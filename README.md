@@ -7,7 +7,7 @@
 1. jdk8、mysql、maven
 
 #### 初始化工作
-1. 运行数据库脚本，在/文档和sql/db/happyroad.sql
+1. 运行数据库脚本，在/文档和sql/db/hbgj.sql
 2. 配置信息在application.yml里，数据库的用户名、密码、ip、端口等，根据情况修改一下
 
 #### 使用说明
