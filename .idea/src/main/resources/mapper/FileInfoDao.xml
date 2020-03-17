@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aa.bb.dao.FileInfoDao">
+
+    <resultMap type="com.aa.bb.entity.FileInfo" id="FileInfoMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="contenttype" column="contentType" jdbcType="VARCHAR"/>
+        <result property="size" column="size" jdbcType="INTEGER"/>
+        <result property="path" column="path" jdbcType="VARCHAR"/>
+        <result property="url" column="url" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="INTEGER"/>
+        <result property="createtime" column="createTime" jdbcType="TIMESTAMP"/>
+        <result property="updatetime" column="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="FileInfoMap">
+        select
+          id, contentType, size, path, url, type, createTime, updateTime
+        from happyroad.file_info
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="FileInfoMap">
+        select
+          id, contentType, size, path, url, type, createTime, updateTime
+        from happyroad.file_info
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="FileInfoMap">
+        select
+          id, contentType, size, path, url, type, createTime, updateTime
+        from happyroad.file_info
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="contenttype != null and contenttype != ''">
+                and contentType = #{contenttype}
+            </if>
+            <if test="size != null">
+                and size = #{size}
+            </if>
+            <if test="path != null and path != ''">
+                and path = #{path}
+            </if>
+            <if test="url != null and url != ''">
+                and url = #{url}
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+            <if test="createtime != null">
+                and createTime = #{createtime}
+            </if>
+            <if test="updatetime != null">
+                and updateTime = #{updatetime}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into happyroad.file_info(contentType, size, path, url, type, createTime, updateTime)
+        values (#{contenttype}, #{size}, #{path}, #{url}, #{type}, #{createtime}, #{updatetime})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update happyroad.file_info
+        <set>
+            <if test="contenttype != null and contenttype != ''">
+                contentType = #{contenttype},
+            </if>
+            <if test="size != null">
+                size = #{size},
+            </if>
+            <if test="path != null and path != ''">
+                path = #{path},
+            </if>
+            <if test="url != null and url != ''">
+                url = #{url},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="createtime != null">
+                createTime = #{createtime},
+            </if>
+            <if test="updatetime != null">
+                updateTime = #{updatetime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from happyroad.file_info where id = #{id}
+    </delete>
+
+</mapper>

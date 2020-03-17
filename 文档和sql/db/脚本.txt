@@ -1,0 +1,10 @@
+
+为表添加 基本字段
+
+ALTER TABLE xxxx  ADD  createName nvarchar(64) NULL COMMENT '创建人';
+ALTER TABLE xxxx  ADD  modifyName nvarchar(64) NULL COMMENT '修改人';
+ALTER TABLE xxxx  ADD  modifyDate  datetime  NULL COMMENT '修改时间';
+ALTER TABLE xxxx  ADD  createDate  datetime  NULL COMMENT '创建时间';
+ALTER TABLE  xxxx ADD  remark  nvarchar(128) NULL COMMENT '备注';
+ALTER TABLE  xxxx ADD  orgId  nvarchar(64) NULL COMMENT '机构ID';
+ALTER TABLE  xxxx ADD  delFlag nvarchar(128) NULL COMMENT '删除标志，1=正常，0=已删除';
