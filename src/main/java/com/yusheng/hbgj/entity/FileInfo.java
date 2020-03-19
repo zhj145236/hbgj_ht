@@ -1,4 +1,6 @@
 package com.yusheng.hbgj.entity;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 public class FileInfo extends BaseEntity<String> {
 
@@ -8,7 +10,38 @@ public class FileInfo extends BaseEntity<String> {
 	private long size;
 	private String path;
 	private String url;
-	private Integer type;
+	private String  type;
+
+
+    /**
+     * 文件资源ID ，绑定业务来源的ID
+     */
+    private String resourceId;
+
+
+    /**
+     *  文件标签
+     */
+    private String tag;
+
+
+    /***
+     * 文件上传时间
+     */
+	private  Date  uploadTime;
+
+
+    /**
+     * 原文件名
+     */
+    private String fileOriginName;
+
+
+    /**
+     *  图片删除时间(如果有删除：delFlag=1)
+     */
+    private Date delTime;
+
 
 	public String getContentType() {
 		return contentType;
@@ -42,11 +75,54 @@ public class FileInfo extends BaseEntity<String> {
 		this.url = url;
 	}
 
-	public Integer getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(Integer type) {
+	public void setType(String type) {
 		this.type = type;
 	}
+
+
+
+
+    public Date getUploadTime() {
+        return uploadTime;
+    }
+
+    public void setUploadTime(Date uploadTime) {
+        this.uploadTime = uploadTime;
+    }
+
+    public String getFileOriginName() {
+        return fileOriginName;
+    }
+
+    public void setFileOriginName(String fileOriginName) {
+        this.fileOriginName = fileOriginName;
+    }
+
+    public Date getDelTime() {
+        return delTime;
+    }
+
+    public void setDelTime(Date delTime) {
+        this.delTime = delTime;
+    }
+
+    public String getResourceId() {
+        return resourceId;
+    }
+
+    public void setResourceId(String resourceId) {
+        this.resourceId = resourceId;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
 }

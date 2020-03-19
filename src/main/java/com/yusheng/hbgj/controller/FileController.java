@@ -43,9 +43,6 @@ public class FileController {
 
 
 
-
-
-
     /**
 	 * layui富文本文件自定义上传
 	 * 
@@ -84,6 +81,7 @@ public class FileController {
 
 			@Override
 			public List<FileInfo> list(PageTableRequest request) {
+			     request.getParams().put("orderBy","  ORDER BY createTime DESC  ");
 				List<FileInfo> list = fileInfoDao.list(request.getParams(), request.getOffset(), request.getLimit());
 				return list;
 			}

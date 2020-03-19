@@ -11,12 +11,12 @@ public abstract class BaseEntity<ID extends Serializable> implements Serializabl
 
 
     private String createName;
-    private String modifyName;
-    private Date createDate;
-    private Date modifyDate;
-
+    private String updateName;
+    private Date createTime;
+    private Date  updateTime;
     private String delFlag;
     private String remark;
+    private String orgId;
     private Integer sort;
 
 
@@ -38,28 +38,12 @@ public abstract class BaseEntity<ID extends Serializable> implements Serializabl
         this.createName = createName;
     }
 
-    public String getModifyName() {
-        return modifyName;
+    public String getUpdateName() {
+        return updateName;
     }
 
-    public void setModifyName(String modifyName) {
-        this.modifyName = modifyName;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public Date getModifyDate() {
-        return modifyDate;
-    }
-
-    public void setModifyDate(Date modifyDate) {
-        this.modifyDate = modifyDate;
+    public void setUpdateName(String updateName) {
+        this.updateName = updateName;
     }
 
     public String getDelFlag() {
@@ -84,5 +68,29 @@ public abstract class BaseEntity<ID extends Serializable> implements Serializabl
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(String orgId) {
+        this.orgId = orgId;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }

@@ -5,6 +5,17 @@
 
 	<sql id="where">
 		<where>
+
+
+            <if test="fileOriginName != null and fileOriginName != ''">
+                AND t.fileOriginName like  '%#{fileOriginName}%'
+            </if>
+
+            <if test="type != null and type != ''">
+                AND t.type =  #{type}
+            </if>
+
+
 		</where>
 	</sql>
 

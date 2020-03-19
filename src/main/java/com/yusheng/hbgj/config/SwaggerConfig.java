@@ -33,8 +33,8 @@ public class SwaggerConfig {
 				.modelRef(new ModelRef("string")); // 在swagger里显示header
 
 		return new Docket(DocumentationType.SWAGGER_2).groupName("swagger接口文档")
-				.apiInfo(new ApiInfoBuilder().title("喜悦之路")
-						.contact(new Contact("微鹰科技", "", "19122@qq.com")).version("1.0").build())
+				.apiInfo(new ApiInfoBuilder().title("环保管家")
+						.contact(new Contact("昱升科技", "", "19122@qq.com")).version("1.0").build())
 				.globalOperationParameters(Lists.newArrayList(builder.build()))
 				.select().paths(PathSelectors.any()).build();
 	}
