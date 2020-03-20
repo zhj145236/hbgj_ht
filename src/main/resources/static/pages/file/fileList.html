@@ -29,7 +29,7 @@
                                 <form class="form-inline" onsubmit="return false">
                                     <div class="form-group">
                                         文件名：
-                                        <input id="fileOriginName"   name="fileOriginName" type="text" class="form-control" placeholder="文件名">
+                                        <input id="fileOriginName"    type="text" class="form-control" placeholder="可模糊搜索">
                                       <!--  上传日期：
                                         <input id="uploadTime" type="date"  name="uploadTime"  class="form-control" >-->
                                         类型：
@@ -97,8 +97,8 @@
     function init() {
         example =
             $('#dt-table').DataTable({
-                "searching": false,
-                "processing": false,
+                "searching": true,
+                "processing": true,
                 "serverSide": true,
                 "language": {
                     "url": "/js/plugin/datatables/Chinese.lang"
@@ -107,6 +107,9 @@
                     "url": "/files",
                     "type": "get",
                     "data": function (d) {
+
+                        d.fileOriginName = $('#fileOriginName').val();
+                        d.type = $('#type').val();
 
                     },
                     "error": function (xhr, textStatus, errorThrown) {
@@ -147,6 +150,8 @@
                     {
                         "data": "xxxx",
                         "defaultContent": "",
+                        "orderable": false,
+
                         "render": function (data, type, row) {
                             var url = row['url'];
                             var type = row['type'];

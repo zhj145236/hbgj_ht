@@ -7,12 +7,13 @@
 		<where>
 
 
-            <if test="fileOriginName != null and fileOriginName != ''">
-                AND t.fileOriginName like  '%#{fileOriginName}%'
+            <if test="params.fileOriginName != null and params.fileOriginName != ''">
+                AND t.fileOriginName  like concat('%', #{params.fileOriginName}, '%')
+
             </if>
 
-            <if test="type != null and type != ''">
-                AND t.type =  #{type}
+            <if test="params.type != null and params.type != ''">
+                AND t.type = #{params.type}
             </if>
 
 
