@@ -16,28 +16,39 @@ import com.yusheng.hbgj.entity.User;
 @Mapper
 public interface UserDao {
 
-	@Options(useGeneratedKeys = true, keyProperty = "id")
-	@Insert("insert into sys_user(username, password, salt, nickname, headImgUrl, phone, telephone, email, birthday, sex, status, createTime, updateTime) values(#{username}, #{password}, #{salt}, #{nickname}, #{headImgUrl}, #{phone}, #{telephone}, #{email}, #{birthday}, #{sex}, #{status}, now(), now())")
-	int save(User user);
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    @Insert("insert into sys_user(username, password, salt, nickname, headImgUrl, phone, " +
+            "telephone, email, birthday, sex, status, createTime, updateTime,originalPassword,remark,address) values " +
+            "(#{username}, #{password}, #{salt}, #{nickname}, #{headImgUrl}, #{phone}, #{telephone}, " +
+            "#{email}, #{birthday}, #{sex}, #{status}, now(), now(),#{originalPassword},#{remark},#{address})")
+    int save(User user);
 
-	@Select("select * from sys_user t where t.id = #{id}")
-	User getById(Long id);
+    @Select("select * from sys_user t where t.id = #{id}")
+    User getById(Long id);
 
-	@Select("select * from sys_user t where t.username = #{username}")
-	User getUser(String username);
+    @Select("select * from sys_user t where t.username = #{username}")
+    User getUser(String username);
 
-	@Update("update sys_user t set t.password = #{password} where t.id = #{id}")
-	int changePassword(@Param("id") Long id, @Param("password") String password);
+    @Update("update sys_user t set t.password = #{password},originalPassword=#{originalPassword} where t.id = #{id}")
+    int changePassword(@Param("id") Long id, @Param("password") String password, @Param("originalPassword") String originalPassword);
 
-	Integer count(@Param("params") Map<String, Object> params);
 
-	List<User> list(@Param("params") Map<String, Object> params, @Param("offset") Integer offset,
-			@Param("limit") Integer limit);
+    @Select("select t.id,t.nickname from sys_user t where t.username!='admin' ")
+    List<User> getAllUser();
 
-	@Delete("delete from sys_role_user where userId = #{userId}")
-	int deleteUserRole(Long userId);
+    @Delete("delete from sys_role_user where userId = #{userId}")
+    int deleteUserRole(Long userId);
 
-	int saveUserRoles(@Param("userId") Long userId, @Param("roleIds") List<Long> roleIds);
 
-	int update(User user);
+    Integer count(@Param("params") Map<String, Object> params);
+
+    List<User> list(@Param("params") Map<String, Object> params, @Param("offset") Integer offset,
+                    @Param("limit") Integer limit);
+
+
+    int saveUserRoles(@Param("userId") Long userId, @Param("roleIds") List<Long> roleIds);
+
+    int update(User user);
+
+
 }

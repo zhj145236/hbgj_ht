@@ -80,6 +80,14 @@ public class UserController {
 		log.debug("{}修改了头像", user.getUsername());
 	}
 
+    @LogAnnotation
+    @GetMapping("/{getAllUser}")
+    @ApiOperation(value = "获取所有用户/厂商")
+    public List<User> getAllUser() {
+        return userService.getAllUser();
+    }
+
+
 	@LogAnnotation
 	@PutMapping("/{username}")
 	@ApiOperation(value = "修改密码")

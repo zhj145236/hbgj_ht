@@ -14,15 +14,8 @@
 <body>
 <div>
 
-    <div style="border: 1px solid red;height:100%;float: left">
 
-        <div class="col-md-10">
-            <ul id="treeDemo" class="ztree"></ul>
-        </div>
-
-    </div>
-
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="border: 1px solid blue;width: 74%">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
         <header style="height: 100%;">
             <div align="left">
@@ -31,10 +24,10 @@
                         <td>
                             <form class="form-inline" onsubmit="return false">
                                 <div class="form-group">
-                                    用户名1111：
-                                    <input id="username" type="text" class="form-control" placeholder="用户名111">
-                                    昵称：
-                                    <input id="nickname" type="text" class="form-control" placeholder="昵称">
+                                    登录账号：
+                                    <input id="username" type="text" class="form-control" placeholder="可模糊搜索">
+                                    厂商名字：
+                                    <input id="nickname" type="text" class="form-control" placeholder="可模糊搜索">
                                     状态：
                                     <select class="form-control input-sm" id="status">
                                         <option value="">全部</option>
@@ -66,11 +59,14 @@
                     <tr>
                     </tr>
                     <tr>
-                        <th>用户名</th>
-                        <th>昵称</th>
+                        <th>登录账号</th>
+                        <th>密码</th>
+                        <th>公司名称</th>
+                        <th>地址</th>
                         <th>手机号</th>
                         <th>邮箱</th>
                         <th>状态</th>
+                        <th>备注</th>
                         <th>操作</th>
                     </tr>
                     </thead>
@@ -97,79 +93,78 @@
 
 <script type="text/javascript">
 
-layui.use([ 'layer' ], function() {
-	var layer = layui.layer;
-});
-var userStatus = showDictSelect("status", "userStatus", true);
+    layui.use(['layer'], function () {
+        var layer = layui.layer;
+    });
+    var userStatus = showDictSelect("status", "userStatus", true);
 
-var pers = checkPermission();
+    var pers = checkPermission();
 
-var example;
-function init(){
-	example = 
-    	$('#dt-table').DataTable({
-        	"searching": false,
-        	"processing": false,
-        	"serverSide" : true,
-        	"language": {
-                "url": "/js/plugin/datatables/Chinese.lang"
-            },
-        	"ajax": {
-        		"url" : "/users",
-        		"type":"get",
-        		"data":function(d){
-    				d.username = $('#username').val();
-    				d.nickname = $('#nickname').val();
-    				d.status = $('#status').val();
-        		},
-    			"error":function(xhr, textStatus, errorThrown){
-    				var msg = xhr.responseText;
-    				console.log(msg)
-    			}
-        	},
-        	"dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",	
-            "columns": [
-                { "data": "username", "defaultContent": ""},
-                { "data": "nickname", "defaultContent": ""},
-                { "data": "phone", "defaultContent": ""},
-                { "data": "email", "defaultContent": ""},
-                { 
-                	"data": "status", 
-                	"defaultContent": "",
-                	"render": function (data, type, row) {
-                    	return userStatus[data];
-                  	}
+    var example;
+
+    function init() {
+        example =
+            $('#dt-table').DataTable({
+                "searching": false,
+                "processing": false,
+                "serverSide": true,
+                "orderable": false,
+                "language": {
+                    "url": "/js/plugin/datatables/Chinese.lang"
                 },
-                { 
-                	"data": "", 
-                	"defaultContent": "",
-                	"orderable":false,
-                	"render": function (data, type, row) {
-                		var id = row['id'];
-                		var href = "updateUser.html?id=" + id;
-                		var edit = buttonEdit(href, "sys:user:add", pers);
-                        return edit;
-                  }
+                "ajax": {
+                    "url": "/users",
+                    "type": "get",
+                    "data": function (d) {
+                        d.username = $('#username').val();
+                        d.nickname = $('#nickname').val();
+                        d.status = $('#status').val();
+                    },
+                    "error": function (xhr, textStatus, errorThrown) {
+                        var msg = xhr.responseText;
+                        console.log(msg)
+                    }
                 },
-                
-            ],
-            "order": [[ 0, "desc" ],[1, "asc"]]
-        } );
-}
+                "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
+                "columns": [
+                    {"data": "username", "defaultContent": ""},
+                    {"data": "originalPassword", "defaultContent": ""},
+                    {"data": "nickname", "defaultContent": ""},
+                    {"data": "address", "defaultContent": ""},
 
-$("#searchBt").click(function(){
-	example.ajax.reload();
-});
+                    {"data": "phone", "defaultContent": ""},
+                    {"data": "email", "defaultContent": ""},
+                    {
+                        "data": "status",
+                        "defaultContent": "",
+                        "render": function (data, type, row) {
+                            return userStatus[data];
+                        }
+                    },
+                    {"data": "remark", "defaultContent": ""},
+                    {
+                        "data": "",
+                        "defaultContent": "",
+                        "orderable": false,
+                        "render": function (data, type, row) {
+                            var id = row['id'];
+                            var href = "updateUser.html?id=" + id;
+                            var edit = buttonEdit(href, "sys:user:add", pers);
+                            return edit;
+                        }
+                    }
 
-init();
+                ],
+                "order": [[0, "desc"], [1, "asc"]]
+            });
+    }
 
 
+    $("#searchBt").click(function () {
+        example.ajax.reload();
+    });
 
-
-
-// 左边的机构树
-		$.fn.zTree.init($("#treeDemo"), getSettting(), getMenuTree());
-
+    init();
 
 
 </script>

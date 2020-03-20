@@ -5,21 +5,22 @@ $.ajaxSetup({
 		var response = JSON.parse(msg);
 		var code = response.code;
 		var message = response.message;
-		if (code == 400) {
+		if (code === 400) {
 			layer.msg(message);
-		} else if (code == 401) {
+		} else if (code === 401) {
 			layer.msg('未登录');
-		} else if (code == 403) {
+		} else if (code === 403) {
 			console.log("未授权:" + message);
 			layer.msg('未授权');
-		} else if (code == 500) {
-			layer.msg('系统错误：' + message);
+		} else if (code === 500) {
+		    alert("系统错误111111")
+			layer.msg('系统错误111111：' + message);
 		}
 	}
 });
 
 function buttonDel(data, permission, pers){
-	if(permission != ""){
+	if(permission !== ""){
 		if ($.inArray(permission, pers) < 0) {
 			return "";
 		}
@@ -30,7 +31,7 @@ function buttonDel(data, permission, pers){
 }
 
 function buttonEdit(href, permission, pers){
-	if(permission != ""){
+	if(permission !== ""){
 		if ($.inArray(permission, pers) < 0) {
 			return "";
 		}
@@ -45,3 +46,4 @@ function deleteCurrentTab(){
 	var lay_id = $(parent.document).find("ul.layui-tab-title").children("li.layui-this").attr("lay-id");
 	parent.active.tabDelete(lay_id);
 }
+

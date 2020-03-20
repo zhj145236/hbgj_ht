@@ -21,77 +21,82 @@ import org.springframework.util.CollectionUtils;
 @Service
 public class UserServiceImpl implements UserService {
 
-	private static final Logger log = LoggerFactory.getLogger("adminLogger");
+    private static final Logger log = LoggerFactory.getLogger("adminLogger");
 
-	@Autowired
-	private UserDao userDao;
+    @Autowired
+    private UserDao userDao;
 
-	@Override
-	@Transactional
-	public User saveUser(UserDto userDto) {
-		User user = userDto;
-		user.setSalt(DigestUtils
-				.md5Hex(UUID.randomUUID().toString() + System.currentTimeMillis() + UUID.randomUUID().toString()));
-		user.setPassword(passwordEncoder(user.getPassword(), user.getSalt()));
-		user.setStatus(User.Status.VALID);
-		userDao.save(user);
-		saveUserRoles(user.getId(), userDto.getRoleIds());
+    @Override
+    @Transactional
+    public User saveUser(UserDto userDto) {
+        User user = userDto;
+        user.setSalt(DigestUtils
+                .md5Hex(UUID.randomUUID().toString() + System.currentTimeMillis() + UUID.randomUUID().toString()));
+        user.setPassword(passwordEncoder(user.getPassword(), user.getSalt()));
+        user.setStatus(User.Status.VALID);
+        userDao.save(user);
+        saveUserRoles(user.getId(), userDto.getRoleIds());
 
-		log.debug("新增用户{}", user.getUsername());
-		return user;
-	}
+        log.debug("新增用户{}", user.getUsername());
+        return user;
+    }
 
-	private void saveUserRoles(Long userId, List<Long> roleIds) {
-		if (roleIds != null) {
-			userDao.deleteUserRole(userId);
-			if (!CollectionUtils.isEmpty(roleIds)) {
-				userDao.saveUserRoles(userId, roleIds);
-			}
-		}
-	}
+    private void saveUserRoles(Long userId, List<Long> roleIds) {
+        if (roleIds != null) {
+            userDao.deleteUserRole(userId);
+            if (!CollectionUtils.isEmpty(roleIds)) {
+                userDao.saveUserRoles(userId, roleIds);
+            }
+        }
+    }
 
-	@Override
-	public String passwordEncoder(String credentials, String salt) {
-		Object object = new SimpleHash("MD5", credentials, salt, UserConstants.HASH_ITERATIONS);
-		return object.toString();
-	}
+    @Override
+    public String passwordEncoder(String credentials, String salt) {
+        Object object = new SimpleHash("MD5", credentials, salt, UserConstants.HASH_ITERATIONS);
+        return object.toString();
+    }
 
-	@Override
-	public User getUser(String username) {
-		return userDao.getUser(username);
-	}
+    @Override
+    public User getUser(String username) {
+        return userDao.getUser(username);
+    }
 
-	@Override
-	public void changePassword(String username, String oldPassword, String newPassword) {
-		User u = userDao.getUser(username);
-		if (u == null) {
-			throw new IllegalArgumentException("用户不存在");
-		}
+    @Override
+    public void changePassword(String username, String oldPassword, String newPassword) {
+        User u = userDao.getUser(username);
+        if (u == null) {
+            throw new IllegalArgumentException("用户不存在");
+        }
 
-		if (!u.getPassword().equals(passwordEncoder(oldPassword, u.getSalt()))) {
-			throw new IllegalArgumentException("密码错误");
-		}
+        if (!u.getPassword().equals(passwordEncoder(oldPassword, u.getSalt()))) {
+            throw new IllegalArgumentException("密码错误");
+        }
 
-		userDao.changePassword(u.getId(), passwordEncoder(newPassword, u.getSalt()));
+        userDao.changePassword(u.getId(), passwordEncoder(newPassword, u.getSalt()), newPassword);
 
-		log.debug("修改{}的密码", username);
-	}
+        log.debug("修改{}的密码", username);
+    }
 
-	@Override
-	@Transactional
-	public User updateUser(UserDto userDto) {
-		userDao.update(userDto);
-		saveUserRoles(userDto.getId(), userDto.getRoleIds());
-		updateUserSession(userDto.getId());
+    @Override
+    public List<User> getAllUser() {
+        return userDao.getAllUser();
+    }
 
-		return userDto;
-	}
+    @Override
+    @Transactional
+    public User updateUser(UserDto userDto) {
+        userDao.update(userDto);
+        saveUserRoles(userDto.getId(), userDto.getRoleIds());
+        updateUserSession(userDto.getId());
 
-	private void updateUserSession(Long id) {
-		User current = UserUtil.getCurrentUser();
-		if (current.getId().equals(id)) {
-			User user = userDao.getById(id);
-			UserUtil.setUserSession(user);
-		}
-	}
+        return userDto;
+    }
+
+    private void updateUserSession(Long id) {
+        User current = UserUtil.getCurrentUser();
+        if (current.getId().equals(id)) {
+            User user = userDao.getById(id);
+            UserUtil.setUserSession(user);
+        }
+    }
 }

@@ -18,6 +18,7 @@ public abstract class BaseEntity<ID extends Serializable> implements Serializabl
     private String remark;
     private String orgId;
     private Integer sort;
+    private  Date delTime;
 
 
 	public ID getId() {
@@ -92,5 +93,13 @@ public abstract class BaseEntity<ID extends Serializable> implements Serializabl
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Date getDelTime() {
+        return delTime;
+    }
+
+    public void setDelTime(Date delTime) {
+        this.delTime = delTime;
     }
 }

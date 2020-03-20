@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+</head>
+<body>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	<form class="form-horizontal" onsubmit="return false" id="form">
+		<fieldset>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>openid</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='openid' type='text' name='openid' id='openid' data-bv-notempty='true' data-bv-notempty-message='openid 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>sex</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='sex' type='text' name='sex' id='sex' data-bv-notempty='true' data-bv-notempty-message='sex 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>tel</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='tel' type='text' name='tel' id='tel' data-bv-notempty='true' data-bv-notempty-message='tel 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>nickName</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='nickName' type='text' name='nickName' id='nickName' data-bv-notempty='true' data-bv-notempty-message='nickName 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>headPic</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='headPic' type='text' name='headPic' id='headPic' data-bv-notempty='true' data-bv-notempty-message='headPic 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>publishContent</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='publishContent' type='text' name='publishContent' id='publishContent' data-bv-notempty='true' data-bv-notempty-message='publishContent 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>createName</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='createName' type='text' name='createName' id='createName' data-bv-notempty='true' data-bv-notempty-message='createName 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>updateName</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='updateName' type='text' name='updateName' id='updateName' data-bv-notempty='true' data-bv-notempty-message='updateName 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>remark</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='remark' type='text' name='remark' id='remark' data-bv-notempty='true' data-bv-notempty-message='remark 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>orgId</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='orgId' type='text' name='orgId' id='orgId' data-bv-notempty='true' data-bv-notempty-message='orgId 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>delFlag</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='delFlag' type='text' name='delFlag' id='delFlag' data-bv-notempty='true' data-bv-notempty-message='delFlag 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>sort</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='sort' type='text' name='sort' id='sort' data-bv-notempty='true' data-bv-notempty-message='sort 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>delTime</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='delTime' type='text' name='delTime' id='delTime' data-bv-notempty='true' data-bv-notempty-message='delTime 不能为空'>
+				</div>
+			</div>
+
+
+			<div class="form-actions">
+				<div class="row" align="center">
+					<div class="col-md-12">
+					    <button class="btn btn-primary" onclick="location.href='publishList.html'">返回</button>
+						<button class="btn btn-primary" type="submit" onclick="add()">
+							<i class="fa fa-save"></i> 保存
+						</button>
+					</div>
+				</div>
+			</div>
+
+		</fieldset>
+	</form>
+</div>
+	<script type="text/javascript" src="../../js/libs/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="../../js/jq.js"></script>
+	<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript" src="../../layui/layui.js"></script>
+	<script type="text/javascript">
+		layui.use(['layer','laydate'], function(){
+		    var layer = layui.layer;
+		});
+		
+		function add() {
+			$('#form').bootstrapValidator();
+			var bootstrapValidator = $("#form").data('bootstrapValidator');
+			bootstrapValidator.validate();
+		    if(!bootstrapValidator.isValid()){
+			   return;
+		    }
+		    
+		    var formdata = $("#form").serializeObject();
+
+			$.ajax({
+				type : 'post',
+				url : '/publishs',
+				contentType: "application/json; charset=utf-8",  
+				data : JSON.stringify(formdata),
+				success : function(data) {
+					layer.msg("添加成功", {shift: -1, time: 1000}, function(){
+                        location.href = "publishList.html";
+                    });
+				}
+			});
+		}
+		
+	</script>
+</body>
+</html>

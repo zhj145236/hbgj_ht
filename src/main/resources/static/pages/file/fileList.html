@@ -17,8 +17,6 @@
                         <tr>
 
 
-
-
                             <td>
                                 <button type="button" class="layui-btn" id="test1">
                                     <i class="layui-icon">&#xe67c;</i>上传文件
@@ -29,9 +27,9 @@
                                 <form class="form-inline" onsubmit="return false">
                                     <div class="form-group">
                                         文件名：
-                                        <input id="fileOriginName"    type="text" class="form-control" placeholder="可模糊搜索">
-                                      <!--  上传日期：
-                                        <input id="uploadTime" type="date"  name="uploadTime"  class="form-control" >-->
+                                        <input id="fileOriginName" type="text" class="form-control" placeholder="可模糊搜索">
+                                        <!--  上传日期：
+                                          <input id="uploadTime" type="date"  name="uploadTime"  class="form-control" >-->
                                         类型：
                                         <select class="form-control input-sm" id="type">
                                             <option value="">全部</option>
@@ -126,17 +124,17 @@
                     {
                         "data": "size", "defaultContent": "", "render": function (data, type, row) {
 
-                            var sizeInt=parseInt(data);
-                            if(sizeInt<1024){
+                            var sizeInt = parseInt(data);
+                            if (sizeInt < 1024) {
                                 return "小于1KB";
 
-                            }else  if(sizeInt<(1024*1024) ){
-                                return (sizeInt/1024).toFixed(1)+"KB";
+                            } else if (sizeInt < (1024 * 1024)) {
+                                return (sizeInt / 1024).toFixed(1) + "KB";
 
-                            }else  if(sizeInt<(1024*1024*1024) ){
-                                return (sizeInt/1024/1024).toFixed(1)+"MB";
+                            } else if (sizeInt < (1024 * 1024 * 1024)) {
+                                return (sizeInt / 1024 / 1024).toFixed(1) + "MB";
 
-                            }else {
+                            } else {
                                 return "超大文件";
 
                             }
@@ -148,10 +146,9 @@
 
                     {"data": "uploadTime", "defaultContent": ""},
                     {
-                        "data": "xxxx",
+                        "data": "",
                         "defaultContent": "",
                         "orderable": false,
-
                         "render": function (data, type, row) {
                             var url = row['url'];
                             var type = row['type'];
@@ -161,15 +158,14 @@
                                 u = "<a target='_blank' href='" + src + "'><img width='30' src='" + src + "' alt='" + row['fileOriginName'] + "'></img></a>";
                             } else {
 
-                                var downUrl=domain + "/files" + url;
+                                var downUrl = domain + "/files" + url;
 
-                                 if(  parseInt(row['size']) <(1024*1024*1024) ){
-                                     u = "<a target='_blank' style='color: #1E9FFF'  alt='此文件较大，请下载过程中请耐心等待(\'▽\'〃)\'' href='" + downUrl + "'>下载</a>";
-                                 }else{
-                                     u = "<a target='_blank' style='color: #1E9FFF'  title='aaaaa'  href='" + downUrl + "'>下载</a>";;
-                                 }
-
-
+                                if (parseInt(row['size']) < (1024 * 1024)) {
+                                    u = "<a target='_blank' style='color: #1E9FFF'  alt='此文件较大，下载过程中请耐心等待' href='" + downUrl + "'>下载</a>";
+                                } else {
+                                    u = "<a target='_blank' style='color: #1E9FFF'   href='" + downUrl + "'>下载</a>";
+                                    ;
+                                }
 
 
                             }

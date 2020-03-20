@@ -1,7 +1,12 @@
-package {controllerPkgName};
+package com.yusheng.hbgj.controller;
 
 import java.util.List;
 
+import com.yusheng.hbgj.dao.PublishDao;
+import com.yusheng.hbgj.entity.Publish;
+import com.yusheng.hbgj.page.table.PageTableHandler;
+import com.yusheng.hbgj.page.table.PageTableRequest;
+import com.yusheng.hbgj.page.table.PageTableResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,57 +17,57 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import {daoPackageName}.{daoName};
-import {beanPackageName}.{beanName};
+
+
 
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/{beanParamName}s")
-public class {controllerName} {
+@RequestMapping("/publishs")
+public class PublishController {
 
     @Autowired
-    private {daoName} {daoParamName};
+    private PublishDao publishDao;
 
     @PostMapping
     @ApiOperation(value = "保存")
-    public {beanName} save(@RequestBody {beanName} {beanParamName}) {
-        {daoParamName}.save({beanParamName});
+    public Publish save(@RequestBody Publish publish) {
+        publishDao.save(publish);
 
-        return {beanParamName};
+        return publish;
     }
 
     @GetMapping("/{id}")
     @ApiOperation(value = "根据id获取")
-    public {beanName} get(@PathVariable Long id) {
-        return {daoParamName}.getById(id);
+    public Publish get(@PathVariable Long id) {
+        return publishDao.getById(id);
     }
 
     @PutMapping
     @ApiOperation(value = "修改")
-    public {beanName} update(@RequestBody {beanName} {beanParamName}) {
-        {daoParamName}.update({beanParamName});
+    public Publish update(@RequestBody Publish publish) {
+        publishDao.update(publish);
 
-        return {beanParamName};
+        return publish;
     }
 
     @GetMapping
     @ApiOperation(value = "列表")
     public PageTableResponse list(PageTableRequest request) {
-        return new PageTableHandler(new CountHandler() {
+        return new PageTableHandler(new PageTableHandler.CountHandler() {
 
             @Override
             public int count(PageTableRequest request) {
-                return {daoParamName}.count(request.getParams());
+                return publishDao.count(request.getParams());
             }
-        }, new ListHandler() {
+        }, new PageTableHandler.ListHandler() {
 
             @Override
-            public List<{beanName}> list(PageTableRequest request) {
+            public List<Publish> list(PageTableRequest request) {
 
                 request.getParams().putIfAbsent("orderBy", "  ORDER BY createTime DESC  ");
 
-                return {daoParamName}.list(request.getParams(), request.getOffset(), request.getLimit());
+                return publishDao.list(request.getParams(), request.getOffset(), request.getLimit());
             }
         }).handle(request);
     }
@@ -70,6 +75,6 @@ public class {controllerName} {
     @DeleteMapping("/{id}")
     @ApiOperation(value = "删除")
     public void delete(@PathVariable Long id) {
-        {daoParamName}.delete(id);
+        publishDao.delete(id);
     }
 }

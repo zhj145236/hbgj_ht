@@ -7,114 +7,137 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class User extends BaseEntity<Long> {
 
-	private static final long serialVersionUID = -6525908145032868837L;
+    private static final long serialVersionUID = -6525908145032868837L;
 
-	private String username;
-	private String password;
-	@JsonIgnore
-	private String salt;
-	private String nickname;
-	private String headImgUrl;
-	private String phone;
-	private String telephone;
-	private String email;
-	@JsonFormat(pattern = "yyyy-MM-dd")
-	private Date birthday;
-	private Integer sex;
-	private Integer status;
+    private String username;
+    private String password;
+    @JsonIgnore
+    private String salt;
+    private String nickname;
+    private String headImgUrl;
+    private String phone;
+    private String telephone;
+    private String email;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date birthday;
+    private Integer sex;
+    private Integer status;
 
-	public String getUsername() {
-		return username;
-	}
+    /**
+     * 原始密码
+     */
+    private String originalPassword;
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    private String address;
 
-	public String getPassword() {
-		return password;
-	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public String getSalt() {
-		return salt;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public void setSalt(String salt) {
-		this.salt = salt;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public String getNickname() {
-		return nickname;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
+    public String getSalt() {
+        return salt;
+    }
 
-	public String getHeadImgUrl() {
-		return headImgUrl;
-	}
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
 
-	public void setHeadImgUrl(String headImgUrl) {
-		this.headImgUrl = headImgUrl;
-	}
+    public String getNickname() {
+        return nickname;
+    }
 
-	public String getPhone() {
-		return phone;
-	}
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    public String getHeadImgUrl() {
+        return headImgUrl;
+    }
 
-	public String getTelephone() {
-		return telephone;
-	}
+    public void setHeadImgUrl(String headImgUrl) {
+        this.headImgUrl = headImgUrl;
+    }
 
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
+    public String getPhone() {
+        return phone;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getTelephone() {
+        return telephone;
+    }
 
-	public Date getBirthday() {
-		return birthday;
-	}
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
 
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public Integer getSex() {
-		return sex;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setSex(Integer sex) {
-		this.sex = sex;
-	}
+    public Date getBirthday() {
+        return birthday;
+    }
 
-	public Integer getStatus() {
-		return status;
-	}
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
 
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
+    public Integer getSex() {
+        return sex;
+    }
 
-	public interface Status {
-		int DISABLED = 0;
-		int VALID = 1;
-		int LOCKED = 2;
-	}
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public interface Status {
+        int DISABLED = 0;
+        int VALID = 1;
+        int LOCKED = 2;
+    }
+
+    public String getOriginalPassword() {
+        return originalPassword;
+    }
+
+    public void setOriginalPassword(String originalPassword) {
+        this.originalPassword = originalPassword;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }
