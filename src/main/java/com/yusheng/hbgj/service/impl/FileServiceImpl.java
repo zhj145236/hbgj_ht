@@ -7,12 +7,14 @@ import com.yusheng.hbgj.dao.FileInfoDao;
 import com.yusheng.hbgj.entity.FileInfo;
 import com.yusheng.hbgj.service.FileService;
 import com.yusheng.hbgj.utils.FileUtil;
+import com.yusheng.hbgj.utils.StrUtil;
 import com.yusheng.hbgj.utils.UserUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.IdGenerator;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,18 +29,22 @@ public class FileServiceImpl implements FileService {
     private FileInfoDao fileInfoDao;
 
     @Override
-    public FileInfo save(MultipartFile file) throws IOException {
+    public FileInfo save(MultipartFile file, FileInfo uploadFileInfo) throws IOException {
         String fileOrigName = file.getOriginalFilename();
         if (!fileOrigName.contains(".")) {
             throw new IllegalArgumentException("缺少后缀名");
         }
 
         String md5 = FileUtil.fileMd5(file.getInputStream());
-        FileInfo fileInfo = fileInfoDao.getById(md5);
+
+        /*FileInfo fileInfo = fileInfoDao.getById(md5);
+
         if (fileInfo != null) {
             fileInfoDao.update(fileInfo);
             return fileInfo;
-        }
+        }*/
+
+        FileInfo fileInfo = new FileInfo();
 
         fileOrigName = fileOrigName.substring(fileOrigName.lastIndexOf("."));
         String pathname = FileUtil.getPath() + md5 + fileOrigName;
@@ -48,9 +54,8 @@ public class FileServiceImpl implements FileService {
         long size = file.getSize();
         String contentType = file.getContentType();
 
-        fileInfo = new FileInfo();
 
-        fileInfo.setId(md5);
+        fileInfo.setId(StrUtil.uuid());
         fileInfo.setContentType(contentType);
         fileInfo.setSize(size);
         fileInfo.setPath(fullPath);
@@ -65,7 +70,12 @@ public class FileServiceImpl implements FileService {
         fileInfo.setCreateName(createName);
 
         fileInfo.setCreateTime(new Date());
+        fileInfo.setMd5(md5);
 
+        fileInfo.setTag(uploadFileInfo.getTag());
+        fileInfo.setResourceId(uploadFileInfo.getResourceId());
+        fileInfo.setRemark(uploadFileInfo.getRemark());
+        fileInfo.setOrgId(uploadFileInfo.getOrgId());
         fileInfoDao.save(fileInfo);
 
 
@@ -80,12 +90,12 @@ public class FileServiceImpl implements FileService {
 
         //VID_20190617_185050.mp4.zIP
 
-        if(StringUtils.isEmpty(fileName)){
-            return  null;
+        if (StringUtils.isEmpty(fileName)) {
+            return null;
         }
-        String tty=fileName.substring( fileName.lastIndexOf(".")+1,fileName.length()).toLowerCase();
+        String tty = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length()).toLowerCase();
 
-        String[] images = new String[]{"jpg", "png", "gif", "bmp", "tif", "jpeg", "gif","ico"};
+        String[] images = new String[]{"jpg", "png", "gif", "bmp", "tif", "jpeg", "gif", "ico"};
         String[] doc = new String[]{"xls", "xlsx", "doc", "docx", "ppt", "pptx", "txt", "pdf"};
         String[] exe = new String[]{"exe", "bat", "cmd", "vbs", "js", "dll"};
         String[] zip = new String[]{"zip", "rar", "tar", "jar", "js", "dll"};
@@ -125,7 +135,6 @@ public class FileServiceImpl implements FileService {
     }
 
 
-
     @Override
     public void delete(String id) {
         FileInfo fileInfo = fileInfoDao.getById(id);
@@ -136,6 +145,10 @@ public class FileServiceImpl implements FileService {
             fileInfoDao.delete(id);
             log.debug("删除文件：{}", fileInfo.getPath());
         }
+    }
+
+    public static void main(String[] args) {
+        new Random().nextFloat();
     }
 
 }

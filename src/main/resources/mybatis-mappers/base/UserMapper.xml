@@ -14,6 +14,8 @@
             <if test="params.status != null and params.status != ''">
                 and t.status = #{params.status}
             </if>
+
+            and t.username not in( 'admin' )
         </where>
     </sql>
 

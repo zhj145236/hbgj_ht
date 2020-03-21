@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface FileService {
 
-	FileInfo save(MultipartFile file) throws IOException;
+	FileInfo save(MultipartFile file,FileInfo uploadFileInfo) throws IOException;
 
 	void delete(String id);
 

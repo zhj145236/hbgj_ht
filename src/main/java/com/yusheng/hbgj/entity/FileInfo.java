@@ -12,6 +12,8 @@ public class FileInfo extends BaseEntity<String> {
 	private String url;
 	private String  type;
 
+	private  String md5;
+
 
     /**
      * 文件资源ID ，绑定业务来源的ID
@@ -124,5 +126,13 @@ public class FileInfo extends BaseEntity<String> {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public String getMd5() {
+        return md5;
+    }
+
+    public void setMd5(String md5) {
+        this.md5 = md5;
     }
 }

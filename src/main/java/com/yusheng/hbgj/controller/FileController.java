@@ -37,8 +37,11 @@ public class FileController {
     @LogAnnotation
     @PostMapping
     @ApiOperation(value = "文件上传")
-    public FileInfo uploadFile(MultipartFile file) throws IOException {
-        return fileService.save(file);
+    public FileInfo uploadFile(MultipartFile file, FileInfo fileInfo) throws IOException {
+        if (fileInfo == null) {
+            fileInfo = new FileInfo();
+        }
+        return fileService.save(file, fileInfo);
     }
 
 
@@ -54,7 +57,7 @@ public class FileController {
     @PostMapping("/layui")
     @ApiOperation(value = "layui富文本文件自定义上传")
     public LayuiFile uploadLayuiFile(MultipartFile file, String domain) throws IOException {
-        FileInfo fileInfo = fileService.save(file);
+        FileInfo fileInfo = fileService.save(file,null);
 
         LayuiFile layuiFile = new LayuiFile();
         layuiFile.setCode(0);
@@ -82,7 +85,7 @@ public class FileController {
             public List<FileInfo> list(PageTableRequest request) {
 
 
-                request.getParams().putIfAbsent("orderBy", "  ORDER BY createTime DESC  ");
+                request.getParams().putIfAbsent("orderBy", "  ORDER BY uploadTime DESC  ");
 
 
                 List<FileInfo> list = fileInfoDao.list(request.getParams(), request.getOffset(), request.getLimit());

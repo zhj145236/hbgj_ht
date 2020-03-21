@@ -2,6 +2,7 @@ package com.yusheng.hbgj;
 
 import com.yusheng.hbgj.entity.Org;
 import com.yusheng.hbgj.entity.User;
+import com.yusheng.hbgj.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,32 @@ public class ServerApplicationTest {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+
+    @Autowired
+    private UserService userService;
+
+
     @Test
-	public void test1() {
+    public void test0() {
+
+        List<User> allUser = userService.getAllUser();
+
+        System.out.println(allUser.size() + "<<<<<<<<<<<<<<");
+
+        allUser.forEach((item)->{
+
+            System.out.println("----->"+item.getUsername()+"---"+item.getNickname()+"---------");
+
+        });
+
+    }
+
+
+    @Test
+    public void test1() {
 
         RowMapper<Org> rowMapper = new BeanPropertyRowMapper<>(Org.class);
         List<Org> orgList = jdbcTemplate.query("select  * from sys_orgtree", rowMapper);
-
 
         System.out.println(orgList.toString());
 
@@ -71,10 +92,10 @@ public class ServerApplicationTest {
         String sql = "INSERT INTO xwj_user(id, last_name, email) VALUES(?, ?, ?)";
 
         List<Object[]> batchArgs = new ArrayList<>();
-        batchArgs.add(new Object[] { "2", "AA", "aa@atguigu.com" });
-        batchArgs.add(new Object[] { "3", "BB", "bb@atguigu.com" });
-        batchArgs.add(new Object[] { "4", "CC", "cc@atguigu.com" });
-        batchArgs.add(new Object[] { "5", "DD", "dd@atguigu.com" });
+        batchArgs.add(new Object[]{"2", "AA", "aa@atguigu.com"});
+        batchArgs.add(new Object[]{"3", "BB", "bb@atguigu.com"});
+        batchArgs.add(new Object[]{"4", "CC", "cc@atguigu.com"});
+        batchArgs.add(new Object[]{"5", "DD", "dd@atguigu.com"});
 
         jdbcTemplate.batchUpdate(sql, batchArgs);
     }

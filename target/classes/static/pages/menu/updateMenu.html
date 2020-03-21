@@ -93,7 +93,7 @@
 	initData();
 	
 	function initData(){
-		if(id != ""){
+		if(id !== ""){
 			$.ajax({
 				type : 'get',
 				url : '/permissions/'+id,
@@ -101,6 +101,7 @@
 				success : function(data) {
 					$("#id").val(data.id);
 					$("#parentId").val(data.parentId);
+
 					$("#name").val(data.name);
 					var css = data.css;
 					$("#css").val(css);

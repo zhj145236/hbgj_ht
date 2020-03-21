@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>环保文件</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="../../layui/css/layui.css" media="all"/>
+    <script src="../../js/dict.js"></script>
+
+
+</head>
+<body>
+<div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div>
+            <header style="height: 100%">
+                <div align="left">
+                    <table style="width: 100%">
+                        <tr>
+
+
+                            <td>
+                                <button type="button" class="layui-btn" id="test1">
+                                    <i class="layui-icon">&#xe67c;</i>上传文件
+                                </button>
+
+
+                            </td>
+
+                            <td align="right">
+
+
+                                <form class="form-inline  layui-form" onsubmit="return false">
+                                    <div class="form-group">
+
+                                        <div class="layui-input-inline">
+                                            <select name="resourceId" id="resourceId"
+                                                    lay-verify="required" lay-search="">
+
+                                            </select>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="form-group">
+
+
+                                        文件名：
+                                        <input id="fileOriginName" type="text" class="form-control" placeholder="可模糊搜索">
+
+
+                                    </div>
+
+
+                                    <button id="searchBt" class="layui-btn layui-btn-sm"
+                                            permission="sys:file:query"><i class="layui-icon">&#xe615;</i>搜索
+                                    </button>
+
+                                </form>
+                            </td>
+                        </tr>
+
+
+                    </table>
+                </div>
+            </header>
+
+            <div>
+                <div class="widget-body no-padding">
+                    <table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">
+                        <thead>
+                        <tr>
+                        </tr>
+                        <tr>
+                            <th>企业名称</th>
+                            <th>文件名</th>
+                            <th>文件大小</th>
+                            <th>类型</th>
+                            <th>上传时间</th>
+                            <th>预览</th>
+                            <th>管理</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<script type="text/javascript" src="../../js/libs/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/my/permission.js"></script>
+<script type="text/javascript">
+
+    var pers = checkPermission();
+
+    var pro = window.location.protocol;
+    var host = window.location.host;
+    var domain = pro + "//" + host;
+
+    //获取所有用户
+    getAllUser();
+
+    var example;
+
+    function init() {
+        example =
+            $('#dt-table').DataTable({
+                "searching": true,
+                "processing": true,
+                "serverSide": true,
+                "language": {
+                    "url": "/js/plugin/datatables/Chinese.lang"
+                },
+                "ajax": {
+                    "url": "/files",
+                    "type": "get",
+                    "data": function (d) {
+
+                        d.fileOriginName = $('#fileOriginName').val();
+                        d.type = $('#type').val();
+                        d.resourceId = $('#resourceId').val();
+
+                        d.tag = "环保文件";
+
+                    },
+                    "error": function (xhr, textStatus, errorThrown) {
+                        var msg = xhr.responseText;
+                        console.log(msg)
+                    }
+                },
+                "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
+                "columns": [
+
+                    {"data": "orgId", "orderable": false, "defaultContent": ""},
+
+                    {"data": "fileOriginName", "orderable": false, "defaultContent": ""},
+
+
+                    {
+                        "data": "size", "defaultContent": "", "orderable": false, "render": function (data, type, row) {
+
+                            var sizeInt = parseInt(data);
+                            if (sizeInt < 1024) {
+                                return "小于1KB";
+
+                            } else if (sizeInt < (1024 * 1024)) {
+                                return (sizeInt / 1024).toFixed(1) + "KB";
+
+                            } else if (sizeInt < (1024 * 1024 * 1024)) {
+                                return (sizeInt / 1024 / 1024).toFixed(1) + "MB";
+
+                            } else {
+                                return "超大文件";
+
+                            }
+
+                            return del;
+                        }
+                    },
+                    {"data": "type", "defaultContent": ""},
+
+                    {"data": "uploadTime", "defaultContent": ""},
+                    {
+                        "data": "",
+                        "defaultContent": "",
+                        "orderable": false,
+                        "render": function (data, type, row) {
+                            var url = row['url'];
+                            var type = row['type'];
+                            var u = "";
+                            if (type === "图片") {
+                                var src = domain + "/files" + url;
+                                u = "<a target='_blank' href='" + src + "'><img width='30' src='" + src + "' alt='" + row['fileOriginName'] + "'></img></a>";
+                            } else {
+
+                                var downUrl = domain + "/files" + url;
+
+                                if (parseInt(row['size']) < (1024 * 1024)) {
+                                    u = "<a target='_blank' style='color: #1E9FFF'  alt='此文件较大，下载过程中请耐心等待' href='" + downUrl + "'>下载</a>";
+                                } else {
+                                    u = "<a target='_blank' style='color: #1E9FFF'   href='" + downUrl + "'>下载</a>";
+                                }
+
+
+                            }
+                            return u;
+                        }
+                    },
+                    {
+                        "data": "",
+                        "defaultContent": "",
+                        "orderable": false,
+                        "render": function (data, type, row) {
+                            var id = row['id'];
+                            var del = buttonDel(id, "sys:file:del", pers);
+                            return del;
+                        }
+                    },
+
+                ],
+                "order": [[3, "desc"]]
+            });
+    }
+
+    // 删除2张表和文件
+    function del(id) {
+        layer.confirm('确定要删除吗？', {
+            btn: ['确定', '取消']
+        }, function () {
+            $.ajax({
+                type: 'delete',
+                url: '/files/' + id,
+                success: function (data) {
+                    example.ajax.reload();
+                    layer.msg("删除成功");
+                }
+            });
+
+            layer.close(1);
+        });
+    }
+
+    $("#searchBt").click(function () {
+        example.ajax.reload();
+    });
+
+    layui.use('upload', function () {
+        var upload = layui.upload;
+
+
+        upload.render({
+            elem: '#test1' //绑定元素
+            , accept: 'file' //允许上传的文件类型
+            , url: '/files' //上传接口
+            , size: 1024 * 20 //限定大小20MB
+            , data: {
+                resourceId: function () {
+                    return $('#resourceId').val();
+                }, orgId: function () {
+                    return $('#resourceId').find("option:selected").text()
+                },
+                tag: function () {
+                    return "环保文件";
+                }
+            }
+
+            , before: function () {
+
+                if ($('#resourceId').val() !== '') {
+                    return true;
+                } else {
+                    layer.msg('上传失败，请先为附件选择企业（右上角下拉框）', {icon: 5});
+                    return false;
+                }
+            }
+            , done: function (res, index, upload) {
+                layer.msg("上传成功");
+                example.ajax.reload();
+            }
+        });
+    });
+
+    init();
+</script>

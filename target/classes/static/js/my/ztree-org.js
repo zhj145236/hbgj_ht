@@ -89,7 +89,7 @@ function getSettting() {
 }
 
 function zTreeOnCheck(event, treeId, treeNode) {
-alert(JSON.stringify(treeNode));
+
 	console.info(treeNode.id + ", " + treeNode.name + "," + treeNode.checked
 			+ "," + treeNode.pId);
 	//console.log(JSON.stringify(treeNode));

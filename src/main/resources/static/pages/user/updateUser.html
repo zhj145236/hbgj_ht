@@ -10,6 +10,8 @@
     <form class="form-horizontal" onsubmit="return false" id="form">
         <fieldset>
             <input type="hidden" id="id" name="id">
+            <input type="hidden" id="userId" name="userId">
+
             <div class="form-group">
                 <label class="col-md-2 control-label">账号名</label>
                 <div class="col-md-10">
@@ -139,6 +141,8 @@
                 success: function (data) {
                     $("#id").val(data.id);
                     $("#username").val(data.username);
+                    $("#userId").val(data.userId);
+
                     $("#nickname").val(data.nickname);
                     $("#phone").val(data.phone);
                     $("#telephone").val(data.telephone);

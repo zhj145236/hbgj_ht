@@ -1,36 +1,72 @@
 function showDictSelect(id, type, all) {
-	var data = getDict(type);
-	var select = $("#" + id);
-	select.empty();
+    var data = getDict(type);
+    var select = $("#" + id);
+    select.empty();
 
-	if (all != undefined || all) {
-		select.append("<option value=''>全部</option>");
-	}
+    if (all != undefined || all) {
+        select.append("<option value=''>全部</option>");
+    }
 
-	$.each(data, function(k, v) {
-		select.append("<option value ='" + k + "'>" + v + "</option>");
-	});
+    $.each(data, function (k, v) {
+        select.append("<option value ='" + k + "'>" + v + "</option>");
+    });
 
-	return data;
+    return data;
 }
 
 function getDict(type) {
-	var v = sessionStorage[type];
-	if (v == null || v == "") {
-		$.ajax({
-			type : 'get',
-			url : '/dicts?type=' + type,
-			async : false,
-			success : function(data) {
-				v = {};
-				$.each(data, function(i, d) {
-					v[d.k] = d.val;
-				});
+    var v = sessionStorage[type];
+    if (v == null || v == "") {
+        $.ajax({
+            type: 'get',
+            url: '/dicts?type=' + type,
+            async: false,
+            success: function (data) {
+                v = {};
+                $.each(data, function (i, d) {
+                    v[d.k] = d.val;
+                });
 
-				sessionStorage[type] = JSON.stringify(v);
-			}
-		});
-	}
+                sessionStorage[type] = JSON.stringify(v);
+            }
+        });
+    }
 
-	return JSON.parse(sessionStorage[type]);
+    return JSON.parse(sessionStorage[type]);
 }
+
+
+/**
+ * 获取所有用户/厂商
+ */
+function getAllUser() {
+    $.ajax({
+        type: 'get',
+        url: '/users/getAllUser',
+        async: false,
+        success: function (data) {
+
+            var select = $("#resourceId");
+
+            select.empty();
+
+            select.append("<option value=''>未选择企业</option>");
+            for (var i = 0; i < data.length; i++) {
+                var d = data[i];
+                var id = d['id'];
+                var nickname = d['nickname'];
+                select.append("<option value='" + id + "'>" + nickname + "</option>");
+            }
+
+
+            layui.use('form', function () {
+                var form = layui.form;
+                form.render();
+            });
+
+
+
+        }
+    });
+}
+

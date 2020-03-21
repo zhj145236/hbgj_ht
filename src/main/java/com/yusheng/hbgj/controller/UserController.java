@@ -81,7 +81,7 @@ public class UserController {
 	}
 
     @LogAnnotation
-    @GetMapping("/{getAllUser}")
+    @GetMapping("/getAllUser")
     @ApiOperation(value = "获取所有用户/厂商")
     public List<User> getAllUser() {
         return userService.getAllUser();

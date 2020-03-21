@@ -33,7 +33,7 @@ public interface UserDao {
     int changePassword(@Param("id") Long id, @Param("password") String password, @Param("originalPassword") String originalPassword);
 
 
-    @Select("select t.id,t.nickname from sys_user t where t.username!='admin' ")
+    @Select("select t.id,t.nickname from sys_user t where t.username not in ('admin') ")
     List<User> getAllUser();
 
     @Delete("delete from sys_role_user where userId = #{userId}")
