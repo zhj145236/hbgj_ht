@@ -41,7 +41,7 @@ public interface NoticeDao {
 
 	List<User> listReadUsers(Long noticeId);
 
-	@Select("select count(1) from t_notice t left join t_notice_read r on r.noticeId = t.id and r.userId = #{userId} where t.status = 1 and r.userId is null")
+	@Select(" select  count(1) from   ( SELECT id from  t_notice  WHERE   (status = 1  AND  isPersonal=0 ) OR  ( isPersonal=1 AND  receiveId= #{userId} ) )  q  where q.id not in ( SELECT noticeId from t_notice_read where userId= #{userId} )  ")
 	int countUnread(Long userId);
 
 	int countNotice(@Param("params") Map<String, Object> params);

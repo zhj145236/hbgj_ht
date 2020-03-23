@@ -26,6 +26,10 @@ public interface FileInfoDao {
     @Update("update file_info t set t.updateTime = now() where t.id = #{id}")
     int update(FileInfo fileInfo);
 
+    @Update("update file_info t set t.updateTime = now() ,  t.remark=#{remark} where t.id = #{id}")
+    int saveRemark(FileInfo fileInfo);
+
+
     @Delete("delete from file_info where id = #{id}")
     int delete(String id);
 

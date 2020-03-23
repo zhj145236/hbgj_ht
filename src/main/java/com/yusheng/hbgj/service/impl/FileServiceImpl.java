@@ -147,6 +147,17 @@ public class FileServiceImpl implements FileService {
         }
     }
 
+    @Override
+    public void saveRemark(FileInfo fileInfo) {
+
+        FileInfo ff=new FileInfo();
+        ff.setId(fileInfo.getId());
+        ff.setRemark(fileInfo.getRemark());
+
+        fileInfoDao.saveRemark(ff);
+
+    }
+
     public static void main(String[] args) {
         new Random().nextFloat();
     }

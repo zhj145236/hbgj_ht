@@ -33,9 +33,7 @@ public class AnalyTableJob {
      * 每天3:10执行
      */
     @Scheduled(cron = "0 10 3 * * ? ")
-     //@Scheduled(cron = "0/20 * *  * * ? ")
-    private void task1() {
-
+    private void tableAnaly() {
 
         List<TableAnaly> currentData = tableAnalyDao.getCurrenData();
 

@@ -12,6 +12,8 @@ public class NoticeReadVO extends Notice {
 	private Date readTime;
 	private Boolean isRead;
 
+	private  Boolean isPersonal;
+
 	public Long getUserId() {
 		return userId;
 	}
@@ -35,4 +37,12 @@ public class NoticeReadVO extends Notice {
 	public void setIsRead(Boolean isRead) {
 		this.isRead = isRead;
 	}
+
+    public Boolean getPersonal() {
+        return isPersonal;
+    }
+
+    public void setPersonal(Boolean personal) {
+        isPersonal = personal;
+    }
 }

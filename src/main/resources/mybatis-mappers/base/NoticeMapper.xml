@@ -48,7 +48,7 @@
 			<if test="params.title != null and params.title != ''">
 				and t.title like concat('%', #{params.title}, '%')
 			</if>
-			
+
 			<if test="params.beginTime != null and params.beginTime != ''">
 				and t.updateTime &gt;= #{params.beginTime}
 			</if>
@@ -71,16 +71,26 @@
 		select count(1) from t_notice t left join
 		t_notice_read r on
 		r.noticeId = t.id and r.userId = #{params.userId}
-		<include refid="whereNotice" />
-	</select>
+
+         WHERE   (t.status = 1  AND  t.isPersonal=0 ) OR  (t.isPersonal=1 AND  t.receiveId= #{params.userId} )
+
+    </select>
 
 	<select id="listNotice" resultType="com.yusheng.hbgj.dto.NoticeReadVO">
+
 		select t.*,r.createTime readTime,
+
 		if(r.createTime is null, 0, 1) isRead,r.userId
+
 		from t_notice t left join
+
 		t_notice_read r on r.noticeId = t.id and r.userId = #{params.userId}
-		<include refid="whereNotice" />
-		${params.orderBy}
+
+        WHERE   (t.status = 1  AND  t.isPersonal=0 ) OR  (t.isPersonal=1 AND  t.receiveId=#{params.userId})
+
+          ORDER BY  isRead ASC,  readTime desc
+
 		limit #{offset}, #{limit}
+
 	</select>
 </mapper>

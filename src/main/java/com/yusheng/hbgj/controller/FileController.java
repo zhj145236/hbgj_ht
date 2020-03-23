@@ -13,12 +13,7 @@ import com.yusheng.hbgj.page.table.PageTableResponse;
 import com.yusheng.hbgj.service.FileService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import io.swagger.annotations.Api;
@@ -100,6 +95,17 @@ public class FileController {
     @RequiresPermissions("sys:file:del")
     public void delete(@PathVariable String id) {
         fileService.delete(id);
+    }
+
+
+    @LogAnnotation
+    @PutMapping("/saveRemark")
+    @ApiOperation(value = "更新文件信息")
+    @RequiresPermissions("sys:file:del")
+    public void saveRemark(@RequestBody FileInfo fileInfo) {
+
+
+        fileService.saveRemark(fileInfo);
     }
 
 }

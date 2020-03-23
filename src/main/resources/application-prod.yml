@@ -60,6 +60,11 @@ mybatis:
     mapUnderscoreToCamelCase: true
 files:
   path: ${file-path:d:/files}
+
+constants:
+  #管理员的ID
+  adminId: 1
+
 logging:
   config: classpath:logback-admin.xml
 log:

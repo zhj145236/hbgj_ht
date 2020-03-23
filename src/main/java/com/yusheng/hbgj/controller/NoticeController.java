@@ -39,6 +39,8 @@ public class NoticeController {
 	@ApiOperation(value = "保存公告")
 	@RequiresPermissions("notice:add")
 	public Notice saveNotice(@RequestBody Notice notice) {
+
+	    notice.setIsPersonal(Notice.Personal.NO);
 		noticeDao.save(notice);
 
 		return notice;

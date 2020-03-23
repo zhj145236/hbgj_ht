@@ -12,6 +12,34 @@
 </head>
 <body>
 <div>
+
+
+    <div class="site-text" style="margin: 5%; display: none" id="setContractWindow" target="test123">
+
+        <form class="layui-form" id="book" method="post" lay-filter="example">
+
+            <input type="hidden" id="form_id" name="id">
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">开始日期</label>
+                <div class="layui-input-block">
+
+                    <input type="text" id="beginTime" name="beginTime" lay-verify="title" class="layui-input">
+
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">结束日期</label>
+                <div class="layui-input-block">
+                    <input type="text" id="endTime" name="endTime" lay-verify="title" placeholder="请输入名称"
+                           class="layui-input">
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div>
             <header style="height: 100%">
@@ -114,6 +142,19 @@
 
     var example;
 
+
+    layui.use(['layer', 'laydate'], function () {
+        var layer = layui.layer;
+        var laydate = layui.laydate;
+        laydate.render({
+            elem: '#beginTime'
+        });
+        laydate.render({
+            elem: '#endTime'
+        });
+    });
+
+
     function init() {
         example =
             $('#dt-table').DataTable({
@@ -131,7 +172,7 @@
                         d.fileOriginName = $('#fileOriginName').val();
                         d.type = $('#type').val();
                         d.resourceId = $('#resourceId').val();
-                        // d.orgId = $('#orgId').val();
+
                         d.tag = "合同管理";
 
                     },
@@ -145,8 +186,30 @@
 
                     {"data": "orgId", "orderable": false, "defaultContent": ""},
 
-                    {"data": "serviceStartTime", "orderable": false, "defaultContent": ""},
-                    {"data": "serviceEndTime", "orderable": false, "defaultContent": ""},
+                    {
+                        "data": "",
+                        "defaultContent": "未设置",
+                        "orderable": false,
+                        "render": function (data, type, row) {
+
+                            if (row['remark'] != null && row['remark'].trim().length > 5) {
+                                return row['remark'].split("@")[0];
+                            }
+
+                        }
+                    },
+
+                    {
+                        "data": "",
+                        "defaultContent": "未设置",
+                        "orderable": false,
+                        "render": function (data, type, row) {
+                            if (row['remark'] != null && row['remark'].trim().length > 5) {
+                                return row['remark'].split("@")[1];
+                            }
+                        }
+                    },
+
 
                     {"data": "fileOriginName", "orderable": false, "defaultContent": ""},
 
@@ -208,7 +271,12 @@
                         "render": function (data, type, row) {
                             var id = row['id'];
                             var del = buttonDel(id, "sys:file:del", pers);
-                            return del;
+
+                            var start_end = row['remark'];
+
+                            var setting = "<button class='layui-btn layui-btn-xs' title='设置合同起止时间' onclick='setContractDate(\"" + id + "\",\"" + start_end + "\")'><i class='layui-icon'>&#xe65f;</i></button>";
+
+                            return del + setting;
                         }
                     },
 
@@ -216,6 +284,88 @@
                 "order": [[3, "desc"]]
             });
     }
+
+
+    // 设置合同时间弹出框
+    function setContractDate(id, start_end) {
+
+
+        $('#form_id').val(id);
+
+
+        if (start_end === null || 'null' === start_end || start_end.trim() === '') {
+            $('#beginTime').val('');
+            $('#endTime').val('');
+
+        } else {
+            $('#beginTime').val(start_end.split("@")[0]);
+            $('#endTime').val(start_end.split("@")[1]);
+
+        }
+        layer.open({
+            type: 1,
+            anim: 1,
+            title: ["设置合同起止时间", 'font-size:18px'],
+            area: ['600px', '300px'],
+            shadeClose: true,
+            content: $("#setContractWindow"),
+            btn: ['保存', '取消'] //只是为了演示
+            , yes: function () {
+
+                update(layer);
+            }
+            , btn2: function () {
+                layer.close();
+            }
+        });
+
+    }
+
+    /**
+     * 更新 合同时间
+     * @param obj
+     */
+    function update(layer) {
+
+        var id = $("#form_id").val();
+        var beginTime = $("#beginTime").val();
+        var endTime = $("#endTime").val();
+
+        if (beginTime.trim() === "") {
+            layer.msg("开始时间不能为空");
+            return;
+        }
+        if (endTime.trim() === "") {
+            layer.msg("结束时间不能为空");
+            return;
+        }
+        //$(obj).attr("disabled", true);
+
+        var formData = {
+            id: id,
+            remark: beginTime + "@" + endTime
+
+        };
+        $.ajax({
+            type: 'put',
+            url: '/files/saveRemark',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formData),
+            success: function (data) {
+                layer.msg("修改成功", {shift: -1, time: 1000}, function () {
+
+                    $('#form_id').val(id);
+                    $('#beginTime').val('');
+                    $('#endTime').val('');
+
+                    example.ajax.reload();
+                    layer.closeAll();
+
+                });
+            }
+        });
+    }
+
 
     // 删除2张表和文件
     function del(id) {
@@ -269,8 +419,9 @@
                 }
             }
             , done: function (res, index, upload) {
-                layer.msg("上传成功");
                 example.ajax.reload();
+                layer.msg("上传成功");
+
             }
         });
     });

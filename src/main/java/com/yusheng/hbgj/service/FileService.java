@@ -11,4 +11,6 @@ public interface FileService {
 
 	void delete(String id);
 
+    void saveRemark(FileInfo fileInfo);
+
 }
