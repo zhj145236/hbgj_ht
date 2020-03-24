@@ -5,19 +5,26 @@ import java.util.List;
 
 import com.yusheng.hbgj.annotation.LogAnnotation;
 import com.yusheng.hbgj.dao.FileInfoDao;
+import com.yusheng.hbgj.dao.NoticeDao;
 import com.yusheng.hbgj.dto.LayuiFile;
 import com.yusheng.hbgj.entity.FileInfo;
+import com.yusheng.hbgj.entity.Notice;
 import com.yusheng.hbgj.page.table.PageTableHandler;
 import com.yusheng.hbgj.page.table.PageTableRequest;
 import com.yusheng.hbgj.page.table.PageTableResponse;
 import com.yusheng.hbgj.service.FileService;
+import com.yusheng.hbgj.utils.DateUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+
+import java.util.Date;
 
 @Api(tags = "文件")
 @RestController
@@ -28,6 +35,14 @@ public class FileController {
     private FileService fileService;
     @Autowired
     private FileInfoDao fileInfoDao;
+
+    @Autowired
+    private NoticeDao noticeDao;
+
+
+    @Value("${constants.adminId}")
+    private String adminId;
+
 
     @LogAnnotation
     @PostMapping
@@ -52,7 +67,7 @@ public class FileController {
     @PostMapping("/layui")
     @ApiOperation(value = "layui富文本文件自定义上传")
     public LayuiFile uploadLayuiFile(MultipartFile file, String domain) throws IOException {
-        FileInfo fileInfo = fileService.save(file,null);
+        FileInfo fileInfo = fileService.save(file, null);
 
         LayuiFile layuiFile = new LayuiFile();
         layuiFile.setCode(0);
@@ -94,18 +109,93 @@ public class FileController {
     @ApiOperation(value = "文件删除")
     @RequiresPermissions("sys:file:del")
     public void delete(@PathVariable String id) {
+
         fileService.delete(id);
+
+        //删除之前可能预设的系统通知
+        noticeDao.flushNotice(id);
+
     }
 
 
     @LogAnnotation
     @PutMapping("/saveRemark")
-    @ApiOperation(value = "更新文件信息")
+    @ApiOperation(value = "更新合同起止时间")
     @RequiresPermissions("sys:file:del")
+
     public void saveRemark(@RequestBody FileInfo fileInfo) {
 
 
+        validDate(fileInfo.getRemark());
+
         fileService.saveRemark(fileInfo);
+
+        senNotice(fileInfo.getId(), fileInfo.getRemark().trim().split("@")[1].trim());
+
+
+    }
+
+
+    private void validDate(String dateStr) {
+
+        if (StringUtils.isEmpty(dateStr)) {
+
+            throw new IllegalArgumentException("合同起止时间都不能为空");
+
+        }
+
+        String[] date = dateStr.trim().split("@");
+
+        Date dateStart = DateUtil.parseDate(date[0].trim());
+        Date dateEnd = DateUtil.parseDate(date[1].trim());
+
+        if (DateUtil.daysBetween(dateStart, dateEnd) < 1) {
+            throw new IllegalArgumentException("合同结束时间应该大于开始时间");
+        }
+
+
+    }
+
+
+    //给管理员发通知
+    private void senNotice(String fileId, String endDate) {
+
+
+        FileInfo file = fileInfoDao.getById(fileId);
+
+
+        // 30天前；7天前；1天前通知
+        Date[] dates = new Date[]{DateUtil.addDay(DateUtil.parseDate(endDate), -30), DateUtil.addDay(DateUtil.parseDate(endDate), -7), DateUtil.addDay(DateUtil.parseDate(endDate), -1)};
+
+
+        noticeDao.flushNotice(fileId);
+
+        for (int i = 0; i < dates.length; i++) {
+
+
+            if (DateUtil.daysBetween(new Date(), dates[i]) >= 0) {
+
+                Notice notice = new Notice();
+                notice.setIsPersonal(Notice.Personal.YES);
+                notice.setTitle("合同快到期提醒");
+                notice.setReceiveId(adminId);
+                StringBuffer sb = new StringBuffer();
+
+                sb.append("您有一份与").append(file.getOrgId()).append("签订的合同【").append(file.getFileOriginName()).append("】").
+                        append("将于").append(endDate)
+                        .append("到期,请及时处理。合同附件链接 【<a target='_blank'  style='color:blue;font-size:23px' href='/files").append(file.getUrl()).append("'>打开</a>").append("】。如已经处理请忽略此条通知");
+                notice.setContent(sb.toString());
+                notice.setStatus(Notice.Status.DRAFT); //草稿
+                notice.setCreateName("系统程序");
+                notice.setCreateTime(dates[i]);  //设置合同到期前X天创建
+                notice.setRefId(fileId);
+                notice.setUpdateTime(new Date());
+                noticeDao.save(notice);
+
+            }
+        }
+
+
     }
 
 }

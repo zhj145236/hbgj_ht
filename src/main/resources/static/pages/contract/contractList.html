@@ -6,7 +6,6 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="../../layui/css/layui.css" media="all"/>
-    <script src="../../js/dict.js"></script>
 
 
 </head>
@@ -24,17 +23,34 @@
                 <label class="layui-form-label">开始日期</label>
                 <div class="layui-input-block">
 
-                    <input type="text" id="beginTime" name="beginTime" lay-verify="title" class="layui-input">
+                    <input type="text" id="beginTime" name="beginTime" lay-verify="title" class="layui-input"
+                           placeholder="请选择日期">
 
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">结束日期</label>
                 <div class="layui-input-block">
-                    <input type="text" id="endTime" name="endTime" lay-verify="title" placeholder="请输入名称"
+                    <input type="text" id="endTime" name="endTime" lay-verify="title" placeholder="应晚于开始日期"
                            class="layui-input">
                 </div>
             </div>
+
+            <div class="layui-form-item">
+
+                <label class="layui-form-label"></label>
+                <div class="layui-input-block">
+
+
+                    <button class="btn btn-primary" type="button" onclick="update(this)">
+                        <i class="fa fa-save"></i> 保存
+                    </button>
+
+                </div>
+
+
+            </div>
+
 
         </form>
     </div>
@@ -129,6 +145,8 @@
 <script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="../../js/my/permission.js"></script>
+<script src="../../js/dict.js"></script>
+
 <script type="text/javascript">
 
     var pers = checkPermission();
@@ -172,14 +190,14 @@
                         d.fileOriginName = $('#fileOriginName').val();
                         d.type = $('#type').val();
                         d.resourceId = $('#resourceId').val();
-
                         d.tag = "合同管理";
 
                     },
                     "error": function (xhr, textStatus, errorThrown) {
                         var msg = xhr.responseText;
-                        console.log(msg)
+                        console.info(msg);
                     }
+
                 },
                 "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
                 "columns": [
@@ -193,7 +211,10 @@
                         "render": function (data, type, row) {
 
                             if (row['remark'] != null && row['remark'].trim().length > 5) {
+
                                 return row['remark'].split("@")[0];
+
+
                             }
 
                         }
@@ -205,7 +226,20 @@
                         "orderable": false,
                         "render": function (data, type, row) {
                             if (row['remark'] != null && row['remark'].trim().length > 5) {
-                                return row['remark'].split("@")[1];
+
+                                var endDate = row['remark'].split("@")[1];
+
+                                var diffDay = ((new Date(endDate.replace(/-/g, "/")).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)).toFixed(1);
+
+                                if (parseFloat(diffDay) <= 7.0 && parseFloat(diffDay) > 0) {
+
+                                    return "<p style='color: #c05e5e' title='将于" + diffDay + "天后合同到期' >" + endDate + "</p>"
+
+                                } else {
+                                    return endDate;
+                                }
+
+
                             }
                         }
                     },
@@ -278,7 +312,7 @@
 
                             return del + setting;
                         }
-                    },
+                    }
 
                 ],
                 "order": [[3, "desc"]]
@@ -306,26 +340,21 @@
             type: 1,
             anim: 1,
             title: ["设置合同起止时间", 'font-size:18px'],
-            area: ['600px', '300px'],
+            area: ['600px', '400px'],
             shadeClose: true,
-            content: $("#setContractWindow"),
-            btn: ['保存', '取消'] //只是为了演示
-            , yes: function () {
+            content: $("#setContractWindow")
 
-                update(layer);
-            }
-            , btn2: function () {
-                layer.close();
-            }
+
         });
 
     }
+
 
     /**
      * 更新 合同时间
      * @param obj
      */
-    function update(layer) {
+    function update(obj) {
 
         var id = $("#form_id").val();
         var beginTime = $("#beginTime").val();
@@ -339,7 +368,13 @@
             layer.msg("结束时间不能为空");
             return;
         }
-        //$(obj).attr("disabled", true);
+
+        if (new Date(endTime.replace(/-/g, "/")).getTime() - new Date(beginTime.replace(/-/g, "/")).getTime() < 86400000) {
+
+            layer.msg("结束时间至少应该比开始时间晚1天");
+            return;
+        }
+        $(obj).attr("disabled", true);
 
         var formData = {
             id: id,
@@ -359,6 +394,7 @@
                     $('#endTime').val('');
 
                     example.ajax.reload();
+                    $(obj).attr("disabled", false);
                     layer.closeAll();
 
                 });

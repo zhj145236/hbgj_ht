@@ -6,6 +6,9 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="../../layui/css/layui.css" media="all"/>
+    <script src="../../js/jq.js"></script>
+
+
 </head>
 <body>
 <div>
@@ -139,7 +142,6 @@
 
                             }
 
-                            return del;
                         }
                     },
                     {"data": "type", "defaultContent": ""},
@@ -181,7 +183,7 @@
                             var del = buttonDel(id, "sys:file:del", pers);
                             return del;
                         }
-                    },
+                    }
 
                 ],
                 "order": [[3, "desc"]]

@@ -14,7 +14,17 @@ public class Notice extends BaseEntity<Long> {
     private Integer isPersonal;
 
 
-    private  String receiveId;
+    /**
+     * 收信人ID
+     */
+    private String receiveId;
+
+
+    /**
+     * 引用资源ID
+     */
+    private String refId;
+
 
     public String getTitle() {
         return title;
@@ -65,5 +75,13 @@ public class Notice extends BaseEntity<Long> {
 
     public void setReceiveId(String receiveId) {
         this.receiveId = receiveId;
+    }
+
+    public String getRefId() {
+        return refId;
+    }
+
+    public void setRefId(String refId) {
+        this.refId = refId;
     }
 }

@@ -1,23 +1,36 @@
 $.ajaxSetup({
     cache: false,
     error: function (xhr, textStatus, errorThrown) {
+
         var msg = xhr.responseText;
         var response = JSON.parse(msg);
         var code = response.code;
         var message = response.message;
-        if (code === 400) {
-            layer.msg(message);
-        } else if (code === 401) {
-            layer.msg('未登录');
-        } else if (code === 403) {
-            console.log("未授权:" + message);
-            layer.msg('未授权');
-        } else if (code === 500) {
+        if (parseInt(code) === 400) {
 
-            layer.msg('系统错误111111：' + message);
+            layer.msg("操作失败，原因：" + message, {icon: 5});
+
+        } else if (parseInt(code) === 401) {
+
+            layer.msg('您还未登录或者登录已经过期，请重新登录', {icon: 5});
+
+        } else if (code === 403) {
+
+            console.warn("未授权:" + message, {icon: 5});
+
+            layer.msg('您没有权限操作', {icon: 5});
+
+        } else if (parseInt(code) === 500) {
+
+            console.error(message);
+            layer.msg('系统错误【' + message + "】，请稍后再试或者联系管理员", {icon: 5});
+
+
+
         }
     }
 });
+
 
 function buttonDel(data, permission, pers) {
     if (permission !== "") {

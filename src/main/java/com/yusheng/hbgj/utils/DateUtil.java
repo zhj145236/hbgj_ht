@@ -78,7 +78,7 @@ public class DateUtil {
 
 
     /*
-     * 获取当前时间字符串 OOKK
+     * 获取当前时间字符串
      */
     public static String getNowStr() {
 
@@ -88,7 +88,7 @@ public class DateUtil {
     }
 
     /*
-     * 获取当前时间字符串 OOKK
+     * 获取当前时间字符串
      */
     public static String getNowStr0(Boolean isUpToSec, Boolean isLocalDesc) {
 
@@ -109,7 +109,7 @@ public class DateUtil {
     }
 
     /*
-     * 日期转Unix时间戳 OOKK
+     * 日期转Unix时间戳
      */
     public static Long dateConvertSec(Date date) {
 
@@ -118,7 +118,7 @@ public class DateUtil {
 
 
     /*
-     * Date日期加X天数 OOKK
+     * Date日期加X天数
      */
     public static Date addDay(Date date, Integer days) {
         if ((date == null) || (days == null) || (days == 0)) {
@@ -133,7 +133,7 @@ public class DateUtil {
 
 
     /*
-     * Date日期加X月数 OOKK
+     * Date日期加X月数
      */
     public static Date addMonth(Date date, Integer months) {
         if ((date == null) || (months == null) || (months == 0)) {
@@ -148,13 +148,15 @@ public class DateUtil {
 
 
     /*
-     *  计算2个Date日期间相差的天数 OOKK
+     *  计算2个Date日期间相差的天数
      */
-    public static int daysBetween(Date date1, Date date2) {
+    public static int daysBetween(Date dateStart, Date dateEnd) {
         Calendar cal = Calendar.getInstance();
-        cal.setTime(date1);
+        cal.setTime(dateStart);
+
         long time1 = cal.getTimeInMillis();
-        cal.setTime(date2);
+        cal.setTime(dateEnd);
+
         long time2 = cal.getTimeInMillis();
         long between_days = (time2 - time1) / 86400000L;
         return Integer.parseInt(String.valueOf(between_days));
@@ -162,7 +164,7 @@ public class DateUtil {
 
 
     /*
-     *  返回XXXX年XX月有几天 OOKK
+     *  返回XXXX年XX月有几天
      */
     public static int getDaysOfMonth(int year, int month) {
         Calendar calendar = Calendar.getInstance();
@@ -171,7 +173,7 @@ public class DateUtil {
     }
 
     /*
-     * 返回指定Date所在月有几天  OOKK
+     * 返回指定Date所在月有几天
      */
     public static int getDaysOfMonth(Date date) {
         Calendar calendar = Calendar.getInstance();
@@ -182,16 +184,9 @@ public class DateUtil {
     public static void main(String[] args) {
 
 
-        // int daysOfMonth = getDaysOfMonth(parseDate("2020-02-10"));
-
-
-        System.out.println(parseDate("2019-12-24"));
-        System.out.println(parseDate("2019/12/24"));
-        System.out.println(parseDate("2019-12-24 17:45:25"));
-        System.out.println(parseDate("2019/12/24 17:45:25"));
-        System.out.println(parseDate("2019年12月24日 17时45分25秒"));
-        System.out.println(parseDate("2019年12月24日"));
-
+        System.out.println(DateUtil.daysBetween(new Date(), parseDate("2020-03-25")));
+        System.out.println(DateUtil.daysBetween(new Date(), parseDate("2020-03-26")));
+        System.out.println(DateUtil.daysBetween(new Date(), parseDate("2020-03-23")));
 
     }
 
