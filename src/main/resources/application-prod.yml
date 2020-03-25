@@ -46,9 +46,9 @@ spring:
     database: 1
   mail:
     default-encoding: UTF-8
-    host: smtp.163.com
-    username:
-    password:
+    host: smtp.exmail.qq.com
+    username: noreply@ysnewtop.com
+    password: pkqS5iotjnFyLGrf
     protocol: smtp
     test-connection: false
 #    properties:
@@ -59,7 +59,7 @@ mybatis:
   configuration:
     mapUnderscoreToCamelCase: true
 files:
-  path: ${file-path:d:/files}
+  path: ${file-path:/home/king/kingdata/hbgjfiles}
 
 constants:
   #管理员的ID

@@ -72,10 +72,13 @@ public class FileServiceImpl implements FileService {
         fileInfo.setCreateTime(new Date());
         fileInfo.setMd5(md5);
 
-        fileInfo.setTag(uploadFileInfo.getTag());
-        fileInfo.setResourceId(uploadFileInfo.getResourceId());
-        fileInfo.setRemark(uploadFileInfo.getRemark());
-        fileInfo.setOrgId(uploadFileInfo.getOrgId());
+        // 富文本编辑器上传附件可能使得uploadFileInfo为空
+        if (uploadFileInfo != null) {
+            fileInfo.setTag(uploadFileInfo.getTag());
+            fileInfo.setResourceId(uploadFileInfo.getResourceId());
+            fileInfo.setRemark(uploadFileInfo.getRemark());
+            fileInfo.setOrgId(uploadFileInfo.getOrgId());
+        }
         fileInfoDao.save(fileInfo);
 
 
@@ -98,7 +101,7 @@ public class FileServiceImpl implements FileService {
         String[] images = new String[]{"jpg", "png", "gif", "bmp", "tif", "jpeg", "gif", "ico"};
         String[] doc = new String[]{"xls", "xlsx", "doc", "docx", "ppt", "pptx", "txt", "pdf"};
         String[] exe = new String[]{"exe", "bat", "cmd", "vbs", "js", "dll"};
-        String[] zip = new String[]{"zip", "rar", "tar", "jar", "js", "dll"};
+        String[] zip = new String[]{"zip", "rar", "tar", "jar", "7z"};
         String[] video = new String[]{"mp4", "avi", "rmvb", "mov", "wvm"};
         String[] audio = new String[]{"mp3", "wav", "mid", "aac", "ogg"};
 
@@ -150,7 +153,7 @@ public class FileServiceImpl implements FileService {
     @Override
     public void saveRemark(FileInfo fileInfo) {
 
-        FileInfo ff=new FileInfo();
+        FileInfo ff = new FileInfo();
         ff.setId(fileInfo.getId());
         ff.setRemark(fileInfo.getRemark());
 

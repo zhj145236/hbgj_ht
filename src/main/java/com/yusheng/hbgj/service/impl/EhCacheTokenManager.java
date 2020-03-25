@@ -25,7 +25,7 @@ import net.sf.ehcache.Element;
  *
  *         2017年8月4日
  */
-@Primary
+
 @Service
 public class EhCacheTokenManager implements TokenManager {
 
@@ -45,7 +45,7 @@ public class EhCacheTokenManager implements TokenManager {
 		Element element = new Element(key, usernamePasswordToken);
 		element.setTimeToLive(expireSeconds);
 		cache.put(element);
-
+        System.err.println(" EhCacheTokenManager token+--->"+expireSeconds+"<<<<<<<<<<<<<<<<<<<<<<");
 		return new Token(key, DateUtils.addSeconds(new Date(), expireSeconds));
 	}
 

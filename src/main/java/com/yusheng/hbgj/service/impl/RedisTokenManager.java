@@ -9,6 +9,7 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -24,6 +25,7 @@ import com.yusheng.hbgj.service.TokenManager;
  *
  *         2017年8月13日
  */
+@Primary  //首要session
 @Service
 public class RedisTokenManager implements TokenManager {
 
@@ -41,6 +43,8 @@ public class RedisTokenManager implements TokenManager {
 		String key = UUID.randomUUID().toString();
 		redisTemplate.opsForValue().set(TOKEN_PREFIX + key, JSONObject.toJSONString(usernamePasswordToken),
 				expireSeconds, TimeUnit.SECONDS);
+
+        System.err.println(" RedisTokenManager token+--->"+expireSeconds+"<<<<<<<<<<<<<<<<<<<<<<");
 
 		return new Token(key, DateUtils.addSeconds(new Date(), expireSeconds));
 	}
