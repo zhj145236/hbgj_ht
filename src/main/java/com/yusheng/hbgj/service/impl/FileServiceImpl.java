@@ -161,6 +161,13 @@ public class FileServiceImpl implements FileService {
 
     }
 
+    @Override
+    public String  getByUrl(String url) {
+
+        return   fileInfoDao.getByUrl(url);
+
+    }
+
     public static void main(String[] args) {
         new Random().nextFloat();
     }

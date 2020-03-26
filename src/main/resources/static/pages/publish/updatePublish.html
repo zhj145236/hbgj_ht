@@ -13,7 +13,7 @@
             <div class='form-group'>
                 <label class='col-md-2 control-label'>联系电话</label>
                 <div class='col-md-10'>
-                    <input class='form-control'  type='text' name='tel' id='tel'
+                    <input class='form-control' type='text' name='tel' id='tel'
                            data-bv-notempty='true' data-bv-notempty-message='tel 不能为空' disabled>
                 </div>
             </div>
@@ -22,8 +22,8 @@
             <div class='form-group'>
                 <label class='col-md-2 control-label'>发布内容</label>
                 <div class='col-md-10'>
-                    <input class='form-control'  type='text' name='publishContent'
-                           id='publishContent' data-bv-notempty='true' data-bv-notempty-message='publishContent 不能为空' disabled>
+                    <input class='form-control' type='text' name='publishContent'
+                           id='publishContent' data-bv-notempty='true' data-bv-notempty-message='发布内容 不能为空' disabled>
                 </div>
             </div>
 
@@ -31,7 +31,7 @@
             <div class="form-group">
                 <label class="col-md-2 control-label">回复内容</label>
                 <div class="col-md-10 form-inline">
-						<textarea rows="8"  cols="100%" name="reply" id="reply">
+						<textarea rows="8" cols="100%" name="reply" id="reply">
 
 						</textarea>
                 </div>
@@ -42,7 +42,7 @@
                 <div class="row" align="center">
                     <div class="col-md-12">
                         <button class="btn btn-primary" onclick="location.href='publishList.html'">返回</button>
-                        <button class="btn btn-primary" type="submit" onclick="update()">
+                        <button class="btn btn-primary" type="submit" onclick="replyMsg()">
                             <i class="fa fa-save"></i> 回复
                         </button>
                     </div>
@@ -66,7 +66,7 @@
 
     function initData() {
         var id = getUrlParam("id");
-        if (id != "") {
+        if (id !== "") {
             $.ajax({
                 type: 'get',
                 url: '/publishs/' + id,
@@ -82,7 +82,9 @@
         }
     }
 
-    function update() {
+
+    function replyMsg() {
+
         $('#form').bootstrapValidator();
         var bootstrapValidator = $("#form").data('bootstrapValidator');
         bootstrapValidator.validate();
@@ -94,11 +96,11 @@
 
         $.ajax({
             type: 'put',
-            url: '/publishs',
+            url: '/publishs/reply',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(formdata),
             success: function (data) {
-                layer.msg("修改成功", {shift: -1, time: 1000}, function () {
+                layer.msg("回复成功", {shift: -1, time: 1000}, function () {
                     location.href = "publishList.html";
                 });
             }

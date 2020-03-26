@@ -156,17 +156,21 @@
                             var type = row['type'];
                             var u = "";
                             if (type === "图片") {
+
                                 var src = domain + "/files" + url;
-                                u = "<a target='_blank' href='" + src + "'><img width='30' src='" + src + "' alt='" + row['fileOriginName'] + "'></img></a>";
+                                var prev = domain + "/files/prev" + url;
+                                u = "<a target='_blank' href='" + src + "'><img width='30' src='" + prev + "' title='点击可下载" + row['fileOriginName'] + "'/></a>";
+
                             } else {
 
                                 var downUrl = domain + "/files" + url;
 
+
                                 if (parseInt(row['size']) < (1024 * 1024)) {
-                                    u = "<a target='_blank' style='color: #1E9FFF'  alt='此文件较大，下载过程中请耐心等待' href='" + downUrl + "'>下载</a>";
+                                    u = "<a target='_blank' style='color: #1E9FFF'  title='此文件较大，下载过程中请耐心等待' href='" + downUrl + "'>下载</a>";
                                 } else {
                                     u = "<a target='_blank' style='color: #1E9FFF'   href='" + downUrl + "'>下载</a>";
-                                    ;
+
                                 }
 
 

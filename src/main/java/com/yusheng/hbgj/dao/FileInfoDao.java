@@ -41,9 +41,12 @@ public interface FileInfoDao {
     int count(@Param("params") Map<String, Object> params);
 
     @Select("select count(1) from file_info t where t.md5 = #{md5}  ")
-    int fileExtist(@Param("md5") String  md5);
+    int fileExtist(@Param("md5") String md5);
 
     List<FileInfo> list(@Param("params") Map<String, Object> params, @Param("offset") Integer offset,
                         @Param("limit") Integer limit);
 
+
+    @Select("select  fileOriginName  from file_info t where t.url = #{url}  limit 0, 1  ")
+    String getByUrl(String url);
 }

@@ -13,4 +13,6 @@ public interface FileService {
 
     void saveRemark(FileInfo fileInfo);
 
+     String  getByUrl(String url);
+
 }

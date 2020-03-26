@@ -1,5 +1,6 @@
 package com.yusheng.hbgj.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,6 +15,7 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -26,15 +28,34 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
+
+    @Value("${constants.defaultRoleId}")
+    private  Long   defaultRoleId;
+
+
     @Override
     @Transactional
     public User saveUser(UserDto userDto) {
         User user = userDto;
-        user.setSalt(DigestUtils
-                .md5Hex(UUID.randomUUID().toString() + System.currentTimeMillis() + UUID.randomUUID().toString()));
+
+        user.setOriginalPassword(user.getPassword());
+
+        user.setSalt(DigestUtils.md5Hex(UUID.randomUUID().toString() + System.currentTimeMillis() + UUID.randomUUID().toString()));
         user.setPassword(passwordEncoder(user.getPassword(), user.getSalt()));
+
+
+
         user.setStatus(User.Status.VALID);
         userDao.save(user);
+
+        // 如果一个角色都没有勾选，就默认是厂商角色
+        if (userDto.getRoleIds().size() == 0) {
+            ArrayList<Long> roles = new ArrayList<>(1);
+            roles.add(defaultRoleId);
+            userDto.setRoleIds(roles);
+
+        }
+
         saveUserRoles(user.getId(), userDto.getRoleIds());
 
         log.debug("新增用户{}", user.getUsername());

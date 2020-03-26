@@ -62,8 +62,10 @@ files:
   path: ${file-path:D:/hbgjfiles}
 
 constants:
-   #管理员的ID
+   #管理员的userID
   adminId: 1
+  #默认角色ID
+  defaultRoleId: 2
 
 logging:
   config: classpath:logback-admin.xml

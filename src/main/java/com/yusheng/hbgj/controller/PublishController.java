@@ -3,6 +3,7 @@ package com.yusheng.hbgj.controller;
 import java.util.Date;
 import java.util.List;
 
+import com.yusheng.hbgj.annotation.LogAnnotation;
 import com.yusheng.hbgj.dao.NoticeDao;
 import com.yusheng.hbgj.dao.PublishDao;
 import com.yusheng.hbgj.entity.Notice;
@@ -11,7 +12,9 @@ import com.yusheng.hbgj.page.table.PageTableHandler;
 import com.yusheng.hbgj.page.table.PageTableRequest;
 import com.yusheng.hbgj.page.table.PageTableResponse;
 import com.yusheng.hbgj.utils.DateUtil;
+import com.yusheng.hbgj.utils.StrUtil;
 import com.yusheng.hbgj.utils.UserUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -45,19 +48,24 @@ public class PublishController {
     @ApiOperation(value = "保存")
     public Publish save(@RequestBody Publish publish) {
 
+
+        publish.setCreateTime(new Date());
         publishDao.save(publish);
+
 
         // 给管理员单独 发送通知
         Notice notice = new Notice();
-        notice.setContent("有用户于" + DateUtil.getNowStr() + "给您留言，请在【用户留言】中查看详情");
+        StringBuffer sb = new StringBuffer();
+
+        sb.append("有用户于 ").append(DateUtil.getNowStr()).append(" 给您留言，内容为：").append(publish.getPublishContent()).append(" <br/><br/>更多详情请在【用户留言】中查看");
+        notice.setContent(sb.toString());
         notice.setTitle("用户留言");
-        notice.setStatus(1);
+        notice.setStatus(Notice.Status.PUBLISH);
         notice.setCreateTime(new Date());
         notice.setUpdateTime(new Date());
         notice.setIsPersonal(Notice.Personal.YES);
         notice.setReceiveId(adminId);
-
-
+        notice.setRefId(publish.getId() + ""); //自动返回主键
         noticeDao.save(notice);
 
 
@@ -73,9 +81,56 @@ public class PublishController {
     @PutMapping
     @ApiOperation(value = "修改")
     public Publish update(@RequestBody Publish publish) {
+
+        publish.setUpdateTime(new Date());
         publishDao.update(publish);
 
         return publish;
+    }
+
+    @LogAnnotation
+    @PutMapping("/reply")
+    @ApiOperation(value = "回复用户留言")
+    public Publish rely(@RequestBody Publish publish) {
+
+        publish.setUpdateTime(new Date());
+        publishDao.update(publish);
+
+        // 回复通知
+        this.noticeUser(publish);
+
+
+        return publish;
+    }
+
+
+    //通知用户有管理员回复TA消息
+    private void noticeUser(Publish publish) {
+
+
+        Publish entity = publishDao.getById(publish.getId());
+
+        if (StringUtils.isBlank(entity.getPublishContent())) {
+            entity.setPublishContent("");
+        }
+
+        Notice notice = new Notice();
+        notice.setStatus(Notice.Status.PUBLISH);
+        notice.setCreateTime(new Date());
+        notice.setCreateTime(new Date());
+        notice.setUpdateTime(new Date());
+        notice.setIsPersonal(Notice.Personal.YES);
+        notice.setTitle("新消息回复提醒");
+        notice.setContent("您的留言【" + StrUtil.elide(entity.getPublishContent(), 10) + "】已被回复，请在【我的发布】里面查看");
+        notice.setRefId(publish.getId().toString());
+        notice.setReceiveId(entity.getOpenid());
+
+        if (StringUtils.isNoneBlank(publish.getReply())) {
+
+            noticeDao.save(notice);
+        }
+
+
     }
 
     @GetMapping

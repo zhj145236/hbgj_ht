@@ -29,9 +29,8 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * 用户相关接口
- * 
- * @author Jinwei
  *
+ * @author Jinwei
  */
 @Api(tags = "用户")
 
@@ -39,48 +38,48 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/users")
 public class UserController {
 
-	private static final Logger log = LoggerFactory.getLogger("adminLogger");
+    private static final Logger log = LoggerFactory.getLogger("adminLogger");
 
-	@Autowired
-	private UserService userService;
-	@Autowired
-	private UserDao userDao;
-
-	@LogAnnotation
-	@PostMapping
-	@ApiOperation(value = "保存用户")
-	@RequiresPermissions("sys:user:add")
-	public User saveUser(@RequestBody UserDto userDto) {
-		User u = userService.getUser(userDto.getUsername());
-		if (u != null) {
-			throw new IllegalArgumentException(userDto.getUsername() + "已存在");
-		}
-
-		return userService.saveUser(userDto);
-	}
-
-	@LogAnnotation
-	@PutMapping
-	@ApiOperation(value = "修改用户")
-	@RequiresPermissions("sys:user:add")
-	public User updateUser(@RequestBody UserDto userDto) {
-		return userService.updateUser(userDto);
-	}
-
-	@LogAnnotation
-	@PutMapping(params = "headImgUrl")
-	@ApiOperation(value = "修改头像")
-	public void updateHeadImgUrl(String headImgUrl) {
-		User user = UserUtil.getCurrentUser();
-		UserDto userDto = new UserDto();
-		BeanUtils.copyProperties(user, userDto);
-		userDto.setHeadImgUrl(headImgUrl);
-
-		userService.updateUser(userDto);
-		log.debug("{}修改了头像", user.getUsername());
-	}
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private UserDao userDao;
 
     @LogAnnotation
+    @PostMapping
+    @ApiOperation(value = "保存用户")
+    @RequiresPermissions("sys:user:add")
+    public User saveUser(@RequestBody UserDto userDto) {
+        User u = userService.getUser(userDto.getUsername());
+        if (u != null) {
+            throw new IllegalArgumentException(userDto.getUsername() + "已存在");
+        }
+
+        return userService.saveUser(userDto);
+    }
+
+    @LogAnnotation
+    @PutMapping
+    @ApiOperation(value = "修改用户")
+    @RequiresPermissions("sys:user:add")
+    public User updateUser(@RequestBody UserDto userDto) {
+        return userService.updateUser(userDto);
+    }
+
+    @LogAnnotation
+    @PutMapping(params = "headImgUrl")
+    @ApiOperation(value = "修改头像")
+    public void updateHeadImgUrl(String headImgUrl) {
+        User user = UserUtil.getCurrentUser();
+        UserDto userDto = new UserDto();
+        BeanUtils.copyProperties(user, userDto);
+        userDto.setHeadImgUrl(headImgUrl);
+
+        userService.updateUser(userDto);
+        log.debug("{}修改了头像", user.getUsername());
+    }
+
+
     @GetMapping("/getAllUser")
     @ApiOperation(value = "获取所有用户/厂商")
     public List<User> getAllUser() {
@@ -88,45 +87,45 @@ public class UserController {
     }
 
 
-	@LogAnnotation
-	@PutMapping("/{username}")
-	@ApiOperation(value = "修改密码")
-	@RequiresPermissions("sys:user:password")
-	public void changePassword(@PathVariable String username, String oldPassword, String newPassword) {
-		userService.changePassword(username, oldPassword, newPassword);
-	}
+    @LogAnnotation
+    @PutMapping("/{username}")
+    @ApiOperation(value = "修改密码")
+    @RequiresPermissions("sys:user:password")
+    public void changePassword(@PathVariable String username, String oldPassword, String newPassword) {
+        userService.changePassword(username, oldPassword, newPassword);
+    }
 
-	@GetMapping
-	@ApiOperation(value = "用户列表")
-	@RequiresPermissions("sys:user:query")
-	public PageTableResponse listUsers(PageTableRequest request) {
-		return new PageTableHandler(new PageTableHandler.CountHandler() {
+    @GetMapping
+    @ApiOperation(value = "用户列表")
+    @RequiresPermissions("sys:user:query")
+    public PageTableResponse listUsers(PageTableRequest request) {
+        return new PageTableHandler(new PageTableHandler.CountHandler() {
 
-			@Override
-			public int count(PageTableRequest request) {
-				return userDao.count(request.getParams());
-			}
-		}, new PageTableHandler.ListHandler() {
+            @Override
+            public int count(PageTableRequest request) {
+                return userDao.count(request.getParams());
+            }
+        }, new PageTableHandler.ListHandler() {
 
-			@Override
-			public List<User> list(PageTableRequest request) {
-				List<User> list = userDao.list(request.getParams(), request.getOffset(), request.getLimit());
-				return list;
-			}
-		}).handle(request);
-	}
+            @Override
+            public List<User> list(PageTableRequest request) {
+                List<User> list = userDao.list(request.getParams(), request.getOffset(), request.getLimit());
+                return list;
+            }
+        }).handle(request);
+    }
 
-	@ApiOperation(value = "当前登录用户")
-	@GetMapping("/current")
-	public User currentUser() {
-		return UserUtil.getCurrentUser();
-	}
+    @ApiOperation(value = "当前登录用户")
+    @GetMapping("/current")
+    public User currentUser() {
+        return UserUtil.getCurrentUser();
+    }
 
-	@ApiOperation(value = "根据用户id获取用户")
-	@GetMapping("/{id}")
-	@RequiresPermissions("sys:user:query")
-	public User user(@PathVariable Long id) {
-		return userDao.getById(id);
-	}
+    @ApiOperation(value = "根据用户id获取用户")
+    @GetMapping("/{id}")
+    @RequiresPermissions("sys:user:query")
+    public User user(@PathVariable Long id) {
+        return userDao.getById(id);
+    }
 
 }

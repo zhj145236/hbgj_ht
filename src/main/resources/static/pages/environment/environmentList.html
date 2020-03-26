@@ -179,8 +179,12 @@
                             var type = row['type'];
                             var u = "";
                             if (type === "图片") {
+
                                 var src = domain + "/files" + url;
-                                u = "<a target='_blank' href='" + src + "'><img width='30' src='" + src + "' alt='" + row['fileOriginName'] + "'></img></a>";
+                                var prev = domain + "/files/prev" + url;
+                                u = "<a target='_blank' href='" + src + "'><img width='30' src='" + prev + "' title='点击可下载" + row['fileOriginName'] + "'/></a>";
+
+
                             } else {
 
                                 var downUrl = domain + "/files" + url;

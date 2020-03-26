@@ -17,15 +17,9 @@ public interface PublishDao {
     int delete(Long id);
 
 
-    
-    @Options(useGeneratedKeys = true, keyProperty = "id")
-    @Insert("insert into publish(openid, sex, tel, nickName, headPic, publishContent, createTime, updateTime, createName, updateName, remark, orgId, delFlag, " +
-            "sort, delTime,reply) " +
-            "values(#{openid}, #{sex}, #{tel}, #{nickName}, #{headPic}, #{publishContent}, #{createTime}, #{updateTime}, #{createName}, #{updateName}, #{remark}," +
-            " #{orgId}, #{delFlag}, #{sort}, #{delTime},#{reply})")
     int save(Publish publish);
 
-    @Update("update publish t set t.delFlag='0', t.delTime=now() where id=#{id} ")
+    @Update("update publish t set t.delFlag='0', t.delTime= now() where id=#{id} ")
     int logDel(String id);
 
     int update(Publish publish);

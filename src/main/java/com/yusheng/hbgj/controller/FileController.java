@@ -1,6 +1,6 @@
 package com.yusheng.hbgj.controller;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
 import com.yusheng.hbgj.annotation.LogAnnotation;
@@ -14,6 +14,8 @@ import com.yusheng.hbgj.page.table.PageTableRequest;
 import com.yusheng.hbgj.page.table.PageTableResponse;
 import com.yusheng.hbgj.service.FileService;
 import com.yusheng.hbgj.utils.DateUtil;
+import jdk.management.resource.internal.inst.SocketOutputStreamRMHooks;
+import net.coobird.thumbnailator.Thumbnails;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
 @Api(tags = "文件")
@@ -42,6 +45,77 @@ public class FileController {
 
     @Value("${constants.adminId}")
     private String adminId;
+
+    @Value("${files.path}")
+    private String filesPath;
+
+
+    @GetMapping("/{year}/{month}/{day}/{filename}")
+    @ApiOperation(value = "原始文件下载")
+    public void down(@PathVariable() String year, @PathVariable() String month, @PathVariable() String day, @PathVariable() String filename, HttpServletResponse response) throws IOException {
+
+
+        StringBuilder baseUrl = new StringBuilder();
+        baseUrl.append(File.separator).append(year).append(File.separator).append(month).append(File.separator).append(day).append(File.separator).append(filename);
+        String fileOriginName = fileService.getByUrl(baseUrl.toString().replaceAll("\\\\", "/"));
+
+
+        StringBuilder fullPath = new StringBuilder();
+        fullPath.append(filesPath).append(File.separator).append(baseUrl);
+
+
+        File file = new File(fullPath.toString());
+        InputStream fis = new BufferedInputStream(new FileInputStream(fullPath.toString()));
+        byte[] buffer = new byte[fis.available()];
+        fis.read(buffer);
+        fis.close();
+
+
+        if (StringUtils.isEmpty(fileOriginName)) {
+            response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes(), "iso-8859-1"));
+        } else {
+            response.addHeader("Content-Disposition", "attachment;filename=" + new String(fileOriginName.getBytes(), "iso-8859-1"));
+        }
+
+        response.addHeader("Content-Length", "" + file.length());
+        OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
+        response.setContentType("application/octet-stream");
+        toClient.write(buffer);
+        toClient.flush();
+        toClient.close();
+
+        System.out.println("下载。。。。。。。。。。。。。。");
+
+    }
+
+
+    @GetMapping("/prev/{year}/{month}/{day}/{filename}")
+    @ApiOperation(value = "小图预览")
+    public void prev(@PathVariable() String year, @PathVariable() String month, @PathVariable() String day, @PathVariable() String filename, HttpServletResponse response) throws IOException {
+
+
+        StringBuilder fullPath = new StringBuilder();
+        fullPath.append(filesPath).append(File.separator).append(File.separator).append(year).append(File.separator).append(month).append(File.separator).append(day).append(File.separator).append(filename);
+
+        if (fullPath.toString().length() < 10) {
+            return;
+        }
+
+        File file = new File(fullPath.toString());
+
+        if (file.exists()) {
+
+            // 缩略图 缩小到0.3
+            Thumbnails.of(fullPath.toString()).scale(0.3f).toOutputStream(response.getOutputStream());
+
+            response.addHeader("Content-Length", "" + file.length());
+
+            response.setContentType("application/octet-stream");
+
+            System.out.println("图片预览。。。。。。。。。。。。。。。。");
+        }
+
+    }
 
 
     @LogAnnotation
@@ -194,6 +268,16 @@ public class FileController {
 
             }
         }
+
+
+    }
+
+    public static void main(String[] args) throws IOException {
+
+        Thumbnails.of("C:\\Users\\Jinwei\\Pictures\\bg.jpg")
+                //.size(200, 300)
+
+                .toFile("D:/a380_200x300.jpg");
 
 
     }

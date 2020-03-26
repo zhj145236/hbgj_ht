@@ -13,7 +13,7 @@ import com.yusheng.hbgj.entity.SysLogs;
 @Mapper
 public interface SysLogsDao {
 
-	@Insert("insert into sys_logs(userId, module, flag, remark, createTime) values(#{user.id}, #{module}, #{flag}, #{remark}, now())")
+	@Insert("insert into sys_logs(userId, module, flag, remark, createTime,ip,param) values(#{user.id}, #{module}, #{flag}, #{remark}, now(),#{ip},#{param} )")
 	int save(SysLogs sysLogs);
 
 	int count(@Param("params") Map<String, Object> params);

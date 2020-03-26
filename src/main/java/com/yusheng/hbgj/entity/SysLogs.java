@@ -8,7 +8,28 @@ public class SysLogs extends BaseEntity<Long> {
 	private Boolean flag;
 	private String remark;
 
-	public User getUser() {
+	private  String ip;
+
+	private  String param;
+
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public String getParam() {
+        return param;
+    }
+
+    public void setParam(String param) {
+        this.param = param;
+    }
+
+    public User getUser() {
 		return user;
 	}
 

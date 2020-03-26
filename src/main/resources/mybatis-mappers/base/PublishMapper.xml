@@ -75,6 +75,23 @@
         limit #{offset}, #{limit}
     </select>
 
+
+    <!--新增信息，并拿到新增信息的表主键信息。
+        新增数据，得到主键的外层写法没什么特别，跟普通的insert一样。只不过里面加了selectKey-->
+    <insert id="save" >
+
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+
+        insert into publish (openid, sex, tel, nickName, headPic, publishContent, createTime, updateTime,
+        createName, updateName, remark, orgId, delFlag, sort, delTime,reply)
+        values ( #{openid}, #{sex}, #{tel}, #{nickName}, #{headPic}, #{publishContent}, #{createTime}, #{updateTime},
+        #{createName}, #{updateName}, #{remark}, #{orgId}, #{delFlag}, #{sort}, #{delTime},#{reply} )
+
+    </insert>
+
+
     <update id="update">
         update publish t
         <set>
@@ -94,7 +111,6 @@
             <if test="reply != null">
                 reply = #{reply},
             </if>
-
 
 
             <if test="headPic != null">

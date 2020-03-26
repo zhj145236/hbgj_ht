@@ -41,12 +41,11 @@
         </foreach>
     </insert>
 
-    <insert id="thisTableCurrentRows" parameterType="string">
+    <select id="thisTableCurrentRows" parameterType="string">
 
-        select tRows
-        from sys_table_analy where t_name= #{tName}
+        select  table_rows as  tRows         from sys_table_analy where t_name= #{tName}
 
-    </insert>
+    </select>
 
 
 </mapper>

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.google.common.collect.Lists;
+import org.springframework.util.StringUtils;
 
 /**
  * 字符串转化工具类
@@ -56,11 +57,42 @@ public class StrUtil {
         return UUID.randomUUID().toString().replaceAll("-", "");
     }
 
-    public static void main(String[] args) {
-        for (int i = 0; i < 10; i++) {
 
-            System.out.println(uuid());
+    /**
+     * 字符串用...省略
+     *
+     * @return
+     */
+    public  static String elide(String str, int maxWord) {
+
+        maxWord = maxWord <= 0 ? 10 : maxWord;
+
+        if (StringUtils.isEmpty(str)) {
+            return "";
+        } else if (str.length() > maxWord) {
+
+            return str.substring(0, maxWord)+"...";
+        } else {
+            return str;
         }
+
+    }
+
+    public static void main(String[] args) {
+
+        String aa1 = null;
+        String aa0 = "";
+
+        String aa2 = "我很认同您的看法，要是能增加就更好了，是不是";
+        String aa3 = "我很认同您";
+
+
+        System.out.println(elide(aa0,10));
+        System.out.println(elide(aa1,10));
+        System.out.println(elide(aa2,10));
+        System.out.println(elide(aa3,10));
+
+
     }
 
 }
