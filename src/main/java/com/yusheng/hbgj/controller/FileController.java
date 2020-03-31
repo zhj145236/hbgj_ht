@@ -15,7 +15,6 @@ import com.yusheng.hbgj.page.table.PageTableRequest;
 import com.yusheng.hbgj.page.table.PageTableResponse;
 import com.yusheng.hbgj.service.FileService;
 import com.yusheng.hbgj.utils.DateUtil;
-import jdk.management.resource.internal.inst.SocketOutputStreamRMHooks;
 import net.coobird.thumbnailator.Thumbnails;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,8 +107,6 @@ public class FileController {
 
         if (file.exists()) {
 
-
-            System.out.println(filename + "AAAAAAAAAAAAa<<<<<<<<<<<");
             String type = fileService.getFileType(file.getName());
 
             if ("图片".equals(type)) {
