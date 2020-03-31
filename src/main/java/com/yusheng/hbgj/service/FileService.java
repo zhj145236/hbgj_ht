@@ -15,4 +15,8 @@ public interface FileService {
 
      String  getByUrl(String url);
 
+
+
+     String getFileType(String fileName);
+
 }

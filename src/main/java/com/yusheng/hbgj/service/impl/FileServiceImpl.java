@@ -89,7 +89,8 @@ public class FileServiceImpl implements FileService {
     }
 
 
-    private String getFileType(String fileName) {
+    @Override
+    public  String getFileType(String fileName) {
 
         //VID_20190617_185050.mp4.zIP
 

@@ -1,6 +1,7 @@
 package com.yusheng.hbgj.controller;
 
 import java.io.*;
+import java.util.HashMap;
 import java.util.List;
 
 import com.yusheng.hbgj.annotation.LogAnnotation;
@@ -28,6 +29,7 @@ import io.swagger.annotations.ApiOperation;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
+import java.util.Map;
 
 @Api(tags = "文件")
 @RestController
@@ -80,11 +82,12 @@ public class FileController {
         response.addHeader("Content-Length", "" + file.length());
         OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
         response.setContentType("application/octet-stream");
+
+
         toClient.write(buffer);
         toClient.flush();
         toClient.close();
 
-        System.out.println("下载。。。。。。。。。。。。。。");
 
     }
 
@@ -105,15 +108,39 @@ public class FileController {
 
         if (file.exists()) {
 
-            // 缩略图 缩小到0.3
-            Thumbnails.of(fullPath.toString()).scale(0.3f).toOutputStream(response.getOutputStream());
 
-            response.addHeader("Content-Length", "" + file.length());
+            System.out.println(filename + "AAAAAAAAAAAAa<<<<<<<<<<<");
+            String type = fileService.getFileType(file.getName());
 
-            response.setContentType("application/octet-stream");
+            if ("图片".equals(type)) {
 
-            System.out.println("图片预览。。。。。。。。。。。。。。。。");
+
+                //缓存7天
+                response.setDateHeader("Expires", +System.currentTimeMillis() + 604800000);
+                //response.setDateHeader("Last-Modified", +file.lastModified());
+                //response.addHeader("Content-Length", "" + file.length());
+                response.setContentType(this.trans(file.getName()));
+
+                // 缩略图 缩小到0.3
+                Thumbnails.of(fullPath.toString()).scale(0.3f).toOutputStream(response.getOutputStream());
+            }
         }
+
+    }
+
+    private String trans(String fileName) {
+
+        String tty = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length()).toLowerCase();
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("jpg", "image/jpeg");
+        map.put("png", "image/png");
+        map.put("gif", "image/gif");
+        map.put("bmp", "application/x-bmp");
+        map.put("tif", "image/tiff");
+        map.put("jpeg", "image/jpeg");
+        map.put("ico", "image/x-icon");
+        return map.get(tty) == null ? "image/jpeg" : map.get(tty);
+
 
     }
 
