@@ -15,7 +15,12 @@
                 and t.status = #{params.status}
             </if>
 
-            and t.username not in( 'admin' )
+            <if test="params.openid != null and params.openid != ''">
+                and t.openid = #{params.openid}
+            </if>
+
+
+            and t.id not in(1,2)
         </where>
     </sql>
 
@@ -104,6 +109,10 @@
             </if>
             <if test="delTime != null">
                 delTime = #{delTime},
+            </if>
+
+            <if test="openid != null">
+                openid = #{openid},
             </if>
 
 

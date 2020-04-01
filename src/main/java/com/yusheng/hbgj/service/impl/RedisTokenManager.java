@@ -35,18 +35,17 @@ public class RedisTokenManager implements TokenManager {
 	/**
 	 * token过期秒数
 	 */
-	@Value("${token.expire.seconds}")
-	private Integer expireSeconds;
+	@Value("${token.expire.day}")
+	private Integer expireDay;
 
 	@Override
 	public Token saveToken(UsernamePasswordToken usernamePasswordToken) {
 		String key = UUID.randomUUID().toString();
+
 		redisTemplate.opsForValue().set(TOKEN_PREFIX + key, JSONObject.toJSONString(usernamePasswordToken),
-				expireSeconds, TimeUnit.SECONDS);
+                expireDay, TimeUnit.DAYS);
 
-        System.err.println(" RedisTokenManager token+--->"+expireSeconds+"<<<<<<<<<<<<<<<<<<<<<<");
-
-		return new Token(key, DateUtils.addSeconds(new Date(), expireSeconds));
+		return new Token(key, DateUtils.addDays(new Date(), expireDay));
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package com.yusheng.hbgj.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.yusheng.hbgj.annotation.LogAnnotation;
@@ -10,12 +11,15 @@ import com.yusheng.hbgj.page.table.PageTableHandler;
 import com.yusheng.hbgj.page.table.PageTableRequest;
 import com.yusheng.hbgj.page.table.PageTableResponse;
 import com.yusheng.hbgj.service.UserService;
+import com.yusheng.hbgj.utils.StrUtil;
 import com.yusheng.hbgj.utils.UserUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,8 +46,17 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
     @Autowired
     private UserDao userDao;
+
+    @Value("${constants.companyRoleId}")
+    private Long companyRoleId;
+
+
+    @Value("${constants.visitorRoleId}")
+    private Long visitorRoleId;
+
 
     @LogAnnotation
     @PostMapping
@@ -53,6 +66,14 @@ public class UserController {
         User u = userService.getUser(userDto.getUsername());
         if (u != null) {
             throw new IllegalArgumentException(userDto.getUsername() + "已存在");
+        }
+
+        // 如果一个角色都没有勾选，就默认是厂商角色
+        if (userDto.getRoleIds().size() == 0) {
+            ArrayList<Long> roles = new ArrayList<>(1);
+            roles.add(companyRoleId);
+            userDto.setRoleIds(roles);
+
         }
 
         return userService.saveUser(userDto);
@@ -127,5 +148,40 @@ public class UserController {
     public User user(@PathVariable Long id) {
         return userDao.getById(id);
     }
+
+
+    @LogAnnotation
+    @PostMapping("/addWxUser")
+    @ApiOperation(value = "新增微信用户")
+    public User addWxUser(@RequestBody UserDto wx) {
+
+        if (StringUtils.isEmpty(wx.getOpenid())) {
+            throw new IllegalArgumentException("Openid参数丢失");
+        }
+
+        if (userService.wxCountByOpenid(wx.getOpenid()) >= 1) {
+
+            throw new IllegalArgumentException("此微信号已经注册过了，请直接登录");
+
+        }
+
+
+        // 默认加上游客角色
+        if (wx.getRoleIds() == null) {
+            wx.setRoleIds(new ArrayList<>());
+        }
+        if (wx.getRoleIds().size() == 0) {
+            ArrayList<Long> roles = new ArrayList<>(1);
+            roles.add(visitorRoleId);
+            wx.setRoleIds(roles);
+        }
+
+        wx.setPassword("123456");
+        wx.setOriginalPassword("123456");
+
+        return userService.saveUser(wx);
+
+    }
+
 
 }

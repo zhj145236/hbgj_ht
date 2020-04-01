@@ -2,7 +2,7 @@ server:
   port: 8080
   servlet:
     session:
-      timeout: 30D #30分钟，测试的话时间不能太短，否则不准。m是分钟单位，s是秒的单位，h是小时的单位，不写单位的话默认是毫秒
+      timeout: 7d #30天。m是分钟单位，s是秒的单位，h是小时的单位，不写单位的话默认是毫秒
 
 
 spring:
@@ -39,6 +39,8 @@ spring:
   mvc:
     servlet:
       load-on-startup: 1
+    favicon:
+      enabled: false
   redis:
     host: localhost
     port: 6379
@@ -62,10 +64,10 @@ files:
   path: ${file-path:/home/server/hbgjfiles}
 
 constants:
-  #管理员的userID
+  hlgjId: 2
   adminId: 1
-  #默认角色ID
-  defaultRoleId: 2
+  companyRoleId: 2
+  visitorRoleId: 3
 
 logging:
   config: classpath:logback-admin.xml
@@ -73,8 +75,9 @@ log:
   level:
     root: info
     my: debug
-  file: ../logs/admin-server.log
+  file: ../hbgjlogs/admin-server.log
   maxsize: 30MB
 token:
   expire:
-    seconds: 86400
+    day: 30
+    webExpireDay: 7

@@ -18,9 +18,9 @@ public interface UserDao {
 
     @Options(useGeneratedKeys = true, keyProperty = "id")
     @Insert("insert into sys_user(username, password, salt, nickname, headImgUrl, phone, " +
-            "telephone, email, birthday, sex, status, createTime, updateTime,originalPassword,remark,address) values " +
+            "telephone, email, birthday, sex, status, createTime, updateTime,originalPassword,remark,address,openid) values " +
             "(#{username}, #{password}, #{salt}, #{nickname}, #{headImgUrl}, #{phone}, #{telephone}, " +
-            "#{email}, #{birthday}, #{sex}, #{status}, now(), now(),#{originalPassword},#{remark},#{address})")
+            "#{email}, #{birthday}, #{sex}, #{status}, now(), now(),#{originalPassword},#{remark},#{address},#{openid})")
     int save(User user);
 
     @Select("select * from sys_user t where t.id = #{id}")
@@ -33,7 +33,7 @@ public interface UserDao {
     int changePassword(@Param("id") Long id, @Param("password") String password, @Param("originalPassword") String originalPassword);
 
 
-    @Select("select t.id,t.nickname from sys_user t where t.username not in ('admin') ")
+    @Select("select t.id,t.nickname from sys_user t where t.id not in (1,2) ")
     List<User> getAllUser();
 
     @Delete("delete from sys_role_user where userId = #{userId}")
@@ -50,5 +50,7 @@ public interface UserDao {
 
     int update(User user);
 
+    @Select("select  count(*)  from sys_user t where t.openid= #{openid}")
+    int wxCountByOpenid(String openid);
 
 }

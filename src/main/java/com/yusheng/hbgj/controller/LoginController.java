@@ -19,7 +19,7 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * 登陆相关接口
- * 
+ *
  * @author Jinwei
  *
  */
@@ -41,6 +41,7 @@ public class LoginController {
 		SecurityUtils.getSubject().login(usernamePasswordToken);
 		// 设置shiro的session过期时间
 		SecurityUtils.getSubject().getSession().setTimeout(serverProperties.getServlet().getSession().getTimeout().toMillis());
+
 	}
 
 	@LogAnnotation

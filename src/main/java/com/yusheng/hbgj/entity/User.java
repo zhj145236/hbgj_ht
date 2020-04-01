@@ -23,6 +23,12 @@ public class User extends BaseEntity<Long> {
     private Integer sex;
     private Integer status;
 
+    /***
+     * 微信Openid
+     */
+    private  String openid;
+
+
     /**
      * 原始密码
      */
@@ -139,5 +145,14 @@ public class User extends BaseEntity<Long> {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+
+    public String getOpenid() {
+        return openid;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid;
     }
 }

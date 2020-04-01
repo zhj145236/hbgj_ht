@@ -12,10 +12,18 @@ public class T1 {
 
     public static void main(String[] args) {
 
-        String res = MathBaseUtil.divide("11.135", "1", 3);
+        int expire=25920000;
+        //2147483647
+        //25920000000
 
+        System.out.println(expire * 1000);
+        if( expire != -1 && (expire * 1000) < 2592000000L){
 
-        System.out.println("res->" + res);
+            System.out.println("11111111111");
+        }else{
+            System.out.println("00000000000000000000");
+        }
+
     }
 
 

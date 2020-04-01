@@ -84,16 +84,16 @@ function showLoginInfo(){
 			
 			var sex = data.sex;
 			var url = data.headImgUrl;
-			if(url == null || url == ""){
-				if(sex == 1){
-					url = "/img/avatars/sunny.png";
+			if(url == null || url === ""){
+				if(sex === 1){
+					url = "/img/avatars/nan.png";
 				} else {
-					url = "/img/avatars/1.png";
+					url = "/img/avatars/nv.png";
 				}
 				
 				url = domain + url;
 			} else {
-				url = domain + "/files" + url;
+				url = domain + "/files/prev" + url;
 			}
 			var img = $(".admin-header-user img");
 			img.attr("src", url);

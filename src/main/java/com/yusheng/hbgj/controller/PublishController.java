@@ -40,8 +40,8 @@ public class PublishController {
     @Autowired
     private NoticeDao noticeDao;
 
-    @Value("${constants.adminId}")
-    private String adminId;
+    @Value("${constants.hlgjId}")
+    private String hlgjId;
 
 
     @PostMapping
@@ -64,7 +64,7 @@ public class PublishController {
         notice.setCreateTime(new Date());
         notice.setUpdateTime(new Date());
         notice.setIsPersonal(Notice.Personal.YES);
-        notice.setReceiveId(adminId);
+        notice.setReceiveId(hlgjId);
         notice.setRefId(publish.getId() + ""); //自动返回主键
         noticeDao.save(notice);
 

@@ -1,13 +1,16 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <configuration>
+
+    <!-- 设定日志级别 -->
     <springProperty name="logFile" source="log.file"/>
     <springProperty name="rootlevel" source="log.level.root"/>
     <springProperty name="mylevel" source="log.level.my"/>
     <springProperty name="maxFileSize" source="log.maxsize"/>
 
+    <!-- 控制台 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d %-5level - %msg %n
+            <pattern>%d %c %t %-5level - %msg %n
             </pattern>
             <charset>UTF-8</charset>
         </encoder>

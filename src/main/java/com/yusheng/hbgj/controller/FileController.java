@@ -44,8 +44,8 @@ public class FileController {
     private NoticeDao noticeDao;
 
 
-    @Value("${constants.adminId}")
-    private String adminId;
+    @Value("${constants.hlgjId}")
+    private String hlgjId;
 
     @Value("${files.path}")
     private String filesPath;
@@ -276,7 +276,7 @@ public class FileController {
                 Notice notice = new Notice();
                 notice.setIsPersonal(Notice.Personal.YES);
                 notice.setTitle("合同快到期提醒");
-                notice.setReceiveId(adminId);
+                notice.setReceiveId(hlgjId);
                 StringBuffer sb = new StringBuffer();
 
                 sb.append("您有一份与").append(file.getOrgId()).append("签订的合同【").append(file.getFileOriginName()).append("】").

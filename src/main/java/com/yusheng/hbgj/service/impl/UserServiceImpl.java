@@ -29,10 +29,6 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
 
-    @Value("${constants.defaultRoleId}")
-    private  Long   defaultRoleId;
-
-
     @Override
     @Transactional
     public User saveUser(UserDto userDto) {
@@ -44,17 +40,10 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder(user.getPassword(), user.getSalt()));
 
 
-
         user.setStatus(User.Status.VALID);
         userDao.save(user);
 
-        // 如果一个角色都没有勾选，就默认是厂商角色
-        if (userDto.getRoleIds().size() == 0) {
-            ArrayList<Long> roles = new ArrayList<>(1);
-            roles.add(defaultRoleId);
-            userDto.setRoleIds(roles);
 
-        }
 
         saveUserRoles(user.getId(), userDto.getRoleIds());
 
@@ -101,6 +90,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAllUser() {
         return userDao.getAllUser();
+    }
+
+    @Override
+    public int wxCountByOpenid(String openid) {
+        return userDao.wxCountByOpenid(openid);
     }
 
     @Override

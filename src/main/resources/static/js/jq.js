@@ -1,3 +1,18 @@
+$(window).load(function () {
+
+
+    // 图片不存在时用默认图片显示
+    $('img').each(function () {
+
+        if (!this.complete || typeof this.naturalWidth == "undefined" || parseInt(this.naturalWidth) === 0) {
+            this.src = '/img/avatars/not_found.png';
+            this.title = "预览图无效"
+
+        }
+    });
+});
+
+
 $.ajaxSetup({
     cache: false,
     error: function (xhr, textStatus, errorThrown) {
@@ -24,7 +39,6 @@ $.ajaxSetup({
 
             console.error(message);
             layer.msg('系统错误【' + message + "】，请稍后再试或者联系管理员", {icon: 5});
-
 
 
         }

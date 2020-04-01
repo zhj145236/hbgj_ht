@@ -42,6 +42,7 @@ public class ExceptionHandlerAdvice {
 	@ExceptionHandler({ UnauthorizedException.class })
 	@ResponseStatus(HttpStatus.FORBIDDEN)
 	public ResponseInfo forbidden(Exception exception) {
+        log.info("系统拒绝处理", exception.getMessage());
 		return new ResponseInfo(HttpStatus.FORBIDDEN.value() + "", exception.getMessage());
 	}
 

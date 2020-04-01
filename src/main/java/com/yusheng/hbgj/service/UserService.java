@@ -19,4 +19,7 @@ public interface UserService {
 
 	List<User> getAllUser();
 
+
+	int wxCountByOpenid(String openid);
+
 }
