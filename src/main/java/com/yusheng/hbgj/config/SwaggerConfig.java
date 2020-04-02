@@ -16,28 +16,28 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * swagger文档
- * 
- * @author Jinwei
  *
- *         2017年7月21日
+ * @author Jinwei
+ * <p>
+ * 2017年7月21日
  */
 @Configuration
 @EnableSwagger2
-@Profile({"test", "prod"})
+@Profile({"test"})
 public class SwaggerConfig {
 
-	@Bean
-	public Docket docket() {
-		ParameterBuilder builder = new ParameterBuilder();
-		builder.parameterType("header").name("login-token")
-				.description("restful方式的header参数")
-				.required(false)
-				.modelRef(new ModelRef("string")); // 在swagger里显示header
+    @Bean
+    public Docket docket() {
+        ParameterBuilder builder = new ParameterBuilder();
+        builder.parameterType("header").name("login-token")
+                .description("restful方式的header参数")
+                .required(false)
+                .modelRef(new ModelRef("string")); // 在swagger里显示header
 
-		return new Docket(DocumentationType.SWAGGER_2).groupName("swagger接口文档")
-				.apiInfo(new ApiInfoBuilder().title("环保管家")
-						.contact(new Contact("昱升科技", "", "19122@qq.com")).version("1.0").build())
-				.globalOperationParameters(Lists.newArrayList(builder.build()))
-				.select().paths(PathSelectors.any()).build();
-	}
+        return new Docket(DocumentationType.SWAGGER_2).groupName("swagger接口文档")
+                .apiInfo(new ApiInfoBuilder().title("环保管家")
+                        .contact(new Contact("昱升", "", "xxx@qq.com")).version("1.0").build())
+                .globalOperationParameters(Lists.newArrayList(builder.build()))
+                .select().paths(PathSelectors.any()).build();
+    }
 }

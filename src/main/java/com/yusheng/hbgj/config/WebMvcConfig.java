@@ -16,52 +16,55 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
-	/**
-	 * 跨域支持
-	 */
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**")
-						.allowedMethods("*")
-						.allowedHeaders("*")
-						.allowedOrigins("*")
-						.allowCredentials(true)
-						.maxAge(18000L);
-			}
-		};
-	}
+    /**
+     * 跨域支持
+     */
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedMethods("*")
+                        .allowedHeaders("*")
+                        .allowedOrigins("*")
+                        .allowCredentials(true)
+                        .maxAge(18000L);
+            }
+        };
+    }
 
-	/**
-	 * datatable分页解析
-	 * 
-	 * @return
-	 */
-	@Bean
-	public PageTableArgumentResolver tableHandlerMethodArgumentResolver() {
-		return new PageTableArgumentResolver();
-	}
+    /**
+     * datatable分页解析
+     *
+     * @return
+     */
+    @Bean
+    public PageTableArgumentResolver tableHandlerMethodArgumentResolver() {
+        return new PageTableArgumentResolver();
+    }
 
-	@Override
-	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-		argumentResolvers.add(tableHandlerMethodArgumentResolver());
-	}
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        argumentResolvers.add(tableHandlerMethodArgumentResolver());
+    }
 
-	/**
-	 * 上传文件根路径
-	 */
-	@Value("${files.path}")
-	private String filesPath;
+    /**
+     * 上传文件根路径
+     */
+    @Value("${files.path}")
+    private String filesPath;
 
-	/**
-	 * 外部文件访问
-	 */
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    /**
+     * 外部文件访问
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		/*registry.addResourceHandler("/files/**")
 				.addResourceLocations(ResourceUtils.FILE_URL_PREFIX + filesPath + File.separator);*/
-	}
 
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+
+
+    }
 }

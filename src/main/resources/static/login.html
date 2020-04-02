@@ -2,17 +2,16 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!--<meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Cache-Control" content="no-cache">
     <meta http-equiv="Expires" content="0">
-  -->
+
     <title>登录</title>
-    <link rel="shortcut icon" href="/favicon.ico"/>
-    <link rel="bookmark" href="/favicon.ico"/>
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="shortcut icon" href="/static/favicon.ico"/>
+    <link rel="bookmark" href="/static/favicon.ico"/>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
 
     <link href="css/login.css" type="text/css" rel="stylesheet">
-
 
 
 </head>
@@ -31,7 +30,7 @@
         <input id="password" name="password" placeholder="密&nbsp;&nbsp;码" type="password"
                autocomplete="off">
         <hr class="hr15">
-        <button style="width: 100%;" type="submit"
+        <button style="width: 100%; " type="submit"
                 onclick="login(this)">登录
         </button>
         <hr class="hr20">
@@ -50,7 +49,7 @@
     }
 
     var user = loginInfo();
-    if (user != "") {
+    if (user !== "") {
         location.href = '/';
     }
 

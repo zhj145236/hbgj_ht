@@ -3,7 +3,7 @@ server:
   servlet:
     session:
       timeout: 7d
-  #30分钟，测试的话时间不能太短，否则不准。m是分钟单位，s是秒的单位，h是小时的单位，不写单位的话默认是毫秒
+  #7天分钟，测试的话时间不能太短，否则不准。m是分钟单位，s是秒的单位，h是小时的单位，不写单位的话默认是毫秒
 
 spring:
   datasource:
@@ -36,9 +36,12 @@ spring:
     multipart:
       max-file-size: 100MB
       max-request-size: 100MB
+
+
   mvc:
     favicon:
       enabled: false
+
     servlet:
       load-on-startup: 1
   redis:

@@ -26,13 +26,11 @@ a {
 }
 
 .login {
-    margin: 150px auto 0 auto;
     min-height: 620px;
     max-width: 520px;
     padding: 40px;
-    background-color: #ffffff;
-    margin-left: auto;
-    margin-right: auto;
+    background-color: #FFFFFF;
+    margin: 150px auto 0;
     border-radius: 4px;
     /* overflow-x: hidden; */
     box-sizing: border-box;
@@ -55,7 +53,9 @@ a {
 .message {
     margin: 10px 0 0 -58px;
     padding: 18px 10px 18px 60px;
-    background: #9AE36A;
+    /** background: #9AE36A; **/
+    background: #006347;
+
     position: relative;
     color: #fff;
     font-size: 19px;
@@ -107,7 +107,7 @@ button {
 
     cursor: pointer;
     color: #ffffff;
-    background-color: #9AE36A;
+    background-color: #006347;
     border-radius: 3px;
     border: none;
     -webkit-appearance: none;
