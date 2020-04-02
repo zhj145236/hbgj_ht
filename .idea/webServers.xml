@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="bc389781-2336-48c3-9f3a-ae0e0217f852" name="上传到测试服务器" url="http://192.168.31.76">
+        <fileTransfer host="192.168.31.76" port="22" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions controlEncoding="UTF-8" dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

@@ -68,8 +68,13 @@ public class UserController {
             throw new IllegalArgumentException(userDto.getUsername() + "已存在");
         }
 
+        if (userDto.getRoleIds() == null) {
+            userDto.setRoleIds(new ArrayList<>());
+        }
+
         // 如果一个角色都没有勾选，就默认是厂商角色
         if (userDto.getRoleIds().size() == 0) {
+
             ArrayList<Long> roles = new ArrayList<>(1);
             roles.add(companyRoleId);
             userDto.setRoleIds(roles);

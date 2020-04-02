@@ -133,7 +133,7 @@
 
     function initData() {
         var id = getUrlParam("id");
-        if (id != "") {
+        if (id !== "") {
             $.ajax({
                 type: 'get',
                 url: '/users/' + id,
