@@ -1,12 +1,15 @@
 package com.yusheng.hbgj.controller;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 
 import com.yusheng.hbgj.annotation.LogAnnotation;
+import com.yusheng.hbgj.constants.BusinessException;
 import com.yusheng.hbgj.dao.FileInfoDao;
 import com.yusheng.hbgj.dao.NoticeDao;
+import com.yusheng.hbgj.dto.FileDto;
 import com.yusheng.hbgj.dto.LayuiFile;
 import com.yusheng.hbgj.entity.FileInfo;
 import com.yusheng.hbgj.entity.Notice;
@@ -64,6 +67,20 @@ public class FileController {
         StringBuilder fullPath = new StringBuilder();
         fullPath.append(filesPath).append(File.separator).append(baseUrl);
 
+        response.setContentType("application/octet-stream");
+        if (StringUtils.isEmpty(fileOriginName)) {
+            response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes(), "iso-8859-1"));
+        } else {
+            response.addHeader("Content-Disposition", "attachment;filename=" + new String(fileOriginName.getBytes(), "iso-8859-1"));
+        }
+
+        rejectStream(fullPath.toString(), response);
+
+
+    }
+
+
+    private void rejectStream(String fullPath, HttpServletResponse response) throws IOException {
 
         File file = new File(fullPath.toString());
         InputStream fis = new BufferedInputStream(new FileInputStream(fullPath.toString()));
@@ -71,16 +88,8 @@ public class FileController {
         fis.read(buffer);
         fis.close();
 
-
-        if (StringUtils.isEmpty(fileOriginName)) {
-            response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes(), "iso-8859-1"));
-        } else {
-            response.addHeader("Content-Disposition", "attachment;filename=" + new String(fileOriginName.getBytes(), "iso-8859-1"));
-        }
-
         response.addHeader("Content-Length", "" + file.length());
         OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
-        response.setContentType("application/octet-stream");
 
 
         toClient.write(buffer);
@@ -92,8 +101,8 @@ public class FileController {
 
 
     @GetMapping("/prev/{year}/{month}/{day}/{filename}")
-    @ApiOperation(value = "小图预览")
-    public void prev(@PathVariable() String year, @PathVariable() String month, @PathVariable() String day, @PathVariable() String filename, HttpServletResponse response) throws IOException {
+    @ApiOperation(value = "文件预览", tags = "适用于图片和PDF文档")
+    public void prev(@PathVariable() String year, @PathVariable() String month, @PathVariable() String day, @PathVariable() String filename, @RequestParam(required = false) Integer isBigPic, HttpServletResponse response) throws IOException {
 
 
         StringBuilder fullPath = new StringBuilder();
@@ -111,15 +120,32 @@ public class FileController {
 
             if ("图片".equals(type)) {
 
+                //缓存7天
+                response.setDateHeader("Expires", +System.currentTimeMillis() + 604800000);
+                response.setContentType(this.trans(file.getName()));
+
+                if (isBigPic != null && isBigPic == 1) {
+
+                    rejectStream(fullPath.toString(), response);
+
+                } else {
+
+                    // 缩略图 缩小到0.3
+                    Thumbnails.of(fullPath.toString()).scale(0.3f).toOutputStream(response.getOutputStream());
+                }
+
+            } else if ("文档".equals(type)) {
 
                 //缓存7天
                 response.setDateHeader("Expires", +System.currentTimeMillis() + 604800000);
-                //response.setDateHeader("Last-Modified", +file.lastModified());
-                //response.addHeader("Content-Length", "" + file.length());
+
                 response.setContentType(this.trans(file.getName()));
 
-                // 缩略图 缩小到0.3
-                Thumbnails.of(fullPath.toString()).scale(0.3f).toOutputStream(response.getOutputStream());
+                rejectStream(fullPath.toString(), response);
+
+                response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes(), StandardCharsets.ISO_8859_1));
+
+
             }
         }
 
@@ -136,6 +162,8 @@ public class FileController {
         map.put("tif", "image/tiff");
         map.put("jpeg", "image/jpeg");
         map.put("ico", "image/x-icon");
+        map.put("pdf", "application/pdf");
+
         return map.get(tty) == null ? "image/jpeg" : map.get(tty);
 
 
@@ -202,6 +230,40 @@ public class FileController {
         }).handle(request);
     }
 
+    @GetMapping("/wxlistFiles")
+    @ApiOperation(value = "小程序端数据中心", tags = "企业检修资料；企业台账；合同；环保文件, 需要开放查询的权限才能调用")
+    @RequiresPermissions("sys:file:query")
+    public PageTableResponse wxlistFiles(PageTableRequest request) {
+
+        if (StringUtils.isEmpty(request.getParams().get("resourceId"))) {
+
+            throw new IllegalArgumentException("resourceId不能为空");
+
+        }
+
+
+        return new PageTableHandler(new PageTableHandler.CountHandler() {
+
+            @Override
+            public int count(PageTableRequest request) {
+                return fileInfoDao.wxCount(request.getParams());
+            }
+        }, new PageTableHandler.ListHandler() {
+
+            @Override
+            public List<FileDto> list(PageTableRequest request) {
+
+
+                request.getParams().putIfAbsent("orderBy", "  ORDER BY uploadTime DESC  ");
+
+                return fileInfoDao.wxlistFiles(request.getParams(), request.getOffset(), request.getLimit());
+
+
+            }
+        }).handle(request);
+    }
+
+
     @LogAnnotation
     @DeleteMapping("/{id}")
     @ApiOperation(value = "文件删除")
@@ -248,7 +310,7 @@ public class FileController {
         Date dateEnd = DateUtil.parseDate(date[1].trim());
 
         if (DateUtil.daysBetween(dateStart, dateEnd) < 1) {
-            throw new IllegalArgumentException("合同结束时间应该大于开始时间");
+            throw new BusinessException("合同结束时间应该大于开始时间");
         }
 
 
@@ -290,20 +352,14 @@ public class FileController {
                 notice.setUpdateTime(new Date());
                 noticeDao.save(notice);
 
+
+                // TODO 给厂商也要发通知
+
             }
         }
 
 
     }
 
-    public static void main(String[] args) throws IOException {
-
-        Thumbnails.of("C:\\Users\\Jinwei\\Pictures\\bg.jpg")
-                //.size(200, 300)
-
-                .toFile("D:/a380_200x300.jpg");
-
-
-    }
 
 }

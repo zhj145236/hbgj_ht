@@ -2,18 +2,22 @@ package com.yusheng.hbgj.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import com.yusheng.hbgj.annotation.LogAnnotation;
+import com.yusheng.hbgj.constants.BusinessException;
 import com.yusheng.hbgj.dao.NoticeDao;
 import com.yusheng.hbgj.dao.PublishDao;
+import com.yusheng.hbgj.dao.UserDao;
+import com.yusheng.hbgj.dto.PublishDto;
 import com.yusheng.hbgj.entity.Notice;
 import com.yusheng.hbgj.entity.Publish;
 import com.yusheng.hbgj.page.table.PageTableHandler;
 import com.yusheng.hbgj.page.table.PageTableRequest;
 import com.yusheng.hbgj.page.table.PageTableResponse;
-import com.yusheng.hbgj.utils.DateUtil;
-import com.yusheng.hbgj.utils.StrUtil;
-import com.yusheng.hbgj.utils.UserUtil;
+import com.yusheng.hbgj.service.RedisService;
+import com.yusheng.hbgj.utils.*;
+import io.swagger.annotations.Api;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,6 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.ApiOperation;
 
+@Api(tags = "发布需求")
 @RestController
 @RequestMapping("/publishs")
 public class PublishController {
@@ -40,13 +45,34 @@ public class PublishController {
     @Autowired
     private NoticeDao noticeDao;
 
+    @Autowired
+    private UserDao userDao;
+
+
     @Value("${constants.hlgjId}")
     private String hlgjId;
 
+    @Autowired
+    private RedisService redisUtil;
+
 
     @PostMapping
-    @ApiOperation(value = "保存")
+    @ApiOperation(value = "保存留言（提交需求）", tags = "微信小程序用户给公司发布留言; 后台已经限制5分钟内最多可以提交5次，主要是防止恶意频繁提交")
     public Publish save(@RequestBody Publish publish) {
+
+
+        if (SysUtil.paramsIsNull(publish.getPublishContent(), publish.getOpenid())) {
+
+            throw new IllegalArgumentException("提交参数不完整");
+
+        } else if (redisUtil.listSize("publish:" + publish.getOpenid(), -1) >= 5L) {
+
+            throw new BusinessException("操作失败，因为您最近已经提交了多次留言，请稍后再试");
+
+        } else if (!RegexUtils.checkMobile(publish.getTel())) {
+
+            throw new BusinessException("手机格式不正确，请重新输入");
+        }
 
 
         publish.setCreateTime(new Date());
@@ -69,8 +95,16 @@ public class PublishController {
         noticeDao.save(notice);
 
 
+        redisUtil.leftPush("publish:" + publish.getOpenid(), publish.getPublishContent());
+
+        if (redisUtil.listSize("publish:" + publish.getOpenid(), -1) == 1L) {
+
+            redisUtil.expire("publish:" + publish.getOpenid(), 5, TimeUnit.MINUTES);
+        }
+
         return publish;
     }
+
 
     @GetMapping("/{id}")
     @ApiOperation(value = "根据id获取")
@@ -123,7 +157,11 @@ public class PublishController {
         notice.setTitle("新消息回复提醒");
         notice.setContent("您的留言【" + StrUtil.elide(entity.getPublishContent(), 10) + "】已被回复，请在【我的发布】里面查看");
         notice.setRefId(publish.getId().toString());
-        notice.setReceiveId(entity.getOpenid());
+
+
+        Long userId = userDao.getUserId(entity.getOpenid());
+
+        notice.setReceiveId(userId + "");
 
         if (StringUtils.isNoneBlank(publish.getReply())) {
 
@@ -132,6 +170,37 @@ public class PublishController {
 
 
     }
+
+
+    @GetMapping("/wxlist")
+    @ApiOperation(value = "微信小程序里查看自己的发布列表", notes = "需要传入openid")
+    public PageTableResponse wxlist(PageTableRequest request) {
+
+        if (SysUtil.paramsIsNull(request.getParams().get("openid"))) {
+
+            throw new IllegalArgumentException("提交参数不完整");
+
+        }
+
+
+        return new PageTableHandler(new PageTableHandler.CountHandler() {
+
+            @Override
+            public int count(PageTableRequest request) {
+                return publishDao.count(request.getParams());
+            }
+        }, new PageTableHandler.ListHandler() {
+
+            @Override
+            public List<PublishDto> list(PageTableRequest request) {
+
+                request.getParams().putIfAbsent("orderBy", "  ORDER BY createTime DESC  ");
+
+                return publishDao.wxlist(request.getParams(), request.getOffset(), request.getLimit());
+            }
+        }).handle(request);
+    }
+
 
     @GetMapping
     @ApiOperation(value = "列表")

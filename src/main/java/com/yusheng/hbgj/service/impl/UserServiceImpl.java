@@ -98,6 +98,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Long getUserId(String openid) {
+
+       return   userDao.getUserId(openid);
+
+    }
+
+    @Override
     @Transactional
     public User updateUser(UserDto userDto) {
         userDao.update(userDto);

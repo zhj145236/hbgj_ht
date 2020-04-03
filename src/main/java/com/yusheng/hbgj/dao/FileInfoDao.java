@@ -3,6 +3,7 @@ package com.yusheng.hbgj.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.yusheng.hbgj.dto.FileDto;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -49,4 +50,11 @@ public interface FileInfoDao {
 
     @Select("select  fileOriginName  from file_info t where t.url = #{url}  limit 0, 1  ")
     String getByUrl(String url);
+
+
+    List<FileDto> wxlistFiles(@Param("params") Map<String, Object> params, @Param("offset") Integer offset,
+                              @Param("limit") Integer limit);
+
+    int wxCount(@Param("params") Map<String, Object> params);
+
 }

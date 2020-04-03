@@ -90,7 +90,7 @@ public class FileServiceImpl implements FileService {
 
 
     @Override
-    public  String getFileType(String fileName) {
+    public String getFileType(String fileName) {
 
         //VID_20190617_185050.mp4.zIP
 
@@ -100,7 +100,7 @@ public class FileServiceImpl implements FileService {
         String tty = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length()).toLowerCase();
 
         String[] images = new String[]{"jpg", "png", "gif", "bmp", "tif", "jpeg", "gif", "ico"};
-        String[] doc = new String[]{"xls", "xlsx", "doc", "docx", "ppt", "pptx", "txt", "pdf"};
+        String[] doc = new String[]{"pdf", "xls", "xlsx", "doc", "docx", "ppt", "pptx", "txt"};
         String[] exe = new String[]{"exe", "bat", "cmd", "vbs", "js", "dll"};
         String[] zip = new String[]{"zip", "rar", "tar", "jar", "7z"};
         String[] video = new String[]{"mp4", "avi", "rmvb", "mov", "wvm"};
@@ -163,9 +163,9 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public String  getByUrl(String url) {
+    public String getByUrl(String url) {
 
-        return   fileInfoDao.getByUrl(url);
+        return fileInfoDao.getByUrl(url);
 
     }
 

@@ -1,9 +1,10 @@
-package com.yusheng.hbgj.utils;
+package com.yusheng.hbgj.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations.TypedTuple;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
@@ -16,7 +17,8 @@ import java.util.concurrent.TimeUnit;
  * @date 2020/1/20 20:53
  * @desc Redis工具类
  */
-public class RedisUtil {
+@Service
+public class RedisService {
 
     @Autowired
     private RedisTemplate<Object, Object> redisTemplate;
@@ -110,6 +112,18 @@ public class RedisUtil {
      */
     public void batchSetIfAbsent(Map<String, String> keyAndValue) {
         redisTemplate.opsForValue().multiSetIfAbsent(keyAndValue);
+    }
+
+    /**
+     *  KV添加 不存在的时候才添加
+     *
+     * @param key
+     * @param value
+     * @return
+     */
+    public boolean putIfAbsent(String key, String value) {
+        return redisTemplate.opsForValue().setIfAbsent  (key, value);
+
     }
 
     /**
@@ -222,8 +236,9 @@ public class RedisUtil {
      * @param value
      * @return
      */
-    public boolean putIfAbsent(String key, String hashKey, String value) {
+    public boolean putForHashIfAbsent(String key, String hashKey, String value) {
         return redisTemplate.opsForHash().putIfAbsent(key, hashKey, value);
+
     }
 
 

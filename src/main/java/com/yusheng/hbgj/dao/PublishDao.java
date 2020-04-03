@@ -3,6 +3,7 @@ package com.yusheng.hbgj.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.yusheng.hbgj.dto.PublishDto;
 import org.apache.ibatis.annotations.*;
 
 import com.yusheng.hbgj.entity.Publish;
@@ -27,4 +28,6 @@ public interface PublishDao {
     int count(@Param("params") Map<String, Object> params);
 
     List<Publish> list(@Param("params") Map<String, Object> params, @Param("offset") Integer offset, @Param("limit") Integer limit);
+
+    List<PublishDto> wxlist(Map<String, Object> params, Integer offset, Integer limit);
 }

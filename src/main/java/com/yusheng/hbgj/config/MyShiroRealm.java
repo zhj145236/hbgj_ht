@@ -43,7 +43,7 @@ public class MyShiroRealm extends AuthorizingRealm {
         UserService userService = SpringUtil.getBean(UserService.class);
         User user = userService.getUser(username);
         if (user == null) {
-            throw new UnknownAccountException("用户名不存在");
+            throw new UnknownAccountException("用户名[" + username + "]不存在");
         }
 
         if (!user.getPassword()

@@ -80,17 +80,7 @@ public class StrUtil {
 
     public static void main(String[] args) {
 
-        String aa1 = null;
-        String aa0 = "";
 
-        String aa2 = "我很认同您的看法，要是能增加就更好了，是不是";
-        String aa3 = "我很认同您";
-
-
-        System.out.println(elide(aa0,10));
-        System.out.println(elide(aa1,10));
-        System.out.println(elide(aa2,10));
-        System.out.println(elide(aa3,10));
 
 
     }

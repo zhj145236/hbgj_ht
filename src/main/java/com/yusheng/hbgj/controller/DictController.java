@@ -9,6 +9,7 @@ import com.yusheng.hbgj.entity.Dict;
 import com.yusheng.hbgj.page.table.PageTableHandler;
 import com.yusheng.hbgj.page.table.PageTableRequest;
 import com.yusheng.hbgj.page.table.PageTableResponse;
+import io.swagger.annotations.Api;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.ApiOperation;
 
+@Api(tags = "字典")
 @RestController
 @RequestMapping("/dicts")
 public class DictController {
@@ -62,8 +64,8 @@ public class DictController {
     @ApiOperation(value = "列表")
     public PageTableResponse list(PageTableRequest request) {
 
-        Map<String,Object> params=new HashMap<>();
-        params.put("orderBy"," ORDER BY  t.createTime DESC");
+        Map<String, Object> params = new HashMap<>();
+        params.put("orderBy", " ORDER BY  t.createTime DESC");
 
         request.setParams(params);
 

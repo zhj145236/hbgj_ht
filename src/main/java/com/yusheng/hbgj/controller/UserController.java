@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.yusheng.hbgj.annotation.LogAnnotation;
+import com.yusheng.hbgj.constants.BusinessException;
 import com.yusheng.hbgj.dao.UserDao;
 import com.yusheng.hbgj.dto.UserDto;
 import com.yusheng.hbgj.entity.User;
@@ -60,7 +61,7 @@ public class UserController {
 
     @LogAnnotation
     @PostMapping
-    @ApiOperation(value = "保存用户")
+    @ApiOperation(value = "Web保存用户", notes = "如果没有勾选任何角色，系统就默认设置为厂商角色")
     @RequiresPermissions("sys:user:add")
     public User saveUser(@RequestBody UserDto userDto) {
         User u = userService.getUser(userDto.getUsername());
@@ -68,18 +69,7 @@ public class UserController {
             throw new IllegalArgumentException(userDto.getUsername() + "已存在");
         }
 
-        if (userDto.getRoleIds() == null) {
-            userDto.setRoleIds(new ArrayList<>());
-        }
-
-        // 如果一个角色都没有勾选，就默认是厂商角色
-        if (userDto.getRoleIds().size() == 0) {
-
-            ArrayList<Long> roles = new ArrayList<>(1);
-            roles.add(companyRoleId);
-            userDto.setRoleIds(roles);
-
-        }
+        roleDeal(userDto, companyRoleId);
 
         return userService.saveUser(userDto);
     }
@@ -166,26 +156,35 @@ public class UserController {
 
         if (userService.wxCountByOpenid(wx.getOpenid()) >= 1) {
 
-            throw new IllegalArgumentException("此微信号已经注册过了，请直接登录");
+            throw new BusinessException("此微信号已经注册过了，请直接登录");
 
         }
 
 
         // 默认加上游客角色
-        if (wx.getRoleIds() == null) {
-            wx.setRoleIds(new ArrayList<>());
-        }
-        if (wx.getRoleIds().size() == 0) {
-            ArrayList<Long> roles = new ArrayList<>(1);
-            roles.add(visitorRoleId);
-            wx.setRoleIds(roles);
-        }
+        roleDeal(wx, visitorRoleId);
+
+        //TODO username 即为微信用户名（英文）
+
+        // TODO 如果没登录自动为他登录
 
         wx.setPassword("123456");
         wx.setOriginalPassword("123456");
 
         return userService.saveUser(wx);
 
+    }
+
+    private void roleDeal(UserDto wx, Long roleId) {
+
+        if (wx.getRoleIds() == null) {
+            wx.setRoleIds(new ArrayList<>());
+        }
+        if (wx.getRoleIds().size() == 0) {
+            ArrayList<Long> roles = new ArrayList<>(1);
+            roles.add(roleId);
+            wx.setRoleIds(roles);
+        }
     }
 
 

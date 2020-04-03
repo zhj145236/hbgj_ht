@@ -53,4 +53,7 @@ public interface UserDao {
     @Select("select  count(*)  from sys_user t where t.openid= #{openid}")
     int wxCountByOpenid(String openid);
 
+    @Select("select t.id  from sys_user t where t.openid= #{openid}")
+    Long getUserId(String openid);
+
 }

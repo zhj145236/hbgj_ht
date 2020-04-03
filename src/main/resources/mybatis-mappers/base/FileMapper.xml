@@ -51,4 +51,37 @@
         limit #{offset}, #{limit}
     </select>
 
+    <select id="wxlistFiles" resultType="com.yusheng.hbgj.dto.FileDto">
+
+
+        SELECT f.id, f.fileOriginName, f.url, f.type, f.uploadTime, f.orgId,f.tag
+        from file_info f
+
+        where f.resourceId = #{params.resourceId}
+
+        <if test="params.tag != null and params.tag != ''">
+            and f.tag = #{params.tag}
+        </if>
+
+        and f.delFlag = '1' order by f.uploadTime DESC
+
+        limit #{offset}, #{limit}
+
+
+    </select>
+
+    <select id="wxCount" resultType="java.lang.Integer">
+
+        select count(1) from file_info f
+        where f.resourceId = #{params.resourceId}
+
+        <if test="params.tag != null and params.tag != ''">
+            and f.tag = #{params.tag}
+        </if>
+
+        and f.delFlag = '1'
+
+
+    </select>
+
 </mapper>

@@ -26,7 +26,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.multipart.MultipartFile;
 
-@Api(tags = "excel相关类")
+@Api(tags = "Excel相关类")
 @RestController
 @RequestMapping("/excels")
 public class ExcelController {

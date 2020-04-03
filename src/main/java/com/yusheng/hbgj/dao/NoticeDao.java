@@ -3,6 +3,7 @@ package com.yusheng.hbgj.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.yusheng.hbgj.dto.NoticeDto;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -65,5 +66,8 @@ public interface NoticeDao {
     @Update(" UPDATE t_notice set `status`=1 where    isPersonal='1'  AND    ( createTime  BETWEEN date_add(now(), interval -2 day) and  now() ) ")
     public void autoPublish();
 
+
+    List<NoticeDto> wxlistNotice(@Param("params") Map<String, Object> params, @Param("offset") Integer offset,
+                                 @Param("limit") Integer limit);
 
 }

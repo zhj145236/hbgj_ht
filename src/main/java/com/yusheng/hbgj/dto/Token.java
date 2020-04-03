@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Restful方式登陆token
+ * Restful方式登录token
  * 
  * @author Jinwei
  *

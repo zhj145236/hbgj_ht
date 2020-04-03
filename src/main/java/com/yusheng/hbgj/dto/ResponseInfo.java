@@ -1,34 +1,69 @@
 package com.yusheng.hbgj.dto;
 
+import com.yusheng.hbgj.utils.DateUtil;
+import org.springframework.http.HttpStatus;
+
 import java.io.Serializable;
+import java.util.Map;
 
-public class ResponseInfo implements Serializable {
+public class ResponseInfo<T> implements Serializable {
 
-	private static final long serialVersionUID = -4417715614021482064L;
+    private static final long serialVersionUID = -4417715614021482064L;
 
-	private String code;
-	private String message;
+    private String code;
+    private String message;
+    private String respTime;
 
-	public ResponseInfo(String code, String message) {
-		super();
-		this.code = code;
-		this.message = message;
-	}
+    private Map<String, Object> data;
 
-	public String getCode() {
-		return code;
-	}
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    public ResponseInfo(String code, String message) {
+        super();
+        this.code = code;
+        this.message = message;
+        this.respTime = DateUtil.getNowStr();
+    }
 
-	public String getMessage() {
-		return message;
-	}
+    public String getCode() {
+        return code;
+    }
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
+    public void setCode(String code) {
+        this.code = code;
+    }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getRespTime() {
+
+        return respTime;
+    }
+
+    public void setRespTime(String respTime) {
+        this.respTime = respTime;
+    }
+
+
+    public Map<String, Object> getData() {
+        return data;
+    }
+
+    public void setData(Map<String, Object> data) {
+        this.data = data;
+    }
+
+    public static ResponseInfo success(Map<String, Object> t) {
+
+        ResponseInfo res = new ResponseInfo(HttpStatus.OK + "", "操作成功");
+        res.setData(t);
+        return res;
+
+
+    }
 }

@@ -3,6 +3,7 @@ package com.yusheng.hbgj.utils;
 import com.yusheng.hbgj.config.InitConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -18,10 +19,25 @@ public class SysUtil {
     @Autowired
     private static JdbcTemplate jdbcTemplate;
 
-    public static void main(String[] args) {
 
+    /***
+     * 非空判断
+     */
+    public static boolean paramsIsNull(Object... obj) {
+
+        for (int i = 0; i < obj.length; i++) {
+
+            if (obj[i] == null) {
+                return true;
+            } else if (obj[i] instanceof String && StringUtils.isEmpty((String) obj[i])) {
+                return true;
+
+            }
+        }
+        return false;
 
     }
+
 
     /***
      * 加载最新配置信息

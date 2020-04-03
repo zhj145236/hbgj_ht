@@ -1,6 +1,7 @@
 package com.yusheng.hbgj.service;
 
 import com.yusheng.hbgj.dto.Token;
+import com.yusheng.hbgj.service.impl.RedisTokenManager;
 import org.apache.shiro.authc.UsernamePasswordToken;
 
 /**

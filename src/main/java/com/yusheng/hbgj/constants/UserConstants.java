@@ -15,6 +15,6 @@ public interface UserConstants {
 
 	String USER_PERMISSIONS = "user_permissions";
 
-	/** 登陆token(nginx中默认header无视下划线) */
+	/** 登录token(nginx中默认header无视下划线) */
 	String LOGIN_TOKEN = "login-token";
 }

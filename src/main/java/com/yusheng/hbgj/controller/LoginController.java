@@ -1,9 +1,11 @@
 package com.yusheng.hbgj.controller;
 
 import com.yusheng.hbgj.annotation.LogAnnotation;
+import com.yusheng.hbgj.dto.ResponseInfo;
 import com.yusheng.hbgj.dto.Token;
 import com.yusheng.hbgj.entity.User;
 import com.yusheng.hbgj.service.TokenManager;
+import com.yusheng.hbgj.service.UserService;
 import com.yusheng.hbgj.utils.UserUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -17,47 +19,67 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- * 登陆相关接口
+ * 登录相关接口
  *
  * @author Jinwei
- *
  */
-@Api(tags = "登陆")
+@Api(tags = "登录")
 @RestController
 @RequestMapping
 public class LoginController {
 
-	@Autowired
-	private TokenManager tokenManager;
-	@Autowired
-	private ServerProperties serverProperties;
+    @Autowired
+    private TokenManager tokenManager;
+    @Autowired
+    private ServerProperties serverProperties;
 
-	@LogAnnotation
-	@ApiOperation(value = "web端登陆")
-	@PostMapping("/sys/login")
-	public void login(String username, String password) {
-		UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, password);
-		SecurityUtils.getSubject().login(usernamePasswordToken);
-		// 设置shiro的session过期时间
-		SecurityUtils.getSubject().getSession().setTimeout(serverProperties.getServlet().getSession().getTimeout().toMillis());
+    @Autowired
+    private UserService userService;
 
-	}
 
-	@LogAnnotation
-	@ApiOperation(value = "Restful方式登陆,前后端分离时登录接口")
-	@PostMapping("/sys/login/restful")
-	public Token restfulLogin(String username, String password) {
-		UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, password);
-		SecurityUtils.getSubject().login(usernamePasswordToken);
+    @LogAnnotation
+    @ApiOperation(value = "web端登录", notes = "传入账号和密码")
+    @PostMapping("/sys/login")
+    public void login(String username, String password) {
+        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, password);
+        SecurityUtils.getSubject().login(usernamePasswordToken);
+        SecurityUtils.getSubject().getSession().setTimeout(serverProperties.getServlet().getSession().getTimeout().toMillis());
 
-		return tokenManager.saveToken(usernamePasswordToken);
-	}
+    }
 
-	@ApiOperation(value = "当前登录用户")
-	@GetMapping("/sys/login")
-	public User getLoginInfo() {
-		return UserUtil.getCurrentUser();
-	}
+    @LogAnnotation
+    @ApiOperation(value = "Restful方式登录,前后端分离时登录接口", notes = "注意返回的token要放在RequestHeader上,后期调用其他接口都需要token")
+    @PostMapping("/sys/login/restful")
+    public ResponseInfo restfulLogin(String username, String password) {
+        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, password);
+        SecurityUtils.getSubject().login(usernamePasswordToken);
+
+        Token token = tokenManager.saveToken(usernamePasswordToken);
+
+        Map<String, Object> maps = new HashMap<>();
+
+
+
+
+
+        User user = userService.getUser(username);
+        user.setOriginalPassword(null);
+        user.setPassword(null);
+        maps.put("user", user);
+        maps.put("token", token);
+        return ResponseInfo.success(maps);
+
+
+    }
+
+    @ApiOperation(value = "当前登录用户")
+    @GetMapping("/sys/login")
+    public User getLoginInfo() {
+        return UserUtil.getCurrentUser();
+    }
 
 }

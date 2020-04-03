@@ -22,9 +22,9 @@ import com.yusheng.hbgj.constants.UserConstants;
 import com.yusheng.hbgj.service.TokenManager;
 
 /**
- * Restful方式登陆<br>
- * 在参数中或者header里加参数login-token作为登陆凭证<br>
- * 参数值是登陆成功后的返回值中获取
+ * Restful方式登录<br>
+ * 在参数中或者header里加参数login-token作为登录凭证<br>
+ * 参数值是登录成功后的返回值中获取
  * 
  * @author Jinwei
  *
@@ -90,7 +90,7 @@ public class RestfulFilter extends UserFilter {
 	}
 
 	private static String info = JSONObject
-			.toJSONString(new ResponseInfo(HttpStatus.UNAUTHORIZED.value() + "", "token不存在或者过期"));
+			.toJSONString(new ResponseInfo(HttpStatus.UNAUTHORIZED.value() + "", "login-token不存在或者过期"));
 
 	public static void writeResponse(HttpServletResponse response, int status, String json) {
 		try {
