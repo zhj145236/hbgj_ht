@@ -15,6 +15,7 @@ import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
+import org.apache.shiro.web.session.mgt.WebSessionManager;
 import org.crazycake.shiro.RedisCacheManager;
 import org.crazycake.shiro.RedisManager;
 import org.crazycake.shiro.RedisSessionDAO;
@@ -55,7 +56,11 @@ public class ShiroConfig {
         // 拦截器.
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
 
-       filterChainDefinitionMap.put("/favicon.ico", "anon");
+        filterChainDefinitionMap.put("/favicon.ico", "anon");
+
+        // 微信自动登录 不拦截
+        filterChainDefinitionMap.put("/users/wxAutoLogin", "anon");
+
         filterChainDefinitionMap.put("/static/favicon.ico", "anon");
         filterChainDefinitionMap.put("/css/**", "anon");
         filterChainDefinitionMap.put("/fonts/**", "anon");
@@ -182,7 +187,13 @@ public class ShiroConfig {
      */
     @Bean
     public DefaultWebSessionManager sessionManager() {
-        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+
+
+        // 注意这里
+       // DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+
+        StatelessSessionManager sessionManager=new StatelessSessionManager();
+
         sessionManager.setSessionDAO(redisSessionDAO());
         return sessionManager;
     }
@@ -197,7 +208,7 @@ public class ShiroConfig {
         redisSessionDAO.setRedisManager(redisManager());
 
         long aa = (serverProperties.getServlet().getSession().getTimeout().toMillis()) / 1000;
-        redisSessionDAO.setExpire(Integer.parseInt(aa + "")); //保存7天
+        redisSessionDAO.setExpire(Integer.parseInt(aa + "")); //保存30天
         return redisSessionDAO;
     }
 

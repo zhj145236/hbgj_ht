@@ -1,16 +1,18 @@
 package com.yusheng.hbgj.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import com.yusheng.hbgj.constants.UserConstants;
 import com.yusheng.hbgj.dao.UserDao;
+import com.yusheng.hbgj.dto.Token;
 import com.yusheng.hbgj.dto.UserDto;
 import com.yusheng.hbgj.entity.User;
+import com.yusheng.hbgj.service.TokenManager;
 import com.yusheng.hbgj.service.UserService;
 import com.yusheng.hbgj.utils.UserUtil;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +21,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+
+import javax.servlet.http.HttpSession;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -101,6 +105,38 @@ public class UserServiceImpl implements UserService {
     public Long getUserId(String openid) {
 
        return   userDao.getUserId(openid);
+
+    }
+
+    @Override
+    public Map<String, Object> restfulLogin(String username, String password, HttpSession session, TokenManager tokenManager) {
+
+        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, password);
+        SecurityUtils.getSubject().login(usernamePasswordToken);
+
+        Token token = tokenManager.saveToken(usernamePasswordToken);
+
+        Map<String, Object> maps = new HashMap<>();
+
+
+        String JSESSIONID = "JSESSIONID=" + session.getId();
+
+        System.out.println("JSESSIONID--->" + JSESSIONID);
+
+        User user=this.getUser(username);
+        user.setOriginalPassword(null);
+        user.setPassword(null);
+        maps.put("user", user);
+        maps.put("token", token);
+        maps.put("Cookie", JSESSIONID);
+        return   maps;
+
+    }
+
+    @Override
+    public User getInfoByOpenId(String openid) {
+
+        return   userDao.getInfoByOpenId(openid);
 
     }
 

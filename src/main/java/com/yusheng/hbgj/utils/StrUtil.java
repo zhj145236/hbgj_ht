@@ -57,13 +57,30 @@ public class StrUtil {
         return UUID.randomUUID().toString().replaceAll("-", "");
     }
 
+    /**
+     * @param length 随机数长度
+     * @return 随机数
+     */
+    public static String random(int length) {
+
+
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < length; i++) {
+
+            sb.append((int) (Math.random() * 10));
+
+        }
+        return sb.toString();
+    }
+
 
     /**
      * 字符串用...省略
      *
      * @return
      */
-    public  static String elide(String str, int maxWord) {
+    public static String elide(String str, int maxWord) {
 
         maxWord = maxWord <= 0 ? 10 : maxWord;
 
@@ -71,7 +88,7 @@ public class StrUtil {
             return "";
         } else if (str.length() > maxWord) {
 
-            return str.substring(0, maxWord)+"...";
+            return str.substring(0, maxWord) + "...";
         } else {
             return str;
         }
@@ -80,9 +97,11 @@ public class StrUtil {
 
     public static void main(String[] args) {
 
+        for (int i = 0; i < 10; i++) {
 
 
-
+            System.out.println(random(6));
+        }
     }
 
 }

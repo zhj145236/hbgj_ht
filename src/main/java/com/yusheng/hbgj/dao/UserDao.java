@@ -56,4 +56,7 @@ public interface UserDao {
     @Select("select t.id  from sys_user t where t.openid= #{openid}")
     Long getUserId(String openid);
 
+    @Select("select * from sys_user t where t.openid = #{openid}")
+    User getInfoByOpenId(String openid);
+
 }

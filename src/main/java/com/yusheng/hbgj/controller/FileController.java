@@ -233,7 +233,7 @@ public class FileController {
     @GetMapping("/wxlistFiles")
     @ApiOperation(value = "小程序端数据中心", tags = "企业检修资料；企业台账；合同；环保文件, 需要开放查询的权限才能调用")
     @RequiresPermissions("sys:file:query")
-    public PageTableResponse wxlistFiles(PageTableRequest request) {
+    public PageTableResponse wxlistFiles( PageTableRequest request) {
 
         if (StringUtils.isEmpty(request.getParams().get("resourceId"))) {
 

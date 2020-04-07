@@ -4,6 +4,8 @@ import com.yusheng.hbgj.constants.BusinessException;
 import com.yusheng.hbgj.dto.ResponseInfo;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authz.AuthorizationException;
+import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,11 +60,11 @@ public class ExceptionHandlerAdvice {
         return new ResponseInfo(HttpStatus.UNAUTHORIZED.value() + "", exception.getMessage());
     }
 
-    @ExceptionHandler({UnauthorizedException.class})
+    @ExceptionHandler({UnauthorizedException.class, UnauthenticatedException.class,AuthorizationException.class})
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public ResponseInfo forbidden(Exception exception) {
-        log.warn("系统拒绝处理,请检查权限.{}", exception.getMessage());
-        return new ResponseInfo(HttpStatus.FORBIDDEN.value() + "", exception.getMessage());
+        log.warn("系统拒绝处理,请检查角色与权限.{}", exception.getMessage());
+        return new ResponseInfo(HttpStatus.FORBIDDEN.value() + "", "系统拒绝处理,请检查角色与权限。"+exception.getMessage());
     }
 
     @ExceptionHandler({MissingServletRequestParameterException.class, HttpMessageNotReadableException.class,
@@ -72,7 +74,7 @@ public class ExceptionHandlerAdvice {
 
         log.warn("无效的接口请求,{}", exception.getMessage());
 
-        return new ResponseInfo(HttpStatus.BAD_REQUEST.value() + "", exception.getMessage());
+        return new ResponseInfo(HttpStatus.BAD_REQUEST.value() + "", "无效的接口请求,请检查接口方式（POST|GET|PUT|DELETE）与参数类型（FORM|JSON）"+exception.getMessage());
     }
 
     @ExceptionHandler(Throwable.class)

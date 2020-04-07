@@ -69,7 +69,12 @@ public class MyShiroRealm extends AuthorizingRealm {
 
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         User user = UserUtil.getCurrentUser();
+
+        //获取角色
         List<Role> roles = SpringUtil.getBean(RoleDao.class).listByUserId(user.getId());
+
+
+
         Set<String> roleNames = roles.stream().map(Role::getName).collect(Collectors.toSet());
         authorizationInfo.setRoles(roleNames);
         List<Permission> permissionList = SpringUtil.getBean(PermissionDao.class).listByUserId(user.getId());

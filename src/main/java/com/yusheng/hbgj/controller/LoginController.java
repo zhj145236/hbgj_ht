@@ -11,6 +11,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,23 +57,12 @@ public class LoginController {
     @LogAnnotation
     @ApiOperation(value = "Restful方式登录,前后端分离时登录接口", notes = "注意返回的token要放在RequestHeader上,后期调用其他接口都需要token")
     @PostMapping("/sys/login/restful")
-    public ResponseInfo restfulLogin(String username, String password) {
-        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, password);
-        SecurityUtils.getSubject().login(usernamePasswordToken);
-
-        Token token = tokenManager.saveToken(usernamePasswordToken);
-
-        Map<String, Object> maps = new HashMap<>();
+    public ResponseInfo restfulLogin(String username, String password, HttpSession session) {
 
 
+        Map<String, Object> maps = userService.restfulLogin(username, password, session, tokenManager);
 
 
-
-        User user = userService.getUser(username);
-        user.setOriginalPassword(null);
-        user.setPassword(null);
-        maps.put("user", user);
-        maps.put("token", token);
         return ResponseInfo.success(maps);
 
 

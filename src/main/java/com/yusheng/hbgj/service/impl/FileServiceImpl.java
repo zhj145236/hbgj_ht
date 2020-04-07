@@ -169,8 +169,6 @@ public class FileServiceImpl implements FileService {
 
     }
 
-    public static void main(String[] args) {
-        new Random().nextFloat();
-    }
+
 
 }

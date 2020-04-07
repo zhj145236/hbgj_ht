@@ -39,7 +39,9 @@ public class RestfulFilter extends UserFilter {
         }
 
 		String loginToken = getToken(request);
+        System.out.println("获取到的Token-------------->"+loginToken);
 		if (StringUtils.isBlank(loginToken)) {// 非Restful方式
+            System.out.println("非Restful方式...........................");
 			return super.isAccessAllowed(request, response, mappedValue);
 		}
 
@@ -52,7 +54,7 @@ public class RestfulFilter extends UserFilter {
 				if (subject.getPrincipal() == null) {
 					subject.login(token);
 				}
-
+                System.out.println("用户通过restful方式访问");
 				return true;
 			} catch (Exception e) {
 				e.printStackTrace();

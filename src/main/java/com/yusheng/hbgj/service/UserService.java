@@ -4,7 +4,9 @@ import com.yusheng.hbgj.dto.UserDto;
 import com.yusheng.hbgj.entity.User;
 import org.apache.ibatis.annotations.Select;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 public interface UserService {
 
@@ -36,5 +38,10 @@ public interface UserService {
      */
     Long getUserId(String openid);
 
+
+   Map<String,Object> restfulLogin(String username, String password, HttpSession session, TokenManager tokenManager);
+
+
+    User getInfoByOpenId(String openid);
 
 }

@@ -57,7 +57,7 @@ public class PublishController {
 
 
     @PostMapping
-    @ApiOperation(value = "保存留言（提交需求）", tags = "微信小程序用户给公司发布留言; 后台已经限制5分钟内最多可以提交5次，主要是防止恶意频繁提交")
+    @ApiOperation(value = "保存留言（提交需求）", notes = "微信小程序用户给公司发布留言; 后台已经限制5分钟内最多可以提交5次，主要是防止恶意频繁提交")
     public Publish save(@RequestBody Publish publish) {
 
 

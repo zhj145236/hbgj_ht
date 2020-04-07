@@ -1,20 +1,30 @@
 package com.yusheng.hbgj.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.yusheng.hbgj.annotation.LogAnnotation;
 import com.yusheng.hbgj.constants.BusinessException;
 import com.yusheng.hbgj.dao.UserDao;
+import com.yusheng.hbgj.dto.Token;
 import com.yusheng.hbgj.dto.UserDto;
 import com.yusheng.hbgj.entity.User;
+import com.yusheng.hbgj.filter.RestfulFilter;
 import com.yusheng.hbgj.page.table.PageTableHandler;
 import com.yusheng.hbgj.page.table.PageTableRequest;
 import com.yusheng.hbgj.page.table.PageTableResponse;
+import com.yusheng.hbgj.service.TokenManager;
 import com.yusheng.hbgj.service.UserService;
+import com.yusheng.hbgj.utils.SpringUtil;
 import com.yusheng.hbgj.utils.StrUtil;
 import com.yusheng.hbgj.utils.UserUtil;
+import com.yusheng.hbgj.vo.WeiXinVo;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -31,6 +41,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * 用户相关接口
@@ -50,6 +64,11 @@ public class UserController {
 
     @Autowired
     private UserDao userDao;
+
+
+    @Autowired
+    private TokenManager tokenManager;
+
 
     @Value("${constants.companyRoleId}")
     private Long companyRoleId;
@@ -146,34 +165,101 @@ public class UserController {
 
 
     @LogAnnotation
-    @PostMapping("/addWxUser")
-    @ApiOperation(value = "新增微信用户")
-    public User addWxUser(@RequestBody UserDto wx) {
+    @PostMapping("/wxAutoLogin")
+    @ApiOperation(value = "微信用户自动登录")
+    public Map addWxUser(@RequestBody WeiXinVo wx, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 
         if (StringUtils.isEmpty(wx.getOpenid())) {
-            throw new IllegalArgumentException("Openid参数丢失");
+            throw new IllegalArgumentException("openid参数丢失");
         }
 
-        if (userService.wxCountByOpenid(wx.getOpenid()) >= 1) {
+        Map<String, Object> maps = new HashMap<>();
 
-            throw new BusinessException("此微信号已经注册过了，请直接登录");
+        // 后台已经登录了
+        String loginToken = RestfulFilter.getToken(request);
+
+
+        TokenManager tokenManager = SpringUtil.getBean(TokenManager.class);
+        UsernamePasswordToken token = tokenManager.getToken(loginToken);
+
+
+        // 微信用户已经登录，无需再次登录
+        if (token != null) {
+
+            maps.put("wxUser", userService.getInfoByOpenId(wx.getOpenid()));
+
+            maps.put("msg", "之前已经登录，无需再次登录");
+            return maps;
+
+        } else {
+
+
+            User userObj = userService.getInfoByOpenId(wx.getOpenid());
+
+            if (userObj == null) {
+
+
+                log.info("微信新用户注册。。。。。");
+
+                UserDto userVo = new UserDto();
+
+                // 默认加上游客角色
+                List<Long> roles = new ArrayList<>(1);
+                roles.add(visitorRoleId);
+                userVo.setRoleIds(roles);
+
+
+                userVo.setNickname(wx.getNickName());
+                userVo.setAddress(wx.getCountry() + wx.getProvince() + wx.getCity());
+                userVo.setHeadImgUrl(wx.getAvatarUrl());
+                userVo.setOpenid(wx.getOpenid());
+                userVo.setSex(wx.getGender());
+                userVo.setTelephone(wx.getTel());
+
+
+                // 无法获取到用户微信名字，所以采用系统随机生成username
+                String username = "wx" + StrUtil.random(6);
+                while (userService.getUser(username) != null) {
+                    log.info(username + "已经被注册，系统重新选号码");
+                    username = "wx" + StrUtil.random(6);
+
+                }
+                userVo.setUsername(username);
+                userVo.setRemark("游客授权微信登录");
+
+
+                String password = "123456";
+
+                userVo.setPassword(password);
+                userVo.setOriginalPassword(password);
+
+                User user = userService.saveUser(userVo);
+
+                // 为新用户在后台静默登录
+                Map<String, Object> map = userService.restfulLogin(username, password, session, tokenManager);
+
+                map.put("msg", "微信新用户登录");
+
+                return map;
+
+
+            } else {
+
+                log.info("之前已经有注册了,重新新自动登录");
+
+                Map<String, Object> map = userService.restfulLogin(userObj.getUsername(), userObj.getOriginalPassword(), session, tokenManager);
+                maps.put("wxUser", userService.getInfoByOpenId(wx.getOpenid()));
+
+                maps.put("msg", "之前已经有注册了,系统为其自动登录上");
+
+                return maps;
+            }
+
 
         }
-
-
-        // 默认加上游客角色
-        roleDeal(wx, visitorRoleId);
-
-        //TODO username 即为微信用户名（英文）
-
-        // TODO 如果没登录自动为他登录
-
-        wx.setPassword("123456");
-        wx.setOriginalPassword("123456");
-
-        return userService.saveUser(wx);
 
     }
+
 
     private void roleDeal(UserDto wx, Long roleId) {
 
