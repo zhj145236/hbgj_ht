@@ -4,11 +4,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.yusheng.hbgj.annotation.LogAnnotation;
+import com.yusheng.hbgj.annotation.PermissionTag;
 import com.yusheng.hbgj.entity.Org;
 import com.yusheng.hbgj.service.OrgService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
@@ -71,7 +71,7 @@ public class OrgController {
 
 	@GetMapping
 	@ApiOperation(value = "机构列表")
-	//@RequiresPermissions("sys:org:query")
+	//@PermissionTag("sys:org:query")
 	public List<Org> orgsList() {
 		List<Org> orgsAll = orgService.listAll();
 
@@ -83,7 +83,7 @@ public class OrgController {
 
 	@GetMapping("/all")
 	@ApiOperation(value = "所有机构")
-	//@RequiresPermissions("sys:org:query")
+	//@PermissionTag("sys:org:query")
 	public JSONArray orgsAll() {
 	    
 		List<Org> orgsAll = orgService.listAll();
@@ -95,7 +95,7 @@ public class OrgController {
 
 	@GetMapping("/parents")
 	@ApiOperation(value = "一级机构")
-	@RequiresPermissions("sys:org:query")
+	@PermissionTag("sys:org:query")
 	public List<Org> parentOrg() {
 		List<Org> parents = orgService.listParents();
 
@@ -130,14 +130,14 @@ public class OrgController {
 	@LogAnnotation
 	@PostMapping
 	@ApiOperation(value = "保存机构")
-	@RequiresPermissions("sys:org:add")
+	@PermissionTag("sys:org:add")
 	public void save(@RequestBody Org org) {
 		orgService.save(org);
 	}
 
 	@GetMapping("/{id}")
 	@ApiOperation(value = "根据机构id获取机构")
-	@RequiresPermissions("sys:org:query")
+	@PermissionTag("sys:org:query")
 	public Org get(@PathVariable Long id) {
 		return orgService.getById(id);
 	}
@@ -145,7 +145,7 @@ public class OrgController {
 	@LogAnnotation
 	@PutMapping
 	@ApiOperation(value = "修改机构")
-	@RequiresPermissions("sys:org:add")
+	@PermissionTag("sys:org:add")
 	public void update(@RequestBody Org org) {
 		orgService.update(org);
 	}
@@ -170,7 +170,7 @@ public class OrgController {
 	@LogAnnotation
 	@DeleteMapping("/{id}")
 	@ApiOperation(value = "删除机构")
-	@RequiresPermissions(value = { "sys:org:del" })
+	@PermissionTag(value = { "sys:org:del" })
 	public void delete(@PathVariable Long id) {
 		orgService.delete(id);
 	}

@@ -1,22 +1,25 @@
 package com.yusheng.hbgj.service.impl;
 
-import java.io.IOException;
-import java.util.*;
-
 import com.yusheng.hbgj.dao.FileInfoDao;
 import com.yusheng.hbgj.entity.FileInfo;
 import com.yusheng.hbgj.service.FileService;
 import com.yusheng.hbgj.utils.FileUtil;
 import com.yusheng.hbgj.utils.StrUtil;
-import com.yusheng.hbgj.utils.UserUtil;
+import com.yusheng.hbgj.utils.UserUtil2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.util.IdGenerator;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 @Service
 public class FileServiceImpl implements FileService {
@@ -25,11 +28,12 @@ public class FileServiceImpl implements FileService {
 
     @Value("${files.path}")
     private String filesPath;
+
     @Autowired
     private FileInfoDao fileInfoDao;
 
     @Override
-    public FileInfo save(MultipartFile file, FileInfo uploadFileInfo) throws IOException {
+    public FileInfo save(MultipartFile file, FileInfo uploadFileInfo, HttpSession session) throws IOException {
         String fileOrigName = file.getOriginalFilename();
         if (!fileOrigName.contains(".")) {
             throw new IllegalArgumentException("缺少后缀名");
@@ -65,7 +69,7 @@ public class FileServiceImpl implements FileService {
         fileInfo.setUploadTime(new Date());
         fileInfo.setFileOriginName(file.getOriginalFilename());
 
-        String createName = UserUtil.getCurrentUser().getUsername();
+        String createName = UserUtil2.getCurrentUser().getUsername();
 
         fileInfo.setCreateName(createName);
 

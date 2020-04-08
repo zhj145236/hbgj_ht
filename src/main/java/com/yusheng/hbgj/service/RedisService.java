@@ -364,7 +364,7 @@ public class RedisService {
      * @param values
      * @return
      */
-    public Long leftPushAll(String key, Collection<Object> values) {
+    public Long leftPushAll(String key, List values) {
         return redisTemplate.opsForList().leftPushAll(key, values);
     }
 
@@ -398,7 +398,7 @@ public class RedisService {
      * @param values
      * @return
      */
-    public Long rightPushAll(String key, Collection<Object> values) {
+    public Long rightPushAll(String key, List values) {
         return redisTemplate.opsForList().rightPushAll(key, values);
     }
 
@@ -463,6 +463,7 @@ public class RedisService {
     public void listTrim(String key, long start, long end) {
         redisTemplate.opsForList().trim(key, start, end);
 
+
     }
 
     /**
@@ -487,7 +488,11 @@ public class RedisService {
      * @return
      */
     public Long add(String key, String... values) {
+
+
         return redisTemplate.opsForSet().add(key, values);
+
+
     }
 
     /**
@@ -913,6 +918,7 @@ public class RedisService {
      */
     public long countZSet(String key, double min, double max) {
         return redisTemplate.opsForZSet().count(key, min, max);
+
     }
 
     /**

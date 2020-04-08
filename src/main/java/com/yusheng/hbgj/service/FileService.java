@@ -5,9 +5,11 @@ import java.io.IOException;
 import com.yusheng.hbgj.entity.FileInfo;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
+
 public interface FileService {
 
-	FileInfo save(MultipartFile file,FileInfo uploadFileInfo) throws IOException;
+	FileInfo save(MultipartFile file,FileInfo uploadFileInfo, HttpSession session) throws IOException;
 
 	void delete(String id);
 

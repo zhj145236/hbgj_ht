@@ -1,50 +1,35 @@
 package com.yusheng.hbgj.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.yusheng.hbgj.annotation.LogAnnotation;
-import com.yusheng.hbgj.constants.BusinessException;
+import com.yusheng.hbgj.annotation.PermissionTag;
 import com.yusheng.hbgj.dao.UserDao;
-import com.yusheng.hbgj.dto.Token;
 import com.yusheng.hbgj.dto.UserDto;
 import com.yusheng.hbgj.entity.User;
-import com.yusheng.hbgj.filter.RestfulFilter;
 import com.yusheng.hbgj.page.table.PageTableHandler;
 import com.yusheng.hbgj.page.table.PageTableRequest;
 import com.yusheng.hbgj.page.table.PageTableResponse;
 import com.yusheng.hbgj.service.TokenManager;
 import com.yusheng.hbgj.service.UserService;
-import com.yusheng.hbgj.utils.SpringUtil;
 import com.yusheng.hbgj.utils.StrUtil;
-import com.yusheng.hbgj.utils.UserUtil;
+import com.yusheng.hbgj.utils.UserUtil2;
 import com.yusheng.hbgj.vo.WeiXinVo;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.subject.Subject;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 用户相关接口
@@ -81,7 +66,7 @@ public class UserController {
     @LogAnnotation
     @PostMapping
     @ApiOperation(value = "Web保存用户", notes = "如果没有勾选任何角色，系统就默认设置为厂商角色")
-    @RequiresPermissions("sys:user:add")
+    @PermissionTag("sys:user:add")
     public User saveUser(@RequestBody UserDto userDto) {
         User u = userService.getUser(userDto.getUsername());
         if (u != null) {
@@ -96,21 +81,21 @@ public class UserController {
     @LogAnnotation
     @PutMapping
     @ApiOperation(value = "修改用户")
-    @RequiresPermissions("sys:user:add")
-    public User updateUser(@RequestBody UserDto userDto) {
-        return userService.updateUser(userDto);
+    @PermissionTag("sys:user:add")
+    public User updateUser(@RequestBody UserDto userDto, HttpSession session) {
+        return userService.updateUser(userDto, session);
     }
 
     @LogAnnotation
     @PutMapping(params = "headImgUrl")
     @ApiOperation(value = "修改头像")
-    public void updateHeadImgUrl(String headImgUrl) {
-        User user = UserUtil.getCurrentUser();
+    public void updateHeadImgUrl(String headImgUrl, HttpSession session) {
+        User user = UserUtil2.getCurrentUser();
         UserDto userDto = new UserDto();
         BeanUtils.copyProperties(user, userDto);
         userDto.setHeadImgUrl(headImgUrl);
 
-        userService.updateUser(userDto);
+        userService.updateUser(userDto, session);
         log.debug("{}修改了头像", user.getUsername());
     }
 
@@ -125,14 +110,14 @@ public class UserController {
     @LogAnnotation
     @PutMapping("/{username}")
     @ApiOperation(value = "修改密码")
-    @RequiresPermissions("sys:user:password")
+    @PermissionTag("sys:user:password")
     public void changePassword(@PathVariable String username, String oldPassword, String newPassword) {
         userService.changePassword(username, oldPassword, newPassword);
     }
 
     @GetMapping
     @ApiOperation(value = "用户列表")
-    @RequiresPermissions("sys:user:query")
+    @PermissionTag("sys:user:query")
     public PageTableResponse listUsers(PageTableRequest request) {
         return new PageTableHandler(new PageTableHandler.CountHandler() {
 
@@ -153,12 +138,12 @@ public class UserController {
     @ApiOperation(value = "当前登录用户")
     @GetMapping("/current")
     public User currentUser() {
-        return UserUtil.getCurrentUser();
+        return UserUtil2.getCurrentUser();
     }
 
     @ApiOperation(value = "根据用户id获取用户")
     @GetMapping("/{id}")
-    @RequiresPermissions("sys:user:query")
+    @PermissionTag("sys:user:query")
     public User user(@PathVariable Long id) {
         return userDao.getById(id);
     }
@@ -176,20 +161,29 @@ public class UserController {
         Map<String, Object> maps = new HashMap<>();
 
         // 后台已经登录了
-        String loginToken = RestfulFilter.getToken(request);
-
-
-        TokenManager tokenManager = SpringUtil.getBean(TokenManager.class);
-        UsernamePasswordToken token = tokenManager.getToken(loginToken);
+        String loginToken = UserUtil2.getToken();
 
 
         // 微信用户已经登录，无需再次登录
-        if (token != null) {
+        if (StringUtils.isEmpty(loginToken)) {
 
-            maps.put("wxUser", userService.getInfoByOpenId(wx.getOpenid()));
+            try {
+                User currentUser = UserUtil2.getCurrentUser();
+                if (currentUser != null) {
+                    maps.put("wxUser", userService.getInfoByOpenId(wx.getOpenid()));
 
-            maps.put("msg", "之前已经登录，无需再次登录");
+                    maps.put("msg", "之前已经登录，无需再次登录");
+                    return maps;
+                }
+
+            } catch (Exception e) {
+
+                log.error("用户未登录。。。。。。");
+
+            }
+
             return maps;
+
 
         } else {
 
@@ -236,7 +230,7 @@ public class UserController {
                 User user = userService.saveUser(userVo);
 
                 // 为新用户在后台静默登录
-                Map<String, Object> map = userService.restfulLogin(username, password, session, tokenManager);
+                Map<String, Object> map = userService.login(user, request, session);
 
                 map.put("msg", "微信新用户登录");
 
@@ -247,7 +241,9 @@ public class UserController {
 
                 log.info("之前已经有注册了,重新新自动登录");
 
-                Map<String, Object> map = userService.restfulLogin(userObj.getUsername(), userObj.getOriginalPassword(), session, tokenManager);
+                //userObj.setPassword(userObj.getOriginalPassword()); //密码转换
+
+                Map<String, Object> map = userService.login(userObj, request, session);
                 maps.put("wxUser", userService.getInfoByOpenId(wx.getOpenid()));
 
                 maps.put("msg", "之前已经有注册了,系统为其自动登录上");

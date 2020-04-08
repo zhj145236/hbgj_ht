@@ -1,10 +1,7 @@
 package com.yusheng.hbgj.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.yusheng.hbgj.annotation.LogAnnotation;
+import com.yusheng.hbgj.annotation.PermissionTag;
 import com.yusheng.hbgj.dao.NoticeDao;
 import com.yusheng.hbgj.dao.UserDao;
 import com.yusheng.hbgj.dto.NoticeDto;
@@ -15,16 +12,15 @@ import com.yusheng.hbgj.entity.User;
 import com.yusheng.hbgj.page.table.PageTableHandler;
 import com.yusheng.hbgj.page.table.PageTableRequest;
 import com.yusheng.hbgj.page.table.PageTableResponse;
-import com.yusheng.hbgj.utils.SysUtil;
-import com.yusheng.hbgj.utils.UserUtil;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import com.yusheng.hbgj.utils.UserUtil2;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import sun.nio.cs.ext.MacArabic;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Api(tags = "公告")
 @RestController
@@ -41,7 +37,7 @@ public class NoticeController {
     @LogAnnotation
     @PostMapping
     @ApiOperation(value = "保存公告")
-    @RequiresPermissions("notice:add")
+    @PermissionTag("notice:add")
     public Notice saveNotice(@RequestBody Notice notice) {
 
         notice.setIsPersonal(Notice.Personal.NO);
@@ -52,13 +48,13 @@ public class NoticeController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "根据id获取公告")
-    @RequiresPermissions("notice:query")
+    @PermissionTag("notice:query")
     public Notice get(@PathVariable Long id) {
         return noticeDao.getById(id);
     }
 
     @GetMapping(params = "id")
-    public NoticeVO readNotice(Long id) {
+    public NoticeVO readNotice(Long id, HttpSession session) {
         NoticeVO vo = new NoticeVO();
 
         Notice notice = noticeDao.getById(id);
@@ -67,7 +63,7 @@ public class NoticeController {
         }
         vo.setNotice(notice);
 
-        noticeDao.saveReadRecord(notice.getId(), UserUtil.getCurrentUser().getId());
+        noticeDao.saveReadRecord(notice.getId(), UserUtil2.getCurrentUser().getId());
 
         List<User> users = noticeDao.listReadUsers(id);
         vo.setUsers(users);
@@ -78,7 +74,7 @@ public class NoticeController {
     @LogAnnotation
     @PutMapping
     @ApiOperation(value = "修改公告")
-    @RequiresPermissions("notice:add")
+    @PermissionTag("notice:add")
     public Notice updateNotice(@RequestBody Notice notice) {
         Notice no = noticeDao.getById(notice.getId());
         if (no.getStatus() == Notice.Status.PUBLISH) {
@@ -91,7 +87,7 @@ public class NoticeController {
 
     @GetMapping
     @ApiOperation(value = "公告管理列表")
-    @RequiresPermissions("notice:query")
+    @PermissionTag("notice:query")
     public PageTableResponse listNotice(PageTableRequest request) {
         return new PageTableHandler(new PageTableHandler.CountHandler() {
 
@@ -111,7 +107,7 @@ public class NoticeController {
     @LogAnnotation
     @DeleteMapping("/{id}")
     @ApiOperation(value = "删除公告")
-    @RequiresPermissions(value = {"notice:del"})
+    @PermissionTag(value = {"notice:del"})
     public void delete(@PathVariable Long id) {
         noticeDao.delete(id);
     }
@@ -119,7 +115,11 @@ public class NoticeController {
     @ApiOperation(value = "未读公告数")
     @GetMapping("/count-unread")
     public Integer countUnread() {
-        User user = UserUtil.getCurrentUser();
+
+        // TODO 空指针异常
+
+        User user = UserUtil2.getCurrentUser();
+
         return noticeDao.countUnread(user.getId());
     }
 
@@ -143,7 +143,7 @@ public class NoticeController {
     @ApiOperation(value = "公告列表")
     public PageTableResponse listNoticeReadVO(PageTableRequest request) {
 
-        request.getParams().put("userId", UserUtil.getCurrentUser().getId());
+        request.getParams().put("userId", UserUtil2.getCurrentUser().getId());
 
         return new PageTableHandler(new PageTableHandler.CountHandler() {
 

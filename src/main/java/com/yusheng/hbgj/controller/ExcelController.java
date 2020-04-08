@@ -9,10 +9,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import com.yusheng.hbgj.annotation.LogAnnotation;
+import com.yusheng.hbgj.annotation.PermissionTag;
 import com.yusheng.hbgj.entity.FileInfo;
 import com.yusheng.hbgj.utils.ExcelUtil;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+
+import com.yusheng.hbgj.annotation.PermissionTag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,7 +88,7 @@ public class ExcelController {
 	@LogAnnotation
 	@ApiOperation("根据sql导出excel")
 	@PostMapping
-	@RequiresPermissions("excel:down")
+	@PermissionTag("excel:down")
 	public void downloadExcel(String sql, String fileName, HttpServletResponse response) {
 		sql = getAndCheckSql(sql);
 		List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);
@@ -119,7 +121,8 @@ public class ExcelController {
 	@LogAnnotation
 	@ApiOperation("根据sql在页面显示结果")
 	@PostMapping("/show-datas")
-	@RequiresPermissions("excel:show:datas")
+	@PermissionTag("excel:show:datas")
+
 	public List<Object[]> showData(String sql) {
 		sql = getAndCheckSql(sql);
 		List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);

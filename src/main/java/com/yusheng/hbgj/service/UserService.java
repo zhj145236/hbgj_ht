@@ -4,31 +4,33 @@ import com.yusheng.hbgj.dto.UserDto;
 import com.yusheng.hbgj.entity.User;
 import org.apache.ibatis.annotations.Select;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
 public interface UserService {
 
-	User saveUser(UserDto userDto);
-	
-	User updateUser(UserDto userDto);
+    User saveUser(UserDto userDto);
 
-	String passwordEncoder(String credentials, String salt);
+    User updateUser(UserDto userDto, HttpSession session);
 
-	User getUser(String username);
+    String passwordEncoder(String credentials, String salt);
 
-	void changePassword(String username, String oldPassword, String newPassword);
+    User getUser(String username);
 
-	List<User> getAllUser();
+    void changePassword(String username, String oldPassword, String newPassword);
+
+    List<User> getAllUser();
 
 
     /**
      * openid 存在表的数量，<=1
+     *
      * @param openid
      * @return
      */
-	int wxCountByOpenid(String openid);
+    int wxCountByOpenid(String openid);
 
 
     /***
@@ -39,9 +41,26 @@ public interface UserService {
     Long getUserId(String openid);
 
 
-   Map<String,Object> restfulLogin(String username, String password, HttpSession session, TokenManager tokenManager);
+    /**
+     * 用户 登录
+     *
+     * @param user    用户对象
+     * @param request 请求
+     * @return
+     */
+    Map<String, Object> login(User user, HttpServletRequest request, HttpSession session);
 
 
     User getInfoByOpenId(String openid);
+
+
+    /**
+     * 用户 退出登录
+     *
+     * @param request 请求
+     * @return
+     */
+    boolean logout(HttpServletRequest request, HttpSession session);
+
 
 }

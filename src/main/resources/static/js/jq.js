@@ -13,6 +13,7 @@ $(window).load(function () {
 });
 
 
+// 全局 Ajax 配置
 $.ajaxSetup({
     cache: false,
     error: function (xhr, textStatus, errorThrown) {

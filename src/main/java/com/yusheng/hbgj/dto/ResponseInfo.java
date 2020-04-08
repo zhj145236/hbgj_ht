@@ -66,4 +66,31 @@ public class ResponseInfo<T> implements Serializable {
 
 
     }
+
+    public static ResponseInfo fail(Map<String, Object> t) {
+
+        ResponseInfo res = new ResponseInfo(HttpStatus.OK + "", "操作失败");
+        res.setData(t);
+        return res;
+
+
+    }
+
+    public static ResponseInfo fail(String msg) {
+
+        return new ResponseInfo(HttpStatus.OK + "", msg);
+
+
+    }
+
+    public static ResponseInfo error(Map<String, Object> t) {
+
+        ResponseInfo res = new ResponseInfo(HttpStatus.INTERNAL_SERVER_ERROR + "", "服务器内部异常");
+        res.setData(t);
+        return res;
+
+
+    }
+
+
 }

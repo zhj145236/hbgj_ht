@@ -1,15 +1,24 @@
 package com.yusheng.hbgj.service.impl;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
+import com.alibaba.fastjson.JSONObject;
 import com.yusheng.hbgj.constants.UserConstants;
+import com.yusheng.hbgj.dao.PermissionDao;
+import com.yusheng.hbgj.dao.RoleDao;
 import com.yusheng.hbgj.dao.UserDao;
 import com.yusheng.hbgj.dto.Token;
 import com.yusheng.hbgj.dto.UserDto;
+import com.yusheng.hbgj.entity.Permission;
+import com.yusheng.hbgj.entity.Role;
 import com.yusheng.hbgj.entity.User;
+import com.yusheng.hbgj.service.RedisService;
 import com.yusheng.hbgj.service.TokenManager;
 import com.yusheng.hbgj.service.UserService;
-import com.yusheng.hbgj.utils.UserUtil;
+import com.yusheng.hbgj.utils.*;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -21,7 +30,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Service
@@ -33,9 +44,14 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
 
+    @Autowired
+    private RedisService redisService;
+
+
     @Override
     @Transactional
     public User saveUser(UserDto userDto) {
+
         User user = userDto;
 
         user.setOriginalPassword(user.getPassword());
@@ -48,7 +64,6 @@ public class UserServiceImpl implements UserService {
         userDao.save(user);
 
 
-
         saveUserRoles(user.getId(), userDto.getRoleIds());
 
         log.debug("新增用户{}", user.getUsername());
@@ -57,10 +72,17 @@ public class UserServiceImpl implements UserService {
 
     private void saveUserRoles(Long userId, List<Long> roleIds) {
         if (roleIds != null) {
+
+
             userDao.deleteUserRole(userId);
+
+
             if (!CollectionUtils.isEmpty(roleIds)) {
                 userDao.saveUserRoles(userId, roleIds);
             }
+
+            //TODO 更新Redis
+
         }
     }
 
@@ -104,57 +126,107 @@ public class UserServiceImpl implements UserService {
     @Override
     public Long getUserId(String openid) {
 
-       return   userDao.getUserId(openid);
+        return userDao.getUserId(openid);
 
     }
 
+
     @Override
-    public Map<String, Object> restfulLogin(String username, String password, HttpSession session, TokenManager tokenManager) {
+    public Map<String, Object> login(User user, HttpServletRequest request, HttpSession session) {
 
-        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, password);
-        SecurityUtils.getSubject().login(usernamePasswordToken);
 
-        Token token = tokenManager.saveToken(usernamePasswordToken);
+        System.out.println(user.getUsername() + "-------" + user.getPassword());
+
+        //利用 账号与密码生成唯一token
+        String token = MD5.getMd5(user.getUsername() + user.getPassword());
+
+
+        //保存到Redis中，后期都从这里取登录对象信息
+        redisService.set(UserConstants.LOGIN_TOKEN + token, JSONObject.toJSONString(user));
+
+
+        //登录 有效期 30天
+        redisService.expire(UserConstants.LOGIN_TOKEN + token, 30, TimeUnit.DAYS);
+
+
+        String ip = NetWorkUtil.getIpAddress(request);
+        String time = DateUtil.getNowStr0(true, false);
+
+        //记录登录时间
+        redisService.leftPush(UserConstants.USER_LOGIN_HISTORY + token, time + "|" + ip);
+
+
+        //记录权限(对象)
+        List<Permission> permissionList = SpringUtil.getBean(PermissionDao.class).listByUserId(user.getId());
+        UserUtil2.setPermission(UserConstants.USER_PERMISSION+token, permissionList);
+
+
+
+        //记录角色(对象)
+        List<Role> roles = SpringUtil.getBean(RoleDao.class).listByUserId(user.getId());
+        UserUtil2.setRole(UserConstants.USER_ROLE +token, roles);
+
+
+        //记录角色(字符串)
+        Set<String> roleNames = roles.stream().map(Role::getName).collect(Collectors.toSet());
+        UserUtil2.setRoleName(UserConstants.USER_ROLE_NAME+token, roleNames);
+
 
         Map<String, Object> maps = new HashMap<>();
 
 
-        String JSESSIONID = "JSESSIONID=" + session.getId();
+        // TODO 是否要 清空？
+        //user.setOriginalPassword(null);
+        //user.setPassword(null);
 
-        System.out.println("JSESSIONID--->" + JSESSIONID);
-
-        User user=this.getUser(username);
-        user.setOriginalPassword(null);
-        user.setPassword(null);
         maps.put("user", user);
         maps.put("token", token);
-        maps.put("Cookie", JSESSIONID);
-        return   maps;
+
+
+        if (session != null && !StringUtils.isEmpty(session.getId())) {
+            maps.put("Cookie", "JSESSIONID=" + session.getId());
+        }
+
+
+        return maps;
 
     }
 
     @Override
     public User getInfoByOpenId(String openid) {
 
-        return   userDao.getInfoByOpenId(openid);
+        return userDao.getInfoByOpenId(openid);
+
+    }
+
+    @Override
+    public boolean logout(HttpServletRequest request, HttpSession session) {
+
+        // 清除会话和权限
+        boolean flag = UserUtil2.logout(request, session);
+
+        // 删除无用文件
+
+
+        return flag;
 
     }
 
     @Override
     @Transactional
-    public User updateUser(UserDto userDto) {
+    public User updateUser(UserDto userDto, HttpSession session) {
         userDao.update(userDto);
         saveUserRoles(userDto.getId(), userDto.getRoleIds());
-        updateUserSession(userDto.getId());
+        updateUserSession(session, userDto.getId());
 
         return userDto;
     }
 
-    private void updateUserSession(Long id) {
-        User current = UserUtil.getCurrentUser();
+    private void updateUserSession(HttpSession session, Long id) {
+        User current = UserUtil2.getCurrentUser();
         if (current.getId().equals(id)) {
             User user = userDao.getById(id);
-            UserUtil.setUserSession(user);
+            UserUtil2.setUserSession(session, user);
         }
     }
 }

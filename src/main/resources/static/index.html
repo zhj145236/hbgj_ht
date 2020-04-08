@@ -18,6 +18,26 @@
     <link rel="stylesheet" href="layui/css/layui.css" media="all"/>
     <link rel="stylesheet" href="css/global.css" media="all"/>
     <link rel="stylesheet" href="css/font-awesome/css/font-awesome.css" media="all"/>
+    <script type="text/javascript" src="js/libs/jquery-2.1.1.min.js"></script>
+
+    <script>
+
+        function logout() {
+
+
+            $.ajax({
+                type: 'get',
+                url: '/sys/logout',
+
+                async: false,
+                success: function (data) {
+
+                    window.location.href = location.protocol + "//" + location.host + "/login.html"
+
+                }
+            });
+        }
+    </script>
 
 </head>
 
@@ -54,7 +74,11 @@
                                     class="fa fa-drupal" aria-hidden="true"></i> 头像</a>
                         </dd>
                         <dd>
-                            <a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> 退出</a>
+
+                            <a href="javascript:;" onclick="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i>
+                                退出</a>
+
+
                         </dd>
                     </dl>
                 </li>
@@ -98,7 +122,7 @@
     <div class="site-mobile-shade"></div>
 
     <script type="text/javascript" src="layui/layui.js"></script>
-    <script type="text/javascript" src="js/libs/jquery-2.1.1.min.js"></script>
+
     <script type="text/javascript" src="js/jq.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
 </div>

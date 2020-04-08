@@ -1,12 +1,10 @@
 package com.yusheng.hbgj.service.impl;
 
-import java.util.Date;
-
 import com.yusheng.hbgj.dao.SysLogsDao;
 import com.yusheng.hbgj.entity.SysLogs;
 import com.yusheng.hbgj.entity.User;
 import com.yusheng.hbgj.service.SysLogService;
-import com.yusheng.hbgj.utils.UserUtil;
+import com.yusheng.hbgj.utils.UserUtil2;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
@@ -14,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 @Service
 public class SysLogServiceImpl implements SysLogService {
@@ -25,7 +25,7 @@ public class SysLogServiceImpl implements SysLogService {
 
 	@Override
 	public void save(SysLogs sysLogs) {
-		User user = UserUtil.getCurrentUser();
+		User user = UserUtil2.getCurrentUser();
 		if (user == null || user.getId() == null) {
 			return;
 		}

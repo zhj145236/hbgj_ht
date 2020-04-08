@@ -1,11 +1,7 @@
 package com.yusheng.hbgj.controller;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.List;
-
 import com.yusheng.hbgj.annotation.LogAnnotation;
+import com.yusheng.hbgj.annotation.PermissionTag;
 import com.yusheng.hbgj.constants.BusinessException;
 import com.yusheng.hbgj.dao.FileInfoDao;
 import com.yusheng.hbgj.dao.NoticeDao;
@@ -18,19 +14,22 @@ import com.yusheng.hbgj.page.table.PageTableRequest;
 import com.yusheng.hbgj.page.table.PageTableResponse;
 import com.yusheng.hbgj.service.FileService;
 import com.yusheng.hbgj.utils.DateUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import net.coobird.thumbnailator.Thumbnails;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Api(tags = "文件")
@@ -136,7 +135,7 @@ public class FileController {
 
             } else if ("文档".equals(type)) {
 
-                //缓存7天
+                //文件缓存7天
                 response.setDateHeader("Expires", +System.currentTimeMillis() + 604800000);
 
                 response.setContentType(this.trans(file.getName()));
@@ -173,11 +172,11 @@ public class FileController {
     @LogAnnotation
     @PostMapping
     @ApiOperation(value = "文件上传")
-    public FileInfo uploadFile(MultipartFile file, FileInfo fileInfo) throws IOException {
+    public FileInfo uploadFile(MultipartFile file, FileInfo fileInfo, HttpSession session) throws IOException {
         if (fileInfo == null) {
             fileInfo = new FileInfo();
         }
-        return fileService.save(file, fileInfo);
+        return fileService.save(file, fileInfo, session);
     }
 
 
@@ -192,8 +191,8 @@ public class FileController {
     @LogAnnotation
     @PostMapping("/layui")
     @ApiOperation(value = "layui富文本文件自定义上传")
-    public LayuiFile uploadLayuiFile(MultipartFile file, String domain) throws IOException {
-        FileInfo fileInfo = fileService.save(file, null);
+    public LayuiFile uploadLayuiFile(MultipartFile file, String domain,HttpSession session) throws IOException {
+        FileInfo fileInfo = fileService.save(file, null,session);
 
         LayuiFile layuiFile = new LayuiFile();
         layuiFile.setCode(0);
@@ -207,7 +206,7 @@ public class FileController {
 
     @GetMapping
     @ApiOperation(value = "文件查询")
-    @RequiresPermissions("sys:file:query")
+    @PermissionTag("sys:file:query")
     public PageTableResponse listFiles(PageTableRequest request) {
         return new PageTableHandler(new PageTableHandler.CountHandler() {
 
@@ -232,8 +231,8 @@ public class FileController {
 
     @GetMapping("/wxlistFiles")
     @ApiOperation(value = "小程序端数据中心", tags = "企业检修资料；企业台账；合同；环保文件, 需要开放查询的权限才能调用")
-    @RequiresPermissions("sys:file:query")
-    public PageTableResponse wxlistFiles( PageTableRequest request) {
+    @PermissionTag("sys:file:query")
+    public PageTableResponse wxlistFiles(PageTableRequest request) {
 
         if (StringUtils.isEmpty(request.getParams().get("resourceId"))) {
 
@@ -267,7 +266,7 @@ public class FileController {
     @LogAnnotation
     @DeleteMapping("/{id}")
     @ApiOperation(value = "文件删除")
-    @RequiresPermissions("sys:file:del")
+    @PermissionTag("sys:file:del")
     public void delete(@PathVariable String id) {
 
         fileService.delete(id);
@@ -281,7 +280,7 @@ public class FileController {
     @LogAnnotation
     @PutMapping("/saveRemark")
     @ApiOperation(value = "更新合同起止时间")
-    @RequiresPermissions("sys:file:del")
+    @PermissionTag("sys:file:del")
 
     public void saveRemark(@RequestBody FileInfo fileInfo) {
 

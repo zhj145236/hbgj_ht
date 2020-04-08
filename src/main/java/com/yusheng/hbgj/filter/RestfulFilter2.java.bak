@@ -30,11 +30,12 @@ import com.yusheng.hbgj.service.TokenManager;
  *
  *         2017年8月3日
  */
-public class RestfulFilter extends UserFilter {
+public class RestfulFilter2 extends UserFilter {
 
 	@Override
 	protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
-        if (HttpMethod.OPTIONS.name().equalsIgnoreCase(WebUtils.toHttp(request).getMethod())) {
+
+	    if (HttpMethod.OPTIONS.name().equalsIgnoreCase(WebUtils.toHttp(request).getMethod())) {
             return Boolean.TRUE;
         }
 

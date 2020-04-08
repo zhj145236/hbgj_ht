@@ -53,10 +53,20 @@ public class ShiroConfig {
 
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
+
+
+
+
         // 拦截器.
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
 
         filterChainDefinitionMap.put("/favicon.ico", "anon");
+
+
+
+
+
+
 
         // 微信自动登录 不拦截
         filterChainDefinitionMap.put("/users/wxAutoLogin", "anon");
@@ -70,9 +80,10 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/files/*", "anon");
         filterChainDefinitionMap.put("/swagger-resources/**", "anon");
         filterChainDefinitionMap.put("/logout", "logout");
-        filterChainDefinitionMap.put("/**", "authc");
+        filterChainDefinitionMap.put("/**", "authcA");
 
-        //filterChainDefinitionMap.put("/static/**", "anon");
+
+
 
         shiroFilterFactoryBean.setLoginUrl("/login.html");
         shiroFilterFactoryBean.setSuccessUrl("/index.html");
@@ -82,7 +93,7 @@ public class ShiroConfig {
 
         RestfulFilter restfulFilter = new RestfulFilter();
 
-        shiroFilterFactoryBean.getFilters().put("authc", restfulFilter);
+        shiroFilterFactoryBean.getFilters().put("authcA", restfulFilter);
         shiroFilterFactoryBean.getFilters().put("logout", logoutFilter);
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
@@ -190,9 +201,9 @@ public class ShiroConfig {
 
 
         // 注意这里
-       // DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+       DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
 
-        StatelessSessionManager sessionManager=new StatelessSessionManager();
+        //StatelessSessionManager sessionManager=new StatelessSessionManager();
 
         sessionManager.setSessionDAO(redisSessionDAO());
         return sessionManager;
@@ -239,7 +250,7 @@ public class ShiroConfig {
     }
 
     /**
-     * 开启Shiro的注解(如@RequiresRoles,@RequiresPermissions),
+     * 开启Shiro的注解(如@RequiresRoles,@PermissionTag),
      * 需借助SpringAOP扫描使用Shiro注解的类,并在必要时进行安全逻辑验证
      *
      * @return

@@ -155,4 +155,6 @@ public class User extends BaseEntity<Long> {
     public void setOpenid(String openid) {
         this.openid = openid;
     }
+
+
 }

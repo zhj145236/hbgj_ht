@@ -45,8 +45,11 @@ public class StatelessSessionManager extends DefaultWebSessionManager {
 
         if (StringUtils.isEmpty(id)) {
             //如果没有携带id参数则按照父类的方式在cookie进行获取
-            System.out.println("super：" + super.getSessionId(request, response));
-            return super.getSessionId(request, response);
+            //System.out.println("super：" + super.getSessionId(request, response));
+            Serializable sessionId= super.getSessionId(request, response);
+            System.out.println(sessionId+"<<<<<");
+            return  sessionId;
+
         } else {
 
             //如果请求头中有 authToken 则其值为sessionId
@@ -54,6 +57,7 @@ public class StatelessSessionManager extends DefaultWebSessionManager {
             request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID, id);
             request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_IS_VALID, Boolean.TRUE);
 
+            System.out.println("token(id)-->"+id+"<<<<<<<<<<<<");
             return id;
         }
     }

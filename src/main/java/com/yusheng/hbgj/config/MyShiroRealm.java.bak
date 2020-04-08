@@ -42,6 +42,7 @@ public class MyShiroRealm extends AuthorizingRealm {
         String username = usernamePasswordToken.getUsername();
         UserService userService = SpringUtil.getBean(UserService.class);
         User user = userService.getUser(username);
+
         if (user == null) {
             throw new UnknownAccountException("用户名[" + username + "]不存在");
         }
@@ -78,6 +79,7 @@ public class MyShiroRealm extends AuthorizingRealm {
         Set<String> roleNames = roles.stream().map(Role::getName).collect(Collectors.toSet());
         authorizationInfo.setRoles(roleNames);
         List<Permission> permissionList = SpringUtil.getBean(PermissionDao.class).listByUserId(user.getId());
+
         UserUtil.setPermissionSession(permissionList);
         Set<String> permissions = permissionList.stream().filter(p -> !StringUtils.isEmpty(p.getPermission()))
                 .map(Permission::getPermission).collect(Collectors.toSet());

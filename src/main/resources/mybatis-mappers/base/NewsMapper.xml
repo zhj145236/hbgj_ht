@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yusheng.hbgj.dao.NewsDao">
+
+    <sql id="where">
+        <where>
+            <if test="params.id != null and params.id != ''">
+                and id = #{params.id}
+            </if>
+            <if test="params.title != null and params.title != ''">
+                and title = #{params.title}
+            </if>
+            <if test="params.content != null and params.content != ''">
+                and content = #{params.content}
+            </if>
+            <if test="params.author != null and params.author != ''">
+                and author = #{params.author}
+            </if>
+            <if test="params.createTime != null and params.createTime != ''">
+                and createTime = #{params.createTime}
+            </if>
+            <if test="params.updateTime != null and params.updateTime != ''">
+                and updateTime = #{params.updateTime}
+            </if>
+            <if test="params.remark != null and params.remark != ''">
+                and remark = #{params.remark}
+            </if>
+            <if test="params.delFlag != null and params.delFlag != ''">
+                and delFlag = #{params.delFlag}
+            </if>
+            <if test="params.sort != null and params.sort != ''">
+                and sort = #{params.sort}
+            </if>
+
+        </where>
+    </sql>
+
+    <select id="count" resultType="int">
+        select count(1) from news t
+        <include refid="where"/>
+    </select>
+
+    <select id="list" resultType="News">
+        select * from news t
+        <include refid="where"/>
+        ${params.orderBy}
+        limit #{offset}, #{limit}
+    </select>
+
+    <update id="update">
+        update news t
+        <set>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="content != null">
+                content = #{content},
+            </if>
+            <if test="author != null">
+                author = #{author},
+            </if>
+            <if test="createTime != null">
+                createTime = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                updateTime = #{updateTime},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+            <if test="delFlag != null">
+                delFlag = #{delFlag},
+            </if>
+            <if test="sort != null">
+                sort = #{sort},
+            </if>
+
+        </set>
+
+        where t.id = #{id}
+    </update>
+
+</mapper>
