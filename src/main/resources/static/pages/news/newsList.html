@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Insert title here</title>
+    <title>政策</title>
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="../../layui/css/layui.css" media="all"/>
@@ -18,8 +18,8 @@
                             <td>
                                 <form class="form-inline" onsubmit="return false">
                                     <div class="form-group">
-                                        id：
-                                        <input id="id" type="text" class="form-control" placeholder="id">
+                                        标题：
+                                        <input id="title" type="text" class="form-control" placeholder="可模糊搜索标题">
                                         <button id="searchBt" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe615;</i>搜索
                                         </button>
                                     </div>
@@ -44,13 +44,13 @@
                         <tr>
 
                             <th>标题</th>
-                            <th>内容</th>
+                            <!-- <th>内容</th>-->
                             <th>作者</th>
                             <th>创建时间</th>
-                            <th>修改时间</th>
-                            <th>备注</th>
-                            <th>删除状态</th>
-                            <th>排序</th>
+                            <!--  <th>修改时间</th>
+                              <th>备注</th>
+                              <th>删除状态</th>
+                              <th>排序</th>-->
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -89,20 +89,20 @@
                     "url": "/newss",
                     "type": "get",
                     "data": function (d) {
-                        d.id = $("#id").val();
+                        d.title = $("#title").val();
                     }
                 },
                 "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
                 "columns": [
 
                     {"data": "title", "orderable": false, "defaultContent": ""},
-                    {"data": "content", "orderable": false, "defaultContent": ""},
+                    /*  {"data": "content", "orderable": false, "defaultContent": ""},*/
                     {"data": "author", "orderable": false, "defaultContent": ""},
                     {"data": "createTime", "orderable": false, "defaultContent": ""},
-                    {"data": "updateTime", "orderable": false, "defaultContent": ""},
-                    {"data": "remark", "orderable": false, "defaultContent": ""},
-                    {"data": "delFlag", "orderable": false, "defaultContent": ""},
-                    {"data": "sort", "orderable": false, "defaultContent": ""},
+                    /* {"data": "updateTime", "orderable": false, "defaultContent": ""},*/
+                    /*  {"data": "remark", "orderable": false, "defaultContent": ""},*/
+                    /* {"data": "delFlag", "orderable": false, "defaultContent": ""},*/
+                    /* {"data": "sort", "orderable": false, "defaultContent": ""},*/
                     {
                         "data": "",
                         "defaultContent": "",
@@ -112,18 +112,62 @@
                             var href = "updateNews.html?id=" + id;
                             var edit = buttonEdit(href, "", pers);
                             var del = buttonDel(id, "", pers);
-                            return edit + del;
+
+                            var hrefDetail = "newsDetail.html?id=" + id;
+
+                            var newsDetails = buttonDetails(hrefDetail);
+
+
+                            var toTopButton = toTop(id);
+
+                            return newsDetails + edit + del + toTopButton;
                         }
                     }
 
                 ],
-                "order": [[1, "asc"]]
+                "order": []  //[3, "DESC"]
             });
     }
 
     layui.use('layer', function () {
         var layer = layui.layer;
     });
+
+
+    function buttonDetails(hrefDetail) {
+
+        return "<button  class='layui-btn layui-btn-xs' title='查看详情' onclick='window.location=\"" + hrefDetail + "\"'><i class='layui-icon'>&#xe705;</i></button>";
+
+    }
+
+    /**
+     * 置顶展示
+     */
+    function topAction(id) {
+
+        var objForm = {
+            id: id
+        };
+
+        $.ajax({
+            type: 'put',
+            url: '/newss/toTop',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(objForm),
+            success: function (data) {
+
+                example.ajax.reload();
+                layer.msg("置顶成功", {shift: -1, time: 1000});
+
+            }
+        });
+
+    }
+
+    function toTop(id) {
+
+        return "<button  class='layui-btn layui-btn-xs' title='置顶展示' onclick='topAction(\"" + id + "\")'><i class='layui-icon'>&#xe604;</i></button>";
+    }
 
     function del(id) {
         layer.confirm('确定要删除吗？', {

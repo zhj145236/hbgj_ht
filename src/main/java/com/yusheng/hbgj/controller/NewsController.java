@@ -56,6 +56,16 @@ public class NewsController {
         return news;
     }
 
+    @PutMapping("/toTop")
+    @ApiOperation(value = "置顶展示")
+    public News toTop(@RequestBody News news) {
+
+        news.setSort(System.currentTimeMillis());
+        newsDao.update(news);
+        return news;
+    }
+
+
     @GetMapping
     @ApiOperation(value = "列表")
     public PageTableResponse list(PageTableRequest request) {
@@ -72,7 +82,7 @@ public class NewsController {
             @Override
             public List<News> list(PageTableRequest request) {
 
-                request.getParams().putIfAbsent("orderBy", "  ORDER BY createTime DESC  ");
+                request.getParams().putIfAbsent("orderBy", "  ORDER BY  sort DESC, createTime DESC   ");
 
                 return newsDao.list(request.getParams(), request.getOffset(), request.getLimit());
             }

@@ -25,7 +25,7 @@ public interface UserService {
 
 
     /**
-     * openid 存在表的数量，<=1
+     * openid 存在表的数量，< = 1
      *
      * @param openid
      * @return
@@ -63,4 +63,5 @@ public interface UserService {
     boolean logout(HttpServletRequest request, HttpSession session);
 
 
+    Boolean agreeLicence(String userId);
 }

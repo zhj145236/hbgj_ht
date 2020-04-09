@@ -3,52 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <title>修改政策信息</title>
+    <style>
+
+        .form-group {
+
+            padding: 20px;
+
+        }
+
+    </style>
 </head>
 <body>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <form class="form-horizontal" onsubmit="return false" id="form">
         <fieldset>
+
             <input type="hidden" id="id" name="id">
-            <div class='form-group'>
-                <label class='col-md-2 control-label'>标题</label>
-                <div class='col-md-10'>
-                    <input class='form-control' placeholder='title' type='text' name='title' id='title'
-                           data-bv-notempty='true' data-bv-notempty-message='title 不能为空'>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">标题</label>
+                <div class="col-md-10">
+                    <input class="form-control" placeholder="标题必填" type="text" name="title" id="title">
                 </div>
             </div>
-            <div class='form-group'>
-                <label class='col-md-2 control-label'>内容</label>
-                <div class='col-md-10'>
-                    <input class='form-control' placeholder='content' type='text' name='content' id='content'
-                           data-bv-notempty='true' data-bv-notempty-message='content 不能为空'>
+            <br/>
+            <div class="form-group">
+                <label class="col-md-2 control-label">作者</label>
+                <div class="col-md-10">
+                    <input class="form-control" placeholder="作者必填" type="text" name="author" id="author">
                 </div>
             </div>
-            <div class='form-group'>
-                <label class='col-md-2 control-label'>作者</label>
-                <div class='col-md-10'>
-                    <input class='form-control' placeholder='author' type='text' name='author' id='author'
-                           data-bv-notempty='true' data-bv-notempty-message='author 不能为空'>
-                </div>
-            </div>
-            <div class='form-group'>
-                <label class='col-md-2 control-label'>备注</label>
-                <div class='col-md-10'>
-                    <input class='form-control' placeholder='remark' type='text' name='remark' id='remark'
-                           data-bv-notempty='true' data-bv-notempty-message='remark 不能为空'>
-                </div>
-            </div>
-            <div class='form-group'>
-                <label class='col-md-2 control-label'>删除标志</label>
-                <div class='col-md-10'>
-                    <input class='form-control' placeholder='delFlag' type='text' name='delFlag' id='delFlag'
-                           data-bv-notempty='true' data-bv-notempty-message='delFlag 不能为空'>
-                </div>
-            </div>
-            <div class='form-group'>
-                <label class='col-md-2 control-label'>排序</label>
-                <div class='col-md-10'>
-                    <input class='form-control' placeholder='sort' type='text' name='sort' id='sort'
-                           data-bv-notempty='true' data-bv-notempty-message='sort 不能为空'>
+
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">内容</label>
+                <div class="col-md-10">
+					<textarea class="layui-textarea" id="content" style="display: none">
+					</textarea>
                 </div>
             </div>
 
@@ -57,7 +51,7 @@
                 <div class="row" align="center">
                     <div class="col-md-12">
                         <button class="btn btn-primary" onclick="location.href='newsList.html'">返回</button>
-                        <button class="btn btn-primary" type="submit" onclick="update()">
+                        <button class="btn btn-primary" type="submit" onclick="update(this)">
                             <i class="fa fa-save"></i> 保存
                         </button>
                     </div>
@@ -81,26 +75,43 @@
 
     function initData() {
         var id = getUrlParam("id");
-        if (id != "") {
+        if (id !== "") {
             $.ajax({
                 type: 'get',
                 url: '/newss/' + id,
                 async: false,
                 success: function (data) {
+
                     $('#id').val(data.id);
                     $('#title').val(data.title);
+
                     $('#content').val(data.content);
+
                     $('#author').val(data.author);
-                    $('#createTime').val(data.createTime);
-                    $('#updateTime').val(data.updateTime);
-                    $('#remark').val(data.remark);
-                    $('#delFlag').val(data.delFlag);
-                    $('#sort').val(data.sort);
+
 
                 }
             });
         }
     }
+
+    var pro = window.location.protocol;
+    var host = window.location.host;
+    var domain = pro + "//" + host;
+
+    var layedit, index;
+    layui.use(['layedit', 'upload'], function () {
+        layedit = layui.layedit;
+        layedit.set({
+            uploadImage: {
+                url: '/files/layui?domain=' + domain,
+                type: 'post'
+            },
+            height: 600
+        });
+        index = layedit.build('content');
+    });
+
 
     function update() {
         $('#form').bootstrapValidator();
@@ -110,7 +121,25 @@
             return;
         }
 
+        var title = $("#title").val().trim();
+
+        var author = $("#author").val().trim();
+
+
+        if (title === "") {
+            layer.msg("标题不能为空");
+            return;
+        } else if (author === "") {
+            layer.msg("作者不能为空");
+            return;
+        } else if (layedit.getContent(index).trim() === "") {
+            layer.msg("内容不能为空");
+            return;
+        }
+
+
         var formdata = $("#form").serializeObject();
+        formdata.content = layedit.getContent(index);
 
         $.ajax({
             type: 'put',

@@ -2,6 +2,7 @@ package com.yusheng.hbgj.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.yusheng.hbgj.annotation.LogAnnotation;
+import com.yusheng.hbgj.constants.BusinessException;
 import com.yusheng.hbgj.constants.UserConstants;
 import com.yusheng.hbgj.dto.ResponseInfo;
 import com.yusheng.hbgj.entity.User;
@@ -13,6 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,6 +40,10 @@ public class LoginController {
     private UserService userService;
 
 
+    @Value("${token.expire.webExpireDay}")
+    private Integer webExpireDay;
+
+
     private static final Logger log = LoggerFactory.getLogger("adminLogger");
 
 
@@ -54,17 +60,17 @@ public class LoginController {
 
                 log.info("登录成功");
 
-                // Web登录
-                session.setAttribute(UserConstants.WEB_SESSION_KEY, user);
 
-                // TODO 设置失效时间
-
-
+                String aa = user.getOriginalPassword();
+                String bb = user.getPassword();
                 userService.login(user, request, session);
 
-                //利用 账号与密码生成唯一token
-                //String token = MD5.getMd5(user.getUsername() + user.getPassword());
-
+                // Web登录
+                user.setOriginalPassword(aa);
+                user.setPassword(bb);
+                log.info("{},{}", aa, bb);
+                session.setAttribute(UserConstants.WEB_SESSION_KEY, user);
+                session.setMaxInactiveInterval(webExpireDay * 3600 * 24);  // 秒为单位,这里设置30天
 
 
                 log.info("登录成功 {},{},{}", user.getId(), user.getUsername(), user.getNickname());
@@ -72,6 +78,12 @@ public class LoginController {
 
             } else {
                 log.info("登录失败，不正确的密码{}", password);
+
+                // TODO 监控并尝试锁住账号 阈值： 10分钟内连续输错5次
+                // 你还有 X次机会
+                // 请X分钟后再试
+
+                throw new BusinessException("登录失败：密码不正确");
             }
 
 
@@ -80,13 +92,16 @@ public class LoginController {
             // 不存在的账号
             log.info("不存在的账号{}", username);
 
+
+            throw new BusinessException("登录失败：不存在的账号【" + username + "】");
+
         }
 
 
-        //UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, password);
-        //SecurityUtils.getSubject().login(usernamePasswordToken);
-        //SecurityUtils.getSubject().getSession().setTimeout(serverProperties.getServlet().getSession().getTimeout().toMillis());
+    }
 
+    // 连续输入3此密码错误 先锁住账号
+    private void dealLogin() {
 
     }
 
@@ -103,7 +118,7 @@ public class LoginController {
             if (user.getPassword().equals(userService.passwordEncoder(password, user.getSalt()))) {
 
 
-                //restful 登录
+                // restful 登录
                 Map<String, Object> maps = userService.login(user, request, session);
 
                 log.info("登录成功 {},{},{}", user.getId(), user.getUsername(), user.getNickname());
@@ -129,7 +144,7 @@ public class LoginController {
 
     }
 
-    @ApiOperation(value = "当前登录用户")
+    @ApiOperation(value = "获取当前登录用户")
     @GetMapping("/sys/login")
     public User getLoginInfo() {
 

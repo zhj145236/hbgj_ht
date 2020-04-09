@@ -69,6 +69,8 @@ public class CheckPermissionAop {
 
         for (int i = 0; i < permissions.size(); i++) {
 
+
+            System.out.println("------->" + permissions.get(i).getPermission() + "<<<<<<<<");
             for (int j = 0; j < permValues.length; j++) {
                 if (permissions.get(i).getPermission().equals(permValues[j].trim())) {
                     isAllowed = true;
@@ -86,9 +88,16 @@ public class CheckPermissionAop {
         } else {
 
 
-            log.warn("没有权限查看。。。。。。。。。");
+            StringBuilder sb = new StringBuilder();
 
-            throw new UnauthorizedException("您没有权限操作，请联系管理员");
+            for (int i = 0; i < permValues.length; i++) {
+
+                sb.append(permValues[i].toString());
+            }
+
+            log.warn("没有权限查看。。。。。。。。。{}", sb.toString());
+
+            throw new UnauthorizedException("您没有权限操作，请联系管理员，需要权限：" + sb.toString());
         }
 
         return object;

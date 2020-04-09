@@ -4,6 +4,19 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+
+    <title>添加政策信息</title>
+
+    <style>
+
+        .form-group {
+
+            padding: 20px;
+
+        }
+
+    </style>
+
 </head>
 <body>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -11,9 +24,17 @@
         <div class="form-group">
             <label class="col-md-2 control-label">标题</label>
             <div class="col-md-10">
-                <input class="form-control" placeholder="title" type="text" name="title" id="title">
+                <input class="form-control" placeholder="标题必填" type="text" name="title" id="title">
             </div>
         </div>
+        <br/>
+        <div class="form-group">
+            <label class="col-md-2 control-label">作者</label>
+            <div class="col-md-10">
+                <input class="form-control" placeholder="作者必填" type="text" name="author" id="author">
+            </div>
+        </div>
+
 
         <div class="form-group">
             <label class="col-md-2 control-label">内容</label>
@@ -22,18 +43,12 @@
 					</textarea>
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">状态</label>
-            <div class="col-md-10" style="width: 100px">
-                <select class="form-control input-sm" name="status" id="status">
-                </select>
-            </div>
-        </div>
+
 
         <div class="form-actions">
             <div class="row" align="center">
                 <div class="col-md-12">
-                    <button class="btn btn-primary" onclick="location.href='noticeList.html'">返回</button>
+                    <button class="btn btn-primary" onclick="location.href='newsList.html'">返回</button>
                     <button class="btn btn-primary" type="submit" onclick="add(this)">
                         <i class="fa fa-save"></i> 保存
                     </button>
@@ -63,27 +78,37 @@
             uploadImage: {
                 url: '/files/layui?domain=' + domain,
                 type: 'post'
-            }
+            },
+            height: 600
         });
         index = layedit.build('demo');
     });
 
     function add(obj) {
-        var title = $("#title").val();
-        var status = $("#status").val();
-        if (title.trim() === "") {
-            layer.msg("title不能为空");
+
+        var title = $("#title").val().trim();
+
+        var author = $("#author").val().trim();
+
+
+        if (title === "") {
+            layer.msg("标题不能为空");
+            return;
+        } else if (author === "") {
+            layer.msg("作者不能为空");
+            return;
+        } else if (layedit.getContent(index).trim() === "") {
+            layer.msg("内容不能为空");
             return;
         }
-        if (status.trim() === "") {
-            layer.msg("状态不能为空");
-            return;
-        }
+
+
         $(obj).attr("disabled", true);
 
         var formdata = $("#form").serializeObject();
         formdata.title = title;
-        formdata.status = status;
+
+        formdata.author = author;
         formdata.content = layedit.getContent(index);
 
         $.ajax({

@@ -9,6 +9,7 @@ import com.yusheng.hbgj.constants.UserConstants;
 import com.yusheng.hbgj.dao.PermissionDao;
 import com.yusheng.hbgj.dao.RoleDao;
 import com.yusheng.hbgj.dao.UserDao;
+import com.yusheng.hbgj.dto.RoleEntity;
 import com.yusheng.hbgj.dto.Token;
 import com.yusheng.hbgj.dto.UserDto;
 import com.yusheng.hbgj.entity.Permission;
@@ -47,6 +48,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RedisService redisService;
 
+    @Value("${token.expire.day}")
+    private Integer expireDay;
+
 
     @Override
     @Transactional
@@ -59,6 +63,8 @@ public class UserServiceImpl implements UserService {
         user.setSalt(DigestUtils.md5Hex(UUID.randomUUID().toString() + System.currentTimeMillis() + UUID.randomUUID().toString()));
         user.setPassword(passwordEncoder(user.getPassword(), user.getSalt()));
 
+        // 标记为厂商
+        user.setCompFlag(1);
 
         user.setStatus(User.Status.VALID);
         userDao.save(user);
@@ -66,7 +72,7 @@ public class UserServiceImpl implements UserService {
 
         saveUserRoles(user.getId(), userDto.getRoleIds());
 
-        log.debug("新增用户{}", user.getUsername());
+        log.debug("新增厂商 {}", user.getUsername());
         return user;
     }
 
@@ -135,52 +141,53 @@ public class UserServiceImpl implements UserService {
     public Map<String, Object> login(User user, HttpServletRequest request, HttpSession session) {
 
 
-        System.out.println(user.getUsername() + "-------" + user.getPassword());
+        //利用 账号与明文密码生成唯一token
+        String token = MD5.getMd5(user.getUsername() + user.getOriginalPassword());
 
-        //利用 账号与密码生成唯一token
-        String token = MD5.getMd5(user.getUsername() + user.getPassword());
-
+        log.debug("登录账号{}与密码{}", user.getUsername(), user.getOriginalPassword());
 
         //保存到Redis中，后期都从这里取登录对象信息
         redisService.set(UserConstants.LOGIN_TOKEN + token, JSONObject.toJSONString(user));
 
 
         //登录 有效期 30天
-        redisService.expire(UserConstants.LOGIN_TOKEN + token, 30, TimeUnit.DAYS);
+        redisService.expire(UserConstants.LOGIN_TOKEN + token, expireDay, TimeUnit.DAYS);
 
 
         String ip = NetWorkUtil.getIpAddress(request);
         String time = DateUtil.getNowStr0(true, false);
 
         //记录登录时间
-        redisService.leftPush(UserConstants.USER_LOGIN_HISTORY + token, time + "|" + ip);
+
+        this.saveLoginHistoory(UserConstants.USER_LOGIN_HISTORY + token, time + "|" + ip);
 
 
         //记录权限(对象)
         List<Permission> permissionList = SpringUtil.getBean(PermissionDao.class).listByUserId(user.getId());
-        UserUtil2.setPermission(UserConstants.USER_PERMISSION+token, permissionList);
-
+        UserUtil2.setPermission(UserConstants.USER_PERMISSION + token, permissionList);
 
 
         //记录角色(对象)
         List<Role> roles = SpringUtil.getBean(RoleDao.class).listByUserId(user.getId());
-        UserUtil2.setRole(UserConstants.USER_ROLE +token, roles);
+        UserUtil2.setRole(UserConstants.USER_ROLE + token, roles);
 
 
         //记录角色(字符串)
         Set<String> roleNames = roles.stream().map(Role::getName).collect(Collectors.toSet());
-        UserUtil2.setRoleName(UserConstants.USER_ROLE_NAME+token, roleNames);
+        UserUtil2.setRoleName(UserConstants.USER_ROLE_NAME + token, roleNames);
 
 
         Map<String, Object> maps = new HashMap<>();
 
 
-        // TODO 是否要 清空？
-        //user.setOriginalPassword(null);
-        //user.setPassword(null);
+        user.setOriginalPassword(null);
+        user.setPassword(null);
 
         maps.put("user", user);
         maps.put("token", token);
+
+        ;
+        maps.put("role", transRole(roles));
 
 
         if (session != null && !StringUtils.isEmpty(session.getId())) {
@@ -191,6 +198,42 @@ public class UserServiceImpl implements UserService {
         return maps;
 
     }
+
+
+    private List<RoleEntity> transRole(List<Role> roles) {
+
+        List<RoleEntity> roleEntityList = new ArrayList<>();
+
+        roles.forEach((item) -> {
+
+            RoleEntity temp = new RoleEntity();
+
+            temp.id = item.getId();
+            temp.name = item.getName();
+            temp.desc = item.getDescription();
+
+
+            roleEntityList.add(temp);
+        });
+        return roleEntityList;
+    }
+
+
+    // 保存登录历史(最多20个)
+    private void saveLoginHistoory(String a, String b) {
+
+
+        Long size = redisService.listSize(a, 0);
+
+
+        if (size >= 20) {
+            redisService.rightPop(a);
+        }
+        redisService.leftPush(a, b);
+
+
+    }
+
 
     @Override
     public User getInfoByOpenId(String openid) {
@@ -209,6 +252,16 @@ public class UserServiceImpl implements UserService {
 
 
         return flag;
+
+    }
+
+    @Override
+    public Boolean agreeLicence(String userId) {
+
+        int sm=  userDao.agreeLicence(userId);
+
+        return  sm>=1;
+
 
     }
 

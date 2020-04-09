@@ -1,6 +1,7 @@
 package com.yusheng.hbgj.service;
 
 import com.yusheng.hbgj.entity.SysLogs;
+import com.yusheng.hbgj.entity.User;
 
 /**
  * 日志service
@@ -16,4 +17,7 @@ public interface SysLogService {
 	void save(Long userId, String module, Boolean flag, String remark);
 
 	void deleteLogs();
+
+    void saveRestfulLogin(User user, SysLogs sysLogs);
+
 }

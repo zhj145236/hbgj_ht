@@ -133,13 +133,13 @@ function init(){
                 		var status = row['status'];
                 		var href = "updateNotice.html?id=" + id;
                 		var edit = buttonEdit(href, "notice:add", pers);
-                		if(status == 1){
+                		if(status === 1){
                 			edit = "<button class='layui-btn layui-btn-xs' style='background-color:#c2c2c2;' title='不可编辑'><i class='layui-icon' style='color: #F0F0F0;'>&#xe642;</i></button>";
                 		}
                         var del = buttonDel(id, "notice:del", pers);
                         return edit + del + "<button class='layui-btn layui-btn-xs' title='详情' onclick='showDetail(\"" + id +"\")'><i class='layui-icon'>&#xe65f;</i></button>";
                      }
-                },
+                }
             ],
             "order": [[ 2, "desc" ],[1, "desc"]]
         } );

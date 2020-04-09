@@ -1,7 +1,9 @@
 package com.yusheng.hbgj.advice;
 
+import com.yusheng.hbgj.dto.ResponseInfo;
 import com.yusheng.hbgj.entity.SysLogs;
 import com.yusheng.hbgj.annotation.LogAnnotation;
+import com.yusheng.hbgj.entity.User;
 import com.yusheng.hbgj.service.SysLogService;
 import com.yusheng.hbgj.utils.NetWorkUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -67,7 +69,15 @@ public class LogAdvice {
             Object object = joinPoint.proceed();
 
             sysLogs.setFlag(true);
-            logService.save(sysLogs);
+            if(object instanceof ResponseInfo && ((ResponseInfo)object).getData()!=null && ((ResponseInfo)object).getData().get("user")!=null) {
+
+               User user= (User) ((ResponseInfo)object).getData().get("user");
+
+                logService.saveRestfulLogin(user,sysLogs);
+            }else{
+                logService.save(sysLogs);
+            }
+
 
             return object;
         } catch (Exception e) {

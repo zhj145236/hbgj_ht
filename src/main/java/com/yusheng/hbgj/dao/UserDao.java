@@ -18,9 +18,9 @@ public interface UserDao {
 
     @Options(useGeneratedKeys = true, keyProperty = "id")
     @Insert("insert into sys_user(username, password, salt, nickname, headImgUrl, phone, " +
-            "telephone, email, birthday, sex, status, createTime, updateTime,originalPassword,remark,address,openid) values " +
+            "telephone, email, birthday, sex, status, createTime, updateTime,originalPassword,remark,address,openid,compFlag,agreeLicence) values " +
             "(#{username}, #{password}, #{salt}, #{nickname}, #{headImgUrl}, #{phone}, #{telephone}, " +
-            "#{email}, #{birthday}, #{sex}, #{status}, now(), now(),#{originalPassword},#{remark},#{address},#{openid})")
+            "#{email}, #{birthday}, #{sex}, #{status}, now(), now(),#{originalPassword},#{remark},#{address},#{openid} ,#{compFlag},#{agreeLicence}  )")
     int save(User user);
 
     @Select("select * from sys_user t where t.id = #{id}")
@@ -58,5 +58,8 @@ public interface UserDao {
 
     @Select("select * from sys_user t where t.openid = #{openid}")
     User getInfoByOpenId(String openid);
+
+    @Update("update sys_user t set  t.agreeLicence= now()  where t.id = #{id} and t.compFlag=1 ")
+    int agreeLicence(String userId);
 
 }

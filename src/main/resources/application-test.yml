@@ -1,8 +1,5 @@
 server:
   port: 8080
-  servlet:
-    session:
-      timeout: 7d #7天，测试的话时间不能太短，否则不准。m是分钟单位，s是秒的单位，h是小时的单位，不写单位的话默认是毫秒
 
 
 spring:
@@ -65,10 +62,14 @@ files:
   path: ${file-path:/home/king/kingdata/hbgjfiles}
 
 constants:
-  hlgjId: 2
+
+  #用户ID
   adminId: 1
-  companyRoleId: 2
-  visitorRoleId: 3
+  hlgjId: 2
+
+  # 角色ID
+  companyRoleId: 3
+  visitorRoleId: 4
 
 logging:
   config: classpath:logback-admin.xml
@@ -79,7 +80,8 @@ log:
   file: ../hbgjlogs/admin-server.log
   maxsize: 30MB
 
-# 移动端使用Token 有效期为30天
+# 移动端与Web终端Session的有效期 都为30天
 token:
   expire:
     day: 30
+    webExpireDay: 30

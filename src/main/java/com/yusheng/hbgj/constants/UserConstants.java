@@ -25,6 +25,12 @@ public interface UserConstants {
 
 	String LOGIN_TOKEN = "user:token:";
 
+    /**
+     * 请求头
+     */
+    String LOGIN_TOKEN_HEAD = "login-token";
+
+
 	String WEB_SESSION_KEY="user:websession:";
 
 

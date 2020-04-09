@@ -5,12 +5,16 @@
 
     <sql id="where">
         <where>
+
             <if test="params.id != null and params.id != ''">
                 and id = #{params.id}
             </if>
+
             <if test="params.title != null and params.title != ''">
-                and title = #{params.title}
+                and title like concat('%', #{params.title}, '%')
+
             </if>
+
             <if test="params.content != null and params.content != ''">
                 and content = #{params.content}
             </if>

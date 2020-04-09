@@ -23,6 +23,13 @@ public class SysLogServiceImpl implements SysLogService {
 	@Autowired
 	private SysLogsDao sysLogsDao;
 
+    @Override
+    public void saveRestfulLogin(User user, SysLogs sysLogs) {
+        sysLogs.setUser(user);
+        sysLogsDao.save(sysLogs);
+    }
+
+
 	@Override
 	public void save(SysLogs sysLogs) {
 		User user = UserUtil2.getCurrentUser();
@@ -58,4 +65,6 @@ public class SysLogServiceImpl implements SysLogService {
 		int n = sysLogsDao.deleteLogs(time);
 		log.info("删除{}之前日志{}条", time, n);
 	}
+
+
 }

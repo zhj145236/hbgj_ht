@@ -1,9 +1,8 @@
 //form序列化为json
-$.fn.serializeObject = function()
-{
+$.fn.serializeObject = function () {
     var o = {};
     var a = this.serializeArray();
-    $.each(a, function() {
+    $.each(a, function () {
         if (o[this.name] !== undefined) {
             if (!o[this.name].push) {
                 o[this.name] = [o[this.name]];
@@ -18,39 +17,44 @@ $.fn.serializeObject = function()
 
 //获取url后的参数值
 function getUrlParam(key) {
-	var href = window.location.href;
-	var url = href.split("?");
-	if(url.length <= 1){
-		return "";
-	}
-	var params = url[1].split("&");
-	
-	for(var i=0; i<params.length; i++){
-		var param = params[i].split("=");
-		if(key == param[0]){
-			return param[1];
-		}
-	}
+    var href = window.location.href;
+    var url = href.split("?");
+    if (url.length <= 1) {
+        return "";
+    }
+    var params = url[1].split("&");
+
+    for (var i = 0; i < params.length; i++) {
+        var param = params[i].split("=");
+        if (key === param[0]) {
+            return param[1];
+        }
+    }
 }
 
 // 检查登录状态
-function loginInfo(){
-	var user = "";
+function loginInfo() {
+    var user = "";
     $.ajax({
-        type : 'get',
-        url : '/sys/login',
+        type: 'get',
+        url: '/sys/login',
         async: false,
-        success : function(data){
-            if(data != null && data != ""){
+        success: function (data) {
+            if (data != null && data !== "") {
                 user = data;
             }
         },
-        error: function(xhr,textStatus,errorThrown){
+        error: function (xhr, textStatus, errorThrown) {
+
             var msg = xhr.responseText;
             var response = JSON.parse(msg);
-            $("#info").html(response.message);
+
+            if (parseInt(response.code) !== 401) {
+                $("#info").html(response.message);
+            }
+
         }
     });
-    
+
     return user;
 }

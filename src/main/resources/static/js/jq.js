@@ -28,7 +28,14 @@ $.ajaxSetup({
 
         } else if (parseInt(code) === 401) {
 
-            layer.msg('您还未登录或者登录已经过期，请重新登录', {icon: 5});
+            setTimeout(function () {
+
+                location.href = "/login.html";
+
+            }, 1500);
+
+            layer.msg('您还未登录或者登录已经过期，将为您自动跳转到登录页面', {icon: 5});
+
 
         } else if (code === 403) {
 
@@ -76,7 +83,7 @@ function buttonReply(href, permission, pers) {
         }
     }
 
-    var btn = $("<button class='layui-btn' icon='' title='回复消息' onclick='window.location=\"" + href + "\"'><i class=\"layui-icon layui-icon-chat\" style=\"\"></i></button>");
+    var btn = $("<button class='layui-btn layui-btn-xs'  title='回复消息' onclick='window.location=\"" + href + "\"'><i class=\"layui-icon\">&#xe611;</i></button>");
     return btn.prop("outerHTML");
 
 

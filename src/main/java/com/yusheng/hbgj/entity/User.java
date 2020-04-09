@@ -23,10 +23,22 @@ public class User extends BaseEntity<Long> {
     private Integer sex;
     private Integer status;
 
+
+    /**
+     * 是否为厂商 1=是，0=否
+     */
+    private Integer compFlag;
+
+    /**
+     * 厂商同意许可的时间
+     */
+    private Date agreeLicence;
+
+
     /***
      * 微信Openid
      */
-    private  String openid;
+    private String openid;
 
 
     /**
@@ -156,5 +168,19 @@ public class User extends BaseEntity<Long> {
         this.openid = openid;
     }
 
+    public Integer getCompFlag() {
+        return compFlag;
+    }
 
+    public void setCompFlag(Integer compFlag) {
+        this.compFlag = compFlag;
+    }
+
+    public Date getAgreeLicence() {
+        return agreeLicence;
+    }
+
+    public void setAgreeLicence(Date agreeLicence) {
+        this.agreeLicence = agreeLicence;
+    }
 }

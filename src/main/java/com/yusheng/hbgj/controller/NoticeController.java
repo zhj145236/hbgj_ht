@@ -2,6 +2,7 @@ package com.yusheng.hbgj.controller;
 
 import com.yusheng.hbgj.annotation.LogAnnotation;
 import com.yusheng.hbgj.annotation.PermissionTag;
+import com.yusheng.hbgj.constants.NotLoginException;
 import com.yusheng.hbgj.dao.NoticeDao;
 import com.yusheng.hbgj.dao.UserDao;
 import com.yusheng.hbgj.dto.NoticeDto;
@@ -119,7 +120,9 @@ public class NoticeController {
         // TODO 空指针异常
 
         User user = UserUtil2.getCurrentUser();
-
+        if (user == null) {
+            throw new NotLoginException();
+        }
         return noticeDao.countUnread(user.getId());
     }
 

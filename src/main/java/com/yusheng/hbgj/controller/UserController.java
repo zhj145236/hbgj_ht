@@ -8,6 +8,7 @@ import com.yusheng.hbgj.entity.User;
 import com.yusheng.hbgj.page.table.PageTableHandler;
 import com.yusheng.hbgj.page.table.PageTableRequest;
 import com.yusheng.hbgj.page.table.PageTableResponse;
+import com.yusheng.hbgj.service.SysLogService;
 import com.yusheng.hbgj.service.TokenManager;
 import com.yusheng.hbgj.service.UserService;
 import com.yusheng.hbgj.utils.StrUtil;
@@ -52,7 +53,7 @@ public class UserController {
 
 
     @Autowired
-    private TokenManager tokenManager;
+    private SysLogService sysLogService;
 
 
     @Value("${constants.companyRoleId}")
@@ -68,12 +69,14 @@ public class UserController {
     @ApiOperation(value = "Web保存用户", notes = "如果没有勾选任何角色，系统就默认设置为厂商角色")
     @PermissionTag("sys:user:add")
     public User saveUser(@RequestBody UserDto userDto) {
+
         User u = userService.getUser(userDto.getUsername());
         if (u != null) {
             throw new IllegalArgumentException(userDto.getUsername() + "已存在");
         }
 
         roleDeal(userDto, companyRoleId);
+
 
         return userService.saveUser(userDto);
     }
@@ -113,7 +116,30 @@ public class UserController {
     @PermissionTag("sys:user:password")
     public void changePassword(@PathVariable String username, String oldPassword, String newPassword) {
         userService.changePassword(username, oldPassword, newPassword);
+
+        // TODO  rename Redis 的key
     }
+
+
+    @PutMapping("/agreeLicence")
+    @ApiOperation(value = "厂商同意法律许可")
+    // TODO 加上 @PermissionTag("sys:user: Licence")
+    public Boolean agreeLicence(@RequestParam String userId) {
+
+        Boolean isSucess = userService.agreeLicence(userId);
+
+        if (isSucess) {
+            sysLogService.save(Long.parseLong(userId), "系统", true, "厂商同意了许可");
+
+            return true;
+        } else {
+
+            return false;
+        }
+
+
+    }
+
 
     @GetMapping
     @ApiOperation(value = "用户列表")
@@ -165,12 +191,13 @@ public class UserController {
 
 
         // 微信用户已经登录，无需再次登录
-        if (StringUtils.isEmpty(loginToken)) {
+        if (!StringUtils.isEmpty(loginToken)) {
 
             try {
                 User currentUser = UserUtil2.getCurrentUser();
                 if (currentUser != null) {
-                    maps.put("wxUser", userService.getInfoByOpenId(wx.getOpenid()));
+
+                    maps.put("user", userService.getInfoByOpenId(wx.getOpenid()));
 
                     maps.put("msg", "之前已经登录，无需再次登录");
                     return maps;
@@ -219,7 +246,7 @@ public class UserController {
 
                 }
                 userVo.setUsername(username);
-                userVo.setRemark("游客授权微信登录");
+                userVo.setRemark("系统自动为微信游客注册了账号");
 
 
                 String password = "123456";
@@ -239,14 +266,13 @@ public class UserController {
 
             } else {
 
-                log.info("之前已经有注册了,重新新自动登录");
+                log.info("此账号已经存在于系统中,重新新自动登录");
 
-                //userObj.setPassword(userObj.getOriginalPassword()); //密码转换
 
-                Map<String, Object> map = userService.login(userObj, request, session);
-                maps.put("wxUser", userService.getInfoByOpenId(wx.getOpenid()));
+                maps = userService.login(userObj, request, session);
 
-                maps.put("msg", "之前已经有注册了,系统为其自动登录上");
+
+                maps.put("msg", "此账号已经存在于系统中,系统为其自动登录上");
 
                 return maps;
             }

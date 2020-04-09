@@ -10,6 +10,7 @@ import com.yusheng.hbgj.service.RedisService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -30,6 +31,10 @@ public class UserUtil2 {
     private RedisService redisService;
 
 
+    @Value("${token.expire.day}")
+    private Integer expireDay;
+
+
     public static UserUtil2 userUtil;
 
     @PostConstruct
@@ -42,24 +47,23 @@ public class UserUtil2 {
     public static User getCurrentUser() {
 
 
-        // 从微信端端取
+        // 尝试从微信端端取用户信息
         String token = getToken();
-
-         System.out.println("token--->" + token);
 
         User user = null;
 
         if (!StringUtils.isBlank(token)) {
 
-
             user = JSON.parseObject(userUtil.redisService.get(UserConstants.LOGIN_TOKEN + token), User.class);
 
         }
 
-        // 从PC端段取
+        HttpServletRequest request = ((ServletRequestAttributes) (RequestContextHolder.currentRequestAttributes())).getRequest();
+
+        // 尝试从PC端段取用户信息
         if (user == null) {
 
-            HttpServletRequest request = ((ServletRequestAttributes) (RequestContextHolder.currentRequestAttributes())).getRequest();
+
             HttpSession session = request.getSession();
 
             if (session != null) {
@@ -70,10 +74,21 @@ public class UserUtil2 {
 
         if (user == null) {
 
-            //throw new NotLoginException("无法获取到登录信息，请重新登录");
-        }
 
-        //System.out.println("用户信息--》" + user.getNickname() + "<<<<<<<<<<<");
+            // TODO nginx 可能识别url有误
+
+            String allowUrl1 = "/sys/login/restful";
+            String allowUrl2 = "/sys/login";
+            String allowUrl3 = "/users/wxAutoLogin";
+
+            String url = request.getRequestURI();
+
+            if (allowUrl1.equals(url) || allowUrl2.equals(url) || allowUrl3.equals(url)) {
+                return null;
+            } else {
+                throw new NotLoginException("无法获取到登录信息，请重新登录");
+            }
+        }
 
         return user;
     }
@@ -90,9 +105,9 @@ public class UserUtil2 {
         HttpServletRequest request = ((ServletRequestAttributes) (RequestContextHolder.currentRequestAttributes())).getRequest();
 
         HttpServletRequest httpServletRequest = WebUtils.toHttp(request);
-        String loginToken = httpServletRequest.getParameter(UserConstants.LOGIN_TOKEN);
+        String loginToken = httpServletRequest.getParameter(UserConstants.LOGIN_TOKEN_HEAD);
         if (StringUtils.isBlank(loginToken)) {
-            loginToken = httpServletRequest.getHeader(UserConstants.LOGIN_TOKEN);
+            loginToken = httpServletRequest.getHeader(UserConstants.LOGIN_TOKEN_HEAD);
         }
 
 
@@ -107,8 +122,6 @@ public class UserUtil2 {
             }
 
         }
-
-
 
 
         return loginToken;
@@ -166,12 +179,11 @@ public class UserUtil2 {
 
 
         userUtil.redisService.delete(prexAndtoken);
-        userUtil.redisService.rightPushAll(prexAndtoken, list);
-
+        if (list.size() > 0) {
+            userUtil.redisService.rightPushAll(prexAndtoken, list);
+        }
         //设置30天过期
-        userUtil.redisService.expire(prexAndtoken, 30, TimeUnit.DAYS);
-
-        //getSession().setAttribute(UserConstants.USER_PERMISSIONS, list);
+        userUtil.redisService.expire(prexAndtoken, userUtil.expireDay, TimeUnit.DAYS);
 
 
     }
@@ -191,7 +203,7 @@ public class UserUtil2 {
 
 
         //设置30天过期
-        userUtil.redisService.expire(prexAndtoken, 30, TimeUnit.DAYS);
+        userUtil.redisService.expire(prexAndtoken, userUtil.expireDay, TimeUnit.DAYS);
 
 
     }
@@ -206,11 +218,12 @@ public class UserUtil2 {
 
 
         userUtil.redisService.delete(prexAddtoken);
-        userUtil.redisService.rightPushAll(prexAddtoken, list);
-        //设置30天过期
-        userUtil.redisService.expire(prexAddtoken, 30, TimeUnit.DAYS);
 
-        //getSession().setAttribute(UserConstants.USER_PERMISSIONS, list);
+        if (list.size() > 0) {
+            userUtil.redisService.rightPushAll(prexAddtoken, list);
+        }
+        //设置30天过期
+        userUtil.redisService.expire(prexAddtoken, userUtil.expireDay, TimeUnit.DAYS);
 
 
     }
@@ -233,7 +246,7 @@ public class UserUtil2 {
 
 
         //记录退出登录的信息
-        userUtil.redisService.leftPush(UserConstants.USER_LOGOUT_HISTORY + token, time + "|" + ip);
+        saveLogoutHistoory(UserConstants.USER_LOGOUT_HISTORY + token, time + "|" + ip);
 
 
         //Redis中清除删除权限
@@ -257,12 +270,21 @@ public class UserUtil2 {
 
     }
 
+    // 保存登出历史(最多20个)
+    private static void saveLogoutHistoory(String a, String b) {
+        Long size = userUtil.redisService.listSize(a, 0);
+
+        if (size >= 20) {
+            userUtil.redisService.rightPop(a);
+        }
+        userUtil.redisService.leftPush(a, b);
+
+    }
+
 
     public static void setUserSession(HttpSession session, User user) {
 
         if (session != null) {
-
-            //String token = MD5.getMd5(user.getUsername() + user.getPassword());
 
             session.setAttribute(UserConstants.WEB_SESSION_KEY, user);
         }

@@ -19,6 +19,13 @@
                 and t.openid = #{params.openid}
             </if>
 
+            <if test="params.compFlag != null and params.compFlag != ''">
+                and t.compFlag = #{params.compFlag}
+            </if>
+
+
+
+
 
             and t.id not in(1,2)
         </where>
@@ -113,6 +120,14 @@
 
             <if test="openid != null">
                 openid = #{openid},
+            </if>
+
+            <if test="agreeLicence != null">
+                agreeLicence = #{agreeLicence},
+            </if>
+
+            <if test="compFlag != null">
+                compFlag = #{compFlag},
             </if>
 
 

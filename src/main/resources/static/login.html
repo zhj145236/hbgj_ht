@@ -53,6 +53,10 @@
         location.href = '/';
     }
 
+    /**
+     * 登录按钮
+     * @param obj
+     */
     function login(obj) {
         $(obj).attr("disabled", true);
 
@@ -67,13 +71,17 @@
                 url: '/sys/login',
                 data: $("#login-form").serialize(),
                 success: function () {
+
                     location.href = '/';
+
                 },
                 error: function (xhr, textStatus, errorThrown) {
+
                     var msg = xhr.responseText;
                     var response = JSON.parse(msg);
                     $("#info").html(response.message);
                     $(obj).attr("disabled", false);
+
                 }
             });
 
