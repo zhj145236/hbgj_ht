@@ -19,10 +19,12 @@ $.ajaxSetup({
     error: function (xhr, textStatus, errorThrown) {
 
         var msg = xhr.responseText;
+        alert("error111111111111111:"+msg);
         var response = JSON.parse(msg);
         var code = response.code;
         var message = response.message;
         if (parseInt(code) === 400) {
+
 
             layer.msg("操作失败，原因：" + message, {icon: 5});
 
@@ -37,10 +39,17 @@ $.ajaxSetup({
             layer.msg('您还未登录或者登录已经过期，将为您自动跳转到登录页面', {icon: 5});
 
 
-        } else if (code === 403) {
+        } else if (parseInt(code)  === 403) {
 
             console.warn("未授权:" + message, {icon: 5});
 
+            setTimeout(function () {
+
+                location.href = "/login.html";
+
+            }, 1500);
+
+            alert("您没有权限操作");
             layer.msg('您没有权限操作', {icon: 5});
 
         } else if (parseInt(code) === 500) {

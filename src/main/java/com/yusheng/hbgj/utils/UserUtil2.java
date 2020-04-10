@@ -1,17 +1,18 @@
 package com.yusheng.hbgj.utils;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.yusheng.hbgj.constants.UserConstants;
 import com.yusheng.hbgj.constants.NotLoginException;
 import com.yusheng.hbgj.entity.Permission;
 import com.yusheng.hbgj.entity.Role;
 import com.yusheng.hbgj.entity.User;
 import com.yusheng.hbgj.service.RedisService;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -52,7 +53,7 @@ public class UserUtil2 {
 
         User user = null;
 
-        if (!StringUtils.isBlank(token)) {
+        if (!StringUtils.isEmpty(token)) {
 
             user = JSON.parseObject(userUtil.redisService.get(UserConstants.LOGIN_TOKEN + token), User.class);
 
@@ -106,19 +107,20 @@ public class UserUtil2 {
 
         HttpServletRequest httpServletRequest = WebUtils.toHttp(request);
         String loginToken = httpServletRequest.getParameter(UserConstants.LOGIN_TOKEN_HEAD);
-        if (StringUtils.isBlank(loginToken)) {
+        if (StringUtils.isEmpty(loginToken)) {
             loginToken = httpServletRequest.getHeader(UserConstants.LOGIN_TOKEN_HEAD);
         }
 
 
         // 还没有取得就从Web Session中取
-        if (StringUtils.isBlank(loginToken)) {
+        if (StringUtils.isEmpty(loginToken)) {
 
 
             User user = (User) (request.getSession().getAttribute(UserConstants.WEB_SESSION_KEY));
-            if (user != null && !SysUtil.paramsIsNull(user.getUsername(), user.getPassword())) {
+            if (user != null && !SysUtil.paramsIsNull(user.getUsername(), user.getOriginalPassword())) {
 
-                loginToken = MD5.getMd5(user.getUsername() + user.getPassword());
+                loginToken = MD5.getMd5(user.getUsername() + user.getOriginalPassword());
+
             }
 
         }
@@ -143,7 +145,9 @@ public class UserUtil2 {
         List<Permission> permissions = new ArrayList<>();
 
         list.forEach((item) -> {
-            permissions.add((Permission) item);
+
+            permissions.add(JSONObject.parseObject((String) item, Permission.class));
+
         });
 
         return permissions;
@@ -163,7 +167,7 @@ public class UserUtil2 {
         List<Role> roles = new ArrayList<>();
 
         list.forEach((item) -> {
-            roles.add((Role) item);
+            roles.add(JSONObject.parseObject((String) item, Role.class));
         });
 
         return roles;
@@ -180,11 +184,16 @@ public class UserUtil2 {
 
         userUtil.redisService.delete(prexAndtoken);
         if (list.size() > 0) {
-            userUtil.redisService.rightPushAll(prexAndtoken, list);
+
+            list.forEach((item -> {
+                userUtil.redisService.rightPush(prexAndtoken, JSONObject.toJSONString(item));
+
+            }));
+
+            //userUtil.redisService.rightPushAll(prexAndtoken, list);
         }
         //设置30天过期
         userUtil.redisService.expire(prexAndtoken, userUtil.expireDay, TimeUnit.DAYS);
-
 
     }
 
@@ -220,7 +229,14 @@ public class UserUtil2 {
         userUtil.redisService.delete(prexAddtoken);
 
         if (list.size() > 0) {
-            userUtil.redisService.rightPushAll(prexAddtoken, list);
+
+            list.forEach((item) -> {
+
+                userUtil.redisService.rightPush(prexAddtoken, JSON.toJSONString(item));
+            });
+
+
+            // userUtil.redisService.rightPushAll(prexAddtoken, list);
         }
         //设置30天过期
         userUtil.redisService.expire(prexAddtoken, userUtil.expireDay, TimeUnit.DAYS);
@@ -228,26 +244,44 @@ public class UserUtil2 {
 
     }
 
-    public static boolean logout(HttpServletRequest request, HttpSession session) {
+    public static boolean logout(User user) {
+
+        String loginToken = MD5.getMd5(user.getUsername() + user.getOriginalPassword());
+
+        if (StringUtils.isEmpty(loginToken)) {
+            return true;
+        }
+        return logout(null, null, loginToken);
 
 
-        String token = UserUtil2.getToken();
-        if (StringUtils.isBlank(token)) {
+    }
 
-            System.out.println("token无法获取到");
+    public static boolean logout(HttpServletRequest request, HttpSession session, String loginToken) {
+
+        String token;
+        if (!StringUtils.isEmpty(loginToken)) {
+            token = loginToken;
+        } else {
+            token = UserUtil2.getToken();
+        }
+
+
+        if (StringUtils.isEmpty(token)) {
+
             return false;
         }
+
         //Redis中删除token
         userUtil.redisService.delete(UserConstants.LOGIN_TOKEN + token);
 
 
-        String ip = NetWorkUtil.getIpAddress(request);
-        String time = DateUtil.getNowStr0(true, false);
+        if (request != null) {
+            String ip = NetWorkUtil.getIpAddress(request);
+            String time = DateUtil.getNowStr0(true, false);
 
-
-        //记录退出登录的信息
-        saveLogoutHistoory(UserConstants.USER_LOGOUT_HISTORY + token, time + "|" + ip);
-
+            //记录退出登录的信息
+            saveLogoutHistoory(UserConstants.USER_LOGOUT_HISTORY + token, time + "|" + ip);
+        }
 
         //Redis中清除删除权限
         userUtil.redisService.delete(UserConstants.USER_PERMISSION + token);

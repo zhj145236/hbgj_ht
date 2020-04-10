@@ -101,6 +101,7 @@
 <script type="text/javascript" src="../../js/my/permission.js"></script>
 <script type="text/javascript">
 
+
     var pers = checkPermission();
 
     var pro = window.location.protocol;
@@ -132,11 +133,11 @@
                         // d.orgId = $('#orgId').val();
                         d.tag = "企业检修";
 
-                    },
+                    }/*,
                     "error": function (xhr, textStatus, errorThrown) {
                         var msg = xhr.responseText;
                         console.log(msg)
-                    }
+                    }*/
                 },
                 "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
                 "columns": [
@@ -261,7 +262,9 @@
             , before: function () {
 
                 if ($('#resourceId').val() !== '') {
+
                     return true;
+
                 } else {
                     layer.msg('上传失败，请先为附件选择企业（右上角下拉框）', {icon: 5});
                     return false;
@@ -274,5 +277,15 @@
         });
     });
 
+
+    layui.use('form', function () {
+        layui.form.on("select", function (data) {
+            example.ajax.reload();
+        });
+
+    });
+
+
     init();
+
 </script>

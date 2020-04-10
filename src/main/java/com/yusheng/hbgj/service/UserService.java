@@ -24,6 +24,10 @@ public interface UserService {
     List<User> getAllUser();
 
 
+    void lockAccount(String username);
+
+
+
     /**
      * openid 存在表的数量，< = 1
      *

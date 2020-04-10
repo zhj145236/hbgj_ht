@@ -133,11 +133,11 @@
                         d.resourceId = $('#resourceId').val();
                         d.tag = "企业台账";
 
-                    },
+                    }/*,
                     "error": function (xhr, textStatus, errorThrown) {
                         var msg = xhr.responseText;
                         console.log(msg)
-                    }
+                    }*/
                 },
                 "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
                 "columns": [
@@ -274,5 +274,15 @@
         });
     });
 
+
+    layui.use('form', function () {
+        layui.form.on("select", function (data) {
+            example.ajax.reload();
+        });
+
+    });
+
+
     init();
+
 </script>

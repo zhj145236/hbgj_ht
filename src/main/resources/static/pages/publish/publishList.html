@@ -43,14 +43,15 @@
                         </tr>
                         <tr>
 
-                            <th>微信唯一识别码</th>
+                            <th>备注</th>
+                            <th>昵称</th>
                             <th>性别</th>
                             <th>联系电话</th>
-                            <th>微信昵称</th>
+
                             <th>头像</th>
                             <th>发布内容</th>
-                            <th>回复</th>
                             <th>留言时间</th>
+                            <th>回复</th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -79,8 +80,8 @@
     function init() {
         example =
             $('#dt-table').DataTable({
-                "searching": false,
-                "processing": false,
+                "searching": true,
+                "processing": true,
                 "serverSide": true,
                 "language": {
                     "url": "/js/plugin/datatables/Chinese.lang"
@@ -94,11 +95,10 @@
                 },
                 "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
                 "columns": [
-                    {"data": "openid", "defaultContent": "", "orderable": false},
+                    {"data": "remark", "defaultContent": "", "orderable": false},
+                    {"data": "nickName", "defaultContent": "", "orderable": false},
                     {"data": "sex", "defaultContent": "", "orderable": false},
                     {"data": "tel", "defaultContent": "", "orderable": false},
-                    {"data": "nickName", "defaultContent": "", "orderable": false},
-
                     {
                         "data": "headPic", "defaultContent": "",
                         "orderable": false,
@@ -111,11 +111,10 @@
                     },
                     {"data": "publishContent", "orderable": false, "defaultContent": ""},
 
+
+                    {"data": "createTime", "defaultContent": ""},
                     {"data": "reply", "orderable": false, "defaultContent": ""},
-
-                    {"data": "createTime", "defaultContent": ""}
-
-                    , {
+                    {
                         "data": "",
                         "defaultContent": "",
                         "orderable": false,
@@ -130,7 +129,7 @@
                     }
 
                 ],
-                "order": [[ 7, "desc" ]]
+                "order": [[7, "desc"]]
 
             });
     }

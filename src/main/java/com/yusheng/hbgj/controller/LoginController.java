@@ -6,6 +6,7 @@ import com.yusheng.hbgj.constants.BusinessException;
 import com.yusheng.hbgj.constants.UserConstants;
 import com.yusheng.hbgj.dto.ResponseInfo;
 import com.yusheng.hbgj.entity.User;
+import com.yusheng.hbgj.service.RedisService;
 import com.yusheng.hbgj.service.UserService;
 import com.yusheng.hbgj.utils.MD5;
 import com.yusheng.hbgj.utils.UserUtil2;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 登录相关接口
@@ -43,6 +45,9 @@ public class LoginController {
     @Value("${token.expire.webExpireDay}")
     private Integer webExpireDay;
 
+    @Autowired
+    private RedisService redisService;
+
 
     private static final Logger log = LoggerFactory.getLogger("adminLogger");
 
@@ -52,14 +57,27 @@ public class LoginController {
     @PostMapping("/sys/login")
     public void login(String username, String password, HttpServletRequest request, HttpSession session) {
 
+        String key = "user:login_failed:" + username;
+
+
+        String failCountStr = redisService.get(key);
+
+
+        if (failCountStr != null && Long.parseLong(failCountStr) > 8L) {
+
+            throw new BusinessException("您之前已经连续输错密码已经超过5次了,请稍后再试");
+        }
+
         User user = userService.getUser(username);
         if (user != null) {
 
 
             if (user.getPassword().equals(userService.passwordEncoder(password, user.getSalt()))) {
 
-                log.info("登录成功");
 
+                if (User.Status.VALID != user.getStatus()) {
+                    throw new BusinessException("您的账号已被锁住了,如需登录请联系管理员");
+                }
 
                 String aa = user.getOriginalPassword();
                 String bb = user.getPassword();
@@ -78,12 +96,10 @@ public class LoginController {
 
             } else {
                 log.info("登录失败，不正确的密码{}", password);
-
-                // TODO 监控并尝试锁住账号 阈值： 10分钟内连续输错5次
-                // 你还有 X次机会
-                // 请X分钟后再试
-
-                throw new BusinessException("登录失败：密码不正确");
+                String msg = this.dealLogin(username);
+                if (msg != null) {
+                    throw new BusinessException(msg);
+                }
             }
 
 
@@ -101,8 +117,35 @@ public class LoginController {
     }
 
     // 连续输入3此密码错误 先锁住账号
-    private void dealLogin() {
+    private String dealLogin(String username) {
 
+        String key = "user:login_failed:" + username;
+
+        if (redisService.get(key) == null) {
+
+            redisService.set(key, "1");
+            redisService.expire(key, 5, TimeUnit.MINUTES);
+
+
+        } else {
+
+            redisService.increment(key, 1);
+        }
+
+        int count = Integer.parseInt(redisService.get(key));
+
+
+        if (count >= 8) {
+
+            return ("您连续输错密码已经超过5次了,请稍后再试");
+
+        } else if (count > 3) {
+
+            return ("密码错误,你还有" + (8 - count) + "次机会尝试");
+
+        } else {
+            return null;
+        }
     }
 
     @LogAnnotation
@@ -113,7 +156,6 @@ public class LoginController {
         User user = userService.getUser(username);
 
         if (user != null) {
-
 
             if (user.getPassword().equals(userService.passwordEncoder(password, user.getSalt()))) {
 

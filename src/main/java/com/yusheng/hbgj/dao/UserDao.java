@@ -33,7 +33,7 @@ public interface UserDao {
     int changePassword(@Param("id") Long id, @Param("password") String password, @Param("originalPassword") String originalPassword);
 
 
-    @Select("select t.id,t.nickname from sys_user t where t.id not in (1,2) ")
+    @Select("select t.id,t.nickname from sys_user t where  t.compFlag = 1 and  t.id not in (1,2) ")
     List<User> getAllUser();
 
     @Delete("delete from sys_role_user where userId = #{userId}")
@@ -56,10 +56,14 @@ public interface UserDao {
     @Select("select t.id  from sys_user t where t.openid= #{openid}")
     Long getUserId(String openid);
 
-    @Select("select * from sys_user t where t.openid = #{openid}")
+    @Select("select t.* from sys_user t where t.openid = #{openid}")
     User getInfoByOpenId(String openid);
 
-    @Update("update sys_user t set  t.agreeLicence= now()  where t.id = #{id} and t.compFlag=1 ")
+    @Update("update sys_user t set  t.agreeLicence= now()  where t.id = #{id} and t.compFlag=1 and t.agreeLicence!=null ")
     int agreeLicence(String userId);
+
+    @Update("update sys_user t set t.status= 2  where  t.username!=null AND  t.username = #{username} ")
+    void lockAccount(String username);
+
 
 }

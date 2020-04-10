@@ -71,11 +71,11 @@
                 </div>
             </div>
 
-            <!--<div class="form-group">
+            <div class="form-group" style="display:none " id="roleDiv">
                 <label class="col-md-2 control-label">角色</label>
                 <div class="checkbox" id="roles">
                 </div>
-            </div>-->
+            </div>
 
             <div class="form-actions">
                 <div class="row" align="center">
@@ -96,7 +96,8 @@
 <script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
 <!--不用授予角色 -->
-<!--<script type="text/javascript" src="../../js/my/roles/role.js"></script>-->
+<script type="text/javascript" src="../../js/my/roles/role.js"></script>
+
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src="../../js/dict.js"></script>
 <script type="text/javascript">
@@ -110,7 +111,30 @@
 
     showDictSelect("sex", "sex");
 
-   /* initRoles();*/
+    initRoles();
+
+
+    isAdmin();
+
+    // 只有管理员 才能显示 角色列表
+    function isAdmin() {
+
+        $.ajax({
+            type: 'get',
+            url: '/roles/myole',
+            async: true,
+            success: function (data) {
+
+                if (parseInt(data[0].id) === 1) {
+                    $("#roleDiv").css("display", "block");
+                }
+
+
+            }
+        });
+
+    }
+
 
     $('#form').bootstrapValidator();
 
@@ -122,7 +146,7 @@
         }
 
         var formdata = $("#form").serializeObject();
-       /* formdata.roleIds = getCheckedRoleIds();*/
+        /* formdata.roleIds = getCheckedRoleIds();*/
 
         $.ajax({
             type: 'post',

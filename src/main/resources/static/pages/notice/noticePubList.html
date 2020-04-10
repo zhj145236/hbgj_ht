@@ -85,7 +85,7 @@
     function init() {
         example =
             $('#dt-table').DataTable({
-                "searching": false,
+                "searching": true,
                 "processing": false,
                 "serverSide": true,
                 "language": {
@@ -103,9 +103,9 @@
                 },
                 "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
                 "columns": [
-                    {"data": "title", "defaultContent": ""},
+                    {"data": "title", "orderable": false, "defaultContent": ""},
                     /* { "data": "updateTime", "defaultContent": ""},*/
-                    {"data": "updateTime", "defaultContent": ""},
+                    {"data": "updateTime", "orderable": false, "defaultContent": ""},
 
                     {
                         "data": "",
@@ -146,9 +146,23 @@
 
         layer.open({
             type: 2,
-            title: title
-            , btn: '关闭'
-            , btnAlign: 'c', //按钮居中
+            title: title,
+
+
+            btn: '测试回调',
+            yes: function(index, layero){
+
+                example.ajax.reload();
+                layer.close(index); //如果设定了yes回调，需进行手工关闭
+
+            }
+            , cancel: function () {
+                example.ajax.reload();
+
+            },
+
+
+            btnAlign: 'c', //按钮居中
             area: ['450px', '450px'],
             shadeClose: true,
             content: ['detail.html?id=' + id]

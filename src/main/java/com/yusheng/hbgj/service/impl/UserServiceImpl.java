@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
         user.setSalt(DigestUtils.md5Hex(UUID.randomUUID().toString() + System.currentTimeMillis() + UUID.randomUUID().toString()));
         user.setPassword(passwordEncoder(user.getPassword(), user.getSalt()));
 
-        // 标记为厂商
+        // 标记是否为厂商
         user.setCompFlag(1);
 
         user.setStatus(User.Status.VALID);
@@ -77,8 +77,9 @@ public class UserServiceImpl implements UserService {
     }
 
     private void saveUserRoles(Long userId, List<Long> roleIds) {
-        if (roleIds != null) {
 
+
+        if (roleIds != null) {
 
             userDao.deleteUserRole(userId);
 
@@ -116,12 +117,25 @@ public class UserServiceImpl implements UserService {
 
         userDao.changePassword(u.getId(), passwordEncoder(newPassword, u.getSalt()), newPassword);
 
+        //清除Redis信息
+
+
         log.debug("修改{}的密码", username);
     }
 
     @Override
     public List<User> getAllUser() {
         return userDao.getAllUser();
+    }
+
+    /****
+     * 锁住 账号
+     * @param username 用户名 (唯一)
+     */
+    @Override
+    public void lockAccount(String username) {
+
+        userDao.lockAccount(username);
     }
 
     @Override
@@ -186,7 +200,6 @@ public class UserServiceImpl implements UserService {
         maps.put("user", user);
         maps.put("token", token);
 
-        ;
         maps.put("role", transRole(roles));
 
 
@@ -246,7 +259,7 @@ public class UserServiceImpl implements UserService {
     public boolean logout(HttpServletRequest request, HttpSession session) {
 
         // 清除会话和权限
-        boolean flag = UserUtil2.logout(request, session);
+        boolean flag = UserUtil2.logout(request, session, null);
 
         // 删除无用文件
 
@@ -258,9 +271,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean agreeLicence(String userId) {
 
-        int sm=  userDao.agreeLicence(userId);
+        int sm = userDao.agreeLicence(userId);
 
-        return  sm>=1;
+        return sm >= 1;
 
 
     }
@@ -268,16 +281,45 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User updateUser(UserDto userDto, HttpSession session) {
+
         userDao.update(userDto);
+
+
         saveUserRoles(userDto.getId(), userDto.getRoleIds());
         updateUserSession(session, userDto.getId());
+
+
+        // 如果用户状态被设置为非正常状态.要立刻使他退出登录
+        if (userDto.getStatus() != User.Status.VALID) {
+            this.kickUser(userDto);
+        }
 
         return userDto;
     }
 
+
+    /**
+     * 踢人下线
+     *
+     * @param userDto
+     */
+    private void kickUser(UserDto userDto) {
+
+        System.out.println(userDto.toString() + "<<<<<<<<<<<");
+        User user = new User();
+
+        user.setUsername(userDto.getUsername());
+        user.setOriginalPassword(userDto.getOriginalPassword());
+
+        UserUtil2.logout(user);
+
+    }
+
     private void updateUserSession(HttpSession session, Long id) {
         User current = UserUtil2.getCurrentUser();
-        if (current.getId().equals(id)) {
+
+        //更新自己
+        if (current != null && current.getId().equals(id)) {
             User user = userDao.getById(id);
             UserUtil2.setUserSession(session, user);
         }

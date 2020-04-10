@@ -398,7 +398,7 @@ public class RedisService {
      * @param values
      * @return
      */
-    public Long rightPushAll(String key, List values) {
+    public Long rightPushAll(String key, List<String> values) {
         return redisTemplate.opsForList().rightPushAll(key, values);
     }
 

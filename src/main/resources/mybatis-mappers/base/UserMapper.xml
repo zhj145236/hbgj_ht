@@ -19,12 +19,9 @@
                 and t.openid = #{params.openid}
             </if>
 
-            <if test="params.compFlag != null and params.compFlag != ''">
+            <if test="params.compFlag != null  ">
                 and t.compFlag = #{params.compFlag}
             </if>
-
-
-
 
 
             and t.id not in(1,2)

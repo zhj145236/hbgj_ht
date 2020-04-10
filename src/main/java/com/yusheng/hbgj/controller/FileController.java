@@ -198,7 +198,11 @@ public class FileController {
         layuiFile.setCode(0);
         LayuiFile.LayuiFileData data = new LayuiFile.LayuiFileData();
         layuiFile.setData(data);
+
+        //TODO 域名问题
+
         data.setSrc(domain + "/files" + fileInfo.getUrl());
+
         data.setTitle(file.getOriginalFilename());
 
         return layuiFile;

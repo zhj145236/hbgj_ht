@@ -1,34 +1,22 @@
 package com.yusheng.hbgj.advice;
 
-import com.yusheng.hbgj.annotation.LogAnnotation;
 import com.yusheng.hbgj.annotation.PermissionTag;
 import com.yusheng.hbgj.constants.UnauthorizedException;
-import com.yusheng.hbgj.dto.ResponseInfo;
 import com.yusheng.hbgj.entity.Permission;
-import com.yusheng.hbgj.entity.SysLogs;
-import com.yusheng.hbgj.service.SysLogService;
-import com.yusheng.hbgj.utils.NetWorkUtil;
 import com.yusheng.hbgj.utils.UserUtil2;
-import io.swagger.annotations.ApiOperation;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * 统一日志处理
@@ -67,12 +55,14 @@ public class CheckPermissionAop {
 
         boolean isAllowed = false;
 
-        for (int i = 0; i < permissions.size(); i++) {
+        int size = permissions.size();
+        for (int i = 0; i < size; i++) {
 
 
-            System.out.println("------->" + permissions.get(i).getPermission() + "<<<<<<<<");
             for (int j = 0; j < permValues.length; j++) {
-                if (permissions.get(i).getPermission().equals(permValues[j].trim())) {
+                String pp = permissions.get(i).getPermission();
+                System.out.println(pp+"<<<<<<<<<");
+                if (pp != null && pp.equals(permValues[j].trim())) {
                     isAllowed = true;
                     break;
                 }
@@ -96,7 +86,6 @@ public class CheckPermissionAop {
             }
 
             log.warn("没有权限查看。。。。。。。。。{}", sb.toString());
-
             throw new UnauthorizedException("您没有权限操作，请联系管理员，需要权限：" + sb.toString());
         }
 

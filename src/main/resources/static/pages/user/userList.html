@@ -67,6 +67,7 @@
                         <th>邮箱</th>
                         <th>状态</th>
                         <th>备注</th>
+                        <th>创建时间</th>
                         <th>操作</th>
                     </tr>
                     </thead>
@@ -119,29 +120,35 @@
                         d.username = $('#username').val();
                         d.nickname = $('#nickname').val();
                         d.status = $('#status').val();
-                    },
+                    }
+                   /* ,
                     "error": function (xhr, textStatus, errorThrown) {
                         var msg = xhr.responseText;
-                        console.log(msg)
-                    }
+                        console.log(msg);
+
+                    }*/
                 },
                 "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
                 "columns": [
-                    {"data": "username", "defaultContent": ""},
-                    {"data": "originalPassword", "defaultContent": ""},
-                    {"data": "nickname", "defaultContent": ""},
-                    {"data": "address", "defaultContent": ""},
 
-                    {"data": "phone", "defaultContent": ""},
-                    {"data": "email", "defaultContent": ""},
+                    {"data": "username", "orderable": false, "defaultContent": ""},
+                    {"data": "originalPassword", "orderable": false, "defaultContent": ""},
+                    {"data": "nickname", "orderable": false, "defaultContent": ""},
+                    {"data": "address", "orderable": false, "defaultContent": ""},
+
+                    {"data": "phone", "orderable": false, "defaultContent": ""},
+                    {"data": "email", "orderable": false, "defaultContent": ""},
                     {
                         "data": "status",
                         "defaultContent": "",
+                        "orderable": false,
                         "render": function (data, type, row) {
                             return userStatus[data];
                         }
                     },
-                    {"data": "remark", "defaultContent": ""},
+                    {"data": "remark", "orderable": false, "defaultContent": ""},
+                    {"data": "createTime", "orderable": true, "defaultContent": ""},
+
                     {
                         "data": "",
                         "defaultContent": "",
@@ -149,13 +156,13 @@
                         "render": function (data, type, row) {
                             var id = row['id'];
                             var href = "updateUser.html?id=" + id;
-                            var edit = buttonEdit(href, "sys:user:add", pers);
-                            return edit;
+                            return buttonEdit(href, "sys:user:add", pers);
+
                         }
                     }
 
                 ],
-                "order": [[0, "desc"], [1, "asc"]]
+                "order": []
             });
     }
 

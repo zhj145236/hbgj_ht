@@ -12,15 +12,17 @@ import com.yusheng.hbgj.dao.UserDao;
 import com.yusheng.hbgj.dto.PublishDto;
 import com.yusheng.hbgj.entity.Notice;
 import com.yusheng.hbgj.entity.Publish;
+import com.yusheng.hbgj.entity.User;
 import com.yusheng.hbgj.page.table.PageTableHandler;
 import com.yusheng.hbgj.page.table.PageTableRequest;
 import com.yusheng.hbgj.page.table.PageTableResponse;
 import com.yusheng.hbgj.service.RedisService;
 import com.yusheng.hbgj.utils.*;
 import io.swagger.annotations.Api;
-import org.apache.commons.lang3.StringUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,15 +59,28 @@ public class PublishController {
 
 
     @PostMapping
-    @ApiOperation(value = "保存留言（提交需求）", notes = "微信小程序用户给公司发布留言; 后台已经限制5分钟内最多可以提交5次，主要是防止恶意频繁提交")
+    @ApiOperation(value = "保存留言（提交需求）", notes = "微信小程序游客或者厂商给公司发布留言; 后台已经限制5分钟内最多可以提交5次，主要是防止恶意频繁提交")
     public Publish save(@RequestBody Publish publish) {
 
 
-        if (SysUtil.paramsIsNull(publish.getPublishContent(), publish.getOpenid())) {
+        if (StringUtils.isEmpty(publish.getPublishContent())) {
 
-            throw new IllegalArgumentException("提交参数不完整");
+            throw new IllegalArgumentException("发布留言不能为空");
 
-        } else if (redisUtil.listSize("publish:" + publish.getOpenid(), -1) >= 5L) {
+        }
+
+        String notNullId;
+        if (publish.getUserId() != null) {
+            notNullId = publish.getUserId() + "";
+        } else {
+            notNullId = publish.getOpenid();
+        }
+
+        if (notNullId == null) {
+
+            throw new IllegalArgumentException("提交参数不完整:userId或者openid必填一样");
+
+        } else if (redisUtil.listSize("publish:" + notNullId, -1) >= 5L) {
 
             throw new BusinessException("操作失败，因为您最近已经提交了多次留言，请稍后再试");
 
@@ -76,6 +91,25 @@ public class PublishController {
 
 
         publish.setCreateTime(new Date());
+
+        String userType;
+
+        if (!StringUtils.isEmpty(publish.getUserId())) {
+
+            userType = "厂商";
+            User uu = userDao.getById(publish.getUserId());
+            if (uu != null) {
+
+                publish.setHeadPic(uu.getHeadImgUrl());
+                publish.setNickName(uu.getNickname());
+            }
+        } else {
+            userType = "游客";
+        }
+
+        publish.setRemark(userType);
+
+
         publishDao.save(publish);
 
 
@@ -83,23 +117,25 @@ public class PublishController {
         Notice notice = new Notice();
         StringBuffer sb = new StringBuffer();
 
-        sb.append("有用户于 ").append(DateUtil.getNowStr()).append(" 给您留言，内容为：").append(publish.getPublishContent()).append(" <br/><br/>更多详情请在【用户留言】中查看");
+        sb.append("有").append(userType).append("于 ").append(DateUtil.getNowStr()).append(" 给您留言，内容为：").append(publish.getPublishContent()).append(" <br/><br/>更多详情请在【用户留言】中查看");
         notice.setContent(sb.toString());
-        notice.setTitle("用户留言");
+        notice.setTitle(userType + "留言");
         notice.setStatus(Notice.Status.PUBLISH);
         notice.setCreateTime(new Date());
         notice.setUpdateTime(new Date());
         notice.setIsPersonal(Notice.Personal.YES);
         notice.setReceiveId(hlgjId);
-        notice.setRefId(publish.getId() + ""); //自动返回主键
+
+        //publish被插入后自动返回主键id
+        notice.setRefId(publish.getId() + "");
         noticeDao.save(notice);
 
 
-        redisUtil.leftPush("publish:" + publish.getOpenid(), publish.getPublishContent());
+        redisUtil.leftPush("publish:" + notNullId, publish.getPublishContent());
 
-        if (redisUtil.listSize("publish:" + publish.getOpenid(), -1) == 1L) {
+        if (redisUtil.listSize("publish:" + notNullId, -1) == 1L) {
 
-            redisUtil.expire("publish:" + publish.getOpenid(), 5, TimeUnit.MINUTES);
+            redisUtil.expire("publish:" + notNullId, 5, TimeUnit.MINUTES);
         }
 
         return publish;
@@ -144,7 +180,7 @@ public class PublishController {
 
         Publish entity = publishDao.getById(publish.getId());
 
-        if (StringUtils.isBlank(entity.getPublishContent())) {
+        if (StringUtils.isEmpty(entity.getPublishContent())) {
             entity.setPublishContent("");
         }
 
@@ -163,7 +199,7 @@ public class PublishController {
 
         notice.setReceiveId(userId + "");
 
-        if (StringUtils.isNoneBlank(publish.getReply())) {
+        if (!StringUtils.isEmpty(publish.getReply())) {
 
             noticeDao.save(notice);
         }

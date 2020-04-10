@@ -5,60 +5,64 @@
 
     <sql id="where">
         <where>
-            <if test="params.id != null and params.id != ''">
+            <if test="params.id != null ">
                 and id = #{params.id}
             </if>
-            <if test="params.openid != null and params.openid != ''">
+            <if test="params.openid != null  ">
                 and openid = #{params.openid}
             </if>
-            <if test="params.sex != null and params.sex != ''">
+            <if test="params.sex != null ">
                 and sex = #{params.sex}
             </if>
-            <if test="params.tel != null and params.tel != ''">
+            <if test="params.tel != null  ">
                 and tel like concat('%', #{params.tel}, '%')
             </if>
-            <if test="params.nickName != null and params.nickName != ''">
+            <if test="params.nickName != null ">
                 and nickName = #{params.nickName}
             </if>
-            <if test="params.headPic != null and params.headPic != ''">
+            <if test="params.headPic != null  ">
                 and headPic = #{params.headPic}
             </if>
-            <if test="params.publishContent != null and params.publishContent != ''">
+            <if test="params.publishContent != null ">
                 and publishContent = #{params.publishContent}
             </if>
 
-            <if test="params.reply != null and params.reply != ''">
+            <if test="params.reply != null ">
                 and reply = #{params.reply}
             </if>
 
-
-            <if test="params.createTime != null and params.createTime != ''">
+            <if test="params.createTime != null ">
                 and createTime = #{params.createTime}
             </if>
-            <if test="params.updateTime != null and params.updateTime != ''">
+            <if test="params.updateTime != null ">
                 and updateTime = #{params.updateTime}
             </if>
-            <if test="params.createName != null and params.createName != ''">
+            <if test="params.createName != null ">
                 and createName = #{params.createName}
             </if>
-            <if test="params.updateName != null and params.updateName != ''">
+            <if test="params.updateName != null ">
                 and updateName = #{params.updateName}
             </if>
-            <if test="params.remark != null and params.remark != ''">
+            <if test="params.remark != null ">
                 and remark = #{params.remark}
             </if>
-            <if test="params.orgId != null and params.orgId != ''">
+            <if test="params.orgId != null ">
                 and orgId = #{params.orgId}
             </if>
-            <if test="params.delFlag != null and params.delFlag != ''">
+            <if test="params.delFlag != null ">
                 and delFlag = #{params.delFlag}
             </if>
-            <if test="params.sort != null and params.sort != ''">
+            <if test="params.sort != null ">
                 and sort = #{params.sort}
             </if>
-            <if test="params.delTime != null and params.delTime != ''">
+            <if test="params.delTime != null ">
                 and delTime = #{params.delTime}
             </if>
+
+            <if test="params.userId != null ">
+                and userId = #{params.userId}
+            </if>
+
 
         </where>
     </sql>
@@ -69,7 +73,7 @@
     </select>
 
     <select id="list" resultType="Publish">
-        select * from publish t
+        select t.* from publish t
         <include refid="where"/>
         ${params.orderBy}
         limit #{offset}, #{limit}
@@ -94,9 +98,9 @@
         </selectKey>
 
         insert into publish (openid, sex, tel, nickName, headPic, publishContent, createTime, updateTime,
-        createName, updateName, remark, orgId, delFlag, sort, delTime,reply)
+        createName, updateName, remark, orgId, delFlag, sort, delTime,reply,userId)
         values ( #{openid}, #{sex}, #{tel}, #{nickName}, #{headPic}, #{publishContent}, #{createTime}, #{updateTime},
-        #{createName}, #{updateName}, #{remark}, #{orgId}, #{delFlag}, #{sort}, #{delTime},#{reply} )
+        #{createName}, #{updateName}, #{remark}, #{orgId}, #{delFlag}, #{sort}, #{delTime},#{reply},#{userId} )
 
     </insert>
 
@@ -155,6 +159,12 @@
             <if test="delTime != null">
                 delTime = #{delTime},
             </if>
+
+            <if test="userId != null">
+                userId = #{userId},
+            </if>
+
+
 
         </set>
 

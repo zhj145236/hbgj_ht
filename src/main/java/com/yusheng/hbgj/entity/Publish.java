@@ -5,7 +5,9 @@ import java.util.Date;
 public class Publish extends BaseEntity<Long> {
 
 	private String openid;
-	private String sex;
+    private Long userId;
+
+    private String sex;
 	private String tel;
 	private String nickName;
 	private String headPic;
@@ -57,5 +59,13 @@ public class Publish extends BaseEntity<Long> {
 
     public void setReply(String reply) {
         this.reply = reply;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

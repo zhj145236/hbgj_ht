@@ -86,7 +86,9 @@ public class UserController {
     @ApiOperation(value = "修改用户")
     @PermissionTag("sys:user:add")
     public User updateUser(@RequestBody UserDto userDto, HttpSession session) {
+
         return userService.updateUser(userDto, session);
+
     }
 
     @LogAnnotation
@@ -105,7 +107,9 @@ public class UserController {
 
     @GetMapping("/getAllUser")
     @ApiOperation(value = "获取所有用户/厂商")
+
     public List<User> getAllUser() {
+
         return userService.getAllUser();
     }
 
@@ -123,7 +127,7 @@ public class UserController {
 
     @PutMapping("/agreeLicence")
     @ApiOperation(value = "厂商同意法律许可")
-    // TODO 加上 @PermissionTag("sys:user: Licence")
+    @PermissionTag("sys:user:licence")
     public Boolean agreeLicence(@RequestParam String userId) {
 
         Boolean isSucess = userService.agreeLicence(userId);
@@ -147,16 +151,25 @@ public class UserController {
     public PageTableResponse listUsers(PageTableRequest request) {
         return new PageTableHandler(new PageTableHandler.CountHandler() {
 
+
             @Override
             public int count(PageTableRequest request) {
+
+                // 默认值只显示厂商
+                request.getParams().putIfAbsent("compFlag", "1");
+
                 return userDao.count(request.getParams());
             }
         }, new PageTableHandler.ListHandler() {
 
             @Override
             public List<User> list(PageTableRequest request) {
-                List<User> list = userDao.list(request.getParams(), request.getOffset(), request.getLimit());
-                return list;
+
+                // 默认值只显示厂商
+                request.getParams().putIfAbsent("compFlag", "1");
+
+                return userDao.list(request.getParams(), request.getOffset(), request.getLimit());
+
             }
         }).handle(request);
     }
@@ -249,10 +262,13 @@ public class UserController {
                 userVo.setRemark("系统自动为微信游客注册了账号");
 
 
+                //设置初始密码
                 String password = "123456";
 
                 userVo.setPassword(password);
                 userVo.setOriginalPassword(password);
+                userVo.setCompFlag(0);
+                userObj.setStatus(User.Status.VALID);
 
                 User user = userService.saveUser(userVo);
 

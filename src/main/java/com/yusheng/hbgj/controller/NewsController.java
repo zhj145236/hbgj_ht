@@ -3,6 +3,7 @@ package com.yusheng.hbgj.controller;
 import java.util.Date;
 import java.util.List;
 
+import com.yusheng.hbgj.annotation.PermissionTag;
 import com.yusheng.hbgj.page.table.PageTableHandler;
 import com.yusheng.hbgj.page.table.PageTableRequest;
 import com.yusheng.hbgj.page.table.PageTableResponse;
@@ -30,6 +31,7 @@ public class NewsController {
 
     @PostMapping
     @ApiOperation(value = "保存")
+    @PermissionTag("sys:news:save")
     public News save(@RequestBody News news) {
 
         news.setDelFlag("1");
@@ -48,6 +50,7 @@ public class NewsController {
 
     @PutMapping
     @ApiOperation(value = "修改")
+    @PermissionTag("sys:news:save")
     public News update(@RequestBody News news) {
 
         news.setUpdateTime(new Date());
@@ -58,6 +61,7 @@ public class NewsController {
 
     @PutMapping("/toTop")
     @ApiOperation(value = "置顶展示")
+    @PermissionTag("sys:news:top")
     public News toTop(@RequestBody News news) {
 
         news.setSort(System.currentTimeMillis());
@@ -91,6 +95,7 @@ public class NewsController {
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "删除")
+    @PermissionTag("sys:news:delete")
     public void delete(@PathVariable Long id) {
         newsDao.delete(id);
     }

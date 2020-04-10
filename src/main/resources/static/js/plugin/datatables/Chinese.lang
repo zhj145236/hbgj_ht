@@ -1,5 +1,5 @@
 {
-	"sProcessing":   "处理中...",
+	"sProcessing":   "处理中,请稍后...",
 	"sLengthMenu":   "显示 _MENU_ 项结果",
 	"sZeroRecords":  "没有匹配结果",
 	"sInfo":         "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
