@@ -1,4 +1,9 @@
 
+
+获取token
+SELECT  MD5( concat(username,originalPassword)) from sys_user;
+
+
 为表添加 基本字段
 
 

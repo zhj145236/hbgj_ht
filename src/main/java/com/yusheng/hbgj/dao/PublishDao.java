@@ -30,4 +30,8 @@ public interface PublishDao {
     List<Publish> list(@Param("params") Map<String, Object> params, @Param("offset") Integer offset, @Param("limit") Integer limit);
 
     List<PublishDto> wxlist(Map<String, Object> params, Integer offset, Integer limit);
+
+    @Select(" SELECT count(t.id) from publish t where  t.userId=13  AND t.userReadTime is null AND length(t.reply)>0  ")
+    int getReplyButUnreadCount(Long userId);
+
 }

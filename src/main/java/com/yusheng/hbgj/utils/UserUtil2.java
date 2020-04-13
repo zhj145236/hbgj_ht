@@ -9,6 +9,8 @@ import com.yusheng.hbgj.entity.Role;
 import com.yusheng.hbgj.entity.User;
 import com.yusheng.hbgj.service.RedisService;
 import org.apache.shiro.web.util.WebUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -30,6 +32,9 @@ public class UserUtil2 {
 
     @Autowired
     private RedisService redisService;
+
+
+    private static final Logger log = LoggerFactory.getLogger("adminLogger");
 
 
     @Value("${token.expire.day}")
@@ -190,7 +195,7 @@ public class UserUtil2 {
 
             }));
 
-            //userUtil.redisService.rightPushAll(prexAndtoken, list);
+
         }
         //设置30天过期
         userUtil.redisService.expire(prexAndtoken, userUtil.expireDay, TimeUnit.DAYS);
@@ -236,7 +241,6 @@ public class UserUtil2 {
             });
 
 
-            // userUtil.redisService.rightPushAll(prexAddtoken, list);
         }
         //设置30天过期
         userUtil.redisService.expire(prexAddtoken, userUtil.expireDay, TimeUnit.DAYS);
@@ -275,13 +279,12 @@ public class UserUtil2 {
         userUtil.redisService.delete(UserConstants.LOGIN_TOKEN + token);
 
 
-        if (request != null) {
-            String ip = NetWorkUtil.getIpAddress(request);
-            String time = DateUtil.getNowStr0(true, false);
+        String ip = NetWorkUtil.getIpAddress(request);
+        String time = DateUtil.getNowStr0(true, false);
 
-            //记录退出登录的信息
-            saveLogoutHistoory(UserConstants.USER_LOGOUT_HISTORY + token, time + "|" + ip);
-        }
+        //记录退出登录的信息
+        saveLogoutHistoory(UserConstants.USER_LOGOUT_HISTORY + token, time + "|" + ip);
+
 
         //Redis中清除删除权限
         userUtil.redisService.delete(UserConstants.USER_PERMISSION + token);
@@ -295,7 +298,19 @@ public class UserUtil2 {
 
 
         if (session != null) {
-            session.invalidate();
+
+
+            User currentUser = (User) (session.getAttribute(UserConstants.WEB_SESSION_KEY));
+
+
+            String utoken = MD5.getMd5(currentUser.getUsername() + currentUser.getOriginalPassword());
+            if (token.equals(utoken)) {
+
+                session.invalidate();
+
+                log.info("当前用户{},{}的session被设置失效", currentUser.getUsername(), currentUser.getNickname());
+            }
+
         }
 
 

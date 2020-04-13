@@ -1,28 +1,19 @@
 package com.yusheng.hbgj.service.impl;
 
-import java.util.*;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
-
 import com.alibaba.fastjson.JSONObject;
 import com.yusheng.hbgj.constants.UserConstants;
 import com.yusheng.hbgj.dao.PermissionDao;
 import com.yusheng.hbgj.dao.RoleDao;
 import com.yusheng.hbgj.dao.UserDao;
 import com.yusheng.hbgj.dto.RoleEntity;
-import com.yusheng.hbgj.dto.Token;
 import com.yusheng.hbgj.dto.UserDto;
 import com.yusheng.hbgj.entity.Permission;
 import com.yusheng.hbgj.entity.Role;
 import com.yusheng.hbgj.entity.User;
 import com.yusheng.hbgj.service.RedisService;
-import com.yusheng.hbgj.service.TokenManager;
 import com.yusheng.hbgj.service.UserService;
 import com.yusheng.hbgj.utils.*;
-
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +26,9 @@ import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -86,9 +80,20 @@ public class UserServiceImpl implements UserService {
 
             if (!CollectionUtils.isEmpty(roleIds)) {
                 userDao.saveUserRoles(userId, roleIds);
+
             }
 
-            //TODO 更新Redis
+
+            // 用户角色修改后 通过自动注销与重新登录来 刷新角色与权限
+            User user = userDao.getById(userId);
+            String token = MD5.getMd5(user.getUsername() + user.getOriginalPassword());
+            if (redisService.get(UserConstants.LOGIN_TOKEN + token) != null) {
+
+                UserUtil2.logout(user);
+                this.login(user, null, null);
+
+            }
+
 
         }
     }
@@ -115,10 +120,15 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("密码错误");
         }
 
+
         userDao.changePassword(u.getId(), passwordEncoder(newPassword, u.getSalt()), newPassword);
 
-        //清除Redis信息
-
+        //修改密码后记得退出登录
+        User oldUser = new User();
+        oldUser.setUsername(username);
+        oldUser.setOriginalPassword(oldPassword);
+        UserUtil2.logout(oldUser);
+        this.login(u, null, null);
 
         log.debug("修改{}的密码", username);
     }
@@ -169,6 +179,7 @@ public class UserServiceImpl implements UserService {
 
 
         String ip = NetWorkUtil.getIpAddress(request);
+
         String time = DateUtil.getNowStr0(true, false);
 
         //记录登录时间
@@ -227,6 +238,7 @@ public class UserServiceImpl implements UserService {
 
 
             roleEntityList.add(temp);
+
         });
         return roleEntityList;
     }
@@ -290,7 +302,7 @@ public class UserServiceImpl implements UserService {
 
 
         // 如果用户状态被设置为非正常状态.要立刻使他退出登录
-        if (userDto.getStatus() != User.Status.VALID) {
+        if (userDto.getStatus() != null && userDto.getStatus() != User.Status.VALID) {
             this.kickUser(userDto);
         }
 
@@ -305,7 +317,7 @@ public class UserServiceImpl implements UserService {
      */
     private void kickUser(UserDto userDto) {
 
-        System.out.println(userDto.toString() + "<<<<<<<<<<<");
+
         User user = new User();
 
         user.setUsername(userDto.getUsername());

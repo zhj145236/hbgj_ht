@@ -11,11 +11,15 @@ public class PublishDto {
 
     private String id;
 
+    private  Date createTime;
 
     private String openid;
 
     private String publishContent;
     private String reply;
+
+
+    private  Date userReadTime;
 
     private Date replyTime;
 
@@ -49,5 +53,29 @@ public class PublishDto {
 
     public void setReplyTime(Date replyTime) {
         this.replyTime = replyTime;
+    }
+
+    public Date getUserReadTime() {
+        return userReadTime;
+    }
+
+    public void setUserReadTime(Date userReadTime) {
+        this.userReadTime = userReadTime;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

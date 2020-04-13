@@ -83,6 +83,7 @@
                 success: function (data) {
 
                     $('#id').val(data.id);
+
                     $('#title').val(data.title);
 
                     $('#content').val(data.content);
@@ -95,19 +96,19 @@
         }
     }
 
-    var pro = window.location.protocol;
-    var host = window.location.host;
-    var domain = pro + "//" + host;
+
 
     var layedit, index;
     layui.use(['layedit', 'upload'], function () {
         layedit = layui.layedit;
         layedit.set({
             uploadImage: {
-                url: '/files/layui?domain=' + domain,
+                url: '/files/layui',
                 type: 'post'
             },
             height: 600
+            //tool:   ['strong','italic','underline' ,'del' ,'|' ,'left' ,'center' ,'right' , 'link','unlink','face' ,'image'],
+
         });
         index = layedit.build('content');
     });
@@ -124,7 +125,6 @@
         var title = $("#title").val().trim();
 
         var author = $("#author").val().trim();
-
 
         if (title === "") {
             layer.msg("标题不能为空");

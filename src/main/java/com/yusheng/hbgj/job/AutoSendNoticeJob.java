@@ -37,9 +37,9 @@ public class AutoSendNoticeJob {
 
 
     /**
-     * 每天8:30执行
+     * 每天07:30执行
      */
-    @Scheduled(cron = "0 30 8 * * ? ")
+    @Scheduled(cron = "0 30 7 * * ? ")
     private void task() {
 
 
@@ -49,7 +49,7 @@ public class AutoSendNoticeJob {
         //记录日志
         logService.save(-1L, "系统", true, "自动将一些草稿通知变成发布状态");
 
-        logger.warn("每天08:30 自动将一些草稿通知变成发布状态，现在时间：{}", DateUtil.getNowStr());
+        logger.warn("每天07:30 自动将一些草稿通知变成发布状态，现在时间：{}", DateUtil.getNowStr());
 
     }
 

@@ -47,7 +47,6 @@
                             <th>昵称</th>
                             <th>性别</th>
                             <th>联系电话</th>
-
                             <th>头像</th>
                             <th>发布内容</th>
                             <th>留言时间</th>
@@ -104,8 +103,11 @@
                         "orderable": false,
                         "render": function (data, type, row) {
 
-                            return "<a target='_blank' href='" + data + "'><img width='30' src='" + data + "' ></img></a>";
-
+                            if (data === null || data.trim() === "") {
+                                return "";
+                            } else {
+                                return "<a target='_blank' href='" + data + "'><img width='30' src='" + data + "' /></a>";
+                            }
 
                         }
                     },
@@ -129,7 +131,7 @@
                     }
 
                 ],
-                "order": [[7, "desc"]]
+                "order": [[6, "DESC"]]
 
             });
     }

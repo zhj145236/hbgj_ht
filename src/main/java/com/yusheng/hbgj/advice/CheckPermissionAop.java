@@ -61,7 +61,6 @@ public class CheckPermissionAop {
 
             for (int j = 0; j < permValues.length; j++) {
                 String pp = permissions.get(i).getPermission();
-                System.out.println(pp+"<<<<<<<<<");
                 if (pp != null && pp.equals(permValues[j].trim())) {
                     isAllowed = true;
                     break;

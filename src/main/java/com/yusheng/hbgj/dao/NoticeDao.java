@@ -63,7 +63,7 @@ public interface NoticeDao {
     /**
      * 将草稿变成发布状态
      */
-    @Update(" UPDATE t_notice set `status`=1 where    isPersonal='1'  AND    ( createTime  BETWEEN date_add(now(), interval -2 day) and  now() ) ")
+    @Update(" UPDATE t_notice set `status`=1 where    isPersonal='1'  AND    ( createTime  BETWEEN date_add(now(), interval -3 day) and  now() ) ")
     public void autoPublish();
 
 

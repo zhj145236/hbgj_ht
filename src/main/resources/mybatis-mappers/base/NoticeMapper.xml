@@ -70,7 +70,7 @@
         <include refid="where"/>
 
 
-        ORDER BY isRead ASC, readTime desc
+        ORDER BY isRead ASC, readTime DESC
 
         limit #{offset}, #{limit}
 

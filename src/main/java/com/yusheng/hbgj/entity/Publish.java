@@ -14,6 +14,10 @@ public class Publish extends BaseEntity<Long> {
 	private String publishContent;
 	private  String reply;
 
+    /***
+     * 用户已读消息的时间
+     */
+	private  Date  userReadTime;
 
 	public String getOpenid() {
 		return openid;
@@ -68,4 +72,13 @@ public class Publish extends BaseEntity<Long> {
     public void setUserId(Long userId) {
         this.userId = userId;
     }
+
+    public Date getUserReadTime() {
+        return userReadTime;
+    }
+
+    public void setUserReadTime(Date userReadTime) {
+        this.userReadTime = userReadTime;
+    }
+
 }

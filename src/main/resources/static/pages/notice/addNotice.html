@@ -52,16 +52,14 @@
 	<script type="text/javascript">
 	showDictSelect("status", "noticeStatus");
 	
-		var pro = window.location.protocol;
-		var host = window.location.host;
-		var domain = pro + "//" + host;
+
 		
 		var layedit, index;
 		layui.use(['layedit','upload'], function(){
 		  layedit = layui.layedit;
 		  layedit.set({
               uploadImage: {
-                url: '/files/layui?domain=' + domain,
+                url: '/files/layui',
                 type: 'post'
               }
             });

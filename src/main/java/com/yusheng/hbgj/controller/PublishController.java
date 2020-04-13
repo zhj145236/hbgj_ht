@@ -2,14 +2,17 @@ package com.yusheng.hbgj.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.yusheng.hbgj.annotation.LogAnnotation;
 import com.yusheng.hbgj.constants.BusinessException;
 import com.yusheng.hbgj.dao.NoticeDao;
 import com.yusheng.hbgj.dao.PublishDao;
 import com.yusheng.hbgj.dao.UserDao;
 import com.yusheng.hbgj.dto.PublishDto;
+import com.yusheng.hbgj.dto.ResponseInfo;
 import com.yusheng.hbgj.entity.Notice;
 import com.yusheng.hbgj.entity.Publish;
 import com.yusheng.hbgj.entity.User;
@@ -20,20 +23,16 @@ import com.yusheng.hbgj.service.RedisService;
 import com.yusheng.hbgj.utils.*;
 import io.swagger.annotations.Api;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import io.swagger.annotations.ApiOperation;
+import sun.rmi.runtime.Log;
 
 @Api(tags = "发布需求")
 @RestController
@@ -56,6 +55,43 @@ public class PublishController {
 
     @Autowired
     private RedisService redisUtil;
+
+
+    private static final Logger log = LoggerFactory.getLogger("adminLogger");
+
+
+    @GetMapping("/getReplyButUnreadCount")
+    @ApiOperation(value = "返回用户未读的留言数量", notes = "条件:留言被平台回复且自己还没有看 的数量")
+    public Integer getReplyButUnreadCount(@RequestParam(required = false) String openid, @RequestParam(required = false) Long userId) {
+
+        if (StringUtils.isEmpty(openid) && StringUtils.isEmpty(userId)) {
+            throw new IllegalArgumentException("参数openid与userId必填一项");
+        }
+
+        Long userIdA = StringUtils.isEmpty(userId) ? userDao.getUserId(openid) : userId;
+        if (userIdA == null || userIdA == 0) {
+            return 0;
+        } else {
+
+            return publishDao.getReplyButUnreadCount(userIdA);
+        }
+
+    }
+
+    @GetMapping("/makePublishRead")
+    @ApiOperation(value = "设置此条留言已读", notes = "传入publishId(主键) 即可")
+    public Boolean makePublishRead(@RequestParam Long publishId) {
+
+
+        Publish pp = new Publish();
+        pp.setId(publishId);
+        pp.setUserReadTime(new Date());
+
+
+        return publishDao.update(pp) >= 1;
+
+
+    }
 
 
     @PostMapping
@@ -93,19 +129,23 @@ public class PublishController {
         publish.setCreateTime(new Date());
 
         String userType;
+        String userId = "";
 
         if (!StringUtils.isEmpty(publish.getUserId())) {
 
             userType = "厂商";
             User uu = userDao.getById(publish.getUserId());
             if (uu != null) {
-
                 publish.setHeadPic(uu.getHeadImgUrl());
                 publish.setNickName(uu.getNickname());
             }
         } else {
+
+            publish.setUserId(userDao.getUserId(publish.getOpenid()));
+
             userType = "游客";
         }
+
 
         publish.setRemark(userType);
 
@@ -209,30 +249,40 @@ public class PublishController {
 
 
     @GetMapping("/wxlist")
-    @ApiOperation(value = "微信小程序里查看自己的发布列表", notes = "需要传入openid")
+    @ApiOperation(value = "微信小程序里查看自己的发布列表", notes = "需要传入openid或者userId ,二选一")
     public PageTableResponse wxlist(PageTableRequest request) {
 
-        if (SysUtil.paramsIsNull(request.getParams().get("openid"))) {
 
-            throw new IllegalArgumentException("提交参数不完整");
+        Map<String, Object> params = request.getParams();
 
+        String openid = (String) params.get("openid");
+        String userId = (String) params.get("userId");
+
+
+        log.debug("openid{}与userId{}", openid, userId);
+
+        if (StringUtils.isEmpty(openid) && StringUtils.isEmpty(userId)) {
+            throw new IllegalArgumentException("参数openid与userId必填一项");
         }
 
+        Long userIdA = StringUtils.isEmpty(userId) ? userDao.getUserId(openid) : Long.parseLong(userId);
+
+        params.put("userId", userIdA);
 
         return new PageTableHandler(new PageTableHandler.CountHandler() {
 
             @Override
             public int count(PageTableRequest request) {
-                return publishDao.count(request.getParams());
+                return publishDao.count(params);
             }
         }, new PageTableHandler.ListHandler() {
 
             @Override
             public List<PublishDto> list(PageTableRequest request) {
 
-                request.getParams().putIfAbsent("orderBy", "  ORDER BY createTime DESC  ");
+                params.putIfAbsent("orderBy", "  ORDER BY createTime DESC  ");
 
-                return publishDao.wxlist(request.getParams(), request.getOffset(), request.getLimit());
+                return publishDao.wxlist(params, request.getOffset(), request.getLimit());
             }
         }).handle(request);
     }

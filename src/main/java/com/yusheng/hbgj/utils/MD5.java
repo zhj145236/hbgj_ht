@@ -50,7 +50,7 @@ public class MD5 {
                 return "";
             }
         } catch (NoSuchAlgorithmException e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
         }
 

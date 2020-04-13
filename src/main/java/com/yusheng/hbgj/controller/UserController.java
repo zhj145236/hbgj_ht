@@ -9,7 +9,6 @@ import com.yusheng.hbgj.page.table.PageTableHandler;
 import com.yusheng.hbgj.page.table.PageTableRequest;
 import com.yusheng.hbgj.page.table.PageTableResponse;
 import com.yusheng.hbgj.service.SysLogService;
-import com.yusheng.hbgj.service.TokenManager;
 import com.yusheng.hbgj.service.UserService;
 import com.yusheng.hbgj.utils.StrUtil;
 import com.yusheng.hbgj.utils.UserUtil2;
@@ -119,9 +118,9 @@ public class UserController {
     @ApiOperation(value = "修改密码")
     @PermissionTag("sys:user:password")
     public void changePassword(@PathVariable String username, String oldPassword, String newPassword) {
+
         userService.changePassword(username, oldPassword, newPassword);
 
-        // TODO  rename Redis 的key
     }
 
 
@@ -244,7 +243,7 @@ public class UserController {
 
 
                 userVo.setNickname(wx.getNickName());
-                userVo.setAddress(wx.getCountry() + wx.getProvince() + wx.getCity());
+                userVo.setAddress((wx.getCountry() == null ? "" : wx.getCountry()) + (wx.getProvince() == null ? "" : wx.getProvince()) + (wx.getCity() == null ? "" : wx.getCity()));
                 userVo.setHeadImgUrl(wx.getAvatarUrl());
                 userVo.setOpenid(wx.getOpenid());
                 userVo.setSex(wx.getGender());
@@ -268,7 +267,7 @@ public class UserController {
                 userVo.setPassword(password);
                 userVo.setOriginalPassword(password);
                 userVo.setCompFlag(0);
-                userObj.setStatus(User.Status.VALID);
+                userVo.setStatus(User.Status.VALID);
 
                 User user = userService.saveUser(userVo);
 
@@ -283,7 +282,6 @@ public class UserController {
             } else {
 
                 log.info("此账号已经存在于系统中,重新新自动登录");
-
 
                 maps = userService.login(userObj, request, session);
 

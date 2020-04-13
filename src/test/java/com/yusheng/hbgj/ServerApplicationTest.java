@@ -34,7 +34,7 @@ public class ServerApplicationTest {
 
         List<User> allUser = userService.getAllUser();
 
-        System.out.println(allUser.size() + "<<<<<<<<<<<<<<");
+
 
         allUser.forEach((item)->{
 

@@ -64,10 +64,16 @@ public class NoticeController {
         }
         vo.setNotice(notice);
 
-        noticeDao.saveReadRecord(notice.getId(), UserUtil2.getCurrentUser().getId());
+        User currentUser = UserUtil2.getCurrentUser();
 
-        List<User> users = noticeDao.listReadUsers(id);
-        vo.setUsers(users);
+        if(currentUser!=null){
+
+            noticeDao.saveReadRecord(notice.getId(), currentUser.getId());
+
+            List<User> users = noticeDao.listReadUsers(id);
+            vo.setUsers(users);
+        }
+
 
         return vo;
     }
@@ -117,8 +123,6 @@ public class NoticeController {
     @GetMapping("/count-unread")
     public Integer countUnread() {
 
-        // TODO 空指针异常
-
         User user = UserUtil2.getCurrentUser();
         if (user == null) {
             throw new NotLoginException();
@@ -128,16 +132,37 @@ public class NoticeController {
 
     @ApiOperation(value = "微信端用户获取未读公告数", notes = "一定要传入openid")
     @GetMapping("/wx_count_unread")
-    public Integer wxcountUnread(@RequestParam String openid) {
+    public Integer wxcountUnread(@RequestParam(required = false) String openid, @RequestParam(required = false) Long userId) {
 
-        if (StringUtils.isEmpty(openid)) {
-            throw new IllegalArgumentException("参数openid缺失");
+        if (StringUtils.isEmpty(openid) && StringUtils.isEmpty(userId)) {
+            throw new IllegalArgumentException("参数openid与userId必填一项");
         }
-        Long userId = userDao.getUserId(openid);
-        if (userId == null || userId == 0) {
+
+
+        Long userIdA = StringUtils.isEmpty(userId) ? userDao.getUserId(openid) : userId;
+
+        if (userIdA == null || userIdA == 0) {
             return 0;
         } else {
-            return noticeDao.countUnread(userId);
+            return noticeDao.countUnread(userIdA);
+        }
+    }
+
+    @ApiOperation(value = "微信端用户已读完此条消息", notes = "一定要传入noticeId,  openid和userId 二选一")
+    @GetMapping("/wxHasRead")
+    public Boolean wxHasRead(@RequestParam Long noticeId, @RequestParam(required = false) String openid, @RequestParam(required = false) Long userId) {
+
+        if (StringUtils.isEmpty(openid) && StringUtils.isEmpty(userId)) {
+            throw new IllegalArgumentException("参数openid与userId必填一项");
+        }
+        Long userIdA = StringUtils.isEmpty(userId) ? userDao.getUserId(openid) : userId;
+        if (userIdA == null || userIdA == 0) {
+            return true;
+        } else {
+
+            noticeDao.saveReadRecord(noticeId, userIdA);
+            return true;
+
         }
     }
 
@@ -164,7 +189,7 @@ public class NoticeController {
     }
 
     @GetMapping("/wx_notice")
-    @ApiOperation(value = "微信小程序端 提醒事项列表", notes = "已按时间降序显示，不管有没有阅读都会查询出来")
+    @ApiOperation(value = "微信小程序端的提醒事项列表", notes = "已按时间降序显示，不管有没有阅读都会查询出来")
     public PageTableResponse wxlistNoticeReadVO(PageTableRequest request) {
 
         String openid = (String) request.getParams().get("openid");

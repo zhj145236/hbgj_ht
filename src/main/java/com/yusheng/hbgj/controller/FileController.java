@@ -46,6 +46,10 @@ public class FileController {
     private NoticeDao noticeDao;
 
 
+    @Value("${constants.domain}")
+    private String domain;
+
+
     @Value("${constants.hlgjId}")
     private String hlgjId;
 
@@ -184,23 +188,26 @@ public class FileController {
      * layui富文本文件自定义上传
      *
      * @param file
-     * @param domain
      * @return
      * @throws IOException
      */
     @LogAnnotation
     @PostMapping("/layui")
     @ApiOperation(value = "layui富文本文件自定义上传")
-    public LayuiFile uploadLayuiFile(MultipartFile file, String domain,HttpSession session) throws IOException {
-        FileInfo fileInfo = fileService.save(file, null,session);
+    public LayuiFile uploadLayuiFile(MultipartFile file, HttpSession session) throws IOException {
+
+        FileInfo ff = new FileInfo();
+        ff.setTag("富文本内文件");
+
+        FileInfo fileInfo = fileService.save(file, ff, session);
 
         LayuiFile layuiFile = new LayuiFile();
         layuiFile.setCode(0);
         LayuiFile.LayuiFileData data = new LayuiFile.LayuiFileData();
         layuiFile.setData(data);
 
-        //TODO 域名问题
 
+        //域名问题
         data.setSrc(domain + "/files" + fileInfo.getUrl());
 
         data.setTitle(file.getOriginalFilename());
@@ -212,6 +219,8 @@ public class FileController {
     @ApiOperation(value = "文件查询")
     @PermissionTag("sys:file:query")
     public PageTableResponse listFiles(PageTableRequest request) {
+
+        // TODO 文件过滤问题
         return new PageTableHandler(new PageTableHandler.CountHandler() {
 
             @Override
@@ -338,31 +347,50 @@ public class FileController {
 
             if (DateUtil.daysBetween(new Date(), dates[i]) >= 0) {
 
+
                 Notice notice = new Notice();
                 notice.setIsPersonal(Notice.Personal.YES);
                 notice.setTitle("合同快到期提醒");
                 notice.setReceiveId(hlgjId);
-                StringBuffer sb = new StringBuffer();
 
-                sb.append("您有一份与").append(file.getOrgId()).append("签订的合同【").append(file.getFileOriginName()).append("】").
-                        append("将于").append(endDate)
-                        .append("到期,请及时处理。合同附件链接 【<a target='_blank'  style='color:blue;font-size:23px' href='/files").append(file.getUrl()).append("'>打开</a>").append("】。如已经处理请忽略此条通知");
-                notice.setContent(sb.toString());
-                notice.setStatus(Notice.Status.DRAFT); //草稿
+                // 给东莞市环联管家生态环境科技有限公司发通知
+                String sb = "您有一份与" + file.getOrgId() + "签订的合同【" + file.getFileOriginName() + "】" +
+                        "将于" + endDate +
+                        "到期,请及时处理。合同附件链接 【<a target='_blank'  style='color:blue;font-size:23px' href='" + domain + "/files" + file.getUrl() + "'>打开</a>" + "】。如已经处理请忽略此条通知";
+                notice.setContent(sb);
                 notice.setCreateName("系统程序");
                 notice.setCreateTime(dates[i]);  //设置合同到期前X天创建
                 notice.setRefId(fileId);
+                notice.setStatus(Notice.Status.DRAFT); //草稿
                 notice.setUpdateTime(new Date());
                 noticeDao.save(notice);
 
 
-                // TODO 给厂商也要发通知
+                // 给厂商也要发通知
+                Notice notice2 = new Notice();
+                notice2.setIsPersonal(Notice.Personal.YES);
+                notice2.setTitle("合同快到期提醒");
+                notice2.setReceiveId(file.getResourceId()); //厂商ID
+
+                String sb2 = "您有一份与" + "东莞市环联管家生态环境科技有限公司" + "签订的合同【" + file.getFileOriginName() + "】" +
+                        "将于" + endDate +
+                        "到期,请及时处理。合同附件链接 【<a target='_blank'  style='color:blue;font-size:23px' href='" + domain + "/files" + file.getUrl() + "'>打开</a>" + "】。如已经处理请忽略此条通知";
+                notice2.setContent(sb2);
+                //草稿
+                notice2.setStatus(Notice.Status.DRAFT);
+                notice2.setCreateName("系统程序");
+                notice2.setUpdateTime(new Date());
+                //设置合同到期前X天创建
+                notice2.setCreateTime(dates[i]);
+                notice2.setRefId(fileId);
+
+                noticeDao.save(notice2);
+
 
             }
         }
 
 
     }
-
 
 }

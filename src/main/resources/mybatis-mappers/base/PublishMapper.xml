@@ -63,6 +63,12 @@
                 and userId = #{params.userId}
             </if>
 
+            <if test="params.userReadTime != null ">
+                and userReadTime = #{params.userReadTime}
+            </if>
+
+
+
 
         </where>
     </sql>
@@ -81,7 +87,7 @@
 
     <select id="wxlist" resultType="com.yusheng.hbgj.dto.PublishDto">
 
-        select t.id,t.openid ,t.publishContent ,t.reply, t.updateTime as replyTime from publish t
+        select t.id,t.openid ,t.publishContent ,t.reply, t.updateTime as replyTime , t.createTime as  createTime , t.userReadTime as userReadTime  from publish t
         <include refid="where"/>
         ${params.orderBy}
         limit #{offset}, #{limit}
@@ -98,9 +104,9 @@
         </selectKey>
 
         insert into publish (openid, sex, tel, nickName, headPic, publishContent, createTime, updateTime,
-        createName, updateName, remark, orgId, delFlag, sort, delTime,reply,userId)
+        createName, updateName, remark, orgId, delFlag, sort, delTime,reply,userId ,userReadTime )
         values ( #{openid}, #{sex}, #{tel}, #{nickName}, #{headPic}, #{publishContent}, #{createTime}, #{updateTime},
-        #{createName}, #{updateName}, #{remark}, #{orgId}, #{delFlag}, #{sort}, #{delTime},#{reply},#{userId} )
+        #{createName}, #{updateName}, #{remark}, #{orgId}, #{delFlag}, #{sort}, #{delTime},#{reply},#{userId},#{userReadTime} )
 
     </insert>
 
@@ -162,6 +168,10 @@
 
             <if test="userId != null">
                 userId = #{userId},
+            </if>
+
+            <if test="userReadTime != null">
+                userReadTime = #{userReadTime},
             </if>
 
 
