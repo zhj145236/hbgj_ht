@@ -21,7 +21,7 @@ public interface NewsDao {
 
     
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    @Insert("insert into news(title, content, author, createTime, updateTime, remark, delFlag, sort) values(#{title}, #{content}, #{author}, #{createTime}, #{updateTime}, #{remark}, #{delFlag}, #{sort})")
+    @Insert("insert into news(title, content, author, createTime, updateTime, remark, delFlag, sort,bannerImg) values(#{title}, #{content}, #{author}, #{createTime}, #{updateTime}, #{remark}, #{delFlag}, #{sort},#{bannerImg} )")
     int save(News news);
 
     int update(News news);

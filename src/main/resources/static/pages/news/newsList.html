@@ -44,6 +44,7 @@
                         <tr>
 
                             <th>标题</th>
+                            <th>预览图</th>
                             <!-- <th>内容</th>-->
                             <th>作者</th>
                             <th>创建时间</th>
@@ -96,6 +97,21 @@
                 "columns": [
 
                     {"data": "title", "orderable": false, "defaultContent": ""},
+                    {
+                        "data": "bannerImg", "orderable": false, "defaultContent": "无预览图",
+                        "width": "200px",
+                        "render": function (data, type, row) {
+
+
+                            if (data != null && data.length > 5) {
+                                return "<img  src='" + data + "' alt='预览图' />";
+                            }else{
+                                return  "无";
+                            }
+
+                        }
+
+                    },
                     /*  {"data": "content", "orderable": false, "defaultContent": ""},*/
                     {"data": "author", "orderable": false, "defaultContent": ""},
                     {"data": "createTime", "orderable": false, "defaultContent": ""},

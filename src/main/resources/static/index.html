@@ -33,7 +33,12 @@
                 async: false,
                 success: function (data) {
 
-                    window.location.href = location.protocol + "//" + location.host + "/login.html"
+                    layer.msg("已退出登录", {shift: -1, time: 600, icon: 1}, function () {
+
+                        location.href = "/login.html";
+
+                    });
+
 
                 }
             });

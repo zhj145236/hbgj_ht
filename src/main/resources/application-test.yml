@@ -80,7 +80,7 @@ log:
   level:
     root: info
     my: debug
-  file: ../hbgjlogs/admin-server.log
+  file: ../hbgj_logs/admin-server.log
   maxsize: 30MB
 
 # 移动端与Web终端Session的有效期 都为30天

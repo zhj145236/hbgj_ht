@@ -2,7 +2,6 @@ package com.yusheng.hbgj.service;
 
 import com.yusheng.hbgj.dto.UserDto;
 import com.yusheng.hbgj.entity.User;
-import org.apache.ibatis.annotations.Select;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -68,4 +67,12 @@ public interface UserService {
 
 
     Boolean agreeLicence(String userId);
+
+    /**
+     * 利用openid得到 token
+     * @param openid openid
+     * @return
+     */
+    String getTokenByOpenId(String openid);
+
 }

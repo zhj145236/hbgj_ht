@@ -192,11 +192,7 @@
                         d.resourceId = $('#resourceId').val();
                         d.tag = "合同管理";
 
-                    }/*,
-                    "error": function (xhr, textStatus, errorThrown) {
-                        var msg = xhr.responseText;
-                        console.info(msg);
-                    }*/
+                    }
 
                 },
                 "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
@@ -229,13 +225,21 @@
 
                                 var endDate = row['remark'].split("@")[1];
 
-                                var diffDay = ((new Date(endDate.replace(/-/g, "/")).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)).toFixed(1);
+                                var diffDay = parseFloat(((new Date(endDate.replace(/-/g, "/")).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)).toFixed(1));
 
-                                if (parseFloat(diffDay) <= 7.0 && parseFloat(diffDay) > 0) {
 
-                                    return "<p style='color: #c05e5e' title='将于" + diffDay + "天后合同到期' >" + endDate + "</p>"
+                                if (diffDay <= 7.0 && diffDay > 1.0) {
+
+
+                                    return "<p style='color: #c05e5e;font-size: 17px' title='将于" + diffDay + "天后合同到期' >" + endDate + "</p>";
+
+                                } else if (diffDay <= 1.0 && diffDay > 0.0) {
+
+
+                                    return "<p style='color: #ff0000;font-size: 18px '   title='将于明天到期' >" + endDate + "</p>";
 
                                 } else {
+
                                     return endDate;
                                 }
 
@@ -266,10 +270,10 @@
 
                             }
 
-                            return del;
+
                         }
                     },
-                    {"data": "type", "defaultContent": ""},
+                    {"data": "type", "orderable": false, "defaultContent": ""},
 
                     {"data": "uploadTime", "defaultContent": ""},
                     {
@@ -312,8 +316,7 @@
                             var start_end = row['remark'];
 
 
-                            // TODO 图标显示不正常
-                            var setting = "<button class='layui-btn layui-btn-xs' title='设置合同起止时间' onclick='setContractDate(\"" + id + "\",\"" + start_end + "\")'><i class='layui-icon'>&#xe68d;</i></button>";
+                            var setting = "<button class='layui-btn layui-btn-xs' title='设置合同起止时间' onclick='setContractDate(\"" + id + "\",\"" + start_end + "\")'><i class='layui-icon'>&#xe716;</i></button>";
 
 
                             return del + setting;
@@ -321,7 +324,7 @@
                     }
 
                 ],
-                "order": [[3, "desc"]]
+                "order": []
             });
     }
 

@@ -79,7 +79,7 @@ log:
   level:
     root: info
     my: debug
-  file: ../hbgjlogs/admin-server.log
+  file: ../hbgj_logs/admin-server.log
   maxsize: 30MB
 token:
   expire:

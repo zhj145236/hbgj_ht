@@ -13,6 +13,12 @@ public class News {
     private String delFlag;
     private Long sort;
 
+
+    /**
+     * 横幅图片
+     */
+    private  String bannerImg;
+
     private  Date createTime;
     private  Date updateTime;
 
@@ -87,5 +93,13 @@ public class News {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getBannerImg() {
+        return bannerImg;
+    }
+
+    public void setBannerImg(String bannerImg) {
+        this.bannerImg = bannerImg;
     }
 }

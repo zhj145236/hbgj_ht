@@ -65,7 +65,7 @@ public class LoginController {
 
         if (failCountStr != null && Long.parseLong(failCountStr) > 8L) {
 
-            throw new BusinessException("您之前已经连续输错密码已经超过5次了,请稍后再试");
+            throw new BusinessException("您之前已经连续输错密码超过5次了,请稍后再试");
         }
 
         User user = userService.getUser(username);
@@ -95,11 +95,11 @@ public class LoginController {
 
 
             } else {
-                log.info("登录失败，不正确的密码{}", password);
+
                 String msg = this.dealLogin(username);
-                if (msg != null) {
-                    throw new BusinessException(msg);
-                }
+                log.info("登录失败，不正确的密码{}; {}", password, msg);
+                throw new BusinessException(msg);
+
             }
 
 
@@ -109,7 +109,7 @@ public class LoginController {
             log.info("不存在的账号{}", username);
 
 
-            throw new BusinessException("登录失败：不存在的账号【" + username + "】");
+            throw new BusinessException("登录失败：不存在的账号");
 
         }
 
@@ -126,10 +126,10 @@ public class LoginController {
             redisService.set(key, "1");
             redisService.expire(key, 5, TimeUnit.MINUTES);
 
-
         } else {
 
             redisService.increment(key, 1);
+
         }
 
         int count = Integer.parseInt(redisService.get(key));
@@ -144,7 +144,7 @@ public class LoginController {
             return ("密码错误,你还有" + (8 - count) + "次机会尝试");
 
         } else {
-            return null;
+            return "密码不正确，请重新输入";
         }
     }
 

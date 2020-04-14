@@ -37,6 +37,13 @@
                 and sort = #{params.sort}
             </if>
 
+            <if test="params.bannerImg != null and params.bannerImg != ''">
+                and bannerImg = #{params.bannerImg}
+            </if>
+
+
+
+
         </where>
     </sql>
 
@@ -79,6 +86,13 @@
             <if test="sort != null">
                 sort = #{sort},
             </if>
+
+            <if test="bannerImg != null">
+                bannerImg = #{bannerImg},
+            </if>
+
+
+
 
         </set>
 

@@ -1,13 +1,16 @@
 package com.yusheng.hbgj.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.yusheng.hbgj.annotation.LogAnnotation;
 import com.yusheng.hbgj.annotation.PermissionTag;
+import com.yusheng.hbgj.constants.UserConstants;
 import com.yusheng.hbgj.dao.UserDao;
 import com.yusheng.hbgj.dto.UserDto;
 import com.yusheng.hbgj.entity.User;
 import com.yusheng.hbgj.page.table.PageTableHandler;
 import com.yusheng.hbgj.page.table.PageTableRequest;
 import com.yusheng.hbgj.page.table.PageTableResponse;
+import com.yusheng.hbgj.service.RedisService;
 import com.yusheng.hbgj.service.SysLogService;
 import com.yusheng.hbgj.service.UserService;
 import com.yusheng.hbgj.utils.StrUtil;
@@ -54,6 +57,9 @@ public class UserController {
     @Autowired
     private SysLogService sysLogService;
 
+    @Autowired
+    private RedisService redisService;
+
 
     @Value("${constants.companyRoleId}")
     private Long companyRoleId;
@@ -75,6 +81,10 @@ public class UserController {
         }
 
         roleDeal(userDto, companyRoleId);
+
+        if(userDto.getCompFlag()==null){
+            userDto.setCompFlag(1);
+        }
 
 
         return userService.saveUser(userDto);
@@ -176,7 +186,14 @@ public class UserController {
     @ApiOperation(value = "当前登录用户")
     @GetMapping("/current")
     public User currentUser() {
-        return UserUtil2.getCurrentUser();
+
+        User tar = UserUtil2.getCurrentUser();
+
+        User user = new User();
+        BeanUtils.copyProperties(tar, user);
+        user.setOriginalPassword(null);
+        user.setPassword(null);
+        return user;
     }
 
     @ApiOperation(value = "根据用户id获取用户")
@@ -198,37 +215,32 @@ public class UserController {
 
         Map<String, Object> maps = new HashMap<>();
 
-        // 后台已经登录了
-        String loginToken = UserUtil2.getToken();
+
+        String token = userService.getTokenByOpenId(wx.getOpenid());
+
+        String userStr = redisService.get(UserConstants.LOGIN_TOKEN + token);
 
 
-        // 微信用户已经登录，无需再次登录
-        if (!StringUtils.isEmpty(loginToken)) {
+        // 已存在账号并已登录
+        if (!StringUtils.isEmpty(userStr)) {
 
-            try {
-                User currentUser = UserUtil2.getCurrentUser();
-                if (currentUser != null) {
+            User loginedUser = JSONObject.parseObject(userStr, User.class);
 
-                    maps.put("user", userService.getInfoByOpenId(wx.getOpenid()));
+            loginedUser.setPassword(null);
+            loginedUser.setOriginalPassword(null);
+            maps.put("user", loginedUser);
 
-                    maps.put("msg", "之前已经登录，无需再次登录");
-                    return maps;
-                }
+            maps.put("msg", "之前已经登录，无需再次登录");
 
-            } catch (Exception e) {
-
-                log.error("用户未登录。。。。。。");
-
-            }
 
             return maps;
-
 
         } else {
 
 
             User userObj = userService.getInfoByOpenId(wx.getOpenid());
 
+            // 新用户注册
             if (userObj == null) {
 
 
@@ -258,7 +270,7 @@ public class UserController {
 
                 }
                 userVo.setUsername(username);
-                userVo.setRemark("系统自动为微信游客注册了账号");
+                userVo.setRemark("系统自动为微信游客注册了此账号");
 
 
                 //设置初始密码
@@ -266,7 +278,10 @@ public class UserController {
 
                 userVo.setPassword(password);
                 userVo.setOriginalPassword(password);
+
+                //非厂商
                 userVo.setCompFlag(0);
+
                 userVo.setStatus(User.Status.VALID);
 
                 User user = userService.saveUser(userVo);
@@ -279,12 +294,13 @@ public class UserController {
                 return map;
 
 
-            } else {
+            }
+            //已存在账号 ,但是"session"已失效
+            else {
 
                 log.info("此账号已经存在于系统中,重新新自动登录");
 
                 maps = userService.login(userObj, request, session);
-
 
                 maps.put("msg", "此账号已经存在于系统中,系统为其自动登录上");
 

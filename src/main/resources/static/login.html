@@ -11,6 +11,7 @@
     <link rel="bookmark" href="/static/favicon.ico"/>
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
 
+
     <link href="css/login.css" type="text/css" rel="stylesheet">
 
 
@@ -58,21 +59,29 @@
      * @param obj
      */
     function login(obj) {
+
         $(obj).attr("disabled", true);
 
         var username = $.trim($('#username').val());
         var password = $.trim($('#password').val());
         if (username === "" || password === "") {
             $("#info").html('用户名或者密码不能为空');
+
             $(obj).attr("disabled", false);
+
         } else {
+
+
             $.ajax({
                 type: 'post',
                 url: '/sys/login',
                 data: $("#login-form").serialize(),
-                success: function () {
+                success: function (xhr, textStatus, errorThrown) {
 
-                    location.href = '/';
+                    setTimeout(function () {
+                        location.href = '/index.html';
+                    }, 500);
+
 
                 },
                 error: function (xhr, textStatus, errorThrown) {

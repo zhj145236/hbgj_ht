@@ -7,12 +7,22 @@ public class Publish extends BaseEntity<Long> {
 	private String openid;
     private Long userId;
 
+
+    /**
+     * 真实姓名
+     */
+    private  String realName;
+
     private String sex;
 	private String tel;
 	private String nickName;
 	private String headPic;
 	private String publishContent;
 	private  String reply;
+
+
+
+
 
     /***
      * 用户已读消息的时间
@@ -79,6 +89,14 @@ public class Publish extends BaseEntity<Long> {
 
     public void setUserReadTime(Date userReadTime) {
         this.userReadTime = userReadTime;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 
 }

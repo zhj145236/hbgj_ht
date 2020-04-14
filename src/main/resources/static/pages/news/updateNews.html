@@ -29,6 +29,20 @@
                     <input class="form-control" placeholder="标题必填" type="text" name="title" id="title">
                 </div>
             </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">预览图</label>
+                <div class="col-md-10">
+                    <button type="button" class="layui-btn" id="test1">
+                        <i class="layui-icon">&#xe67c;</i>上传（1张）
+                    </button>
+                    <input type="hidden" name="bannerImg" id="bannerImg">
+                    <div id="bannerImgDiv"></div>
+                </div>
+
+
+            </div>
+
             <br/>
             <div class="form-group">
                 <label class="col-md-2 control-label">作者</label>
@@ -84,6 +98,15 @@
 
                     $('#id').val(data.id);
 
+
+                    var src = data.bannerImg;
+
+                    var a = "<a target='_blank' href='" + src + "'><img src='" + src + "'/></a>";
+                    $("#bannerImgDiv").html(a);
+
+
+                    $('#bannerImg').val(data.bannerImg);
+
                     $('#title').val(data.title);
 
                     $('#content').val(data.content);
@@ -95,7 +118,6 @@
             });
         }
     }
-
 
 
     var layedit, index;
@@ -113,6 +135,31 @@
         index = layedit.build('content');
     });
 
+
+    layui.use(['upload', 'layer'], function () {
+        var layer = layui.layer;
+        var upload = layui.upload;
+        upload.render({
+            elem: '#test1' //绑定元素
+            , accept: 'images' //允许上传的文件类型
+            , url: '/files' //上传接口
+            , done: function (res, index, upload) {
+
+                var url = res.url;
+
+
+                layer.msg("上传成功");
+
+                var src = "/files" + url;
+                var a = "<a target='_blank' href='" + src + "'><img src='" + src + "'/></a>";
+                $("#bannerImgDiv").html(a);
+
+                $("#bannerImg").val(src);
+
+
+            }
+        });
+    });
 
     function update() {
         $('#form').bootstrapValidator();

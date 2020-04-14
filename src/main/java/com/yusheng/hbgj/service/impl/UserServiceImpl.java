@@ -57,8 +57,7 @@ public class UserServiceImpl implements UserService {
         user.setSalt(DigestUtils.md5Hex(UUID.randomUUID().toString() + System.currentTimeMillis() + UUID.randomUUID().toString()));
         user.setPassword(passwordEncoder(user.getPassword(), user.getSalt()));
 
-        // 标记是否为厂商
-        user.setCompFlag(1);
+
 
         user.setStatus(User.Status.VALID);
         userDao.save(user);
@@ -117,7 +116,7 @@ public class UserServiceImpl implements UserService {
         }
 
         if (!u.getPassword().equals(passwordEncoder(oldPassword, u.getSalt()))) {
-            throw new IllegalArgumentException("密码错误");
+            throw new IllegalArgumentException("旧密码错误");
         }
 
 
@@ -286,6 +285,15 @@ public class UserServiceImpl implements UserService {
         int sm = userDao.agreeLicence(userId);
 
         return sm >= 1;
+
+
+    }
+
+    @Override
+    public String getTokenByOpenId(String openid) {
+
+
+      return    userDao.getTokenByOpenId(openid);
 
 
     }

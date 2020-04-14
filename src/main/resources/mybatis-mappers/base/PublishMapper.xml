@@ -68,6 +68,12 @@
             </if>
 
 
+            <if test="params.realName != null ">
+                and realName = #{params.realName}
+            </if>
+
+
+
 
 
         </where>
@@ -104,9 +110,9 @@
         </selectKey>
 
         insert into publish (openid, sex, tel, nickName, headPic, publishContent, createTime, updateTime,
-        createName, updateName, remark, orgId, delFlag, sort, delTime,reply,userId ,userReadTime )
+        createName, updateName, remark, orgId, delFlag, sort, delTime,reply,userId ,userReadTime,realName )
         values ( #{openid}, #{sex}, #{tel}, #{nickName}, #{headPic}, #{publishContent}, #{createTime}, #{updateTime},
-        #{createName}, #{updateName}, #{remark}, #{orgId}, #{delFlag}, #{sort}, #{delTime},#{reply},#{userId},#{userReadTime} )
+        #{createName}, #{updateName}, #{remark}, #{orgId}, #{delFlag}, #{sort}, #{delTime},#{reply},#{userId},#{userReadTime},#{realName} )
 
     </insert>
 
@@ -172,6 +178,10 @@
 
             <if test="userReadTime != null">
                 userReadTime = #{userReadTime},
+            </if>
+
+            <if test="realName != null">
+                realName = #{realName},
             </if>
 
 

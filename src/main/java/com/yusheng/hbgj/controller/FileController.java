@@ -217,10 +217,9 @@ public class FileController {
 
     @GetMapping
     @ApiOperation(value = "文件查询")
-    @PermissionTag("sys:file:query")
+    //@PermissionTag("sys:file:query")
     public PageTableResponse listFiles(PageTableRequest request) {
 
-        // TODO 文件过滤问题
         return new PageTableHandler(new PageTableHandler.CountHandler() {
 
             @Override
@@ -236,8 +235,8 @@ public class FileController {
                 request.getParams().putIfAbsent("orderBy", "  ORDER BY uploadTime DESC  ");
 
 
-                List<FileInfo> list = fileInfoDao.list(request.getParams(), request.getOffset(), request.getLimit());
-                return list;
+                return fileInfoDao.list(request.getParams(), request.getOffset(), request.getLimit());
+
             }
         }).handle(request);
     }
@@ -287,6 +286,7 @@ public class FileController {
         //删除之前可能预设的系统通知
         noticeDao.flushNotice(id);
 
+
     }
 
 
@@ -303,6 +303,9 @@ public class FileController {
         fileService.saveRemark(fileInfo);
 
         senNotice(fileInfo.getId(), fileInfo.getRemark().trim().split("@")[1].trim());
+
+        // 立刻发布通知
+        noticeDao.autoPublish();
 
 
     }

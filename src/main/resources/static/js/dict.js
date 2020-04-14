@@ -16,7 +16,7 @@ function showDictSelect(id, type, all) {
 
 function getDict(type) {
     var v = sessionStorage[type];
-    if (v == null || v == "") {
+    if (v == null || v === "") {
         $.ajax({
             type: 'get',
             url: '/dicts?type=' + type,

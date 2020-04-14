@@ -129,7 +129,7 @@ public class PublishController {
         publish.setCreateTime(new Date());
 
         String userType;
-        String userId = "";
+
 
         if (!StringUtils.isEmpty(publish.getUserId())) {
 

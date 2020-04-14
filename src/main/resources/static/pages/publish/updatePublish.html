@@ -5,10 +5,18 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
 </head>
 <body>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="width: 1000px">
     <form class="form-horizontal" onsubmit="return false" id="form">
         <fieldset>
             <input type="hidden" id="id" name="id">
+
+            <div class='form-group'>
+                <label class='col-md-2 control-label'>姓名</label>
+                <div class='col-md-10'>
+                    <input class='form-control' type='text' name='realName' id='realName'
+                           data-bv-notempty='true'   disabled>
+                </div>
+            </div>
 
             <div class='form-group'>
                 <label class='col-md-2 control-label'>联系电话</label>
@@ -31,7 +39,7 @@
             <div class="form-group">
                 <label class="col-md-2 control-label">回复内容</label>
                 <div class="col-md-10 form-inline">
-						<textarea rows="8" cols="100%" name="reply" id="reply">
+						<textarea rows="8" style="width: 100%"  name="reply" id="reply">
 
 						</textarea>
                 </div>
@@ -72,7 +80,11 @@
                 url: '/publishs/' + id,
                 async: false,
                 success: function (data) {
+
                     $('#id').val(data.id);
+                    $('#realName').val(data.realName);
+
+
                     $('#tel').val(data.tel);
                     $('#publishContent').val(data.publishContent);
                     $('#reply').val(data.reply);

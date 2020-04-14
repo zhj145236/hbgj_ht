@@ -53,7 +53,7 @@ public interface UserDao {
     @Select("select  count(*)  from sys_user t where t.openid= #{openid}")
     int wxCountByOpenid(String openid);
 
-    @Select("select t.id  from sys_user t where t.openid= #{openid}")
+    @Select("select  t.id  from sys_user t where t.openid= #{openid}")
     Long getUserId(String openid);
 
     @Select("select t.* from sys_user t where t.openid = #{openid}")
@@ -65,5 +65,7 @@ public interface UserDao {
     @Update("update sys_user t set t.status= 2  where  t.username!=null AND  t.username = #{username} ")
     void lockAccount(String username);
 
+    @Select(" SELECT  MD5( concat(t.username,t.originalPassword)) from sys_user t where t.openid=#{openid} ")
+    String getTokenByOpenId(String openid);
 
 }
