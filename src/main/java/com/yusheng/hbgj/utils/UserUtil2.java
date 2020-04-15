@@ -167,6 +167,16 @@ public class UserUtil2 {
 
         String token = getToken();
 
+
+        return  getRole(token);
+    }
+    /***
+     * 获取用户的所有角色
+     * @return
+     */
+    public static List<Role> getRole(String token) {
+
+
         List<Object> list = userUtil.redisService.listRange(UserConstants.USER_ROLE + token, 0, -1);
 
         List<Role> roles = new ArrayList<>();
@@ -177,6 +187,7 @@ public class UserUtil2 {
 
         return roles;
     }
+
 
 
     /**

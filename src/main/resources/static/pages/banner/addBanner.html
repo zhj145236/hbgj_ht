@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <title>添加轮播图</title>
+</head>
+<body>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <form class="form-horizontal" onsubmit="return false" id="form">
+        <fieldset>
+
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">预览图</label>
+                <div class="col-md-10">
+                    <button type="button" class="layui-btn" id="test1">
+                        <i class="layui-icon">&#xe67c;</i>上传（1张）
+                    </button>
+                    <input type="hidden" name="bannerImg" id="bannerImg">
+                    <div id="bannerImgDiv"></div>
+                </div>
+
+
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">详情套图</label>
+                <div class="col-md-10">
+
+
+                <textarea class="layui-textarea" id="content" style=" display: none">
+                </textarea>
+
+                </div>
+            </div>
+
+
+            <div class="form-actions">
+                <div class="row" align="center">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary" onclick="location.href='bannerList.html'">返回</button>
+                        <button class="btn btn-primary" type="submit" onclick="add()">
+                            <i class="fa fa-save"></i> 保存
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+<script type="text/javascript" src="../../js/libs/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+
+
+<script type="text/javascript">
+
+
+    var scratch_banner_html = "scratch_banner_html";
+    var scratch_banner_text = "scratch_banner_text";
+    var banner_content_bakHtml;
+
+    var banner_content_bakText;
+
+    layui.use(['layedit', 'upload', 'layer'], function () {
+        layedit = layui.layedit;
+
+
+        layedit.set({
+            uploadImage: {
+                url: '/files/layui',
+                type: 'post'
+            }
+
+
+        });
+
+        index = layedit.build('content', {
+            height: 800,
+            tool: ['image']
+        });
+
+
+        banner_content_bakText = localStorage.getItem(scratch_banner_text);
+
+
+        if (banner_content_bakText !== null && banner_content_bakText.length >= 1) {
+
+            layer.confirm('检测到有未保存的内容，是否还原？', {
+
+                btn: ['确定', '取消']
+
+            }, function () {
+
+
+                layer.close(1);
+
+                banner_content_bakHtml = localStorage.getItem(scratch_banner_html);
+
+                layedit.setContent(index, banner_content_bakHtml, false);
+
+
+                autoBackContent();
+
+
+            }, function () {
+
+                localStorage.removeItem(scratch_banner_html);
+                localStorage.removeItem(scratch_banner_text);
+
+                autoBackContent();
+
+            });
+
+
+        } else {
+
+            autoBackContent();
+
+        }
+
+
+        var layer = layui.layer;
+        var upload = layui.upload;
+        upload.render({
+            elem: '#test1' //绑定元素
+            , accept: 'images' //允许上传的文件类型
+            , url: '/files?tag=首页轮播图' //上传接口
+            , multiple: true
+            , done: function (res, index, upload) {
+
+                var url = res.url;
+
+                layer.msg("上传成功");
+
+                var src = "/files" + url;
+                var a = "<a target='_blank' href='" + src + "'><img src='" + src + "'/></a>";
+                $("#bannerImgDiv").html(a);
+
+                $("#bannerImg").val(src);
+
+
+            }
+        });
+
+
+    });
+
+
+    var tempContent_Html;
+    var tempContent_Text;
+    var storage_text_bak;
+
+    function autoBackContent() {
+
+        setInterval(function () {
+
+            tempContent_Text = layedit.getText(index).trim();
+            tempContent_Html = layedit.getContent(index).trim();
+
+            storage_text_bak = localStorage.getItem(scratch_banner_text);
+
+
+            if (storage_text_bak !== tempContent_Text) {
+
+                localStorage.setItem(scratch_banner_text, tempContent_Text.trim());
+                localStorage.setItem(scratch_banner_html, tempContent_Html.trim());
+
+                console.info("自动备份草稿中。。");
+            }
+
+        }, 5000);
+    }
+
+
+    function add() {
+        $('#form').bootstrapValidator();
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
+
+        var formdata = $("#form").serializeObject();
+
+        $.ajax({
+            type: 'post',
+            url: '/banners',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                layer.msg("添加成功", {shift: -1, time: 1000}, function () {
+
+                    localStorage.removeItem(scratch_banner_html);
+                    localStorage.removeItem(scratch_banner_text);
+                    //location.href = "bannerList.html";
+                });
+
+
+            }
+        });
+    }
+
+
+</script>
+</body>
+</html>

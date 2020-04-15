@@ -259,7 +259,7 @@ public class PublishController {
         String userId = (String) params.get("userId");
 
 
-        log.debug("openid{}与userId{}", openid, userId);
+        log.debug("openid:{} , userId:{}", openid, userId);
 
         if (StringUtils.isEmpty(openid) && StringUtils.isEmpty(userId)) {
             throw new IllegalArgumentException("参数openid与userId必填一项");

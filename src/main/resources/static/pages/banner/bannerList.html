@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>政策</title>
+    <title>轮播图管理</title>
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="../../layui/css/layui.css" media="all"/>
@@ -17,16 +17,11 @@
                         <tr>
                             <td>
                                 <form class="form-inline" onsubmit="return false">
-                                    <div class="form-group">
-                                        标题：
-                                        <input id="title" type="text" class="form-control" placeholder="可模糊搜索标题">
-                                        <button id="searchBt" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe615;</i>搜索
-                                        </button>
-                                    </div>
+
                                 </form>
                             </td>
                             <td align="right">
-                                <button class="layui-btn layui-btn-sm" onclick="location.href='addNews.html'">
+                                <button class="layui-btn layui-btn-sm" onclick="location.href='addBanner.html'">
                                     <i class="layui-icon">&#xe608;</i> 添加
                                 </button>
                             </td>
@@ -42,16 +37,15 @@
                         <tr>
                         </tr>
                         <tr>
-
-                            <th>标题</th>
-                            <!--<th>预览图</th>-->
-                            <!-- <th>内容</th>-->
-                            <th>作者</th>
-                            <th>创建时间</th>
-                            <!--  <th>修改时间</th>
-                              <th>备注</th>
-                              <th>删除状态</th>
-                              <th>排序</th>-->
+                            <!--<th>id</th>-->
+                            <th>主图</th>
+                            <!--  <th>content</th>
+                              <th>author</th>-->
+                            <th>上传时间</th>
+                            <!--  <th>updateTime</th>
+                              <th>remark</th>
+                              <th>delFlag</th>
+                              <th>sort</th>-->
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -80,64 +74,57 @@
     function init() {
         example =
             $('#dt-table').DataTable({
-                "searching": true,
-                "processing": true,
+                "searching": false,
+                "processing": false,
                 "serverSide": true,
                 "language": {
                     "url": "/js/plugin/datatables/Chinese.lang"
                 },
                 "ajax": {
-                    "url": "/newss",
+                    "url": "/banners",
                     "type": "get",
                     "data": function (d) {
-                        d.title = $("#title").val();
+                        d.id = $("#id").val();
                     }
                 },
                 "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
                 "columns": [
-
+                    /*  {"data": "id", "defaultContent": ""},*/
                     {
-                        "data": "title", "orderable": false, "defaultContent": "", "width": "620px",
+                        "data": "mainImg", orderable: false, "defaultContent": "",
+                        "width": "620px",
                         "render": function (data, type, row) {
 
                             console.info(data, ",,");
 
-                            var imageHtml = "<img  src='" + row.bannerImg + "' style='width: 100%;height: 100px; border-radius: 5px ' alt='预览图' />";
+                            var imageHtml = "<img  src='" + data + "' style='width: 100%;height: 100px; border-radius: 5px ' alt='主图' />";
 
-                            return "<div style='width: 600px;height: 160px;border: 2px solid black'><h3>" + imageHtml + "</h3><br/> <h3>" + data + "</h3>  </div> "
+                            return "<div style='width: 600px;height: 160px;border: 2px solid black'> <p>" + imageHtml + "</p>   </div> "
 
                         }
                     },
-                    /*  {"data": "content", "orderable": false, "defaultContent": ""},*/
-                    {"data": "author", "orderable": false, "defaultContent": ""},
-                    {"data": "createTime", "orderable": false, "defaultContent": ""},
-                    /* {"data": "updateTime", "orderable": false, "defaultContent": ""},*/
-                    /*  {"data": "remark", "orderable": false, "defaultContent": ""},*/
-                    /* {"data": "delFlag", "orderable": false, "defaultContent": ""},*/
-                    /* {"data": "sort", "orderable": false, "defaultContent": ""},*/
+                    /* {"data": "content", "defaultContent": ""},*/
+                    /*  {"data": "author", "defaultContent": ""},*/
+                    {"data": "createTime", "defaultContent": ""},
+                    /* {"data": "updateTime", "defaultContent": ""},*/
+                    /* {"data": "remark", "defaultContent": ""},
+                     {"data": "delFlag", "defaultContent": ""},
+                     {"data": "sort", "defaultContent": ""},*/
                     {
                         "data": "",
                         "defaultContent": "",
                         "orderable": false,
                         "render": function (data, type, row) {
                             var id = row['id'];
-                            var href = "updateNews.html?id=" + id;
+                            var href = "updateBanner.html?id=" + id;
                             var edit = buttonEdit(href, "", pers);
                             var del = buttonDel(id, "", pers);
-
-                            var hrefDetail = "newsDetail.html?id=" + id;
-
-                            var newsDetails = buttonDetails(hrefDetail);
-
-
-                            var toTopButton = toTop(id);
-
-                            return newsDetails + edit + del + toTopButton;
+                            return edit + del;
                         }
                     }
 
                 ],
-                "order": []  //[3, "DESC"]
+                "order": []
             });
     }
 
@@ -145,12 +132,6 @@
         var layer = layui.layer;
     });
 
-
-    function buttonDetails(hrefDetail) {
-
-        return "<button  class='layui-btn layui-btn-xs' title='查看详情' onclick='window.location=\"" + hrefDetail + "\"'><i class='layui-icon'>&#xe705;</i></button>";
-
-    }
 
     /**
      * 置顶展示
@@ -163,7 +144,7 @@
 
         $.ajax({
             type: 'put',
-            url: '/newss/toTop',
+            url: '/banners/toTop',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(objForm),
             success: function (data) {
@@ -181,13 +162,14 @@
         return "<button  class='layui-btn layui-btn-xs' title='置顶展示' onclick='topAction(\"" + id + "\")'><i class='layui-icon'>&#xe604;</i></button>";
     }
 
+
     function del(id) {
         layer.confirm('确定要删除吗？', {
             btn: ['确定', '取消']
         }, function () {
             $.ajax({
                 type: 'delete',
-                url: '/newss/' + id,
+                url: '/banners/' + id,
                 success: function (data) {
                     example.ajax.reload();
                     layer.msg("删除成功");

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.yusheng.hbgj.annotation.PermissionTag;
+import com.yusheng.hbgj.constants.BusinessException;
 import com.yusheng.hbgj.page.table.PageTableHandler;
 import com.yusheng.hbgj.page.table.PageTableRequest;
 import com.yusheng.hbgj.page.table.PageTableResponse;
@@ -37,6 +38,7 @@ public class NewsController {
         news.setDelFlag("1");
         news.setCreateTime(new Date());
         news.setUpdateTime(new Date());
+
         newsDao.save(news);
 
         return news;
@@ -54,6 +56,8 @@ public class NewsController {
     public News update(@RequestBody News news) {
 
         news.setUpdateTime(new Date());
+
+
         newsDao.update(news);
 
         return news;

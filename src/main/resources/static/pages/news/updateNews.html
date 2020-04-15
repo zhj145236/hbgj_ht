@@ -23,12 +23,6 @@
 
             <input type="hidden" id="id" name="id">
 
-            <div class="form-group">
-                <label class="col-md-2 control-label">标题</label>
-                <div class="col-md-10">
-                    <input class="form-control" placeholder="标题必填" type="text" name="title" id="title">
-                </div>
-            </div>
 
             <div class="form-group">
                 <label class="col-md-2 control-label">预览图</label>
@@ -40,8 +34,15 @@
                     <div id="bannerImgDiv"></div>
                 </div>
 
-
             </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">标题</label>
+                <div class="col-md-10">
+                    <input class="form-control" placeholder="标题必填" type="text" name="title" id="title">
+                </div>
+            </div>
+
 
             <br/>
             <div class="form-group">
@@ -119,9 +120,12 @@
         }
     }
 
+    var scratch_news_html = "scratch_news_html";
+    var content_bakHtml;
+
 
     var layedit, index;
-    layui.use(['layedit', 'upload'], function () {
+    layui.use(['layedit', 'upload', 'layer'], function () {
         layedit = layui.layedit;
         layedit.set({
             uploadImage: {
@@ -133,6 +137,29 @@
 
         });
         index = layedit.build('content');
+
+
+        content_bakHtml = localStorage.getItem(scratch_news_html);
+        if (content_bakHtml !== null && content_bakHtml.length >= 10) {
+
+            layer.confirm('检测到有未保存的内容，是否还原？', {
+
+                btn: ['确定', '取消']
+
+            }, function () {
+
+                layedit.setContent(index, content_bakHtml, false);
+                layer.close(1);
+
+
+            }, function () {
+                localStorage.removeItem(scratch_news_html);
+
+            });
+
+        }
+
+
     });
 
 
@@ -142,7 +169,7 @@
         upload.render({
             elem: '#test1' //绑定元素
             , accept: 'images' //允许上传的文件类型
-            , url: '/files' //上传接口
+            , url: '/files?tag=政策预览图' //上传接口
             , done: function (res, index, upload) {
 
                 var url = res.url;
@@ -153,7 +180,6 @@
                 var src = "/files" + url;
                 var a = "<a target='_blank' href='" + src + "'><img src='" + src + "'/></a>";
                 $("#bannerImgDiv").html(a);
-
                 $("#bannerImg").val(src);
 
 
@@ -162,6 +188,7 @@
     });
 
     function update() {
+
         $('#form').bootstrapValidator();
         var bootstrapValidator = $("#form").data('bootstrapValidator');
         bootstrapValidator.validate();
@@ -172,12 +199,16 @@
         var title = $("#title").val().trim();
 
         var author = $("#author").val().trim();
+        var bannerImg = $("#bannerImg").val().trim();
 
         if (title === "") {
             layer.msg("标题不能为空");
             return;
         } else if (author === "") {
             layer.msg("作者不能为空");
+            return;
+        } else if (bannerImg === "") {
+            layer.msg("请上传一张图片");
             return;
         } else if (layedit.getContent(index).trim() === "") {
             layer.msg("内容不能为空");
@@ -195,8 +226,16 @@
             data: JSON.stringify(formdata),
             success: function (data) {
                 layer.msg("修改成功", {shift: -1, time: 1000}, function () {
+
+                    localStorage.removeItem(scratch_news_html);
                     location.href = "newsList.html";
                 });
+            }, error: function (data) {
+
+                localStorage.setItem(scratch_news_html, layedit.getContent(index).trim());
+                layer.msg('保存失败，请刷新页面试试。系统已为自动您保存成草稿,', {icon: 5});
+
+
             }
         });
     }

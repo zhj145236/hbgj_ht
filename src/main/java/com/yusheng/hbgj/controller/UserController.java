@@ -221,6 +221,8 @@ public class UserController {
         String userStr = redisService.get(UserConstants.LOGIN_TOKEN + token);
 
 
+
+
         // 已存在账号并已登录
         if (!StringUtils.isEmpty(userStr)) {
 
@@ -229,9 +231,9 @@ public class UserController {
             loginedUser.setPassword(null);
             loginedUser.setOriginalPassword(null);
             maps.put("user", loginedUser);
-
+            maps.put("role", UserUtil2.getRole(token));
+            maps.put("token", token);
             maps.put("msg", "之前已经登录，无需再次登录");
-
 
             return maps;
 

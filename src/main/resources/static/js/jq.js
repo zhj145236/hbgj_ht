@@ -43,20 +43,12 @@ $.ajaxSetup({
 
             console.warn("未授权:" + message, {icon: 5});
 
-            setTimeout(function () {
-
-                location.href = "/login.html";
-
-            }, 1500);
-
-
-            layer.msg('您没有权限操作', {icon: 5});
+            layer.msg('您没有权限操作,请切换账号或联系管理员授权', {icon: 5});
 
         } else if (parseInt(code) === 500) {
 
             console.error(message);
             layer.msg('系统错误【' + message + "】，请稍后再试或者联系管理员", {icon: 5});
-
 
         }
     }
