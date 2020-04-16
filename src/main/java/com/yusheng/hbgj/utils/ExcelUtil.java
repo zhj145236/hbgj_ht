@@ -29,8 +29,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class ExcelUtil {
 
 
-    private final static String xls = "xls";
-    private final static String xlsx = "xlsx";
+    private final static String XLS = "xls";
+    private final static String XLSX = "xlsx";
 
     /**
      * 读入excel文件，解析后返回 List对象
@@ -87,7 +87,7 @@ public class ExcelUtil {
         //获得文件名
         String fileName = file.getOriginalFilename();
         //判断文件是否是excel文件
-        if(!fileName.endsWith(xls) && !fileName.endsWith(xlsx)){
+        if(!fileName.endsWith(XLSX) && !fileName.endsWith(XLSX)){
             throw new IOException(fileName + "不是excel文件");
         }
     }
@@ -101,10 +101,10 @@ public class ExcelUtil {
             //获取excel文件的io流
             InputStream is = file.getInputStream();
             //根据文件后缀名不同(xls和xlsx)获得不同的Workbook实现类对象
-            if(fileName.endsWith(xls)){
+            if(fileName.endsWith(XLS)){
                 //2003
                 workbook = new HSSFWorkbook(is);
-            }else if(fileName.endsWith(xlsx)){
+            }else if(fileName.endsWith(XLSX)){
                 //2007
                 workbook = new XSSFWorkbook(is);
             }

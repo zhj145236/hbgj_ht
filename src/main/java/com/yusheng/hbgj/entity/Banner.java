@@ -2,7 +2,16 @@ package com.yusheng.hbgj.entity;
 
 import java.util.Date;
 
+/**
+ * @author  jinwei
+ * @date  2020-04-16
+ * @desc
+ */
 public class Banner {
+
+
+    private  Long id;
+
 
     private String mainImg;
     private String content;
@@ -78,5 +87,14 @@ public class Banner {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

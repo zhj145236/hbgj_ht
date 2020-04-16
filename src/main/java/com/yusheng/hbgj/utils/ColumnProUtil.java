@@ -11,6 +11,12 @@ import org.apache.ibatis.mapping.ResultMapping;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.util.CollectionUtils;
 
+/**
+ * @author  jinwei
+ * @date  2020-04-16
+ * @desc
+ */
+
 public class ColumnProUtil {
 
 	private static String DEFAULT_ID = "BaseResultMap";

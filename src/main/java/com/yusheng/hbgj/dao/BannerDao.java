@@ -3,9 +3,16 @@ package com.yusheng.hbgj.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.yusheng.hbgj.dto.BannerDto;
 import org.apache.ibatis.annotations.*;
 
 import com.yusheng.hbgj.entity.Banner;
+
+/**
+ * @author  jinwei
+ * @date  2020-04-16
+ * @desc
+ */
 
 @Mapper
 public interface BannerDao {
@@ -29,4 +36,6 @@ public interface BannerDao {
     int count(@Param("params") Map<String, Object> params);
 
     List<Banner> list(@Param("params") Map<String, Object> params, @Param("offset") Integer offset, @Param("limit") Integer limit);
+
+    List<BannerDto> wxlist(Map<String, Object> params, Integer offset, Integer limit);
 }

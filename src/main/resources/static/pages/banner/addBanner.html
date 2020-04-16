@@ -13,26 +13,42 @@
     <form class="form-horizontal" onsubmit="return false" id="form">
         <fieldset>
 
+            <div class="form-group">
+                <label class="col-md-2 control-label">
+
+                </label>
+
+                <div class="col-md-10">
+                    说明: 待上传的轮播图分辨率应为高150px,宽380px, 图片格式为png,文件大小应在100KB至500KB之间
+                </div>
+
+            </div>
+
 
             <div class="form-group">
-                <label class="col-md-2 control-label">预览图</label>
-                <div class="col-md-10">
+                <label class="col-md-2 control-label">轮播图(1张)</label>
+                <div class="col-md-10" style="border: 1px solid black; width: 380px">
                     <button type="button" class="layui-btn" id="test1">
-                        <i class="layui-icon">&#xe67c;</i>上传（1张）
+                        <i class="layui-icon">&#xe67c;</i>上传
                     </button>
-                    <input type="hidden" name="bannerImg" id="bannerImg">
-                    <div id="bannerImgDiv"></div>
+                    <input type="hidden" name="mainImg" id="mainImg">
+                    <div id="mainImgDiv"></div>
                 </div>
 
 
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">详情套图</label>
-                <div class="col-md-10">
+                <label class="col-md-2 control-label">详情套图(多张)</label>
+
+                <div class="col-md-10" style="border: 1px solid black; width: 380px">
+
+                    <button type="button" class="layui-btn" id="test2">
+                        <i class="layui-icon">&#xe67c;</i>上传
+                    </button>
 
 
-                <textarea class="layui-textarea" id="content" style=" display: none">
+                    <textarea class="layui-textarea" id="content" style=" display: none; ">
                 </textarea>
 
                 </div>
@@ -43,7 +59,7 @@
                 <div class="row" align="center">
                     <div class="col-md-12">
                         <button class="btn btn-primary" onclick="location.href='bannerList.html'">返回</button>
-                        <button class="btn btn-primary" type="submit" onclick="add()">
+                        <button class="btn btn-primary" type="submit" onclick="add(this)">
                             <i class="fa fa-save"></i> 保存
                         </button>
                     </div>
@@ -83,8 +99,8 @@
         });
 
         index = layedit.build('content', {
-            height: 800,
-            tool: ['image']
+            height: 1000,
+            tool: []
         });
 
 
@@ -142,9 +158,29 @@
 
                 var src = "/files" + url;
                 var a = "<a target='_blank' href='" + src + "'><img src='" + src + "'/></a>";
-                $("#bannerImgDiv").html(a);
+                $("#mainImgDiv").html(a);
 
-                $("#bannerImg").val(src);
+                $("#mainImg").val(src);
+
+
+            }
+        });
+
+
+        //TODO 富文本里粘贴图片会破坏居中显示
+        upload.render({
+            elem: '#test2' //绑定元素
+            , accept: 'images' //允许上传的文件类型
+            , url: '/files?tag=轮播图套图' //上传接口
+            , multiple: true
+            , done: function (res, indexA, upload) {
+
+
+                var htmlStr="<p><img src=\""+ res.remark +"\" alt=\""+res.fileOriginName+"\" style=\"width:100%\"><br></p>";
+
+                // 追加内容
+                layedit.setContent(index, htmlStr, true);
+
 
 
             }
@@ -180,7 +216,23 @@
     }
 
 
-    function add() {
+    function add(obj) {
+
+        var mainImg = $("#mainImg").val().trim();
+
+
+        if (mainImg === "") {
+            layer.msg("请上传一张主图");
+            return;
+        } else if (layedit.getContent(index).trim() === "" || layedit.getContent(index).trim().length <= 5) {
+            layer.msg("请上传详情图(允许多张)");
+            return;
+        }
+
+
+        $(obj).attr("disabled", true);
+
+
         $('#form').bootstrapValidator();
         var bootstrapValidator = $("#form").data('bootstrapValidator');
         bootstrapValidator.validate();
@@ -188,22 +240,31 @@
             return;
         }
 
-        var formdata = $("#form").serializeObject();
+        var formData = $("#form").serializeObject();
+        formData.mainImg = mainImg;
+        formData.content = layedit.getContent(index);
+
 
         $.ajax({
             type: 'post',
             url: '/banners',
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(formdata),
+            data: JSON.stringify(formData),
             success: function (data) {
+
                 layer.msg("添加成功", {shift: -1, time: 1000}, function () {
 
                     localStorage.removeItem(scratch_banner_html);
                     localStorage.removeItem(scratch_banner_text);
-                    //location.href = "bannerList.html";
+                    location.href = "bannerList.html";
                 });
 
 
+            },
+            error: function (data) {
+
+                layer.msg('保存失败，请刷新页面试试。系统已为自动您保存成草稿,', {icon: 5});
+                $(obj).attr("disabled", false);
             }
         });
     }

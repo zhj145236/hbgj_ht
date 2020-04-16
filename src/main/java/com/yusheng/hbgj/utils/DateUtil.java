@@ -158,8 +158,8 @@ public class DateUtil {
         cal.setTime(dateEnd);
 
         long time2 = cal.getTimeInMillis();
-        long between_days = (time2 - time1) / 86400000L;
-        return Integer.parseInt(String.valueOf(between_days));
+        long betweenDays = (time2 - time1) / 86400000L;
+        return Integer.parseInt(String.valueOf(betweenDays));
     }
 
 

@@ -48,6 +48,17 @@
         limit #{offset}, #{limit}
     </select>
 
+
+    <select id="wxlist" resultType="com.yusheng.hbgj.dto.BannerDto">
+
+        select t.id as id, t.mainImg as mainImg , t.content as content from banner t
+        <include refid="where"/>
+        ${params.orderBy}
+        limit #{offset}, #{limit}
+
+
+    </select>
+
     <update id="update">
         update banner t
         <set>

@@ -13,7 +13,6 @@ public class News {
     private String delFlag;
     private Long sort;
 
-
     /**
      * 横幅图片
      */

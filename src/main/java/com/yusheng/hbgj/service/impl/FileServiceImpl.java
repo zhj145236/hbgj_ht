@@ -41,13 +41,6 @@ public class FileServiceImpl implements FileService {
 
         String md5 = FileUtil.fileMd5(file.getInputStream());
 
-        /*FileInfo fileInfo = fileInfoDao.getById(md5);
-
-        if (fileInfo != null) {
-            fileInfoDao.update(fileInfo);
-            return fileInfo;
-        }*/
-
         FileInfo fileInfo = new FileInfo();
 
         fileOrigName = fileOrigName.substring(fileOrigName.lastIndexOf("."));

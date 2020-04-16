@@ -32,6 +32,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author jinwei
+ * @date 2020-04-16
+ * @desc
+ */
+
+
 @Api(tags = "文件")
 @RestController
 @RequestMapping("/files")
@@ -157,7 +164,7 @@ public class FileController {
     private String trans(String fileName) {
 
         String tty = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length()).toLowerCase();
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<String, String>(10);
         map.put("jpg", "image/jpeg");
         map.put("png", "image/png");
         map.put("gif", "image/gif");
@@ -180,7 +187,12 @@ public class FileController {
         if (fileInfo == null) {
             fileInfo = new FileInfo();
         }
-        return fileService.save(file, fileInfo, session);
+        FileInfo newFile = fileService.save(file, fileInfo, session);
+
+        newFile.setRemark(domain + "/files" + newFile.getUrl());
+
+        return newFile;
+
     }
 
 
@@ -246,6 +258,7 @@ public class FileController {
     @ApiOperation(value = "小程序端数据中心", tags = "企业检修资料；企业台账；合同；环保文件, 需要开放查询的权限才能调用")
     @PermissionTag("sys:file:query")
     public PageTableResponse wxlistFiles(PageTableRequest request) {
+
 
         if (StringUtils.isEmpty(request.getParams().get("resourceId"))) {
 
@@ -333,7 +346,9 @@ public class FileController {
     }
 
 
-    //给管理员发通知
+    /**
+     * 给环联管家平台发通知
+     */
     private void senNotice(String fileId, String endDate) {
 
 
@@ -363,9 +378,11 @@ public class FileController {
                         "到期,请及时处理。合同附件链接 【<a target='_blank'  style='color:blue;font-size:23px' href='" + domain + "/files" + file.getUrl() + "'>打开</a>" + "】。如已经处理请忽略此条通知";
                 notice.setContent(sb);
                 notice.setCreateName("系统程序");
-                notice.setCreateTime(dates[i]);  //设置合同到期前X天创建
+                //设置合同到期前X天创建
+                notice.setCreateTime(dates[i]);
                 notice.setRefId(fileId);
-                notice.setStatus(Notice.Status.DRAFT); //草稿
+                //草稿
+                notice.setStatus(Notice.Status.DRAFT);
                 notice.setUpdateTime(new Date());
                 noticeDao.save(notice);
 
@@ -374,7 +391,8 @@ public class FileController {
                 Notice notice2 = new Notice();
                 notice2.setIsPersonal(Notice.Personal.YES);
                 notice2.setTitle("合同快到期提醒");
-                notice2.setReceiveId(file.getResourceId()); //厂商ID
+                //厂商ID
+                notice2.setReceiveId(file.getResourceId());
 
                 String sb2 = "您有一份与" + "东莞市环联管家生态环境科技有限公司" + "签订的合同【" + file.getFileOriginName() + "】" +
                         "将于" + endDate +

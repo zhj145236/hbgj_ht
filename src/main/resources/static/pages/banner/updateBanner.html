@@ -2,53 +2,69 @@
 <html>
 <head>
     <meta charset="UTF-8">
+
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+
+    <title>编辑轮播图</title>
+
+    <style>
+
+        .form-group {
+
+            padding: 20px;
+
+        }
+
+    </style>
+
 </head>
 <body>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <form class="form-horizontal" onsubmit="return false" id="form">
         <fieldset>
             <input type="hidden" id="id" name="id">
-            <div class='form-group'>
-                <label class='col-md-2 control-label'>mainImg</label>
-                <div class='col-md-10'>
-                    <input class='form-control' placeholder='mainImg' type='text' name='mainImg' id='mainImg'
-                           data-bv-notempty='true' data-bv-notempty-message='mainImg 不能为空'>
+
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">
+
+                </label>
+
+                <div class="col-md-10">
+                    说明: 待上传的轮播图分辨率应为高150px,宽380px, 图片格式为png,文件大小应在100KB至500KB之间
                 </div>
+
             </div>
-            <div class='form-group'>
-                <label class='col-md-2 control-label'>content</label>
-                <div class='col-md-10'>
-                    <input class='form-control' placeholder='content' type='text' name='content' id='content'
-                           data-bv-notempty='true' data-bv-notempty-message='content 不能为空'>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">轮播图(一张)</label>
+                <div class="col-md-10" style="border: 1px solid black; width: 380px">
+                    <button type="button" class="layui-btn" id="test1">
+                        <i class="layui-icon">&#xe67c;</i>上传（1张）
+                    </button>
+                    <input type="hidden" name="mainImg" id="mainImg">
+                    <div id="mainImgDiv"></div>
                 </div>
+
             </div>
-            <div class='form-group'>
-                <label class='col-md-2 control-label'>author</label>
-                <div class='col-md-10'>
-                    <input class='form-control' placeholder='author' type='text' name='author' id='author'
-                           data-bv-notempty='true' data-bv-notempty-message='author 不能为空'>
-                </div>
-            </div>
-            <div class='form-group'>
-                <label class='col-md-2 control-label'>remark</label>
-                <div class='col-md-10'>
-                    <input class='form-control' placeholder='remark' type='text' name='remark' id='remark'
-                           data-bv-notempty='true' data-bv-notempty-message='remark 不能为空'>
-                </div>
-            </div>
-            <div class='form-group'>
-                <label class='col-md-2 control-label'>delFlag</label>
-                <div class='col-md-10'>
-                    <input class='form-control' placeholder='delFlag' type='text' name='delFlag' id='delFlag'
-                           data-bv-notempty='true' data-bv-notempty-message='delFlag 不能为空'>
-                </div>
-            </div>
-            <div class='form-group'>
-                <label class='col-md-2 control-label'>sort</label>
-                <div class='col-md-10'>
-                    <input class='form-control' placeholder='sort' type='text' name='sort' id='sort'
-                           data-bv-notempty='true' data-bv-notempty-message='sort 不能为空'>
+
+            <hr/>
+
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">详情套图(多张)</label>
+
+                <div class="col-md-10" style="border: 1px solid black; width: 380px">
+
+                    <button type="button" class="layui-btn" id="test2">
+                        <i class="layui-icon">&#xe67c;</i>上传
+                    </button>
+
+
+                    <textarea class="layui-textarea" id="content" style=" display: none; ">
+                </textarea>
+
                 </div>
             </div>
 
@@ -57,7 +73,7 @@
                 <div class="row" align="center">
                     <div class="col-md-12">
                         <button class="btn btn-primary" onclick="location.href='bannerList.html'">返回</button>
-                        <button class="btn btn-primary" type="submit" onclick="update()">
+                        <button class="btn btn-primary" type="submit" onclick="update(this)">
                             <i class="fa fa-save"></i> 保存
                         </button>
                     </div>
@@ -73,36 +89,122 @@
 <script type="text/javascript" src="../../js/common.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript">
-    layui.use(['layer', 'laydate'], function () {
-        var layer = layui.layer;
-    });
+
 
     initData();
 
     function initData() {
         var id = getUrlParam("id");
-        if (id != "") {
+        if (id !== "") {
             $.ajax({
                 type: 'get',
                 url: '/banners/' + id,
                 async: false,
                 success: function (data) {
+
                     $('#id').val(data.id);
+
+
+                    var src = data.mainImg;
+
+                    var a = "<img  style='width:100% ' src='" + src + "' alt='主图' />";
+                    $("#mainImgDiv").html(a);
+
                     $('#mainImg').val(data.mainImg);
+
                     $('#content').val(data.content);
-                    $('#author').val(data.author);
-                    $('#createTime').val(data.createTime);
-                    $('#updateTime').val(data.updateTime);
-                    $('#remark').val(data.remark);
-                    $('#delFlag').val(data.delFlag);
-                    $('#sort').val(data.sort);
+
 
                 }
             });
         }
     }
 
-    function update() {
+    var scratch_banner_html = "scratch_banner_html";
+    var content_bakHtml;
+
+
+    var layedit, index;
+    layui.use(['layedit', 'upload', 'layer', 'laydate'], function () {
+        layedit = layui.layedit;
+        layedit.set({
+            uploadImage: {
+                url: '/files/layui',
+                type: 'post'
+            }
+
+
+        });
+        index = layedit.build('content', {
+            height: 1000,
+            tool: []
+        });
+
+
+        content_bakHtml = localStorage.getItem(scratch_banner_html);
+        if (content_bakHtml !== null && content_bakHtml.length >= 10) {
+
+            layer.confirm('检测到有未保存的内容，是否还原？', {
+
+                btn: ['确定', '取消']
+
+            }, function () {
+
+                layedit.setContent(index, content_bakHtml, false);
+                layer.close(1);
+
+
+            }, function () {
+                localStorage.removeItem(scratch_banner_html);
+
+            });
+
+        }
+
+
+    });
+
+
+    layui.use(['upload', 'layer'], function () {
+        var layer = layui.layer;
+        var upload = layui.upload;
+        upload.render({
+            elem: '#test1' //绑定元素
+            , accept: 'images' //允许上传的文件类型
+            , url: '/files?tag=首页轮播图' //上传接口
+            , done: function (res, index, upload) {
+
+                var url = res.url;
+
+                var src = "/files" + url;
+                var a = "<img src='" + src + "'  style='width: 100%' alt='主图' />";
+                $("#mainImgDiv").html(a);
+                $("#mainImg").val(src);
+                layer.msg("上传成功");
+
+            }
+        });
+
+        upload.render({
+            elem: '#test2' //绑定元素
+            , accept: 'images' //允许上传的文件类型
+            , url: '/files?tag=轮播图套图' //上传接口
+            , multiple: true
+            , done: function (res, indexA, upload) {
+
+                var htmlStr = "<p><img src=\"" + res.remark + "\" alt=\"" + res.fileOriginName + "\" style=\"width:100%\"><br></p>";
+
+                // 追加内容
+                layedit.setContent(index, htmlStr, true);
+
+
+            }
+        });
+
+    });
+
+    function update(obj) {
+
         $('#form').bootstrapValidator();
         var bootstrapValidator = $("#form").data('bootstrapValidator');
         bootstrapValidator.validate();
@@ -110,20 +212,49 @@
             return;
         }
 
-        var formdata = $("#form").serializeObject();
+
+        var mainImg = $("#mainImg").val().trim();
+
+        if (mainImg === "") {
+            layer.msg("请上传一张图片");
+            return;
+        } else if (layedit.getContent(index).trim().length <= 5) {
+            layer.msg("请上传详情图片");
+            return;
+        }
+
+
+        var formData = $("#form").serializeObject();
+        formData.content = layedit.getContent(index);
+
+        $(obj).attr("disabled", true);
 
         $.ajax({
             type: 'put',
             url: '/banners',
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(formdata),
+            data: JSON.stringify(formData),
             success: function (data) {
                 layer.msg("修改成功", {shift: -1, time: 1000}, function () {
+
+                    localStorage.removeItem(scratch_banner_html);
                     location.href = "bannerList.html";
+
                 });
+            }, error: function (data) {
+
+
+                var resp = JSON.parse(data.responseText);
+
+                localStorage.setItem(scratch_banner_html, layedit.getContent(index).trim());
+                layer.msg('保存失败,原因:' + resp.message + '.系统已为自动您保存成草稿,', {icon: 5});
+
+                $(obj).attr("disabled", false);
+
             }
         });
     }
+
 
 </script>
 </body>

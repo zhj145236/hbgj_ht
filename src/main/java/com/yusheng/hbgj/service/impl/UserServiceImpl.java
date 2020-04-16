@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public User saveUser(UserDto userDto) {
 
         User user = userDto;
@@ -299,7 +299,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public User updateUser(UserDto userDto, HttpSession session) {
 
         userDao.update(userDto);

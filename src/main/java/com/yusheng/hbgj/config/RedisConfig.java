@@ -22,7 +22,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * <p>
  * 2017年8月10日
  */
-//@EnableRedisHttpSession
 @Configuration
 public class RedisConfig {
 
@@ -46,7 +45,6 @@ public class RedisConfig {
 
 
         jackson2JsonRedisSerializer.setObjectMapper(objectMapper);
-
 
 
         redisTemplate.setValueSerializer(new GenericToStringSerializer(Object.class));

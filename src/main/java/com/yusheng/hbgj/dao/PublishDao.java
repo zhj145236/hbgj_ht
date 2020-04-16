@@ -31,7 +31,7 @@ public interface PublishDao {
 
     List<PublishDto> wxlist(Map<String, Object> params, Integer offset, Integer limit);
 
-    @Select(" SELECT count(t.id) from publish t where  t.userId=13  AND t.userReadTime is null AND length(t.reply)>0  ")
+    @Select(" SELECT count(t.id) from publish t where  t.userId=#{userId}  AND t.userReadTime is null AND length(t.reply)>0  ")
     int getReplyButUnreadCount(Long userId);
 
 }

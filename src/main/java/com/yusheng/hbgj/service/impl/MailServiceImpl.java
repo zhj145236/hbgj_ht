@@ -24,7 +24,7 @@ public class MailServiceImpl implements MailService {
 	private MailDao mailDao;
 
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public void save(Mail mail, List<String> toUser) {
 		mail.setUserId(UserUtil2.getCurrentUser().getId());
 		mailDao.save(mail);

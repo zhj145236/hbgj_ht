@@ -12,6 +12,13 @@ import org.apache.ibatis.annotations.Select;
 
 import com.yusheng.hbgj.entity.Dict;
 
+/**
+ * @author  jinwei
+ * @date  2020-04-16
+ * @desc
+ */
+
+
 @Mapper
 public interface DictDao {
 

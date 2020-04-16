@@ -126,6 +126,7 @@ public class FileUtil {
 			bufferedReader = new BufferedReader(isr);
 			StringBuilder builder = new StringBuilder();
 			String string;
+
 			while ((string = bufferedReader.readLine()) != null) {
 				string = string + "\n";
 				builder.append(string);

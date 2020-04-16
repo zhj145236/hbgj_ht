@@ -55,7 +55,7 @@ public class RedisService {
      * @param value
      * @param time  过期时间,毫秒单位
      */
-    public void setForTimeMS(String key, String value, long time) {
+    public void setForTimeMs(String key, String value, long time) {
         redisTemplate.opsForValue().set(key, value, time, TimeUnit.MILLISECONDS);
     }
 
@@ -66,7 +66,7 @@ public class RedisService {
      * @param value
      * @param time  过期时间,分钟单位
      */
-    public void setForTimeMIN(String key, String value, long time) {
+    public void setForTimeMin(String key, String value, long time) {
         redisTemplate.opsForValue().set(key, value, time, TimeUnit.MINUTES);
     }
 
@@ -916,7 +916,7 @@ public class RedisService {
      * @param max
      * @return
      */
-    public long countZSet(String key, double min, double max) {
+    public long countZset(String key, double min, double max) {
         return redisTemplate.opsForZSet().count(key, min, max);
 
     }

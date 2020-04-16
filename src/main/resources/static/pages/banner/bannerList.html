@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>轮播图管理</title>
+
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="../../layui/css/layui.css" media="all"/>
+
+
 </head>
 <body>
 <div>
@@ -30,7 +33,10 @@
                 </div>
             </header>
 
+
             <div>
+
+                <p style="color: blueviolet">说明: 小程序的轮播图默认取前面3张</p>
                 <div class="widget-body no-padding">
                     <table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">
                         <thead>
@@ -60,13 +66,16 @@
 </body>
 </html>
 
+
 <script type="text/javascript" src="../../js/libs/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="../../js/jq.js"></script>
 <script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src="../../js/my/permission.js"></script>
+
 <script type="text/javascript">
+
     var pers = checkPermission();
 
     var example;
@@ -95,11 +104,10 @@
                         "width": "620px",
                         "render": function (data, type, row) {
 
-                            console.info(data, ",,");
 
-                            var imageHtml = "<img  src='" + data + "' style='width: 100%;height: 100px; border-radius: 5px ' alt='主图' />";
+                            var imageHtml = "<img  src='" + data + "' style='width: 100%;height: 150px; border-radius: 5px ' alt='主图' />";
 
-                            return "<div style='width: 600px;height: 160px;border: 2px solid black'> <p>" + imageHtml + "</p>   </div> "
+                            return "<div style='width: 382px;height: 150px;border: 2px solid black'> <p>" + imageHtml + "</p>   </div> ";
 
                         }
                     },
@@ -115,17 +123,35 @@
                         "defaultContent": "",
                         "orderable": false,
                         "render": function (data, type, row) {
+
+
                             var id = row['id'];
+
                             var href = "updateBanner.html?id=" + id;
                             var edit = buttonEdit(href, "", pers);
                             var del = buttonDel(id, "", pers);
-                            return edit + del;
+
+
+                            var hrefDetail = "bannerDetail.html?id=" + id;
+
+                            var bannerDetails = buttonDetails(hrefDetail);
+
+                            var toTopButton = toTop(id);
+
+                            return bannerDetails + edit + del + toTopButton;
                         }
                     }
 
                 ],
                 "order": []
             });
+    }
+
+
+    function buttonDetails(hrefDetail) {
+
+        return "<button  class='layui-btn layui-btn-xs' title='查看详情' onclick='window.location=\"" + hrefDetail + "\"'><i class='layui-icon'>&#xe705;</i></button>";
+
     }
 
     layui.use('layer', function () {

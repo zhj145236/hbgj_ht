@@ -207,7 +207,7 @@ public class UserController {
     @LogAnnotation
     @PostMapping("/wxAutoLogin")
     @ApiOperation(value = "微信用户自动登录")
-    public Map addWxUser(@RequestBody WeiXinVo wx, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+    public Map wxAutoLogin(@RequestBody WeiXinVo wx, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 
         if (StringUtils.isEmpty(wx.getOpenid())) {
             throw new IllegalArgumentException("openid参数丢失");
@@ -219,8 +219,6 @@ public class UserController {
         String token = userService.getTokenByOpenId(wx.getOpenid());
 
         String userStr = redisService.get(UserConstants.LOGIN_TOKEN + token);
-
-
 
 
         // 已存在账号并已登录
@@ -239,22 +237,17 @@ public class UserController {
 
         } else {
 
-
             User userObj = userService.getInfoByOpenId(wx.getOpenid());
 
             // 新用户注册
             if (userObj == null) {
 
-
-                log.info("微信新用户注册。。。。。");
-
+                log.info("微信新用户注册。。。。。{}",wx.getOpenid());
                 UserDto userVo = new UserDto();
-
                 // 默认加上游客角色
                 List<Long> roles = new ArrayList<>(1);
                 roles.add(visitorRoleId);
                 userVo.setRoleIds(roles);
-
 
                 userVo.setNickname(wx.getNickName());
                 userVo.setAddress((wx.getCountry() == null ? "" : wx.getCountry()) + (wx.getProvince() == null ? "" : wx.getProvince()) + (wx.getCity() == null ? "" : wx.getCity()));

@@ -1,7 +1,11 @@
 package com.yusheng.hbgj.dto;
 
 import java.io.Serializable;
-
+/**
+ * @author  jinwei
+ * @date  2020-04-16
+ * @desc
+ */
 public class BeanField implements Serializable {
 
 	private static final long serialVersionUID = 4279960350136806659L;

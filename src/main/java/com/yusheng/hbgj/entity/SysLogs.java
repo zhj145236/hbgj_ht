@@ -53,10 +53,12 @@ public class SysLogs extends BaseEntity<Long> {
 		this.flag = flag;
 	}
 
+    @Override
 	public String getRemark() {
 		return remark;
 	}
 
+    @Override
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}

@@ -21,10 +21,10 @@ import java.util.List;
 @Component
 public class AnalyTableJob {
 
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
     private final Logger logger = LoggerFactory.getLogger(AnalyTableJob.class);
 
+    SimpleDateFormat dateFormat;
 
     @Autowired
     private TableAnalyDao tableAnalyDao;
@@ -35,6 +35,8 @@ public class AnalyTableJob {
     @Scheduled(cron = "0 10 3 * * ? ")
     private void tableAnaly() {
 
+        dateFormat = new SimpleDateFormat("HH:mm:ss");
+        
         List<TableAnaly> currentData = tableAnalyDao.getCurrenData();
 
         if (currentData.size() == 0) {

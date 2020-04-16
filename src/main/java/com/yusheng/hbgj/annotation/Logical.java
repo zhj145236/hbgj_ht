@@ -7,12 +7,18 @@ package com.yusheng.hbgj.annotation;
  */
 
 
-    public enum Logical {
-        AND,
-        OR;
+public enum Logical {
 
-        private Logical() {
-        }
+
+    //并且
+    AND,
+
+
+    //或者
+    OR;
+
+    private Logical() {
     }
+}
 
 

@@ -64,10 +64,12 @@ public class Permission extends BaseEntity<Long> {
 		this.permission = permission;
 	}
 
+    @Override
 	public Integer getSort() {
 		return sort;
 	}
 
+    @Override
 	public void setSort(Integer sort) {
 		this.sort = sort;
 	}

@@ -16,53 +16,53 @@ import org.springframework.util.CollectionUtils;
 @Service
 public class RoleServiceImpl implements RoleService {
 
-	private static final Logger log = LoggerFactory.getLogger("adminLogger");
+    private static final Logger log = LoggerFactory.getLogger("adminLogger");
 
-	@Autowired
-	private RoleDao roleDao;
+    @Autowired
+    private RoleDao roleDao;
 
-	@Override
-	@Transactional
-	public void saveRole(RoleDto roleDto) {
-		Role role = roleDto;
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void saveRole(RoleDto roleDto) {
+        Role role = roleDto;
 
-		if (role.getId() != null) {// 修改
-			Role r = roleDao.getRole(role.getName());
-			if (r != null && r.getId() != role.getId()) {
-				throw new IllegalArgumentException(role.getName() + "已存在");
-			}
+        if (role.getId() != null) {// 修改
+            Role r = roleDao.getRole(role.getName());
+            if (r != null && !(r.getId().equals(role.getId()))) {
+                throw new IllegalArgumentException(role.getName() + "已存在");
+            }
 
-			roleDao.update(role);
-		} else {// 新增
-			Role r = roleDao.getRole(role.getName());
-			if (r != null) {
-				throw new IllegalArgumentException(role.getName() + "已存在");
-			}
+            roleDao.update(role);
+        } else {// 新增
+            Role r = roleDao.getRole(role.getName());
+            if (r != null) {
+                throw new IllegalArgumentException(role.getName() + "已存在");
+            }
 
-			roleDao.save(role);
+            roleDao.save(role);
 
-			log.debug("新增角色{}", role.getName());
-		}
+            log.debug("新增角色{}", role.getName());
+        }
 
-		saveRolePermission(role.getId(), roleDto.getPermissionIds());
-	}
+        saveRolePermission(role.getId(), roleDto.getPermissionIds());
+    }
 
-	private void saveRolePermission(Long roleId, List<Long> permissionIds) {
-		roleDao.deleteRolePermission(roleId);
-		permissionIds.remove(0L);
-		if (!CollectionUtils.isEmpty(permissionIds)) {
-			roleDao.saveRolePermission(roleId, permissionIds);
-		}
-	}
+    private void saveRolePermission(Long roleId, List<Long> permissionIds) {
+        roleDao.deleteRolePermission(roleId);
+        permissionIds.remove(0L);
+        if (!CollectionUtils.isEmpty(permissionIds)) {
+            roleDao.saveRolePermission(roleId, permissionIds);
+        }
+    }
 
-	@Override
-	@Transactional
-	public void deleteRole(Long id) {
-		roleDao.deleteRolePermission(id);
-		roleDao.deleteRoleUser(id);
-		roleDao.delete(id);
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteRole(Long id) {
+        roleDao.deleteRolePermission(id);
+        roleDao.deleteRoleUser(id);
+        roleDao.delete(id);
 
-		log.debug("删除角色id:{}", id);
-	}
+        log.debug("删除角色id:{}", id);
+    }
 
 }

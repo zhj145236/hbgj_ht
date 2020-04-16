@@ -15,6 +15,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author  jinwei
+ * @date  2020-04-16
+ * @desc
+ */
+
+
 @Api(tags = "字典")
 @RestController
 @RequestMapping("/dicts")

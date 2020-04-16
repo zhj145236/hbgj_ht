@@ -1,5 +1,12 @@
 package com.yusheng.hbgj.entity;
 
+/**
+ * @author  jinwei
+ * @date  2020-04-16
+ * @desc
+ */
+
+
 public class Dict extends BaseEntity<Long> {
 
 	private static final long serialVersionUID = -2431140186410912787L;

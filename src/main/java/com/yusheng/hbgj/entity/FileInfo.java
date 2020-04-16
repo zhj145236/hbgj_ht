@@ -104,10 +104,12 @@ public class FileInfo extends BaseEntity<String> {
         this.fileOriginName = fileOriginName;
     }
 
+    @Override
     public Date getDelTime() {
         return delTime;
     }
 
+    @Override
     public void setDelTime(Date delTime) {
         this.delTime = delTime;
     }

@@ -30,7 +30,7 @@ public class PermissionServiceImpl implements PermissionService {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public void delete(Long id) {
 		permissionDao.deleteRolePermission(id);
 		permissionDao.delete(id);
