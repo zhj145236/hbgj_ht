@@ -37,10 +37,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
-        <!--<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>-->
+
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -50,8 +47,7 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
-        <!-- <dependency> <groupId>org.projectlombok</groupId> <artifactId>lombok</artifactId>
-            </dependency> -->
+
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
@@ -93,11 +89,7 @@
             <artifactId>shiro-ehcache</artifactId>
             <version>${shiro.version}</version>
         </dependency>
-        <!--<dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>${druid.version}</version>
-        </dependency>-->
+
         <!--改为stater的方式-->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -127,6 +119,15 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
+
+
+        <!--项目的session托管在redis上-->
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-data-redis</artifactId>
+        </dependency>
+
+
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>
@@ -154,22 +155,6 @@
             <artifactId>poi-ooxml</artifactId>
             <version>4.1.0</version>
         </dependency>
-
-
-        <!-- shiro+redis缓存插件 -->
-        <!-- <dependency>
-             <groupId>org.crazycake</groupId>
-             <artifactId>shiro-redis</artifactId>
-             <version>3.2.3</version>
-         </dependency>-->
-
-
-        <!-- 集群下，启用session共享时，需打开 -->
-        <!-- <dependency>
-             <groupId>org.springframework.session</groupId>
-             <artifactId>spring-session-data-redis</artifactId>
-         </dependency>
-         -->
 
 
         <dependency>

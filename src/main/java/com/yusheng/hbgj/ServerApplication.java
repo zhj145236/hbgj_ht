@@ -26,7 +26,7 @@ public class ServerApplication {
         SpringApplication.run(ServerApplication.class, args);
 
 
-        log.info("{}", SysUtil.getMemInfo() + "\n启动耗时：" + ((System.currentTimeMillis() - startA) / 1000) + "s");
+        log.warn("{}", SysUtil.getMemInfo() + "\n启动耗时：" + ((System.currentTimeMillis() - startA) / 1000) + "s");
 
     }
 

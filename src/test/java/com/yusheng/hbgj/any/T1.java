@@ -12,18 +12,26 @@ public class T1 {
 
     public static void main(String[] args) {
 
-        int expire=25920000;
-        //2147483647
-        //25920000000
+        System.out.println("1111111111111..........");
+        System.out.println("1111111111111..........");
+        System.out.println("1111111111111..........");
+        System.out.println("1111111111111..........");
 
-        System.out.println(expire * 1000);
-        if( expire != -1 && (expire * 1000) < 2592000000L){
+        Runnable runnable=new Runnable() {
 
-            System.out.println("11111111111");
-        }else{
-            System.out.println("00000000000000000000");
-        }
+            @Override
+            public void run() {
 
+                System.out.println("i am new Runnable(){xxx},启动了");
+
+            }
+        };
+        Thread thread=new Thread(runnable);
+        thread.start();
+
+        System.out.println("2222222222222..........");
+        System.out.println("2222222222222..........");
+        System.out.println("2222222222222..........");
     }
 
 

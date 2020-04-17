@@ -1,6 +1,8 @@
 server:
   port: 8080
-
+  servlet:
+    session:
+      timeout: "PT10M"
 
 spring:
   datasource:
@@ -44,6 +46,10 @@ spring:
     port: 6379
     password: passredis@1109
     database: 1
+
+  session:
+    store-type: redis
+
   mail:
     default-encoding: UTF-8
     host: smtp.exmail.qq.com
@@ -73,6 +79,9 @@ constants:
 
   #本机域名
   domain: http://192.168.31.76:8080
+
+  mysqlBinDir:
+  sqlBackDir: /home/king/kingdata/dbback/
 
 logging:
   config: classpath:logback-admin.xml

@@ -12,6 +12,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 
@@ -78,7 +80,12 @@ public class BannerController {
 
     @GetMapping
     @ApiOperation(value = "列表")
-    public PageTableResponse list(PageTableRequest request) {
+    public PageTableResponse list(PageTableRequest request, HttpServletRequest request1) {
+
+        HttpSession session=request1.getSession();
+
+        System.out.println(session.toString()+"<<<<<<<<<");
+
         return new PageTableHandler(new PageTableHandler.CountHandler() {
 
             @Override

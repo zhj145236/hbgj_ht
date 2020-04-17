@@ -168,8 +168,9 @@ public class UserUtil2 {
         String token = getToken();
 
 
-        return  getRole(token);
+        return getRole(token);
     }
+
     /***
      * 获取用户的所有角色
      * @return
@@ -187,7 +188,6 @@ public class UserUtil2 {
 
         return roles;
     }
-
 
 
     /**
@@ -234,12 +234,17 @@ public class UserUtil2 {
     }
 
 
+    public static void setPermission(String prexAddtoken, List<Permission> list) {
+
+        setPermission(prexAddtoken, list, 0L);
+    }
+
     /**
      * 为用户加入他的权限
      *
      * @param list 权限对象集合
      */
-    public static void setPermission(String prexAddtoken, List<Permission> list) {
+    public static void setPermission(String prexAddtoken, List<Permission> list, Long expireTime) {
 
 
         userUtil.redisService.delete(prexAddtoken);
@@ -247,15 +252,19 @@ public class UserUtil2 {
         if (list.size() > 0) {
 
             list.forEach((item) -> {
-
                 userUtil.redisService.rightPush(prexAddtoken, JSON.toJSONString(item));
             });
 
 
         }
-        //设置30天过期
-        userUtil.redisService.expire(prexAddtoken, userUtil.expireDay, TimeUnit.DAYS);
+        if (expireTime != 0L) {
 
+            userUtil.redisService.expire(prexAddtoken, expireTime, TimeUnit.SECONDS);
+        } else {
+
+            //设置30天过期
+            userUtil.redisService.expire(prexAddtoken, userUtil.expireDay, TimeUnit.DAYS);
+        }
 
     }
 

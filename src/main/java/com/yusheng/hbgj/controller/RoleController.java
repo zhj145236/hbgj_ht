@@ -39,7 +39,11 @@ public class RoleController {
     @ApiOperation(value = "保存角色")
     @PermissionTag("sys:role:add")
     public void saveRole(@RequestBody RoleDto roleDto) {
+
+        System.out.println("保持或修改角色："+roleDto.getPermissionIds().size()+"<<<<<<<<<<,,,");
+
         roleService.saveRole(roleDto);
+
     }
 
     @GetMapping

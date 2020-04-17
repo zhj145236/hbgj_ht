@@ -27,6 +27,26 @@ public class RedisService {
         return redisTemplate;
     }
 
+
+
+    /**
+     * 模糊查询有关key
+     *
+     * @param key
+
+     */
+    public Set<Object> keys(String key ) {
+
+
+
+        return  redisTemplate.keys(key);
+
+
+    }
+
+
+
+
     /**
      * 设置 String 类型 key-value
      *
@@ -57,6 +77,7 @@ public class RedisService {
      */
     public void setForTimeMs(String key, String value, long time) {
         redisTemplate.opsForValue().set(key, value, time, TimeUnit.MILLISECONDS);
+
     }
 
     /**

@@ -1,7 +1,11 @@
 server:
   port: 8080
+  servlet:
+    session:
+      timeout: "PT10M"
 
 spring:
+
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/hbgj?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
@@ -45,6 +49,10 @@ spring:
     port: 6379
     password: passredis@1109
     database: 1
+
+  session:
+    store-type: redis
+
   mail:
     default-encoding: UTF-8
     host: smtp.exmail.qq.com
@@ -74,6 +82,9 @@ constants:
 
   #本机域名
   domain: http://192.168.31.174:8080
+
+  mysqlBinDir: D:\tools\mysql-5.6.46-winx64\bin\
+  sqlBackDir: D:\download\
 
 logging:
   config: classpath:logback-admin.xml
