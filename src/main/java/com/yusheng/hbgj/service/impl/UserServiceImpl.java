@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
 
         saveUserRoles(user.getId(), userDto.getRoleIds());
 
-        log.debug("新增厂商 {}", user.getUsername());
+        log.debug("新增厂商/微信用户 {}", user.getUsername());
         return user;
     }
 

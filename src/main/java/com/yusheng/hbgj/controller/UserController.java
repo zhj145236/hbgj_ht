@@ -265,7 +265,7 @@ public class UserController {
 
                 }
                 userVo.setUsername(username);
-                userVo.setRemark("系统自动为微信游客注册了此账号");
+                userVo.setRemark("系统自动为微信游客注册此账号");
 
 
                 //设置初始密码

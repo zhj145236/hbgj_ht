@@ -144,6 +144,8 @@ public class NoticeController {
             return 0;
         } else {
             return noticeDao.countUnread(Long.parseLong(userIdA));
+
+
         }
     }
 

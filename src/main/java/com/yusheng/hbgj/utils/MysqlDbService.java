@@ -1,5 +1,6 @@
 package com.yusheng.hbgj.utils;
 
+import com.yusheng.hbgj.constants.BusinessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.util.StringUtils;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Date;
 
 
@@ -50,7 +53,16 @@ public class MysqlDbService {
         } catch (Exception e) {
             log.error("备份文件失败。。{}", sqlBackDir);
         }
+    }
 
+    public void dbRestore() {
+
+        try {
+            this.dbRestore(sqlBackDir);
+            log.info("还原数据库库成功。。{}", sqlBackDir);
+        } catch (Exception e) {
+            log.error("还原数据库库失败。。{},{}", sqlBackDir, e.getMessage());
+        }
     }
 
 
@@ -90,11 +102,22 @@ public class MysqlDbService {
 
         sb.append(pathSql);
 
-        log.info("cmd命令为：" + sb.toString());
+
         Runtime runtime = Runtime.getRuntime();
-        log.info("开始备份：" + dbName);
-        Process process = runtime.exec("cmd /c" + sb.toString());
-        log.info("备份成功!执行耗时:" + (System.currentTimeMillis() - startA) + "ms");
+
+
+        if (SysUtil.isOSLinux()) {
+
+            log.info("shell命令为：" + sb.toString());
+            runtime.exec(new String[]{"/bin/sh", "-c", sb.toString()}, null, null);
+
+        } else {
+            log.info("cmd命令为：" + sb.toString());
+            runtime.exec("cmd /c" + sb.toString());
+        }
+
+
+        log.info("备份数据库成功!执行耗时:" + (System.currentTimeMillis() - startA) + "ms");
         return pathSql;
 
 
@@ -103,30 +126,51 @@ public class MysqlDbService {
     /**
      * 恢复数据库
      *
-     * @param root     账号
-     * @param pwd      密码
      * @param filePath 文件路径
      *                 脚本: mysql -hlocalhost -uroot -pjson@1109 hbgj < /home/king/kingdata/dbback/xxx.sql
      */
-    private void dbRestore(String root, String pwd, String filePath) {
+    private void dbRestore(String filePath) {
 
         long startA = System.currentTimeMillis();
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append(mysqlBinDir);
+        if (!StringUtils.isEmpty(mysqlBinDir)) {
+            sb.append(mysqlBinDir);
+        }
+
 
         sb.append("mysql");
         sb.append(" -h127.0.0.1");
-        sb.append(" -u").append(root);
-        sb.append(" -p").append(pwd);
+        sb.append(" -u").append(username);
+        sb.append(" -p").append(password);
         sb.append(" ").append(dbName).append(" <");
-        sb.append(filePath);
-        System.out.println("cmd命令为：" + sb.toString());
+
+        String currentSql = this.getCurrentSqlFile(filePath);
+
+        if (StringUtils.isEmpty(currentSql)) {
+            log.error("不存在的sql备份文件， 数据库还原失败！{}", filePath);
+            throw new BusinessException("不存在的sql备份文件， 数据库还原失败！");
+        }
+
+        sb.append(currentSql);
+
+
         Runtime runtime = Runtime.getRuntime();
-        System.out.println("开始还原数据");
+
+        Process process;
+
         try {
-            Process process = runtime.exec("cmd /c" + sb.toString());
+
+            if (SysUtil.isOSLinux()) {
+
+                process = runtime.exec(new String[]{"/bin/sh", "-c", sb.toString()}, null, null);
+
+            } else {
+                process = runtime.exec("cmd /c" + sb.toString());
+            }
+
+
             InputStream is = process.getInputStream();
             BufferedReader bf = new BufferedReader(new InputStreamReader(is, "utf8"));
             String line = null;
@@ -138,16 +182,53 @@ public class MysqlDbService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
         log.info("还原成功！执行耗时:" + (System.currentTimeMillis() - startA) + "ms");
     }
 
 
-    public static void main(String[] args) throws Exception {
+    /**
+     * 获取最新的sql备份文件
+     * @param sqlBackDir 放置sql文件的目录
+     * @return 最新的sql文件全路径
+     */
+    private String getCurrentSqlFile(String sqlBackDir) {
+        File f = new File("D:\\download\\");
+        if (f.isDirectory()) {
 
+            File[] files = f.listFiles(new FileFilter() {
+                @Override
+                public boolean accept(File fi) {
+                    // 要是sql文件，且大小超过20KB
+                    return fi.getName().endsWith(".sql") && !fi.isDirectory() && (fi.length() > 20 * 1024);
+                }
+            });
 
-        // DbBakUtil.dbBackUp("root", "json@1109", "jira", "D:/");
+            Arrays.sort(files, new Comparator<File>() {
+                public int compare(File f1, File f2) {
+                    long diff = f1.lastModified() - f2.lastModified();
+                    if (diff > 0)
+                        return -1;
+                    else if (diff == 0)
+                        return 0;
+                    else
+                        return 1;//如果 if 中修改为 返回-1 同时此处修改为返回 1  排序就会是递减
+                }
 
-        //DbBakUtil.dbRestore("root","json@1109","test","D:/test_20200120_202319.sql");
+                public boolean equals(Object obj) {
+                    return true;
+                }
+
+            });
+
+            //按时间排序，第0个就是最新的
+            return files[0].getAbsolutePath();
+
+        } else {
+            return null;
+
+        }
     }
 
 

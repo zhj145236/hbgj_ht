@@ -307,8 +307,7 @@ public class FileController {
     @LogAnnotation
     @PutMapping("/saveRemark")
     @ApiOperation(value = "更新合同起止时间")
-    @PermissionTag("sys:file:del")
-
+    @PermissionTag("sys:file:update")
     public void saveRemark(@RequestBody FileInfo fileInfo) {
 
 

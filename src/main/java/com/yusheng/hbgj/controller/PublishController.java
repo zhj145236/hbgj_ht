@@ -1,18 +1,11 @@
 package com.yusheng.hbgj.controller;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.yusheng.hbgj.annotation.LogAnnotation;
 import com.yusheng.hbgj.constants.BusinessException;
 import com.yusheng.hbgj.dao.NoticeDao;
 import com.yusheng.hbgj.dao.PublishDao;
 import com.yusheng.hbgj.dao.UserDao;
 import com.yusheng.hbgj.dto.PublishDto;
-import com.yusheng.hbgj.dto.ResponseInfo;
 import com.yusheng.hbgj.entity.Notice;
 import com.yusheng.hbgj.entity.Publish;
 import com.yusheng.hbgj.entity.User;
@@ -20,9 +13,11 @@ import com.yusheng.hbgj.page.table.PageTableHandler;
 import com.yusheng.hbgj.page.table.PageTableRequest;
 import com.yusheng.hbgj.page.table.PageTableResponse;
 import com.yusheng.hbgj.service.RedisService;
-import com.yusheng.hbgj.utils.*;
+import com.yusheng.hbgj.utils.DateUtil;
+import com.yusheng.hbgj.utils.RegexUtils;
+import com.yusheng.hbgj.utils.StrUtil;
 import io.swagger.annotations.Api;
-
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +25,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-
-import io.swagger.annotations.ApiOperation;
-import sun.rmi.runtime.Log;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Api(tags = "发布需求")
 @RestController
@@ -69,11 +65,15 @@ public class PublishController {
         }
 
         Long userIdA = StringUtils.isEmpty(userId) ? userDao.getUserId(openid) : userId;
+
+
+        System.out.println("userIdA-->" + userIdA + "<<<<<<<<<<<,,");
         if (userIdA == null || userIdA == 0) {
             return 0;
         } else {
 
-            return publishDao.getReplyButUnreadCount(userIdA);
+            return  publishDao.getReplyButUnreadCount(userIdA);
+
         }
 
     }
@@ -137,7 +137,7 @@ public class PublishController {
 
         // 给管理员单独 发送通知
         Notice notice = new Notice();
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append("有").append(userType).append("于 ").append(DateUtil.getNowStr()).append(" 给您留言，内容为：").append(publish.getPublishContent()).append(" <br/><br/>更多详情请在【用户留言】中查看");
         notice.setContent(sb.toString());
         notice.setTitle(userType + "留言");
@@ -211,9 +211,14 @@ public class PublishController {
         notice.setRefId(publish.getId().toString());
 
 
-        Long userId = userDao.getUserId(entity.getOpenid());
+        Long userIdA = entity.getUserId();
 
-        notice.setReceiveId(userId + "");
+
+        if (userIdA == null) {
+            userIdA = userDao.getUserId(entity.getOpenid());
+        }
+
+        notice.setReceiveId(userIdA + "");
 
         if (!StringUtils.isEmpty(publish.getReply())) {
 

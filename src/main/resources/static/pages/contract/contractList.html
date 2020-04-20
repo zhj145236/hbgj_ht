@@ -13,34 +13,37 @@
 <div>
 
 
-    <div class="site-text" style="margin: 5%; display: none" id="setContractWindow" target="test123">
+    <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11" style="display: none" id="setContractWindow"
+         target="test123">
 
-        <form class="layui-form" id="book" method="post" lay-filter="example">
+        <form class="form-horizontal" id="book" method="post">
+
 
             <input type="hidden" id="form_id" name="id">
 
-            <div class="layui-form-item">
-                <label class="layui-form-label">开始日期</label>
-                <div class="layui-input-block">
 
-                    <input type="text" id="beginTime" name="beginTime" lay-verify="title" class="layui-input"
+            <div class="form-group">
+                <label class="col-md-2 control-label">开始日期</label>
+                <div class="col-md-9">
+                    <input type="text" id="beginTime" name="beginTime" class="layui-input"
                            placeholder="请选择日期">
-
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">结束日期</label>
-                <div class="layui-input-block">
-                    <input type="text" id="endTime" name="endTime" lay-verify="title" placeholder="应晚于开始日期"
-                           class="layui-input">
                 </div>
             </div>
 
-            <div class="layui-form-item">
 
-                <label class="layui-form-label"></label>
-                <div class="layui-input-block">
+            <div class="form-group">
+                <label class="col-md-2 control-label">结束日期</label>
+                <div class="col-md-9">
+                    <input type="text" id="endTime" name="endTime" class="layui-input"
+                           placeholder="应晚于开始日期">
+                </div>
+            </div>
 
+
+            <div class="form-group">
+
+                <label class="col-md-2 control-label"></label>
+                <div class="col-md-10">
 
                     <button class="btn btn-primary" type="button" onclick="update(this)">
                         <i class="fa fa-save"></i> 保存
@@ -349,7 +352,7 @@
             type: 1,
             anim: 1,
             title: ["设置合同起止时间", 'font-size:18px'],
-            area: ['600px', '400px'],
+            area: ['600px', '250px'],
             shadeClose: true,
             content: $("#setContractWindow")
 

@@ -145,7 +145,8 @@ public class JobServiceImpl implements JobService {
 		scheduler.deleteJob(jobKey);
 
 		jobModel.setStatus(0);
-		jobDao.update(jobModel);
+
+		jobDao.delete(jobModel);
 	}
 
 }

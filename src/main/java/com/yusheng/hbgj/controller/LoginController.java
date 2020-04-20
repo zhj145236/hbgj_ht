@@ -76,6 +76,7 @@ public class LoginController {
 
 
                 if (User.Status.VALID != user.getStatus()) {
+                    log.warn("{},{}被锁定无法正常登录", user.getUsername(), user.getNickname());
                     throw new BusinessException("您的账号已被锁住了,如需登录请联系管理员");
                 }
 
@@ -124,7 +125,7 @@ public class LoginController {
         if (redisService.get(key) == null) {
 
             redisService.set(key, "1");
-            redisService.expire(key, 5, TimeUnit.MINUTES);
+            redisService.expire(key, 10, TimeUnit.MINUTES);
 
         } else {
 

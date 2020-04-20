@@ -9,6 +9,7 @@ import org.springframework.util.StringUtils;
 import java.lang.management.ManagementFactory;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * @author 金伟 on 2019/6/19 0019.
@@ -101,4 +102,17 @@ public class SysUtil {
         return sb.toString();
 
     }
+
+    /***
+     * 判断 操作系统是否为linux系统
+     * @return true:是；false:否
+     */
+    public static boolean isOSLinux() {
+
+        Properties prop = System.getProperties();
+        String os = prop.getProperty("os.name");
+        return os != null && os.toLowerCase().contains("linux");
+    }
+
+
 }
