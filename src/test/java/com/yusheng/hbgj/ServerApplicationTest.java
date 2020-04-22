@@ -19,8 +19,8 @@ public class ServerApplicationTest {
     public void test0() {
 
 
-        mysqlDbService.dbBackUp();
-        System.out.println("备份成功！");
+       // mysqlDbService.dbBackUp();
+        //System.out.println("备份成功！");
 
         //mysqlDbService. ();
 
