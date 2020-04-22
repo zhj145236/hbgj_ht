@@ -143,7 +143,6 @@ public class UserController {
 
         if (isSucess) {
             sysLogService.save(Long.parseLong(userId), "系统", true, "厂商同意了许可");
-
             return true;
         } else {
 

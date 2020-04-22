@@ -104,9 +104,7 @@
 
     var pers = checkPermission();
 
-    var pro = window.location.protocol;
-    var host = window.location.host;
-    var domain = pro + "//" + host;
+
 
     //获取所有用户
     getAllUser();
@@ -133,11 +131,7 @@
                         // d.orgId = $('#orgId').val();
                         d.tag = "企业检修";
 
-                    }/*,
-                    "error": function (xhr, textStatus, errorThrown) {
-                        var msg = xhr.responseText;
-                        console.log(msg)
-                    }*/
+                    }
                 },
                 "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
                 "columns": [
@@ -164,8 +158,6 @@
                                 return "超大文件";
 
                             }
-
-                            return del;
                         }
                     },
                     {"data": "type", "defaultContent": ""},
@@ -182,13 +174,13 @@
                             if (type === "图片") {
 
 
-                                var src = domain + "/files" + url;
-                                var prev = domain + "/files/prev" + url;
+                                var src =  "/files" + url;
+                                var prev =  "/files/prev" + url;
                                 u = "<a target='_blank' href='" + src + "'><img width='30' src='" + prev + "' title='点击可下载" + row['fileOriginName'] + "'/></a>";
 
                             } else {
 
-                                var downUrl = domain + "/files" + url;
+                                var downUrl =  "/files" + url;
 
                                 if (parseInt(row['size']) < (1024 * 1024)) {
                                     u = "<a target='_blank' style='color: #1E9FFF'  alt='此文件较大，下载过程中请耐心等待' href='" + downUrl + "'>下载</a>";
@@ -243,11 +235,12 @@
         var upload = layui.upload;
 
 
-        upload.render({
+        var uploadIns =    upload.render({
             elem: '#test1' //绑定元素
             , accept: 'file' //允许上传的文件类型
             , url: '/files' //上传接口
             , size: 1024 * 20 //限定大小20MB
+            , auto: false //选择文件后不自动上传a
             , data: {
                 resourceId: function () {
                     return $('#resourceId').val();
@@ -259,20 +252,27 @@
                 }
             }
 
-            , before: function () {
+            , choose: function (obj) {  //上传前选择回调方法
 
-                if ($('#resourceId').val() !== '') {
+                if (($('#resourceId').val().trim() === '')) {
 
-                    return true;
+                    uploadIns.config.elem.next()[0].value = '';
+                    layer.msg('上传失败，请先为附件选择企业（右上角下拉框）', {icon: 5});
 
                 } else {
-                    layer.msg('上传失败，请先为附件选择企业（右上角下拉框）', {icon: 5});
-                    return false;
+
+                    obj.preview(function (index, file, result) {
+                        obj.upload(index, file);
+                    });
+
                 }
             }
             , done: function (res, index, upload) {
                 layer.msg("上传成功");
                 example.ajax.reload();
+            },
+            error: function () {
+                layer.msg('请求异常，请稍后重试', {icon: 5});
             }
         });
     });

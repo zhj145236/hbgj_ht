@@ -59,7 +59,7 @@ public interface UserDao {
     @Select("select t.* from sys_user t where t.openid = #{openid}")
     User getInfoByOpenId(String openid);
 
-    @Update("update sys_user t set  t.agreeLicence= now()  where t.id = #{id} and t.compFlag=1 and t.agreeLicence!=null ")
+    @Update("update sys_user t set  t.agreeLicence= now()  where t.id = #{id} and t.compFlag=1 and t.agreeLicence is  null ")
     int agreeLicence(String userId);
 
     @Update("update sys_user t set t.status= 2  where  t.username!=null AND  t.username = #{username} ")

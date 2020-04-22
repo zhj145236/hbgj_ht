@@ -29,7 +29,7 @@
             </label>
 
             <div class="col-md-10">
-                说明: 待上传的预览图分辨率应为高260px,宽650px, 图片格式为png,文件大小应在100KB至500KB之间
+                说明: 待上传的预览图分辨率应为高260px,宽650px,图片格式建议为png,文件大小应在20KB至500KB之间
             </div>
 
         </div>
@@ -243,14 +243,48 @@
     layui.use(['upload', 'layer'], function () {
         var layer = layui.layer;
         var upload = layui.upload;
-        upload.render({
+
+        var uploadIns = upload.render({
             elem: '#test1' //绑定元素
+
             , accept: 'images' //允许上传的文件类型
             , url: '/files?tag=政策预览图' //上传接口
+            , auto: false //选择文件后不自动上传
+            , size: 500 //限定大小500KB
+            , exts: 'jpg|png|gif|bmp|jpeg'
+
+            , choose: function (obj) {  //上传前选择回调方法
+
+
+                obj.preview(function (index, file, result) {
+
+
+                    var img = new Image();
+                    img.src = result;
+                    img.onload = function () { //初始化夹在完成后获取上传图片宽高，判断限制上传图片的大小。
+
+                        console.info("图片尺寸","宽:",img.width,"高：",img.height);
+
+                        if ( Math.abs(img.width- 650)<=10  &&  Math.abs(img.height-260)<= 10) {
+
+                            obj.upload(index, file); //满足条件调用上传方法
+
+                        } else {
+
+                            uploadIns.config.elem.next()[0].value = '';
+                            layer.msg('上传失败，您上传的预览图尺寸必须是高260px、宽650px', {icon: 5});
+
+                        }
+                    };
+
+                });
+
+            }
+
+
             , done: function (res, index, upload) {
 
                 var url = res.url;
-
 
                 layer.msg("上传成功");
 

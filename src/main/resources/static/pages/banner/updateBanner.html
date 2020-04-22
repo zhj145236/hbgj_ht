@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
 
-    <title>编辑轮播图</title>
+    <title>修改轮播图</title>
 
     <style>
 
@@ -32,14 +32,14 @@
                 </label>
 
                 <div class="col-md-10">
-                    说明: 待上传的轮播图分辨率应为高150px,宽380px, 图片格式为png,文件大小应在100KB至500KB之间
+                    说明: 待上传的轮播图分辨率应为高150px,宽380px, 图片格式建议为png,文件大小应在20KB至500KB之间
                 </div>
 
             </div>
 
             <div class="form-group">
                 <label class="col-md-2 control-label">轮播图(一张)</label>
-                <div class="col-md-10" style="border: 1px solid black; width: 380px">
+                <div class="col-md-10" style="width: 380px">
                     <button type="button" class="layui-btn" id="test1">
                         <i class="layui-icon">&#xe67c;</i>上传（1张）
                     </button>
@@ -55,7 +55,7 @@
             <div class="form-group">
                 <label class="col-md-2 control-label">详情套图(多张)</label>
 
-                <div class="col-md-10" style="border: 1px solid black; width: 380px">
+                <div class="col-md-10" style="width: 500px">
 
                     <button type="button" class="layui-btn" id="test2">
                         <i class="layui-icon">&#xe67c;</i>上传
@@ -126,7 +126,10 @@
 
     var layedit, index;
     layui.use(['layedit', 'upload', 'layer', 'laydate'], function () {
+
         layedit = layui.layedit;
+
+
         layedit.set({
             uploadImage: {
                 url: '/files/layui',
@@ -168,10 +171,47 @@
     layui.use(['upload', 'layer'], function () {
         var layer = layui.layer;
         var upload = layui.upload;
-        upload.render({
+
+        var uploadIns = upload.render({
+
+
             elem: '#test1' //绑定元素
             , accept: 'images' //允许上传的文件类型
             , url: '/files?tag=首页轮播图' //上传接口
+            , auto: false //选择文件后不自动上传
+            , size: 500 //限定大小500KB
+            , exts: 'jpg|png|gif|bmp|jpeg'
+            , multiple: false
+
+
+            , choose: function (obj) {  //上传前选择回调方法
+
+
+                obj.preview(function (index, file, result) {
+
+
+                    var img = new Image();
+                    img.src = result;
+                    img.onload = function () { //初始化夹在完成后获取上传图片宽高，判断限制上传图片的大小。
+
+                        console.info("图片尺寸", "宽:", img.width, "高：", img.height);
+
+                        if (Math.abs(img.width - 380) <= 10 && Math.abs(img.height - 150) <= 10) {
+
+                            obj.upload(index, file);
+
+                        } else {
+
+                            uploadIns.config.elem.next()[0].value = '';
+                            layer.msg('上传失败，您上传的预览图尺寸必须是高150px、宽380px', {icon: 5});
+
+                        }
+                    };
+
+                });
+
+            }
+
             , done: function (res, index, upload) {
 
                 var url = res.url;
@@ -218,14 +258,14 @@
         if (mainImg === "") {
             layer.msg("请上传一张图片");
             return;
-        } else if (layedit.getContent(index).trim().length <= 5) {
-            layer.msg("请上传详情图片");
-            return;
         }
 
 
         var formData = $("#form").serializeObject();
+
+        formData.mainImg = mainImg;
         formData.content = layedit.getContent(index);
+
 
         $(obj).attr("disabled", true);
 

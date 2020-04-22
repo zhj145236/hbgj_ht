@@ -7,7 +7,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/hbgj?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    url: jdbc:mysql://localhost:7090/hbgj?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
     username: root
     password: hbgj@Humen#2020$
     druid:
@@ -42,7 +42,7 @@ spring:
       enabled: false
   redis:
     host: localhost
-    port: 6379
+    port: 7190
     password: hbgj@Redis#2020$
     database: 1
 
