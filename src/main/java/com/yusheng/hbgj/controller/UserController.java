@@ -13,6 +13,7 @@ import com.yusheng.hbgj.page.table.PageTableResponse;
 import com.yusheng.hbgj.service.RedisService;
 import com.yusheng.hbgj.service.SysLogService;
 import com.yusheng.hbgj.service.UserService;
+import com.yusheng.hbgj.utils.MD5;
 import com.yusheng.hbgj.utils.StrUtil;
 import com.yusheng.hbgj.utils.UserUtil2;
 import com.yusheng.hbgj.vo.WeiXinVo;
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 用户相关接口
@@ -82,7 +84,7 @@ public class UserController {
 
         roleDeal(userDto, companyRoleId);
 
-        if(userDto.getCompFlag()==null){
+        if (userDto.getCompFlag() == null) {
             userDto.setCompFlag(1);
         }
 
@@ -225,8 +227,13 @@ public class UserController {
 
             User loginedUser = JSONObject.parseObject(userStr, User.class);
 
+            this.supplyUser(wx,loginedUser);
+
             loginedUser.setPassword(null);
             loginedUser.setOriginalPassword(null);
+
+
+
             maps.put("user", loginedUser);
             maps.put("role", UserUtil2.getRole(token));
             maps.put("token", token);
@@ -241,7 +248,7 @@ public class UserController {
             // 新用户注册
             if (userObj == null) {
 
-                log.info("微信新用户注册。。。。。{}",wx.getOpenid());
+                log.info("微信新用户注册。。。。。{}", wx.getOpenid());
                 UserDto userVo = new UserDto();
                 // 默认加上游客角色
                 List<Long> roles = new ArrayList<>(1);
@@ -249,8 +256,8 @@ public class UserController {
                 userVo.setRoleIds(roles);
 
                 userVo.setNickname(wx.getNickName());
-                userVo.setAddress((wx.getCountry() == null ? "" : wx.getCountry()) + (wx.getProvince() == null ? "" : wx.getProvince()) + (wx.getCity() == null ? "" : wx.getCity()));
                 userVo.setHeadImgUrl(wx.getAvatarUrl());
+                userVo.setAddress((wx.getCountry() == null ? "" : wx.getCountry()) + (wx.getProvince() == null ? "" : wx.getProvince()) + (wx.getCity() == null ? "" : wx.getCity()));
                 userVo.setOpenid(wx.getOpenid());
                 userVo.setSex(wx.getGender());
                 userVo.setTelephone(wx.getTel());
@@ -294,7 +301,15 @@ public class UserController {
 
                 log.info("此账号已经存在于系统中,重新新自动登录");
 
+
+                String passW=userObj.getOriginalPassword();
+
                 maps = userService.login(userObj, request, session);
+
+                userObj.setOriginalPassword(passW);
+                this.supplyUser(wx,userObj);
+
+
 
                 maps.put("msg", "此账号已经存在于系统中,系统为其自动登录上");
 
@@ -303,6 +318,43 @@ public class UserController {
 
 
         }
+
+    }
+
+
+    //完善用户的更多信息
+    private void supplyUser(WeiXinVo weiXinVo, User loginedUser) {
+
+
+        if (!StringUtils.isEmpty(weiXinVo.getAvatarUrl()) && StringUtils.isEmpty(loginedUser.getHeadImgUrl())) {
+
+            UserDto userDto = new UserDto();
+            userDto.setId(loginedUser.getId());
+
+            userDto.setNickname(weiXinVo.getNickName());
+            userDto.setHeadImgUrl(weiXinVo.getAvatarUrl());
+            userDto.setAddress((weiXinVo.getCountry() == null ? "" : weiXinVo.getCountry()) + (weiXinVo.getProvince() == null ? "" : weiXinVo.getProvince()) + (weiXinVo.getCity() == null ? "" : weiXinVo.getCity()));
+            userDto.setSex(weiXinVo.getGender());
+            userDto.setTelephone(weiXinVo.getTel());
+            userDao.update(userDto);
+
+
+            String token = MD5.getMd5(loginedUser.getUsername() + loginedUser.getOriginalPassword());
+            loginedUser.setSex(weiXinVo.getGender());
+            loginedUser.setNickname(weiXinVo.getNickName());
+            loginedUser.setAddress((weiXinVo.getCountry() == null ? "" : weiXinVo.getCountry()) + (weiXinVo.getProvince() == null ? "" : weiXinVo.getProvince()) + (weiXinVo.getCity() == null ? "" : weiXinVo.getCity()));
+            loginedUser.setHeadImgUrl(weiXinVo.getAvatarUrl());
+            loginedUser.setTelephone(weiXinVo.getTel());
+
+
+            Long time = redisService.getExpire(UserConstants.LOGIN_TOKEN + token);
+            System.out.println(time+"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+            redisService.set(UserConstants.LOGIN_TOKEN + token, JSONObject.toJSONString(loginedUser));
+            redisService.expire(UserConstants.LOGIN_TOKEN + token, time, TimeUnit.SECONDS);
+
+            log.info("完善用户字段{},{},{},{},{}",loginedUser.getHeadImgUrl() , loginedUser.getSex(), loginedUser.getNickname(), loginedUser.getAddress(), loginedUser.getTelephone());
+        }
+
 
     }
 

@@ -9,6 +9,8 @@ import com.yusheng.hbgj.entity.User;
 import com.yusheng.hbgj.service.RedisService;
 import com.yusheng.hbgj.service.UserService;
 import com.yusheng.hbgj.utils.MD5;
+import com.yusheng.hbgj.utils.StrUtil;
+import com.yusheng.hbgj.utils.SysUtil;
 import com.yusheng.hbgj.utils.UserUtil2;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -77,7 +79,7 @@ public class LoginController {
 
                 if (User.Status.VALID != user.getStatus()) {
                     log.warn("{},{}被锁定无法正常登录", user.getUsername(), user.getNickname());
-                    throw new BusinessException("您的账号已被锁住了,如需登录请联系管理员");
+                    throw new BusinessException("您的账号被锁住,如需登录请联系管理员");
                 }
 
                 String aa = user.getOriginalPassword();
@@ -154,12 +156,31 @@ public class LoginController {
     @PostMapping("/sys/login/restful")
     public ResponseInfo restfulLogin(String username, String password, HttpServletRequest request, HttpSession session) {
 
+
+        if (SysUtil.paramsIsNull(username, password)) {
+            throw new IllegalArgumentException("账号与密码必填");
+        }
+
+        String key = "user:login_failed:" + username;
+
+        String failCountStr = redisService.get(key);
+
+        if (failCountStr != null && Long.parseLong(failCountStr) > 8L) {
+
+            throw new BusinessException("您之前已经连续输错密码超过5次了,请稍后再试");
+        }
+
         User user = userService.getUser(username);
 
         if (user != null) {
 
             if (user.getPassword().equals(userService.passwordEncoder(password, user.getSalt()))) {
 
+
+                if (User.Status.VALID != user.getStatus()) {
+                    log.warn("{},{}被锁定无法正常登录", user.getUsername(), user.getNickname());
+                    throw new BusinessException("您的账号已失效,如需登录请联系客服");
+                }
 
                 // restful 登录
                 Map<String, Object> maps = userService.login(user, request, session);
@@ -169,9 +190,10 @@ public class LoginController {
                 return ResponseInfo.success(maps);
 
             } else {
-                log.info("登录失败，{}输入了不正确的密码{}", username, password);
 
-                return ResponseInfo.fail("登录失败,原因密码不正确");
+                log.info("登录失败，{}输入了不正确的密码{}", username, password);
+                String msg = this.dealLogin(username);
+                throw new BusinessException(msg);
 
             }
 
@@ -179,7 +201,7 @@ public class LoginController {
         } else {
 
             log.info("登录失败,账号不存在，{}", username);
-            return ResponseInfo.fail("登录失败,账号不存在");
+            throw new BusinessException("登录失败：账号不存在");
 
 
         }

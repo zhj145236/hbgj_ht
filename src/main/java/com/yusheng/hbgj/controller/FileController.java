@@ -395,7 +395,7 @@ public class FileController {
 
                 String sb2 = "您有一份与" + "东莞市环联管家生态环境科技有限公司" + "签订的合同【" + file.getFileOriginName() + "】" +
                         "将于" + endDate +
-                        "到期,请及时处理。合同附件链接 【<a target='_blank'  style='color:blue;font-size:23px' href='" + domain + "/files" + file.getUrl() + "'>打开</a>" + "】。如已经处理请忽略此条通知";
+                        "到期,请及时处理。如已经处理请忽略此条通知";
                 notice2.setContent(sb2);
                 //草稿
                 notice2.setStatus(Notice.Status.DRAFT);

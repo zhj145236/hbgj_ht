@@ -5,40 +5,56 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f3cc32f-ce62-4bb5-abc8-e1e2356ba79d" name="Default Changelist" comment="favicon.ico图标显示">
-      <change afterPath="$PROJECT_DIR$/.idea/GrepConsole.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_coobird_thumbnailator_0_4_8.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_pool2_2_5_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_crazycake_shiro_redis_3_2_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__redis_clients_jedis_2_9_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/hbgj.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/hbgj.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_pool2_2_5_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_crazycake_shiro_redis_3_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__redis_clients_jedis_2_9_0.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/FileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/pages/user/addUser.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/pages/user/addUser.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/pages/user/updateUser.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/pages/user/updateUser.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/pages/check_repair/checkpairList.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/pages/check_repair/checkpairList.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/pages/contract/contractList.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/pages/contract/contractList.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/pages/environment/environmentList.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/pages/environment/environmentList.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/pages/standing_book/standingbookList.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/pages/standing_book/standingbookList.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/logback-admin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/logback-admin.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/css/login.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/img/avatars/1.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/img/avatars/sunny.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/img/login/bg.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/img/login/bg.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/img/logo/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/common.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/dict.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/dict.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/js/jq.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/jq.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/plugin/datatables/Chinese.lang" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/plugin/datatables/Chinese.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/layui/lay/modules/layedit.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/layui/lay/modules/layedit.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/pages/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/pages/job/jobList.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/job/jobList.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/pages/log/logList.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/log/logList.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/pages/mail/addMail.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/mail/addMail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/pages/notice/addNotice.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/notice/addNotice.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/pages/notice/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/notice/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/pages/notice/noticeList.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/notice/noticeList.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/pages/notice/noticePubList.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/notice/noticePubList.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/pages/notice/updateNotice.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/notice/updateNotice.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/pages/user/addUser.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/user/addUser.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/pages/user/changePassword.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/user/changePassword.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/pages/user/updateHeadImg.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/user/updateHeadImg.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/pages/user/updateMyself.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/user/updateMyself.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/pages/user/updateUser.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/user/updateUser.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/pages/user/userList.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/user/userList.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/happyroad.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/happyroad.jar.original" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.happyroad.wy.ServerApplicationTest.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.happyroad.wy.ServerApplicationTest.txt" beforeDir="false" />
     </list>
@@ -200,6 +216,7 @@
     <ignored path="logs/admin-server.log.error" />
     <ignored path="logs/admin-server.log.sql" />
     <ignored path="target/classes/META-INF/happyroad.kotlin_module" />
+    <ignored path="$PROJECT_DIR$/.idea/httpRequests/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -237,49 +254,55 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="hbgj" />
+  </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
+  <component name="FindBugs-IDEA-Workspace">
+    <toolWindowEditorPreview>false</toolWindowEditorPreview>
+  </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>sess</find>
-      <find>rootlevel</find>
-      <find>mylevel</find>
-      <find>start</find>
-      <find>Advice</find>
-      <find>登</find>
-      <find>龚金伟</find>
-      <find>session</find>
-      <find>webExpireDay</find>
-      <find>serverProperties</find>
-      <find>sun</find>
-      <find>登录</find>
-      <find>IllegalArgumentException</find>
-      <find>公告未读提醒、发布公告、查询公告、公告阅读人列表</find>
-      <find>发布内容</find>
-      <find>visitorRoleId</find>
-      <find>环保管家管理系统</find>
+      <find>上传失败，请先为附件选择企业（右上角下拉框）</find>
+      <find>UPLOAD_FILES</find>
+      <find>resourceId</find>
+      <find>getA</find>
+      <find>alert</find>
+      <find>260px,宽650px, 图片格式为png,文件大小</find>
+      <find>260</find>
+      <find>test1</find>
+      <find>mainImgDiv</find>
+      <find>confirm</find>
+      <find>add</find>
+      <find>图片格式为png,文件大小应在100KB至500KB之间</find>
+      <find>6379</find>
+      <find>domain</find>
+      <find>备份数据库文件成功</find>
+      <find>dbBackUp</find>
+      <find>sys:file</find>
       <find>login</find>
-      <find>logo</find>
-      <find>darkbannerrap</find>
-      <find>.admin-header-user</find>
-      <find>admin-header-user</find>
-      <find>static</find>
-      <find>拦截</find>
-      <find>@pro</find>
-      <find>.login</find>
-      <find>9AE36A</find>
-      <find>.message</find>
-      <find>message</find>
-      <find>formdata.roleIds</find>
+      <find>BusinessException</find>
+      <find>dealLogin</find>
+      <find>IllegalArgumentException</find>
+      <find>Coo</find>
+      <find>Cookie</find>
+      <find>备案</find>
+      <find>30M</find>
+      <find>20</find>
+      <find>账号</find>
+      <find>logout</find>
+      <find>您有</find>
+      <find>supplyUser</find>
     </findStrings>
     <replaceStrings>
       <replace>sys_table_analy</replace>
@@ -296,8 +319,25 @@
       <replace>adminUserid</replace>
       <replace>厂商角色ID</replace>
       <replace>hlgjId</replace>
+      <replace>登录</replace>
+      <replace>userVo</replace>
+      <replace>PermissionTag</replace>
+      <replace>com.yusheng.hbgj.annotation.PermissionTag</replace>
+      <replace>userUtil.redisService</replace>
+      <replace>content_bakHtml</replace>
+      <replace>banner</replace>
+      <replace>banner_content_bakText</replace>
+      <replace>formDate</replace>
+      <replace>formData</replace>
+      <replace>mainImg</replace>
+      <replace>scratch_banner_html</replace>
+      <replace>XLSX</replace>
+      <replace>XLS</replace>
     </replaceStrings>
     <dirStrings>
+      <dir>D:\jinwei_private\hbgj\src\main\java</dir>
+      <dir>D:\jinwei_private\hbgj\src\test</dir>
+      <dir>D:\jinwei_private\hbgj\src</dir>
       <dir>D:\jinwei_private\hbgj</dir>
     </dirStrings>
   </component>
@@ -305,59 +345,62 @@
     <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HierarchyBrowserManager">
+    <option name="SORT_ALPHABETICALLY" value="true" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/resources/mybatis-mappers/base/SysLogsMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/resources/mybatis-mappers/base/TableAnalyMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/dao/PublishDao.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/mybatis-mappers/base/PublishMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/notice/noticePubList.html" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/PublishController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/publish/publishList.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/publish/updatePublish.html" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/dao/FileInfoDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/ImageUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/standing_book/standingbookList.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/environment/environmentList.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/contract/contractList.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/check_repair/checkpairList.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/file/fileList.html" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/impl/FileServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/FileService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/FileController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/entity/User.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/mybatis-mappers/base/UserMapper.xml" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/config/EhCacheConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/impl/EhCacheTokenManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/TokenManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/config/RedisYml.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/yusheng/hbgj/any/T1.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/logback-admin.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/config/MyShiroRealm.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/advice/ExceptionHandlerAdvice.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/page/table/PageTableArgumentResolver.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/impl/RedisTokenManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/filter/LogoutFilter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/LoginController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/js/main.js" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/UserService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/impl/UserServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/dao/UserDao.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/dashboard.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/js/jq.js" />
-        <option value="$PROJECT_DIR$/src/main/resources/application-prod.yml" />
-        <option value="$PROJECT_DIR$/src/main/resources/application-test.yml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/RedisService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/UserUtil2.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/RoleController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/impl/RoleServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/DbBakUtil.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application-dev.yml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/config/ShiroConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/config/WebMvcConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/index.html" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/config/SwaggerConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/DbBakService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/NoticeController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/PublishController.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/yusheng/hbgj/any/T1.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/SysUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/MysqlDbService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/impl/JobServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/dao/JobDao.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/job/jobList.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/dict.js" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/entity/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/validator/MatchingBean.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/validator/ValidatorMessage.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/validator/ValidatorUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/entity/News.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/NewsController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/status_code/500.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/status_code/403.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/status_code/404.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/ErrorPageController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/error/js/500.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/error/css/500.css" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/error/500.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/error/404.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/error/js/demo-1.js" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/dao/UserDao.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/news/updateNews.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/news/addNews.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/banner/bannerDetail.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/banner/addBanner.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/banner/updateBanner.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/application-test.yml" />
+        <option value="$PROJECT_DIR$/src/main/resources/application-prod.yml" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/file/fileList.html" />
+        <option value="$PROJECT_DIR$/src/test/java/com/yusheng/hbgj/ServerApplicationTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/impl/UserServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/resources/static/login.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/css/login.css" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/user/addUser.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/user/updateUser.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/contract/contractList.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/environment/environmentList.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/standing_book/standingbookList.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/check_repair/checkpairList.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/index.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/LoginController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/FileController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/UserController.java" />
       </list>
     </option>
@@ -392,15 +435,26 @@
           <item name="hbgj" type="9519ce18:MavenProjectsStructure$ProjectNode" />
           <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
         </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="hbgj" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Dependencies" type="f4be9f2a:MavenProjectsStructure$DependenciesNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="hbgj" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Dependencies" type="f4be9f2a:MavenProjectsStructure$DependenciesNode" />
+          <item name="org.springframework.boot:spring-boot-starter-data-redis:2.0.4.RELEASE" type="c0821a7e:MavenProjectsStructure$DependencyNode" />
+        </path>
       </expand>
       <select />
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="56" />
+    <option name="x" value="892" />
     <option name="y" value="-8" />
     <option name="width" value="944" />
-    <option name="height" value="1056" />
+    <option name="height" value="1096" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -408,8 +462,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="CatdeaLogs" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -420,13 +473,75 @@
             <path>
               <item name="hbgj" type="b2602c69:ProjectViewProjectNode" />
               <item name="hbgj" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hbgj" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hbgj" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hbgj" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hbgj" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hbgj" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hbgj" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hbgj" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hbgj" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hbgj" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hbgj" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="banner" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hbgj" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hbgj" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hbgj" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hbgj" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hbgj" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hbgj" type="462c0819:PsiDirectoryNode" />
+              <item name="文档和sql" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="CatdeaLogs" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -440,8 +555,8 @@
     <property name="GenerateAntBuildDialog.outputFileNameProperty" value="hbgj" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
-    <property name="RequestMappingsPanelWidth0" value="75" />
-    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RequestMappingsPanelWidth0" value="725" />
+    <property name="RequestMappingsPanelWidth1" value="725" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
@@ -451,12 +566,14 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="database.console.LAST_STATE" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/target" />
+    <property name="extract.method.default.visibility" value="private" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/static/pages/environment/environmentList.html" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/src/main/resources/static/pages/environment/environmentList.html" />
   </component>
   <component name="RebelAgentSelection">
     <selection>jr</selection>
@@ -466,30 +583,364 @@
       <recent name="com.yusheng.hbgj" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\jinwei_private\hbgj\src\main\resources\static\img\login" />
-      <recent name="D:\jinwei_private\hbgj\src\main\resources" />
-      <recent name="D:\jinwei_private\hbgj\src\main\resources\static" />
-      <recent name="D:\jinwei_private\hbgj\src\main\resources\static\img\logo" />
-      <recent name="D:\jinwei_private\hbgj\src\main\resources\static\img\avatars" />
+      <recent name="D:\jinwei_private\hbgj\src\main\resources\static\pages\error\js" />
+      <recent name="D:\jinwei_private\hbgj\src\main\resources\static\pages\error\css" />
+      <recent name="D:\jinwei_private\hbgj\src\main\resources\static\pages\error" />
+      <recent name="D:\jinwei_private\hbgj\src\main\resources\static\pages\status_code" />
+      <recent name="D:\jinwei_private\hbgj\src\main\java\com\yusheng\hbgj\utils" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.yusheng.hbgj.advice" />
+      <recent name="com.yusheng.hbgj.utils" />
+      <recent name="com.yusheng.hbgj.dto" />
       <recent name="com.yusheng.hbgj.job" />
       <recent name="com.happyroad.wy.job" />
-      <recent name="com.happyroad.wy.entity" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\jinwei_private\hbgj\src\main\java\com\yusheng\hbgj" />
+      <recent name="D:\jinwei_private\hbgj\src\main\java" />
       <recent name="D:\jinwei_private\hbgj\src\main\resources\static" />
       <recent name="D:\jinwei_private\hbgj\src\main\resources" />
     </key>
+  </component>
+  <component name="RestClientSettings">
+    <option name="REQUEST_HISTORY">
+      <list>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="-1" />
+                <option name="domain" value="localhost" />
+                <option name="name" value="JSESSIONID" />
+                <option name="path" value="/" />
+                <option name="value" value="79daa015-774a-43b3-92d8-88874d54aaed" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost:8080" />
+          <option name="urlPath" value="/files/" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="login-token" />
+                <option name="value" value="c31f0c9a-dc0b-488a-b1e1-d690cff7271aAAA" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="resourceId" />
+                <option name="value" value="2" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="-1" />
+                <option name="domain" value="localhost" />
+                <option name="name" value="JSESSIONID" />
+                <option name="path" value="/" />
+                <option name="value" value="79daa015-774a-43b3-92d8-88874d54aaed" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost:8080" />
+          <option name="urlPath" value="/files/wxlistFiles" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="login-token" />
+                <option name="value" value="c31f0c9a-dc0b-488a-b1e1-d690cff7271aAAA" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="resourceId" />
+                <option name="value" value="2" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="-1" />
+                <option name="domain" value="localhost" />
+                <option name="name" value="JSESSIONID" />
+                <option name="path" value="/" />
+                <option name="value" value="79daa015-774a-43b3-92d8-88874d54aaed" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost:8080" />
+          <option name="urlPath" value="/files/wxlistFiles" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="login-token" />
+                <option name="value" value="c31f0c9a-dc0b-488a-b1e1-d690cff7271a" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="resourceId" />
+                <option name="value" value="2" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="-1" />
+                <option name="domain" value="localhost" />
+                <option name="name" value="JSESSIONID" />
+                <option name="path" value="/" />
+                <option name="value" value="79daa015-774a-43b3-92d8-88874d54aaed" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost:8080" />
+          <option name="urlPath" value="/files/wxlistFiles" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="login-token" />
+                <option name="value" value="c31f0c9a-dc0b-488a-b1e1-d690cff7271a" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="-1" />
+                <option name="domain" value="localhost" />
+                <option name="name" value="JSESSIONID" />
+                <option name="path" value="/" />
+                <option name="value" value="79daa015-774a-43b3-92d8-88874d54aaed" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost:8080" />
+          <option name="urlPath" value="/files" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="login-token" />
+                <option name="value" value="c31f0c9a-dc0b-488a-b1e1-d690cff7271a" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="-1" />
+                <option name="domain" value="localhost" />
+                <option name="name" value="JSESSIONID" />
+                <option name="path" value="/" />
+                <option name="value" value="79daa015-774a-43b3-92d8-88874d54aaed" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost:8080" />
+          <option name="urlPath" value="/files" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="login-token" />
+                <option name="value" value="Ac31f0c9a-dc0b-488a-b1e1-d690cff7271a" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="-1" />
+                <option name="domain" value="localhost" />
+                <option name="name" value="JSESSIONID" />
+                <option name="path" value="/" />
+                <option name="value" value="79daa015-774a-43b3-92d8-88874d54aaed" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost:8080" />
+          <option name="urlPath" value="swagger-ui.html" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="login-token" />
+                <option name="value" value="Ac31f0c9a-dc0b-488a-b1e1-d690cff7271a" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="-1" />
+                <option name="domain" value="localhost" />
+                <option name="name" value="JSESSIONID" />
+                <option name="path" value="/" />
+                <option name="value" value="79daa015-774a-43b3-92d8-88874d54aaed" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost:8080" />
+          <option name="urlPath" value="swagger-ui.html" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="login-token" />
+                <option name="value" value="c31f0c9a-dc0b-488a-b1e1-d690cff7271a" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost:8080" />
+          <option name="urlPath" value="swagger-ui.html" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+      </list>
+    </option>
   </component>
   <component name="RestServicesNavigator">
     <treeState>
       <expand>
         <path>
-          <item name="Found 80 services " type="fcff1e1b:RestServiceStructure$RootNode" />
+          <item name="Found 105 services " type="fcff1e1b:RestServiceStructure$RootNode" />
         </path>
         <path>
-          <item name="Found 80 services " type="fcff1e1b:RestServiceStructure$RootNode" />
+          <item name="Found 105 services " type="fcff1e1b:RestServiceStructure$RootNode" />
           <item name="hbgj" type="c588b436:RestServiceStructure$ProjectNode" />
         </path>
       </expand>
@@ -512,7 +963,7 @@
         </RuleState>
       </list>
     </option>
-    <option name="contentProportion" value="0.15097402" />
+    <option name="contentProportion" value="0.19967532" />
   </component>
   <component name="RunManager" selected="Spring Boot.ServerApplication">
     <configuration default="true" type="Applet">
@@ -521,26 +972,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DateUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.yusheng.hbgj.utils.DateUtil" />
-      <module name="hbgj" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="FileController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.yusheng.hbgj.controller.FileController" />
-      <module name="hbgj" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="StrUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.yusheng.hbgj.utils.StrUtil" />
+    <configuration name="SysUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.yusheng.hbgj.utils.SysUtil" />
       <module name="hbgj" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
@@ -560,6 +993,29 @@
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerApplicationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="hbgj" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="PACKAGE_NAME" value="com.yusheng.hbgj" />
+      <option name="MAIN_CLASS_NAME" value="com.yusheng.hbgj.ServerApplicationTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerApplicationTest.test0" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="hbgj" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="PACKAGE_NAME" value="com.yusheng.hbgj" />
+      <option name="MAIN_CLASS_NAME" value="com.yusheng.hbgj.ServerApplicationTest" />
+      <option name="METHOD_NAME" value="test0" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -599,13 +1055,10 @@
     <configuration name="ServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="hbgj" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.yusheng.hbgj.ServerApplication" />
-      <option name="DEBUG_MODE" value="true" />
-      <option name="ENABLE_LAUNCH_OPTIMIZATION" value="false" />
-      <option name="HIDE_BANNER" value="true" />
-      <option name="ENABLE_JMX_AGENT" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="UPDATE_ACTION_UPDATE_POLICY" value="UpdateClassesAndResources" />
-      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <RunnerSettings RunnerId="Debug with VisualVM">
+        <option name="visualVMId" value="7947741403900" />
+      </RunnerSettings>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -630,20 +1083,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.StrUtil" />
-      <item itemvalue="Application.DateUtil" />
-      <item itemvalue="Application.FileController" />
       <item itemvalue="Application.T1" />
+      <item itemvalue="Application.SysUtil" />
+      <item itemvalue="JUnit.ServerApplicationTest.test0" />
+      <item itemvalue="JUnit.ServerApplicationTest" />
       <item itemvalue="Remote.远程调试" />
       <item itemvalue="Spring Boot.ServerApplication" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.ServerApplication" />
+        <item itemvalue="Application.SysUtil" />
         <item itemvalue="Application.T1" />
-        <item itemvalue="Application.FileController" />
-        <item itemvalue="Application.StrUtil" />
-        <item itemvalue="Application.DateUtil" />
+        <item itemvalue="JUnit.ServerApplicationTest" />
+        <item itemvalue="JUnit.ServerApplicationTest.test0" />
       </list>
     </recent_temporary>
   </component>
@@ -729,7 +1182,38 @@
       <workItem from="1585702457380" duration="30010000" />
       <workItem from="1585788659413" duration="10178000" />
       <workItem from="1585810721477" duration="1848000" />
-      <workItem from="1585820456828" duration="592000" />
+      <workItem from="1585820456828" duration="697000" />
+      <workItem from="1585874999235" duration="26039000" />
+      <workItem from="1585912201732" duration="1533000" />
+      <workItem from="1586052877590" duration="1373000" />
+      <workItem from="1586093688608" duration="2845000" />
+      <workItem from="1586140812758" duration="827000" />
+      <workItem from="1586163653508" duration="596000" />
+      <workItem from="1586220852019" duration="6773000" />
+      <workItem from="1586231114617" duration="20956000" />
+      <workItem from="1586307297957" duration="32969000" />
+      <workItem from="1586393594252" duration="27760000" />
+      <workItem from="1586428905512" duration="3369000" />
+      <workItem from="1586480231531" duration="29564000" />
+      <workItem from="1586569082155" duration="4399000" />
+      <workItem from="1586575085789" duration="22568000" />
+      <workItem from="1586743609012" duration="8561000" />
+      <workItem from="1586825457688" duration="27272000" />
+      <workItem from="1586911980175" duration="19867000" />
+      <workItem from="1586999136968" duration="6961000" />
+      <workItem from="1587006695266" duration="11995000" />
+      <workItem from="1587025577003" duration="358000" />
+      <workItem from="1587026011133" duration="1260000" />
+      <workItem from="1587027557137" duration="625000" />
+      <workItem from="1587028261058" duration="4226000" />
+      <workItem from="1587084623801" duration="25440000" />
+      <workItem from="1587345372831" duration="21343000" />
+      <workItem from="1587430505763" duration="2073000" />
+      <workItem from="1587433978046" duration="23597000" />
+      <workItem from="1587516510381" duration="18271000" />
+      <workItem from="1587603054772" duration="8284000" />
+      <workItem from="1587689910570" duration="9776000" />
+      <workItem from="1587710630169" duration="8979000" />
     </task>
     <task id="LOCAL-00001" summary="数据库脚本">
       <created>1578287448438</created>
@@ -878,37 +1362,141 @@
       <option name="project" value="LOCAL" />
       <updated>1585797903267</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="favicon.ico图标显示">
+      <created>1585823722019</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1585823722019</updated>
+    </task>
+    <task id="LOCAL-00023" summary="代码优化">
+      <created>1585912583895</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1585912583895</updated>
+    </task>
+    <task id="LOCAL-00024" summary="微信新用户注册，系统为其自动登录">
+      <created>1586258957245</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1586258957245</updated>
+    </task>
+    <task id="LOCAL-00025" summary="权限框架搭 大改动">
+      <created>1586349256447</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1586349256447</updated>
+    </task>
+    <task id="LOCAL-00026" summary="1、登录登出 历史保存20天条 (OK)&#10;2、setpassword(null)  (OK)&#10;3、政策文件 （OK）&#10;4、游客、游客身份确 识别  (OK)&#10;5、厂商 同意法律声明 字段  （OK）">
+      <created>1586432273179</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1586432273179</updated>
+    </task>
+    <task id="LOCAL-00027" summary="1、文件上传BUG， 选择好文件 失败再上传就不触发上传 (OK)&#10;8、 留言列表显示身份 （OK）&#10;10、redis 登录锁定 (OK)&#10;13   锁住用户后 退出登录 (OK)&#10;14  角色 隐藏显示 (OK)">
+      <created>1586518030320</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1586518030320</updated>
+    </task>
+    <task id="LOCAL-00028" summary="清理无用代码">
+      <created>1586751058164</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1586751058164</updated>
+    </task>
+    <task id="LOCAL-00029" summary="1、 合同到期提醒 （OK）&#10;3、16*16的png图标 （OK）&#10;5、发布中心 姓名 realName 注意数据库同步 （OK）&#10;6、修改密码 （OK）&#10;8.  删除文件管理 注意权限 （OK）&#10;9、 微信登录 先从redis取 OK()&#10;10、 图标问题  (OK)&#10;11 合同 提醒 autoPublis（OK）&#10;12 日志去除打印 (run.jar) 注意线上 (ok)&#10;13未读消息 接口异常 （OK）">
+      <created>1586868963306</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1586868963306</updated>
+    </task>
+    <task id="LOCAL-00030" summary="轮播图管理">
+      <created>1586948243812</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1586948243812</updated>
+    </task>
+    <task id="LOCAL-00031" summary="7、轮播图3张 (同时上传多张 (OK)&#10;4. 政策文件，图文结合 (OK)&#10;14  自动保存新闻 （OK）&#10;16、代码 规范 (OK)">
+      <created>1587033681796</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1587033681796</updated>
+    </task>
+    <task id="LOCAL-00032" summary="&#10;1、项目session托管在redis中&#10;2、角色管理更新完立刻更新redis">
+      <created>1587118481466</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1587118481466</updated>
+    </task>
+    <task id="LOCAL-00033" summary="修复几处BUG">
+      <created>1587378536030</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1587378536030</updated>
+    </task>
+    <task id="LOCAL-00034" summary="1、文件上传的BUG总是完美修复了。&#10;2、404/500 页面&#10;3、修改配置文件： redis连接端口，mysql连接端口">
+      <created>1587553242155</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1587553242155</updated>
+    </task>
+    <task id="LOCAL-00035" summary="test类取消运行">
+      <created>1587553458189</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1587553458189</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ServerApplicationTest_test1 - 2020.01.19 at 20h 49m 55s.xml">
-      <configuration name="ServerApplicationTest.test1" configurationId="JUnit" />
+    <history-entry file="ServerApplicationTest_test0_(1) - 2020.04.17 at 15h 07m 43s.xml">
+      <configuration name="ServerApplicationTest.test0 (1)" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ServerApplicationTest_test1 - 2020.01.19 at 20h 52m 17s.xml">
-      <configuration name="ServerApplicationTest.test1" configurationId="JUnit" />
+    <history-entry file="ServerApplicationTest_test0_(2) - 2020.04.17 at 15h 13m 26s.xml">
+      <configuration name="ServerApplicationTest.test0 (2)" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ServerApplicationTest_test1 - 2020.01.19 at 21h 00m 43s.xml">
-      <configuration name="ServerApplicationTest.test1" configurationId="JUnit" />
+    <history-entry file="ServerApplicationTest_test0_(3) - 2020.04.17 at 15h 14m 20s.xml">
+      <configuration name="ServerApplicationTest.test0 (3)" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ServerApplicationTest_test0 - 2020.03.21 at 10h 03m 57s.xml">
+    <history-entry file="ServerApplicationTest - 2020.04.17 at 15h 27m 49s.xml">
+      <configuration name="ServerApplicationTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ServerApplicationTest_test0 - 2020.04.17 at 17h 10m 09s.xml">
       <configuration name="ServerApplicationTest.test0" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ServerApplicationTest_test0 - 2020.03.21 at 10h 31m 38s.xml">
+    <history-entry file="ServerApplicationTest - 2020.04.17 at 17h 10m 48s.xml">
+      <configuration name="ServerApplicationTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ServerApplicationTest - 2020.04.17 at 17h 47m 04s.xml">
+      <configuration name="ServerApplicationTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ServerApplicationTest_test0 - 2020.04.20 at 11h 45m 16s.xml">
       <configuration name="ServerApplicationTest.test0" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ServerApplicationTest_test0 - 2020.03.21 at 10h 32m 15s.xml">
+    <history-entry file="ServerApplicationTest_test0 - 2020.04.20 at 11h 46m 35s.xml">
       <configuration name="ServerApplicationTest.test0" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ServerApplicationTest_test0 - 2020.03.21 at 10h 35m 24s.xml">
-      <configuration name="ServerApplicationTest.test0" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ServerApplicationTest_test0 - 2020.03.21 at 10h 38m 40s.xml">
-      <configuration name="ServerApplicationTest.test0" configurationId="JUnit" />
+    <history-entry file="ServerApplicationTest - 2020.04.20 at 12h 06m 05s.xml">
+      <configuration name="ServerApplicationTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="255940000" />
+    <option name="totallyTimeSpent" value="636504000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -920,104 +1508,110 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2553305" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.499187" visible="true" weight="0.28624734" />
+      <window_info id="Structure" order="1" show_stripe_button="false" sideWeight="0.500813" side_tool="true" weight="0.26332623" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
-      <window_info id="JRebel" order="4" side_tool="true" />
-      <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info id="Web" order="6" side_tool="true" />
+      <window_info id="JRebel" order="4" show_stripe_button="false" sideWeight="0.500813" side_tool="true" weight="0.26332623" />
+      <window_info id="Favorites" order="5" show_stripe_button="false" sideWeight="0.500813" side_tool="true" weight="0.26332623" />
+      <window_info id="Web" order="6" show_stripe_button="false" sideWeight="0.500813" side_tool="true" weight="0.26332623" />
       <window_info id="Image Layers" order="7" />
       <window_info id="Capture Tool" order="8" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32896176" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49840087" weight="0.32786885" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.67103827" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49840087" weight="0.6142076" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.46666667" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946696" weight="0.32896176" />
-      <window_info anchor="bottom" id="FindBugs-IDEA" order="7" weight="0.32896176" />
+      <window_info anchor="bottom" id="FindBugs-IDEA" order="7" show_stripe_button="false" weight="0.58360654" />
       <window_info anchor="bottom" id="Spring" order="8" weight="0.32896176" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.31912568" />
-      <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50159913" side_tool="true" weight="0.3715847" />
-      <window_info anchor="bottom" id="Java Enterprise" order="12" weight="0.32896176" />
-      <window_info anchor="bottom" id="Database Changes" order="13" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="14" weight="0.7147541" />
-      <window_info anchor="bottom" id="JRebel Executor" order="15" />
-      <window_info anchor="bottom" id="JRebel Console" order="16" sideWeight="0.21695095" side_tool="true" weight="0.49945354" />
-      <window_info anchor="bottom" id="MyBatis Log" order="17" />
-      <window_info anchor="bottom" id="Tail" order="18" />
-      <window_info anchor="bottom" id="Problems" order="19" weight="0.32896176" />
-      <window_info anchor="bottom" id="Messages" order="20" sideWeight="0.4989339" weight="0.4622951" />
-      <window_info anchor="bottom" id="Database Console" order="21" weight="0.32896176" />
-      <window_info anchor="bottom" id="Run Dashboard" order="22" sideWeight="0.78304905" weight="0.420765" />
-      <window_info anchor="bottom" id="JIRA" order="23" weight="0.32896176" />
-      <window_info anchor="bottom" id="Inspection Results" order="24" weight="0.32896176" />
-      <window_info active="true" anchor="bottom" id="File Transfer" order="25" visible="true" weight="0.5387978" />
-      <window_info anchor="bottom" id="Sequence" order="26" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.44918033" />
+      <window_info anchor="bottom" id="Docker" order="10" weight="0.368306" />
+      <window_info anchor="bottom" id="Java Enterprise" order="11" show_stripe_button="false" weight="0.32896176" />
+      <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="13" weight="0.6568306" />
+      <window_info anchor="bottom" id="JRebel Executor" order="14" />
+      <window_info anchor="bottom" id="MyBatis Log" order="15" />
+      <window_info anchor="bottom" id="Tail" order="16" />
+      <window_info anchor="bottom" id="Problems" order="17" weight="0.32896176" />
+      <window_info anchor="bottom" id="Messages" order="18" sideWeight="0.4989339" weight="0.26885247" />
+      <window_info anchor="bottom" id="Database Console" order="19" weight="0.32896176" />
+      <window_info anchor="bottom" id="Run Dashboard" order="20" sideWeight="0.78304905" weight="0.39344263" />
+      <window_info anchor="bottom" id="JIRA" order="21" show_stripe_button="false" weight="0.32896176" />
+      <window_info anchor="bottom" id="Inspection Results" order="22" weight="0.47431695" />
+      <window_info anchor="bottom" id="File Transfer" order="23" weight="0.60546446" />
+      <window_info anchor="bottom" id="Sequence" order="24" />
+      <window_info anchor="bottom" id="RestServices" order="25" weight="0.6502732" />
+      <window_info anchor="bottom" id="JRebel Console" order="26" sideWeight="0.30170575" weight="0.40765026" />
+      <window_info anchor="bottom" id="Event Log" order="27" sideWeight="0.6982942" weight="0.49945354" />
+      <window_info active="true" anchor="bottom" id="REST Client" order="28" visible="true" weight="0.6185792" />
+      <window_info anchor="bottom" id="Run with VisualVM" order="29" />
+      <window_info anchor="bottom" id="Debug with VisualVM" order="30" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Maven" order="3" visible="true" weight="0.16044776" />
+      <window_info anchor="right" id="Maven" order="3" weight="0.34381664" />
       <window_info anchor="right" id="Palette" order="4" />
-      <window_info anchor="right" id="RestServices" order="5" weight="0.32995737" />
+      <window_info anchor="right" id="Palette&#9;" order="5" />
       <window_info anchor="right" id="Database" order="6" weight="0.17217484" />
-      <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info anchor="right" id="Remote Host" order="8" weight="0.32995737" />
-      <window_info anchor="right" id="Capture Analysis" order="9" />
-      <window_info anchor="right" id="Theme Preview" order="10" />
+      <window_info anchor="right" id="Remote Host" order="7" weight="0.14712153" />
+      <window_info anchor="right" id="Capture Analysis" order="8" />
+      <window_info anchor="right" id="Theme Preview" order="9" />
     </layout>
     <layout-to-restore>
-      <window_info id="Capture Tool" order="0" />
-      <window_info id="Image Layers" order="1" />
-      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.25" />
-      <window_info id="Structure" order="3" side_tool="true" weight="0.25" />
-      <window_info id="Designer" order="4" />
-      <window_info id="UI Designer" order="5" />
-      <window_info id="JRebel" order="6" side_tool="true" />
-      <window_info id="Favorites" order="7" side_tool="true" />
-      <window_info id="Web" order="8" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.499187" weight="0.28624734" />
+      <window_info id="Structure" order="1" show_stripe_button="false" sideWeight="0.500813" side_tool="true" weight="0.26332623" />
+      <window_info id="Designer" order="2" />
+      <window_info id="UI Designer" order="3" />
+      <window_info id="JRebel" order="4" show_stripe_button="false" sideWeight="0.500813" side_tool="true" weight="0.26332623" />
+      <window_info id="Favorites" order="5" show_stripe_button="false" sideWeight="0.500813" side_tool="true" weight="0.26332623" />
+      <window_info id="Web" order="6" show_stripe_button="false" sideWeight="0.500813" side_tool="true" weight="0.26332623" />
+      <window_info id="Image Layers" order="7" />
+      <window_info id="Capture Tool" order="8" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32896176" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49840087" weight="0.32786885" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.67103827" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49840087" weight="0.6142076" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.46666667" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946696" weight="0.32896176" />
-      <window_info anchor="bottom" id="FindBugs-IDEA" order="7" weight="0.32896176" />
+      <window_info anchor="bottom" id="FindBugs-IDEA" order="7" show_stripe_button="false" weight="0.58360654" />
       <window_info anchor="bottom" id="Spring" order="8" weight="0.32896176" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.31912568" />
-      <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50159913" side_tool="true" weight="0.3715847" />
-      <window_info anchor="bottom" id="Java Enterprise" order="12" weight="0.32896176" />
-      <window_info anchor="bottom" id="Database Changes" order="13" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="14" weight="0.7147541" />
-      <window_info anchor="bottom" id="JRebel Executor" order="15" />
-      <window_info anchor="bottom" id="JRebel Console" order="16" sideWeight="0.21695095" side_tool="true" weight="0.49945354" />
-      <window_info anchor="bottom" id="MyBatis Log" order="17" />
-      <window_info anchor="bottom" id="Tail" order="18" />
-      <window_info anchor="bottom" id="Problems" order="19" weight="0.32896176" />
-      <window_info anchor="bottom" id="Messages" order="20" sideWeight="0.4989339" weight="0.4622951" />
-      <window_info anchor="bottom" id="Database Console" order="21" weight="0.32896176" />
-      <window_info active="true" anchor="bottom" id="Run Dashboard" order="22" sideWeight="0.78304905" visible="true" weight="0.420765" />
-      <window_info anchor="bottom" id="JIRA" order="23" weight="0.32896176" />
-      <window_info anchor="bottom" id="Inspection Results" order="24" weight="0.32896176" />
-      <window_info anchor="bottom" id="File Transfer" order="25" weight="0.32896176" />
-      <window_info anchor="bottom" id="Sequence" order="26" />
-      <window_info anchor="right" id="Capture Analysis" order="0" />
-      <window_info anchor="right" id="Theme Preview" order="1" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="2" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="3" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="4" weight="0.25" />
-      <window_info anchor="right" id="Maven" order="5" visible="true" weight="0.16044776" />
-      <window_info anchor="right" id="Palette" order="6" />
-      <window_info anchor="right" id="RestServices" order="7" weight="0.32995737" />
-      <window_info anchor="right" id="Database" order="8" weight="0.17217484" />
-      <window_info anchor="right" id="Palette&#9;" order="9" />
-      <window_info anchor="right" id="Remote Host" order="10" weight="0.32995737" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.44918033" />
+      <window_info anchor="bottom" id="Docker" order="10" weight="0.368306" />
+      <window_info anchor="bottom" id="Java Enterprise" order="11" show_stripe_button="false" weight="0.32896176" />
+      <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="13" weight="0.6568306" />
+      <window_info anchor="bottom" id="JRebel Executor" order="14" />
+      <window_info anchor="bottom" id="MyBatis Log" order="15" />
+      <window_info anchor="bottom" id="Tail" order="16" />
+      <window_info anchor="bottom" id="Problems" order="17" weight="0.32896176" />
+      <window_info anchor="bottom" id="Messages" order="18" sideWeight="0.4989339" weight="0.26885247" />
+      <window_info anchor="bottom" id="Database Console" order="19" weight="0.32896176" />
+      <window_info active="true" anchor="bottom" id="Run Dashboard" order="20" sideWeight="0.78304905" visible="true" weight="0.39344263" />
+      <window_info anchor="bottom" id="JIRA" order="21" show_stripe_button="false" weight="0.32896176" />
+      <window_info anchor="bottom" id="Inspection Results" order="22" weight="0.47431695" />
+      <window_info anchor="bottom" id="File Transfer" order="23" weight="0.60546446" />
+      <window_info anchor="bottom" id="Sequence" order="24" />
+      <window_info anchor="bottom" id="RestServices" order="25" weight="0.6502732" />
+      <window_info anchor="bottom" id="JRebel Console" order="26" sideWeight="0.30170575" weight="0.40765026" />
+      <window_info anchor="bottom" id="Event Log" order="27" sideWeight="0.6982942" weight="0.49945354" />
+      <window_info active="true" anchor="bottom" id="REST Client" order="28" visible="true" weight="0.6185792" />
+      <window_info anchor="bottom" id="Run with VisualVM" order="29" />
+      <window_info anchor="bottom" id="Debug with VisualVM" order="30" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="3" weight="0.34381664" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Palette&#9;" order="5" />
+      <window_info anchor="right" id="Database" order="6" weight="0.17217484" />
+      <window_info anchor="right" id="Remote Host" order="7" weight="0.14712153" />
+      <window_info anchor="right" id="Capture Analysis" order="8" />
+      <window_info anchor="right" id="Theme Preview" order="9" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1033,17 +1627,49 @@
       </list>
     </option>
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="pom修改" />
-    <MESSAGE value="数据库脚本" />
-    <MESSAGE value="1. 数字运算工具类&#10;2. 加入Echars统计表" />
-    <MESSAGE value="JdbcTemplet类测试" />
-    <MESSAGE value="1.从数据库读取配置&#10;2.Excel读入写出&#10;3.数据库备份还原&#10;4.Redis工具类&#10;5.文件zip压缩工具类" />
-    <MESSAGE value="表定时分析" />
-    <MESSAGE value="机构树显示" />
-    <MESSAGE value="环保管家代码初始化" />
     <MESSAGE value="文件上传下载优化" />
     <MESSAGE value="文件上传完善好了" />
     <MESSAGE value="厂商账号管理 和 用户发布需求列表" />
@@ -1055,28 +1681,48 @@
     <MESSAGE value="图片预览设置缓存" />
     <MESSAGE value="1、shiro、session超时设置为7天&#10;2、新角色 openid游客 身份&#10;3、图片缺失用默认图片显示" />
     <MESSAGE value="登录页面配色" />
-    <option name="LAST_COMMIT_MESSAGE" value="登录页面配色" />
+    <MESSAGE value="favicon.ico图标显示" />
+    <MESSAGE value="代码优化" />
+    <MESSAGE value="微信新用户注册，系统为其自动登录" />
+    <MESSAGE value="权限框架搭 大改动" />
+    <MESSAGE value="1、登录登出 历史保存20天条 (OK)&#10;2、setpassword(null)  (OK)&#10;3、政策文件 （OK）&#10;4、游客、游客身份确 识别  (OK)&#10;5、厂商 同意法律声明 字段  （OK）" />
+    <MESSAGE value="1、文件上传BUG， 选择好文件 失败再上传就不触发上传 (OK)&#10;8、 留言列表显示身份 （OK）&#10;10、redis 登录锁定 (OK)&#10;13   锁住用户后 退出登录 (OK)&#10;14  角色 隐藏显示 (OK)" />
+    <MESSAGE value="清理无用代码" />
+    <MESSAGE value="1、 合同到期提醒 （OK）&#10;3、16*16的png图标 （OK）&#10;5、发布中心 姓名 realName 注意数据库同步 （OK）&#10;6、修改密码 （OK）&#10;8.  删除文件管理 注意权限 （OK）&#10;9、 微信登录 先从redis取 OK()&#10;10、 图标问题  (OK)&#10;11 合同 提醒 autoPublis（OK）&#10;12 日志去除打印 (run.jar) 注意线上 (ok)&#10;13未读消息 接口异常 （OK）" />
+    <MESSAGE value="轮播图管理" />
+    <MESSAGE value="7、轮播图3张 (同时上传多张 (OK)&#10;4. 政策文件，图文结合 (OK)&#10;14  自动保存新闻 （OK）&#10;16、代码 规范 (OK)" />
+    <MESSAGE value="&#10;1、项目session托管在redis中&#10;2、角色管理更新完立刻更新redis" />
+    <MESSAGE value="修复几处BUG" />
+    <MESSAGE value="1、文件上传的BUG总是完美修复了。&#10;2、404/500 页面&#10;3、修改配置文件： redis连接端口，mysql连接端口" />
+    <MESSAGE value="test类取消运行" />
+    <option name="LAST_COMMIT_MESSAGE" value="test类取消运行" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/filter/LogoutFilter.java</url>
-          <line>51</line>
+          <url>file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/UserController.java</url>
+          <line>328</line>
           <properties />
-          <option name="timeStamp" value="48" />
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/filter/LogoutFilter.java</url>
-          <line>48</line>
+          <url>file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/UserController.java</url>
+          <line>354</line>
           <properties />
-          <option name="timeStamp" value="50" />
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/impl/RedisTokenManager.java</url>
-          <line>64</line>
+          <url>file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/UserController.java</url>
+          <line>330</line>
           <properties />
-          <option name="timeStamp" value="51" />
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/UserController.java</url>
+          <line>352</line>
+          <properties />
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -1089,194 +1735,290 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/FileController.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/8.5.32/tomcat-embed-core-8.5.32.jar!/org/apache/catalina/core/ApplicationFilterChain.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="195" selection-start-line="195" selection-end-line="195" />
+        <state relative-caret-position="276">
+          <caret line="134" selection-start-line="134" selection-end-line="134" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/page/table/PageTableArgumentResolver.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/javax/validation/validation-api/2.0.1.Final/validation-api-2.0.1.Final.jar!/javax/validation/constraints/Email.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="48" column="18" selection-start-line="48" selection-start-column="18" selection-end-line="48" selection-end-column="18" />
+        <state relative-caret-position="565">
+          <caret line="31" column="17" selection-start-line="31" selection-start-column="11" selection-end-line="31" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/page/table/PageTableRequest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/NewsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
+          <folding>
+            <element signature="e#2566#2567#0" expanded="true" />
+            <element signature="e#2639#2640#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/entity/News.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" column="27" lean-forward="true" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/validator/ValidatorUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="59">
+          <caret line="18" column="12" lean-forward="true" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/validator/ValidatorMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="13" column="28" lean-forward="true" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
+          <folding>
+            <element signature="e#296#297#0" expanded="true" />
+            <element signature="e#326#327#0" expanded="true" />
+            <element signature="e#369#370#0" expanded="true" />
+            <element signature="e#400#401#0" expanded="true" />
+            <element signature="e#434#435#0" expanded="true" />
+            <element signature="e#464#465#0" expanded="true" />
+            <element signature="e#510#511#0" expanded="true" />
+            <element signature="e#548#549#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/status_code/403.html" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/status_code/500.html" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/status_code/404.html" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/error/css/normalize.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/error/css/500.css" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/error/js/500.js" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/error/js/demo-1.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="502">
+          <caret line="42" column="37" lean-forward="true" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/error/500.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="293">
+          <caret line="73" column="53" lean-forward="true" selection-start-line="73" selection-start-column="53" selection-end-line="73" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/UserUtil2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="143" lean-forward="true" selection-start-line="143" selection-end-line="143" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/constants/UserConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="25" column="39" lean-forward="true" selection-start-line="25" selection-start-column="39" selection-end-line="25" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/advice/CheckPermissionAop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/error/404.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
-          <caret line="8" column="17" lean-forward="true" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+          <caret line="8" column="28" lean-forward="true" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
           <folding>
-            <element signature="e#374#375#0" expanded="true" />
-            <element signature="e#394#395#0" expanded="true" />
-            <element signature="e#436#437#0" expanded="true" />
-            <element signature="e#463#464#0" expanded="true" />
-            <element signature="e#493#494#0" expanded="true" />
-            <element signature="e#512#513#0" expanded="true" />
-            <element signature="e#552#553#0" expanded="true" />
-            <element signature="e#577#578#0" expanded="true" />
-            <element signature="e#620#621#0" expanded="true" />
-            <element signature="e#640#641#0" expanded="true" />
-            <element signature="e#694#695#0" expanded="true" />
-            <element signature="e#721#722#0" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/impl/RedisTokenManager.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/ErrorPageController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="38" column="30" lean-forward="true" selection-start-line="38" selection-start-column="30" selection-end-line="38" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/shiro/shiro-core/1.4.0/shiro-core-1.4.0.jar!/org/apache/shiro/SecurityUtils.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/config/RedisConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="18" column="21" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/filter/LogoutFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
-          <caret line="40" column="52" lean-forward="true" selection-start-line="40" selection-start-column="52" selection-end-line="40" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/impl/SysLogServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="32" column="30" lean-forward="true" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/shiro/shiro-core/1.4.0/shiro-core-1.4.0.jar!/org/apache/shiro/session/Session.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/filter/RestfulFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-342">
-          <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/TokenManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="15" column="31" lean-forward="true" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/config/MyShiroRealm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-448">
-          <caret line="38" column="54" selection-start-line="38" selection-start-column="54" selection-end-line="38" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/crazycake/shiro-redis/3.2.3/shiro-redis-3.2.3-sources.jar!/org/crazycake/shiro/RedisSessionDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+        <state relative-caret-position="494">
+          <caret line="26" column="43" lean-forward="true" selection-start-line="26" selection-start-column="43" selection-end-line="26" selection-end-column="43" />
           <folding>
-            <element signature="e#8130#8131#0" expanded="true" />
-            <element signature="e#8157#8158#0" expanded="true" />
+            <element signature="e#883#884#0" expanded="true" />
+            <element signature="e#908#909#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/img/avatars/sunny.png" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/img/avatars/nv.png">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/img/login/bg.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/img/avatars/not_found.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/main.js">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/dao/UserDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="94" column="20" lean-forward="true" selection-start-line="94" selection-start-column="20" selection-end-line="94" selection-end-column="20" />
+        <state relative-caret-position="540">
+          <caret line="45" column="51" lean-forward="true" selection-start-line="45" selection-start-column="51" selection-end-line="45" selection-end-column="51" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/check_repair/checkpairList.html">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/news/updateNews.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="83" column="32" lean-forward="true" selection-start-line="83" selection-start-column="32" selection-end-line="83" selection-end-column="32" />
+        <state relative-caret-position="608">
+          <caret line="32" column="61" lean-forward="true" selection-start-line="32" selection-start-column="51" selection-end-line="32" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/news/addNews.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="206" column="19" lean-forward="true" selection-start-line="206" selection-start-column="19" selection-end-line="206" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/banner/updateBanner.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="271" column="16" lean-forward="true" selection-start-line="271" selection-start-column="16" selection-end-line="271" selection-end-column="16" />
           <folding>
-            <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#fieldset#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#2;n#fieldset#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#p#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/img/avatars/nan.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/img/avatars/1.png" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/LoginController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application-dev.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="692">
-          <caret line="60" column="5" lean-forward="true" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
+        <state relative-caret-position="285">
+          <caret line="45" column="24" lean-forward="true" selection-start-line="45" selection-start-column="24" selection-end-line="45" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/dto/UserDto.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/banner/bannerDetail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="31" lean-forward="true" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
+        <state relative-caret-position="266">
+          <caret line="14" column="25" lean-forward="true" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/entity/User.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/banner/addBanner.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="22" column="23" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="23" />
+        <state relative-caret-position="157">
+          <caret line="68" column="19" lean-forward="true" selection-start-line="68" selection-start-column="19" selection-end-line="68" selection-end-column="19" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#1;n#fieldset#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#2;n#fieldset#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#textarea#0;n#div#0;n#div#2;n#fieldset#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#p#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application-test.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="41" column="20" lean-forward="true" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/file/fileList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="156" column="48" selection-start-line="156" selection-start-column="48" selection-end-line="156" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/MysqlDbService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/yusheng/hbgj/ServerApplicationTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/UserService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
+        <state relative-caret-position="266">
+          <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/dao/UserDao.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/lang/Integer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="654">
-          <caret line="51" selection-start-line="51" selection-end-line="51" />
+        <state relative-caret-position="108">
+          <caret line="612" column="7" lean-forward="true" selection-start-line="612" selection-start-column="7" selection-end-line="612" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/impl/UserServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/RedisService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="96" column="32" selection-start-line="96" selection-start-column="32" selection-end-line="96" selection-end-column="32" />
+        <state relative-caret-position="125">
+          <caret line="173" lean-forward="true" selection-start-line="173" selection-end-line="173" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="63" lean-forward="true" selection-start-line="63" selection-end-line="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/environment/environmentList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-595">
+          <caret line="217" column="42" selection-start-line="217" selection-start-column="42" selection-end-line="217" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/standing_book/standingbookList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="225" selection-start-line="225" selection-end-line="225" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/check_repair/checkpairList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="502">
+          <caret line="277" column="7" lean-forward="true" selection-start-line="277" selection-start-column="7" selection-end-line="277" selection-end-column="7" />
           <folding>
-            <element signature="e#2876#2877#0" expanded="true" />
-            <element signature="e#2900#2901#0" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application-prod.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="502">
+          <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/dashboard.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="7" lean-forward="true" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
+        <state relative-caret-position="95">
+          <caret line="5" column="38" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
           <folding>
             <element signature="n#style#0;n#blockquote#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#blockquote#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -1285,143 +2027,80 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/publish/publishList.html">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/contract/contractList.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="68" column="47" lean-forward="true" selection-start-line="68" selection-start-column="47" selection-end-line="68" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/jq.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-323">
-          <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
+        <state relative-caret-position="175">
+          <caret line="458" column="50" lean-forward="true" selection-start-line="458" selection-start-column="50" selection-end-line="458" selection-end-column="50" />
           <folding>
-            <element signature="n#style#0;n#i#0;n#button#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/img/login/aiwrap.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/img/logo/logo.png" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/img/logo/logo.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/global.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="287" column="1" selection-start-line="287" selection-start-column="1" selection-end-line="287" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/favicon.ico">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/target/classes/favicon.ico" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application-dev.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="56" column="18" selection-start-line="56" selection-start-column="18" selection-end-line="56" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application-test.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="553">
-          <caret line="75" column="8" selection-start-line="75" selection-start-column="8" selection-end-line="75" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application-prod.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="836">
-          <caret line="44" column="19" selection-start-line="44" selection-start-column="19" selection-end-line="44" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/config/WebMvcConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="57" column="7" selection-start-line="57" selection-start-column="7" selection-end-line="57" selection-end-column="7" />
-          <folding>
-            <element signature="e#838#1240#0" expanded="true" />
-            <element signature="e#1239#1240#0" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/static/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" column="53" selection-start-line="13" selection-start-column="53" selection-end-line="13" selection-end-column="53" />
+        <state relative-caret-position="198">
+          <caret line="108" column="17" lean-forward="true" selection-start-line="108" selection-start-column="17" selection-end-line="108" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/img/login/bg.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/config/ShiroConfig.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/test/echarsdemo.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="33" column="2" lean-forward="true" selection-start-line="33" selection-start-column="2" selection-end-line="33" selection-end-column="2" />
+        <state relative-caret-position="160">
+          <caret line="69" column="27" lean-forward="true" selection-start-line="69" selection-start-column="27" selection-end-line="69" selection-end-column="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/config/SwaggerConfig.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/LoginController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="37" column="59" lean-forward="true" selection-start-line="37" selection-start-column="59" selection-end-line="37" selection-end-column="59" />
+        <state relative-caret-position="198">
+          <caret line="203" column="54" lean-forward="true" selection-start-line="203" selection-start-column="54" selection-end-line="203" selection-end-column="54" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/login.css">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/FileController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="23" column="26" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
+        <state relative-caret-position="217">
+          <caret line="370" column="43" lean-forward="true" selection-start-line="370" selection-start-column="43" selection-end-line="370" selection-end-column="43" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/login.html">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/NoticeController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="722">
-          <caret line="38" selection-start-line="38" selection-end-line="38" />
-          <folding>
-            <element signature="n#style#0;n#button#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="236">
+          <caret line="190" column="5" lean-forward="true" selection-start-line="190" selection-start-column="5" selection-end-line="190" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/user/addUser.html">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/impl/UserServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2337">
-          <caret line="123" column="45" selection-start-line="123" selection-start-column="45" selection-end-line="123" selection-end-column="45" />
+        <state relative-caret-position="347">
+          <caret line="208" lean-forward="true" selection-start-line="208" selection-end-line="208" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/user/updateHeadImg.html">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/advice/LogAdvice.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+        <state relative-caret-position="328">
+          <caret line="76" column="18" lean-forward="true" selection-start-line="76" selection-start-column="18" selection-end-line="76" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/user/updateUser.html">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/vo/WeiXinVo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2356">
-          <caret line="124" column="11" selection-start-line="124" selection-start-column="11" selection-end-line="124" selection-end-column="11" />
+        <state relative-caret-position="152">
+          <caret line="8" column="3" lean-forward="true" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="75" column="47" selection-start-line="75" selection-start-column="47" selection-end-line="75" selection-end-column="47" />
+        <state relative-caret-position="357">
+          <caret line="213" column="61" lean-forward="true" selection-start-line="213" selection-start-column="61" selection-end-line="213" selection-end-column="61" />
         </state>
       </provider>
     </entry>

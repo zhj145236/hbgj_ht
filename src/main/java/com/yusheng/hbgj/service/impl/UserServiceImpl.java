@@ -209,14 +209,7 @@ public class UserServiceImpl implements UserService {
 
         maps.put("user", user);
         maps.put("token", token);
-
         maps.put("role", transRole(roles));
-
-
-        if (session != null && !StringUtils.isEmpty(session.getId())) {
-            maps.put("Cookie", "JSESSIONID=" + session.getId());
-        }
-
 
         return maps;
 
