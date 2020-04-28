@@ -57,7 +57,7 @@ spring:
     default-encoding: UTF-8
     host: smtp.exmail.qq.com
     username: noreply@ysnewtop.com
-    password: pkqS5iotjnFyLGrf
+    password: apkqS5iotjnFyLGrfA
     protocol: smtp
     test-connection: false
 #    properties:
@@ -96,5 +96,5 @@ log:
   maxsize: 30MB
 token:
   expire:
-    day: 30
-    webExpireDay: 30
+    day: 7
+    webExpireDay: 7

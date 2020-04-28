@@ -1,6 +1,5 @@
 package com.yusheng.hbgj.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.yusheng.hbgj.annotation.LogAnnotation;
 import com.yusheng.hbgj.constants.BusinessException;
 import com.yusheng.hbgj.constants.UserConstants;
@@ -8,8 +7,6 @@ import com.yusheng.hbgj.dto.ResponseInfo;
 import com.yusheng.hbgj.entity.User;
 import com.yusheng.hbgj.service.RedisService;
 import com.yusheng.hbgj.service.UserService;
-import com.yusheng.hbgj.utils.MD5;
-import com.yusheng.hbgj.utils.StrUtil;
 import com.yusheng.hbgj.utils.SysUtil;
 import com.yusheng.hbgj.utils.UserUtil2;
 import io.swagger.annotations.Api;
@@ -18,7 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -72,6 +68,7 @@ public class LoginController {
 
         User user = userService.getUser(username);
         if (user != null) {
+
 
 
             if (user.getPassword().equals(userService.passwordEncoder(password, user.getSalt()))) {

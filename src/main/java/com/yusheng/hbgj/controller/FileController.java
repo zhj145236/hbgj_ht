@@ -14,9 +14,13 @@ import com.yusheng.hbgj.page.table.PageTableRequest;
 import com.yusheng.hbgj.page.table.PageTableResponse;
 import com.yusheng.hbgj.service.FileService;
 import com.yusheng.hbgj.utils.DateUtil;
+import com.yusheng.hbgj.utils.RegexUtils;
+import com.yusheng.hbgj.utils.SysUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import net.coobird.thumbnailator.Thumbnails;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;
@@ -52,6 +56,7 @@ public class FileController {
     @Autowired
     private NoticeDao noticeDao;
 
+    private static final Logger log = LoggerFactory.getLogger("adminLogger");
 
     @Value("${constants.domain}")
     private String domain;
@@ -68,6 +73,10 @@ public class FileController {
     @ApiOperation(value = "原始文件下载")
     public void down(@PathVariable() String year, @PathVariable() String month, @PathVariable() String day, @PathVariable() String filename, HttpServletResponse response) throws IOException {
 
+        if (!this.urlCheckPass(year, month, day, filename)) {
+            throw new IllegalArgumentException("无效的路径");
+        }
+
 
         StringBuilder baseUrl = new StringBuilder();
         baseUrl.append(File.separator).append(year).append(File.separator).append(month).append(File.separator).append(day).append(File.separator).append(filename);
@@ -79,9 +88,9 @@ public class FileController {
 
         response.setContentType("application/octet-stream");
         if (StringUtils.isEmpty(fileOriginName)) {
-            response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes(), "iso-8859-1"));
+            response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes(), StandardCharsets.ISO_8859_1));
         } else {
-            response.addHeader("Content-Disposition", "attachment;filename=" + new String(fileOriginName.getBytes(), "iso-8859-1"));
+            response.addHeader("Content-Disposition", "attachment;filename=" + new String(fileOriginName.getBytes(), StandardCharsets.ISO_8859_1));
         }
 
         rejectStream(fullPath.toString(), response);
@@ -90,21 +99,27 @@ public class FileController {
     }
 
 
-    private void rejectStream(String fullPath, HttpServletResponse response) throws IOException {
-
-        File file = new File(fullPath.toString());
-        InputStream fis = new BufferedInputStream(new FileInputStream(fullPath.toString()));
-        byte[] buffer = new byte[fis.available()];
-        fis.read(buffer);
-        fis.close();
-
-        response.addHeader("Content-Length", "" + file.length());
-        OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
+    private void rejectStream(String fullPath, HttpServletResponse response) {
 
 
-        toClient.write(buffer);
-        toClient.flush();
-        toClient.close();
+        try {
+            File file = new File(fullPath.toString());
+            InputStream fis = new BufferedInputStream(new FileInputStream(fullPath.toString()));
+            byte[] buffer = new byte[fis.available()];
+            fis.read(buffer);
+            fis.close();
+
+            response.addHeader("Content-Length", "" + file.length());
+            OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
+
+            toClient.write(buffer);
+            toClient.flush();
+            toClient.close();
+        } catch (IOException e) {
+
+            log.error("运行异常{},文件错误{}", e.getMessage(), fullPath);
+
+        }
 
 
     }
@@ -114,6 +129,10 @@ public class FileController {
     @ApiOperation(value = "文件预览", tags = "适用于图片和PDF文档")
     public void prev(@PathVariable() String year, @PathVariable() String month, @PathVariable() String day, @PathVariable() String filename, @RequestParam(required = false) Integer isBigPic, HttpServletResponse response) throws IOException {
 
+
+        if (!this.urlCheckPass(year, month, day, filename)) {
+            throw new IllegalArgumentException("无效的路径");
+        }
 
         StringBuilder fullPath = new StringBuilder();
         fullPath.append(filesPath).append(File.separator).append(File.separator).append(year).append(File.separator).append(month).append(File.separator).append(day).append(File.separator).append(filename);
@@ -161,6 +180,21 @@ public class FileController {
 
     }
 
+
+    /**
+     * @param year     年
+     * @param month    月
+     * @param day      日
+     * @param filename 文件名
+     * @return true 通过验证，false，验证不通过
+     */
+    private boolean urlCheckPass(String year, String month, String day, String filename) {
+
+        return (!SysUtil.paramsIsNull(year, month, day, filename)) && (RegexUtils.checkBirthday(year + "-" + month + "-" + day));
+
+
+    }
+
     private String trans(String fileName) {
 
         String tty = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length()).toLowerCase();
@@ -175,7 +209,6 @@ public class FileController {
         map.put("pdf", "application/pdf");
 
         return map.get(tty) == null ? "image/jpeg" : map.get(tty);
-
 
     }
 
@@ -199,7 +232,7 @@ public class FileController {
     /**
      * layui富文本文件自定义上传
      *
-     * @param file
+     * @param file 文件
      * @return
      * @throws IOException
      */
@@ -245,8 +278,13 @@ public class FileController {
             public List<FileInfo> list(PageTableRequest request) {
 
 
-                request.getParams().putIfAbsent("orderBy", "  ORDER BY uploadTime DESC  ");
+                if ("合同管理".equals((String) request.getParams().get("tag"))) {
 
+                    request.getParams().putIfAbsent("orderBy", "  ORDER BY right(remark,10) DESC  ");
+
+                } else {
+                    request.getParams().putIfAbsent("orderBy", "  ORDER BY uploadTime DESC  ");
+                }
 
                 return fileInfoDao.list(request.getParams(), request.getOffset(), request.getLimit());
 
@@ -313,9 +351,12 @@ public class FileController {
 
         validDate(fileInfo.getRemark());
 
+
+        // 注意顺序
+        senNotice(fileInfo.getId(), fileInfo.getRemark().trim().split("@")[1].trim());
+
         fileService.saveRemark(fileInfo);
 
-        senNotice(fileInfo.getId(), fileInfo.getRemark().trim().split("@")[1].trim());
 
         // 立刻发布通知
         noticeDao.autoPublish();
@@ -353,6 +394,12 @@ public class FileController {
 
         FileInfo file = fileInfoDao.getById(fileId);
 
+        if (file != null && file.getRemark() != null && file.getRemark().contains("@") && file.getRemark().split("@")[1].equals(endDate)) {
+
+            log.warn("file id:{},结束时间{}没有做任何修改。。不发送通知", file.getId(), file.getRemark());
+            return;
+        }
+
 
         // 30天前；7天前；1天前通知
         Date[] dates = new Date[]{DateUtil.addDay(DateUtil.parseDate(endDate), -30), DateUtil.addDay(DateUtil.parseDate(endDate), -7), DateUtil.addDay(DateUtil.parseDate(endDate), -1)};
@@ -374,7 +421,7 @@ public class FileController {
                 // 给东莞市环联管家生态环境科技有限公司发通知
                 String sb = "您有一份与" + file.getOrgId() + "签订的合同【" + file.getFileOriginName() + "】" +
                         "将于" + endDate +
-                        "到期,请及时处理。合同附件链接 【<a target='_blank'  style='color:blue;font-size:23px' href='" + domain + "/files" + file.getUrl() + "'>打开</a>" + "】。如已经处理请忽略此条通知";
+                        "到期,请及时处理。如已经处理请忽略此条通知";
                 notice.setContent(sb);
                 notice.setCreateName("系统程序");
                 //设置合同到期前X天创建

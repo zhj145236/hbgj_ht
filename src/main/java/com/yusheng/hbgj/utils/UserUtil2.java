@@ -316,20 +316,10 @@ public class UserUtil2 {
         //Redis清除角色(字符串)
         userUtil.redisService.delete(UserConstants.USER_ROLE_NAME + token);
 
-
         if (session != null) {
 
-
-            User currentUser = (User) (session.getAttribute(UserConstants.WEB_SESSION_KEY));
-
-
-            String utoken = MD5.getMd5(currentUser.getUsername() + currentUser.getOriginalPassword());
-            if (token.equals(utoken)) {
-
-                session.invalidate();
-
-                log.info("当前用户{},{}的session被设置失效", currentUser.getUsername(), currentUser.getNickname());
-            }
+            session.invalidate();
+            log.info("当前用户token:{}退出登录。。",token);
 
         }
 

@@ -127,6 +127,15 @@
                 compFlag = #{compFlag},
             </if>
 
+            <if test=" salt != null and  salt != ''  ">
+                salt = #{salt},
+            </if>
+
+            <if test=" password != null  and  password != ''  ">
+                `password` = #{password},
+            </if>
+
+
 
         </set>
         where t.id = #{id}

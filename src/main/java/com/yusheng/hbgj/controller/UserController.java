@@ -348,7 +348,7 @@ public class UserController {
 
 
             Long time = redisService.getExpire(UserConstants.LOGIN_TOKEN + token);
-            System.out.println(time+"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+
             redisService.set(UserConstants.LOGIN_TOKEN + token, JSONObject.toJSONString(loginedUser));
             redisService.expire(UserConstants.LOGIN_TOKEN + token, time, TimeUnit.SECONDS);
 

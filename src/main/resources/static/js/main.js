@@ -76,24 +76,22 @@ function showLoginInfo(){
 		url : '/users/current',
 		async : false,
 		success : function(data) {
+
 			$(".admin-header-user span").text(data.nickname);
-			
-			var pro = window.location.protocol;
-			var host = window.location.host;
-			var domain = pro + "//" + host;
-			
+
 			var sex = data.sex;
 			var url = data.headImgUrl;
 			if(url == null || url === ""){
+
 				if(sex === 1){
 					url = "/img/avatars/nan.png";
 				} else {
 					url = "/img/avatars/nv.png";
 				}
 				
-				url = domain + url;
+
 			} else {
-				url = domain + "/files/prev" + url;
+				url =  "/files/prev" + url;
 			}
 			var img = $(".admin-header-user img");
 			img.attr("src", url);

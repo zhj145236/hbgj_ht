@@ -57,15 +57,12 @@ public class UserServiceImpl implements UserService {
         user.setSalt(DigestUtils.md5Hex(UUID.randomUUID().toString() + System.currentTimeMillis() + UUID.randomUUID().toString()));
         user.setPassword(passwordEncoder(user.getPassword(), user.getSalt()));
 
-
-
         user.setStatus(User.Status.VALID);
         userDao.save(user);
 
-
         saveUserRoles(user.getId(), userDto.getRoleIds());
 
-        log.debug("新增厂商/微信用户 {}", user.getUsername());
+        log.debug("保存厂商/微信用户 {}", user.getUsername());
         return user;
     }
 
@@ -294,6 +291,13 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public User updateUser(UserDto userDto, HttpSession session) {
+
+
+
+        userDto.setSalt(DigestUtils.md5Hex(UUID.randomUUID().toString() + System.currentTimeMillis() + UUID.randomUUID().toString()));
+        userDto.setPassword(passwordEncoder(userDto.getOriginalPassword(), userDto.getSalt()));
+
+        log.info("更新用户。。。。。。。。。。。。。。。。。。。。。");
 
         userDao.update(userDto);
 

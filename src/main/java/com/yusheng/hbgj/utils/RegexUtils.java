@@ -11,14 +11,7 @@ import java.util.regex.Pattern;
  */
 public class RegexUtils {
 
-    public static void main(String[] args) {
 
-
-        System.out.println(checkMobile("13532879029"));
-        System.out.println(checkMobile("13532952098"));
-        System.out.println(checkMobile("135-2879029"));
-        System.out.println(checkMobile("0769-8891117"));
-    }
 
     /**
      * 验证Email
@@ -120,13 +113,14 @@ public class RegexUtils {
     /**
      * 验证日期（年月日）
      *
-     * @param birthday 日期，格式：1992-09-03，或1992.09.03
+     * @param birthday 日期，格式：1992-09-03，2012-02-29
      * @return 验证成功返回true，验证失败返回false
      */
     public static boolean checkBirthday(String birthday) {
-        String regex = "[1-9]{4}([-./])\\d{1,2}\\1\\d{1,2}";
+        String regex = "^\\d{4}-\\d{2}-\\d{2}$";
         return Pattern.matches(regex, birthday);
     }
+
 
     /**
      * 验证URL地址
@@ -175,5 +169,7 @@ public class RegexUtils {
         String regex = "[1-9](\\d{1,2})?\\.(0|([1-9](\\d{1,2})?))\\.(0|([1-9](\\d{1,2})?))\\.(0|([1-9](\\d{1,2})?))";
         return Pattern.matches(regex, ipAddress);
     }
+
+
 
 }

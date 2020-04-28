@@ -67,7 +67,7 @@ public class PublishController {
         Long userIdA = StringUtils.isEmpty(userId) ? userDao.getUserId(openid) : userId;
 
 
-        System.out.println("userIdA-->" + userIdA + "<<<<<<<<<<<,,");
+
         if (userIdA == null || userIdA == 0) {
             return 0;
         } else {

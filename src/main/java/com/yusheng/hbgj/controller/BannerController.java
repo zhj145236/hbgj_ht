@@ -82,9 +82,6 @@ public class BannerController {
     @ApiOperation(value = "列表")
     public PageTableResponse list(PageTableRequest request, HttpServletRequest request1) {
 
-        HttpSession session=request1.getSession();
-
-        System.out.println(session.toString()+"<<<<<<<<<");
 
         return new PageTableHandler(new PageTableHandler.CountHandler() {
 
@@ -108,9 +105,11 @@ public class BannerController {
     @ApiOperation(value = "返回微信小程序的3张轮播图列表")
     public PageTableResponse wxlist(PageTableRequest request) {
 
-        request.setOffset(0);
-        request.setLimit(3);
 
+        if (request.getOffset()==null) {
+            request.setOffset(0);
+            request.setLimit(3);
+        }
         return new PageTableHandler(new PageTableHandler.CountHandler() {
 
             @Override

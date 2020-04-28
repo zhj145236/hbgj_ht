@@ -24,7 +24,7 @@
                                 </form>
                             </td>
                             <td align="right">
-                                <button class="layui-btn layui-btn-sm" onclick="location.href='addBanner.html'">
+                                <button class="layui-btn layui-btn-sm" onclick="location.href='addBanner.html'" permission="sys:banner:save" >
                                     <i class="layui-icon">&#xe608;</i> 添加
                                 </button>
                             </td>
@@ -128,15 +128,15 @@
                             var id = row['id'];
 
                             var href = "updateBanner.html?id=" + id;
-                            var edit = buttonEdit(href, "", pers);
-                            var del = buttonDel(id, "", pers);
+                            var edit = buttonEdit(href, "sys:banner:save", pers);
+                            var del = buttonDel(id, "sys:banner:delete", pers);
 
 
                             var hrefDetail = "bannerDetail.html?id=" + id;
 
                             var bannerDetails = buttonDetails(hrefDetail);
 
-                            var toTopButton = toTop(id);
+                            var toTopButton = toTop(id,"sys:banner:top",pers);
 
                             return bannerDetails + edit + del + toTopButton;
                         }
@@ -149,6 +149,8 @@
 
 
     function buttonDetails(hrefDetail) {
+
+
 
         return "<button  class='layui-btn layui-btn-xs' title='查看详情' onclick='window.location=\"" + hrefDetail + "\"'><i class='layui-icon'>&#xe705;</i></button>";
 
@@ -183,7 +185,14 @@
 
     }
 
-    function toTop(id) {
+    function toTop(id,permission, pers) {
+
+        if (permission !== "") {
+            if ($.inArray(permission, pers) < 0) {
+                return "";
+            }
+        }
+
 
         return "<button  class='layui-btn layui-btn-xs' title='置顶展示' onclick='topAction(\"" + id + "\")'><i class='layui-icon'>&#xe604;</i></button>";
     }
