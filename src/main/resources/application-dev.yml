@@ -4,13 +4,14 @@ server:
     session:
       timeout: "PT10M"
 
+
 spring:
 
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/hbgj?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
     username: root
-    password: json@1109
+    password: DOG(/ST/BTZ+BtLm/kdWVBMXlfL5rPVl5NgYXwJL3PSqZ7AIei4IEEGbkoFzejPW01I9)
     druid:
       initialSize: 5
       minIdle: 5
@@ -47,7 +48,7 @@ spring:
   redis:
     host: localhost
     port: 6379
-    password: passredis@1109
+    password: DOG(jCY22UbFTXqTdzl5IZ8QQ8MoX9ozSoJVgOeExPLr/gvvWJ73Donyc+CepZ+7q+VF)
     database: 1
 
   session:

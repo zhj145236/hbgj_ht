@@ -9,7 +9,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:7090/hbgj?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
     username: root
-    password: json@1109
+    password: DOG(z+fqVxcBjzQoee/VS2OtQ5ovF1oyICJTriFUDQPzx2tiivjRaPSvKxDNmmZZoTid)
     druid:
       initialSize: 5
       minIdle: 5
@@ -44,7 +44,7 @@ spring:
   redis:
     host: localhost
     port: 7190
-    password: passredis@1109
+    password: DOG(jCY22UbFTXqTdzl5IZ8QQ8MoX9ozSoJVgOeExPLr/gvvWJ73Donyc+CepZ+7q+VF)
     database: 1
 
   session:

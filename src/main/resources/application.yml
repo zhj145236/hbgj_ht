@@ -1,3 +1,10 @@
 spring:
   profiles:
     active: dev
+
+jasypt:
+  encryptor:
+
+    property:
+      prefix: DOG(
+      suffix: )
