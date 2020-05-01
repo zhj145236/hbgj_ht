@@ -14,6 +14,8 @@ import com.yusheng.hbgj.service.RoleService;
 import com.yusheng.hbgj.utils.UserUtil2;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,13 +36,17 @@ public class RoleController {
     @Autowired
     private RoleDao roleDao;
 
+
+    private static final Logger log = LoggerFactory.getLogger("adminLogger");
+
+
     @LogAnnotation
     @PostMapping
     @ApiOperation(value = "保存角色")
     @PermissionTag("sys:role:add")
     public void saveRole(@RequestBody RoleDto roleDto) {
 
-        System.out.println("保持或修改角色："+roleDto.getPermissionIds().size()+"<<<<<<<<<<,,,");
+        log.warn("保存或修改角色："+roleDto.getPermissionIds().size());
 
         roleService.saveRole(roleDto);
 

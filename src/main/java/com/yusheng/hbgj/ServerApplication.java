@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * 启动类
@@ -29,5 +31,11 @@ public class ServerApplication {
         log.warn("{}", SysUtil.getMemInfo() + "\n启动耗时：" + ((System.currentTimeMillis() - startA) / 1000) + "s");
 
     }
+
+    @Bean
+    public RestTemplate restTemplate(){
+        return new RestTemplate();
+    }
+
 
 }

@@ -82,6 +82,10 @@ constants:
   mysqlBinDir:
   sqlBackDir: /home/server/mysqldbbak/baksql/
 
+  #小程序秘钥
+  appid: wx44c4721e4704c732
+  appsecret: 5bf6ca316b48eb9a8887115c03be3409
+
 logging:
   config: classpath:logback-admin.xml
 log:
