@@ -104,8 +104,14 @@
                         "render": function (data, type, row) {
 
                             if (data === null || data.trim() === "") {
+
                                 return "";
-                            } else {
+
+                            } else  if(data.startsWith("http") ) {
+
+                                return "<img width='40px' src='" + data + "' />";
+
+                            }else{
                                 return "<img width='40px' src='/files" + data + "' />";
                             }
 
