@@ -23,7 +23,7 @@ public class T1 {
 
 
         // 加密用的密码（盐值）见 有道云笔记中
-        System.setProperty("jasypt.encryptor.password", "");
+        System.setProperty("jasypt.encryptor.password", "LoveMe520@Girl");
         StringEncryptor stringEncryptor = new DefaultLazyEncryptor(new StandardEnvironment());
 
 

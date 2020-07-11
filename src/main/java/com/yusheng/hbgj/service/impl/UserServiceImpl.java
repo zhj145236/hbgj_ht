@@ -47,6 +47,35 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
+    public Integer saveOpenid(Long id, String openid) {
+
+
+        // 查找 此微信号有之前无被游客注册
+
+
+        // select  id, headImgUrl from sys_user where openid='oJpnF5CTwQ6H4oSC_6YPZWrF8xX4' and remark= ;
+        User visitor = userDao.getVisitor(openid, "系统自动为微信游客注册此账号");
+
+
+        if (visitor != null && visitor.getId() != null) {
+
+            //delete  from sys_user where  id='35' ;
+            userDao.delete(visitor.getId());
+
+            log.info("删除游客:{},并绑定厂商({})的头像和openid", openid, id);
+
+            // update sys_user t set  t.openid = 'oJpnF5CTwQ6H4oSC_6YPZWrF8xX4' , t.headImgUrl= 'https://wx.qlogo.cn/mmopen/vi_32/bMT3KwNdUfeBwxbXcR43CsA0JVwzqt44iaSicWX9VjoAMWt4vKXadP8tVlRM7gSKFP0mCgL4XsxMb1LAoUEwyDSQ/132'  where t.id = 49;
+            return userDao.saveOpenid(id, openid, visitor.getHeadImgUrl());
+
+        }
+
+
+        return 0;
+
+
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public User saveUser(UserDto userDto) {
 
@@ -283,7 +312,7 @@ public class UserServiceImpl implements UserService {
     public String getTokenByOpenId(String openid) {
 
 
-      return    userDao.getTokenByOpenId(openid);
+        return userDao.getTokenByOpenId(openid);
 
 
     }
@@ -291,7 +320,6 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public User updateUser(UserDto userDto, HttpSession session) {
-
 
 
         userDto.setSalt(DigestUtils.md5Hex(UUID.randomUUID().toString() + System.currentTimeMillis() + UUID.randomUUID().toString()));

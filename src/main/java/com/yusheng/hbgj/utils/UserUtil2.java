@@ -298,6 +298,10 @@ public class UserUtil2 {
         //Redis中删除token
         userUtil.redisService.delete(UserConstants.LOGIN_TOKEN + token);
 
+        if (UserUtil2.getCurrentUser() != null) {
+            userUtil.redisService.delete(UserConstants.OPENID_TOKEN + UserUtil2.getCurrentUser().getOpenid());
+        }
+
 
         String ip = NetWorkUtil.getIpAddress(request);
         String time = DateUtil.getNowStr0(true, false);
@@ -319,7 +323,7 @@ public class UserUtil2 {
         if (session != null) {
 
             session.invalidate();
-            log.info("当前用户token:{}退出登录。。",token);
+            log.info("当前用户token:{}退出登录。。", token);
 
         }
 

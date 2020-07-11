@@ -4,6 +4,9 @@ server:
     session:
       timeout: "PT10M"
 
+  tomcat:
+    basedir: /home/temp
+
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
@@ -82,10 +85,6 @@ constants:
   mysqlBinDir:
   sqlBackDir: /home/server/mysqldbbak/baksql/
 
-  #小程序秘钥
-  appid: wx44c4721e4704c732
-  appsecret: 5bf6ca316b48eb9a8887115c03be3409
-
 logging:
   config: classpath:logback-admin.xml
 log:
@@ -96,5 +95,5 @@ log:
   maxsize: 30MB
 token:
   expire:
-    day: 7
+    day: 30
     webExpireDay: 7

@@ -16,12 +16,26 @@ import com.yusheng.hbgj.entity.User;
 @Mapper
 public interface UserDao {
 
+
+    @Update("update sys_user t set  t.openid = #{openid} , t.headImgUrl= #{headImgUrl}   where t.id = #{id} ")
+    Integer saveOpenid(@Param("id") Long id, @Param("openid") String openid, String headImgUrl);
+
+
     @Options(useGeneratedKeys = true, keyProperty = "id")
     @Insert("insert into sys_user(username, password, salt, nickname, headImgUrl, phone, " +
             "telephone, email, birthday, sex, status, createTime, updateTime,originalPassword,remark,address,openid,compFlag,agreeLicence) values " +
             "(#{username}, #{password}, #{salt}, #{nickname}, #{headImgUrl}, #{phone}, #{telephone}, " +
             "#{email}, #{birthday}, #{sex}, #{status}, now(), now(),#{originalPassword},#{remark},#{address},#{openid} ,#{compFlag},#{agreeLicence}  )")
     int save(User user);
+
+
+    @Select(" select  id, headImgUrl  from sys_user where openid=#{openid}  and remark= #{remark}  ")
+    User getVisitor(String openid, String remark);
+
+
+    @Delete(" delete  from sys_user where  id=#{id}  ")
+    int delete(Long id);
+
 
     @Select("select * from sys_user t where t.id = #{id}")
     User getById(Long id);

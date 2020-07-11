@@ -1,6 +1,7 @@
 package com.yusheng.hbgj.service;
 
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations.TypedTuple;
@@ -28,23 +29,18 @@ public class RedisService {
     }
 
 
-
     /**
      * 模糊查询有关key
      *
      * @param key
-
      */
-    public Set<Object> keys(String key ) {
+    public Set<Object> keys(String key) {
 
 
-
-        return  redisTemplate.keys(key);
+        return redisTemplate.keys(key);
 
 
     }
-
-
 
 
     /**
@@ -136,14 +132,14 @@ public class RedisService {
     }
 
     /**
-     *  KV添加 不存在的时候才添加
+     * KV添加 不存在的时候才添加
      *
      * @param key
      * @param value
      * @return
      */
     public boolean putIfAbsent(String key, String value) {
-        return redisTemplate.opsForValue().setIfAbsent  (key, value);
+        return redisTemplate.opsForValue().setIfAbsent(key, value);
 
     }
 
@@ -331,6 +327,7 @@ public class RedisService {
     public boolean hashKey(String key, String hashKey) {
         return redisTemplate.opsForHash().hasKey(key, hashKey);
     }
+
 
     /**
      * 获取 key 下的 所有 hashkey 字段名
@@ -648,6 +645,16 @@ public class RedisService {
     public boolean isMember(String key, Object value) {
         return redisTemplate.opsForSet().isMember(key, value);
     }
+
+
+    public Long sadd(String key, Object setItem) {
+
+
+        return redisTemplate.opsForSet().add(key, setItem);
+
+
+    }
+
 
     /**
      * 返回 key 和 othere 的并集

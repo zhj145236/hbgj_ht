@@ -143,7 +143,7 @@ public class RegexUtils {
      */
     public static String getDomain(String url) {
 
-             Matcher matcher = Pattern.compile("(?<=http://|\\.)[^.]*?\\.(com|cn|net|org|biz|info|cc|tv)", Pattern.CASE_INSENSITIVE).matcher(url);
+        Matcher matcher = Pattern.compile("(?<=http://|\\.)[^.]*?\\.(com|cn|net|org|biz|info|cc|tv)", Pattern.CASE_INSENSITIVE).matcher(url);
         matcher.find();
         return matcher.group();
     }

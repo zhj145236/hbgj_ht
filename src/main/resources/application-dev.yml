@@ -101,5 +101,5 @@ log:
   maxsize: 30MB
 token:
   expire:
-    day: 7
+    day: 30
     webExpireDay: 7

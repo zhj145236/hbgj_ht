@@ -10,6 +10,10 @@ import java.util.Map;
 
 public interface UserService {
 
+
+    Integer saveOpenid(Long id, String openid);
+
+
     User saveUser(UserDto userDto);
 
     User updateUser(UserDto userDto, HttpSession session);
@@ -24,7 +28,6 @@ public interface UserService {
 
 
     void lockAccount(String username);
-
 
 
     /**
@@ -70,6 +73,7 @@ public interface UserService {
 
     /**
      * 利用openid得到 token
+     *
      * @param openid openid
      * @return
      */

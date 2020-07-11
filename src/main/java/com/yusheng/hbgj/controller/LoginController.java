@@ -15,10 +15,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -68,7 +66,6 @@ public class LoginController {
 
         User user = userService.getUser(username);
         if (user != null) {
-
 
 
             if (user.getPassword().equals(userService.passwordEncoder(password, user.getSalt()))) {
@@ -148,14 +145,17 @@ public class LoginController {
         }
     }
 
+
+
+
     @LogAnnotation
     @ApiOperation(value = "Restful方式登录,前后端分离时登录接口", notes = "注意返回的token要放在RequestHeader上,后期调用其他接口都需要token")
     @PostMapping("/sys/login/restful")
-    public ResponseInfo restfulLogin(String username, String password, HttpServletRequest request, HttpSession session) {
+    public ResponseInfo restfulLogin(@RequestParam String username, @RequestParam String password, @RequestParam String openid, HttpServletRequest request, HttpSession session) {
 
 
-        if (SysUtil.paramsIsNull(username, password)) {
-            throw new IllegalArgumentException("账号与密码必填");
+        if (SysUtil.paramsIsNull(username, password,openid)) {
+            throw new IllegalArgumentException("账号,密码,openid必填");
         }
 
         String key = "user:login_failed:" + username;
@@ -183,6 +183,26 @@ public class LoginController {
                 Map<String, Object> maps = userService.login(user, request, session);
 
                 log.info("登录成功 {},{},{}", user.getId(), user.getUsername(), user.getNickname());
+
+
+                // 将openid与token 关联上,到时直接通过openid 也可以登录
+
+                // TOKEN 保存30天
+                redisService.setForTimeCustom(UserConstants.OPENID_TOKEN + openid, (String) maps.get("token"), 30, TimeUnit.DAYS);
+
+
+                //记录已被注册的openid
+                redisService.sadd(UserConstants.OPENID_SETS, openid);
+
+
+                if (StringUtils.isEmpty(user.getOpenid())) {
+
+                    // 账户关联上此用户的openid
+                      userService.saveOpenid(user.getId(), openid);
+
+
+
+                }
 
                 return ResponseInfo.success(maps);
 

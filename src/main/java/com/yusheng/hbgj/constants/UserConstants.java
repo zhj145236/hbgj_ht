@@ -8,6 +8,19 @@ package com.yusheng.hbgj.constants;
  */
 public interface UserConstants {
 
+
+    /**
+     * openid与token关联
+     */
+    String  OPENID_TOKEN ="string:openid_map_token:";
+
+    /**
+     * 保存已注册的openid
+     */
+    String  OPENID_SETS="set:openid";
+
+
+
 	/** 加密次数 */
 	int HASH_ITERATIONS = 3;
 
@@ -23,6 +36,9 @@ public interface UserConstants {
 	String USER_PERMISSION = "user:permission:";
 
 
+    /**
+     * token 和 用户基本信息到redis中
+     */
 	String LOGIN_TOKEN = "user:token:";
 
     /**
