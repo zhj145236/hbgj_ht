@@ -4,11 +4,14 @@ import com.yusheng.hbgj.annotation.LogAnnotation;
 import com.yusheng.hbgj.constants.BusinessException;
 import com.yusheng.hbgj.constants.UserConstants;
 import com.yusheng.hbgj.dto.ResponseInfo;
+import com.yusheng.hbgj.dto.UserDto;
 import com.yusheng.hbgj.entity.User;
 import com.yusheng.hbgj.service.RedisService;
 import com.yusheng.hbgj.service.UserService;
+import com.yusheng.hbgj.utils.StrUtil;
 import com.yusheng.hbgj.utils.SysUtil;
 import com.yusheng.hbgj.utils.UserUtil2;
+import com.yusheng.hbgj.vo.WeiXinVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -19,7 +22,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -41,8 +47,16 @@ public class LoginController {
     @Value("${token.expire.webExpireDay}")
     private Integer webExpireDay;
 
+
+    @Value("${token.expire.day}")
+    private Integer expireDay;
+
+
     @Autowired
     private RedisService redisService;
+
+    @Value("${constants.visitorRoleId}")
+    private Long visitorRoleId;
 
 
     private static final Logger log = LoggerFactory.getLogger("adminLogger");
@@ -146,15 +160,12 @@ public class LoginController {
     }
 
 
-
-
-    @LogAnnotation
     @ApiOperation(value = "Restful方式登录,前后端分离时登录接口", notes = "注意返回的token要放在RequestHeader上,后期调用其他接口都需要token")
     @PostMapping("/sys/login/restful")
     public ResponseInfo restfulLogin(@RequestParam String username, @RequestParam String password, @RequestParam String openid, HttpServletRequest request, HttpSession session) {
 
 
-        if (SysUtil.paramsIsNull(username, password,openid)) {
+        if (SysUtil.paramsIsNull(username, password, openid)) {
             throw new IllegalArgumentException("账号,密码,openid必填");
         }
 
@@ -179,30 +190,23 @@ public class LoginController {
                     throw new BusinessException("您的账号已失效,如需登录请联系客服");
                 }
 
+
+                user.setOpenid(openid);
+
+
+                // 账户关联上此用户的openid
+                userService.saveOpenid(user.getId(), openid);
+
+
                 // restful 登录
                 Map<String, Object> maps = userService.login(user, request, session);
 
                 log.info("登录成功 {},{},{}", user.getId(), user.getUsername(), user.getNickname());
 
 
-                // 将openid与token 关联上,到时直接通过openid 也可以登录
+                // TOKEN 保存XX天
+                redisService.setForTimeCustom(UserConstants.OPENID_MAP_TOKEN + openid, (String) maps.get("token"), expireDay, TimeUnit.DAYS);
 
-                // TOKEN 保存30天
-                redisService.setForTimeCustom(UserConstants.OPENID_TOKEN + openid, (String) maps.get("token"), 30, TimeUnit.DAYS);
-
-
-                //记录已被注册的openid
-                redisService.sadd(UserConstants.OPENID_SETS, openid);
-
-
-                if (StringUtils.isEmpty(user.getOpenid())) {
-
-                    // 账户关联上此用户的openid
-                      userService.saveOpenid(user.getId(), openid);
-
-
-
-                }
 
                 return ResponseInfo.success(maps);
 
@@ -225,6 +229,95 @@ public class LoginController {
 
 
     }
+
+
+    @PostMapping("/visitorLogin")
+    @ApiOperation(value = "游客通过微信授权登录")
+    public Map visitorLogin(@RequestBody WeiXinVo wx, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+
+
+        if (StringUtils.isEmpty(wx.getOpenid())) {
+            throw new IllegalArgumentException("openid参数丢失");
+        }
+
+
+        User infoByOpenId = userService.getInfoByOpenId(wx.getOpenid(), 0);
+
+
+        // 已注册过
+        if (infoByOpenId == null) {
+
+
+            // 未注册过
+            log.info("微信新用户注册。。。。。{}", wx.getOpenid());
+            UserDto userVo = new UserDto();
+
+            // 默认加上游客角色
+            List<Long> roles = new ArrayList<>(1);
+            roles.add(visitorRoleId);
+            userVo.setRoleIds(roles);
+
+
+            userVo.setNickname(wx.getNickName());
+            userVo.setHeadImgUrl(wx.getAvatarUrl());
+            userVo.setAddress((wx.getCountry() == null ? "" : wx.getCountry()) + (wx.getProvince() == null ? "" : wx.getProvince()) + (wx.getCity() == null ? "" : wx.getCity()));
+            userVo.setOpenid(wx.getOpenid());
+
+            userVo.setSex(wx.getGender());
+            userVo.setTelephone(wx.getTel());
+
+
+            // 无法获取到用户微信名字，所以采用系统随机生成username
+            String username = "wx" + StrUtil.random(8);
+            while (userService.getUser(username) != null) {
+                log.info(username + "已经被注册，系统重新选号码");
+                username = "wx" + StrUtil.random(8);
+
+            }
+            userVo.setUsername(username);
+            userVo.setRemark("系统自动为微信游客注册此账号");
+
+
+            //设置初始密码
+            String password = "123456";
+
+            userVo.setPassword(password);
+            userVo.setOriginalPassword(password);
+
+            //非厂商
+            userVo.setCompFlag(0);
+
+            userVo.setStatus(User.Status.VALID);
+
+            User user = userService.saveUser(userVo);
+
+            // 为新用户在后台静默登录
+            Map<String, Object> map = userService.login(user, request, session);
+
+            map.put("message", "微信新用户登录");
+
+
+            // TOKEN 保存XX天
+            redisService.setForTimeCustom(UserConstants.OPENID_MAP_TOKEN + user.getOpenid(), (String) map.get("token"), expireDay, TimeUnit.DAYS);
+
+
+            return map;
+
+
+        } else {
+
+            Map<String, Object> map = userService.login(infoByOpenId, request, session);
+            map.put("message", "之前已授权的微信用户重新登录");
+
+            // TOKEN 保存XX天
+            redisService.setForTimeCustom(UserConstants.OPENID_MAP_TOKEN + infoByOpenId.getOpenid(), (String) map.get("token"), expireDay, TimeUnit.DAYS);
+
+            return map;
+        }
+
+
+    }
+
 
     @ApiOperation(value = "获取当前登录用户")
     @GetMapping("/sys/login")

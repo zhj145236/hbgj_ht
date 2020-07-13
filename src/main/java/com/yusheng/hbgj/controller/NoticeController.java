@@ -130,41 +130,33 @@ public class NoticeController {
         return noticeDao.countUnread(user.getId());
     }
 
-    @ApiOperation(value = "微信端用户获取未读公告数", notes = "openid和userId二选一")
+    @ApiOperation(value = "微信端用户获取未读公告数", notes = "userId必填")
     @GetMapping("/wx_count_unread")
-    public Integer wxcountUnread(@RequestParam(required = false) String openid, @RequestParam(required = false) String userId) {
+    public Integer wxcountUnread(@RequestParam String userId) {
 
-        if (StringUtils.isEmpty(openid) && StringUtils.isEmpty(userId)) {
-            throw new IllegalArgumentException("参数openid与userId必填一项");
+        if (StringUtils.isEmpty(userId)) {
+            throw new IllegalArgumentException("userId必填一项");
         }
 
-        String userIdA = StringUtils.isEmpty(userId) ? userDao.getUserId(openid) + "" : userId;
-
-        if ("null".equals(userIdA)) {
-            return 0;
-        } else {
-            return noticeDao.countUnread(Long.parseLong(userIdA));
 
 
-        }
+        return noticeDao.countUnread(Long.parseLong(userId));
+
+
     }
 
-    @ApiOperation(value = "微信端用户已读完此条消息", notes = "一定要传入noticeId ; openid和userId 二选一")
+    @ApiOperation(value = "微信端用户已读完此条消息", notes = "一定要传入noticeId和userId")
     @GetMapping("/wxHasRead")
-    public Boolean wxHasRead(@RequestParam Long noticeId, @RequestParam(required = false) String openid, @RequestParam(required = false) String userId) {
+    public Boolean wxHasRead(@RequestParam Long noticeId, @RequestParam String userId) {
 
-        if (StringUtils.isEmpty(openid) && StringUtils.isEmpty(userId)) {
-            throw new IllegalArgumentException("参数openid与userId必填一项");
+        if (StringUtils.isEmpty(userId)) {
+            throw new IllegalArgumentException("userId必填");
         }
 
-        String userIdA = StringUtils.isEmpty(userId) ? userDao.getUserId(openid) + "" : userId;
 
-        if ("null".equals(userIdA)) {
-            return true;
-        } else {
-            noticeDao.saveReadRecord(noticeId, Long.parseLong(userIdA));
-            return true;
-        }
+        noticeDao.saveReadRecord(noticeId, Long.parseLong(userId));
+        return true;
+
 
     }
 
@@ -194,17 +186,19 @@ public class NoticeController {
     @ApiOperation(value = "微信小程序端的提醒事项列表", notes = "已按时间降序显示，不管有没有阅读都会查询出来")
     public PageTableResponse wxlistNoticeReadVO(PageTableRequest request) {
 
-        String openid = (String) request.getParams().get("openid");
+
+
+        // String openid = (String) request.getParams().get("openid");
         String userId = (String) request.getParams().get("userId");
 
-        if (StringUtils.isEmpty(openid) && StringUtils.isEmpty(userId)) {
+        if (StringUtils.isEmpty(userId)) {
             throw new IllegalArgumentException("参数openid与userId必填一项");
         }
 
 
-        String userIdA = StringUtils.isEmpty(userId) ? userDao.getUserId(openid) + "" : userId;
+        // String userIdA = StringUtils.isEmpty(userId) ? userDao.getUserId(openid) + "" : userId;
 
-        request.getParams().put("userId", userIdA);
+        request.getParams().put("userId", userId);
 
         return new PageTableHandler(new PageTableHandler.CountHandler() {
 

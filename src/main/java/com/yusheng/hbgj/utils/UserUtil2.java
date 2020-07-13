@@ -298,8 +298,21 @@ public class UserUtil2 {
         //Redis中删除token
         userUtil.redisService.delete(UserConstants.LOGIN_TOKEN + token);
 
-        if (UserUtil2.getCurrentUser() != null) {
-            userUtil.redisService.delete(UserConstants.OPENID_TOKEN + UserUtil2.getCurrentUser().getOpenid());
+
+        Set<Object> keys = userUtil.redisService.keys("*" + UserConstants.OPENID_MAP_TOKEN + "*");
+
+        for (Object key : keys) {
+
+            // string:openid_map_token:oJpnF5KrFXDycuGd4dOXcyup5boE -> dc942df11ad7723d26e4e266c9bf71d4
+            String tokenA = userUtil.redisService.get((String) key);
+
+            if (token.equals(tokenA)) {
+                log.warn("用户退出登录,解除openid:{}与token:{}的映射......................", key, tokenA);
+                userUtil.redisService.delete((String) key);
+
+            }
+
+
         }
 
 

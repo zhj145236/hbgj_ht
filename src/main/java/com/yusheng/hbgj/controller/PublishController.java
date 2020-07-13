@@ -58,23 +58,17 @@ public class PublishController {
 
     @GetMapping("/getReplyButUnreadCount")
     @ApiOperation(value = "返回用户未读的留言数量", notes = "条件:留言被平台回复且自己还没有看 的数量")
-    public Integer getReplyButUnreadCount(@RequestParam(required = false) String openid, @RequestParam(required = false) Long userId) {
+    public Integer getReplyButUnreadCount(@RequestParam Long userId) {
 
-        if (StringUtils.isEmpty(openid) && StringUtils.isEmpty(userId)) {
-            throw new IllegalArgumentException("参数openid与userId必填一项");
+        if (StringUtils.isEmpty(userId)) {
+            throw new IllegalArgumentException("userId必填");
         }
 
-        Long userIdA = StringUtils.isEmpty(userId) ? userDao.getUserId(openid) : userId;
 
 
 
-        if (userIdA == null || userIdA == 0) {
-            return 0;
-        } else {
+        return publishDao.getReplyButUnreadCount(userId);
 
-            return  publishDao.getReplyButUnreadCount(userIdA);
-
-        }
 
     }
 
@@ -102,36 +96,41 @@ public class PublishController {
             throw new IllegalArgumentException("发布留言不能为空");
         }
 
-        String notNullId;
+        String notNullId = "";
         if (publish.getUserId() != null) {
             notNullId = publish.getUserId() + "";
-        } else {
-            notNullId = publish.getOpenid();
         }
 
-        if (notNullId == null) {
+        if (publish.getUserId() == null) {
             throw new IllegalArgumentException("提交参数不完整:userId或者openid必填一样");
         } else if (redisUtil.listSize("publish:" + notNullId, -1) >= 5L) {
             throw new BusinessException("操作失败，因为您最近已经提交了多次留言，请稍后再试");
         } else if (!RegexUtils.checkMobile(publish.getTel())) {
             throw new BusinessException("手机格式不正确，请重新输入");
         }
+
         publish.setCreateTime(new Date());
         String userType;
-        if (!StringUtils.isEmpty(publish.getUserId())) {
 
-            userType = "厂商";
-            User uu = userDao.getById(publish.getUserId());
-            if (uu != null) {
-                publish.setHeadPic(uu.getHeadImgUrl());
-                publish.setNickName(uu.getNickname());
+
+        User uu = userDao.getById(publish.getUserId());
+        if (uu != null) {
+
+            if (uu.getCompFlag() == null && hlgjId.equals(uu.getId().toString())) {
+                userType = "自己";
+            } else {
+                userType = (1 == uu.getCompFlag()) ? "厂商" : "游客";
             }
+
+
+            publish.setRemark(userType);
+
+            publish.setHeadPic(uu.getHeadImgUrl());
+            publish.setNickName(uu.getNickname());
         } else {
-            publish.setUserId(userDao.getUserId(publish.getOpenid()));
             userType = "游客";
         }
 
-        publish.setRemark(userType);
 
         publishDao.save(publish);
 
@@ -214,10 +213,6 @@ public class PublishController {
         Long userIdA = entity.getUserId();
 
 
-        if (userIdA == null) {
-            userIdA = userDao.getUserId(entity.getOpenid());
-        }
-
         notice.setReceiveId(userIdA + "");
 
         if (!StringUtils.isEmpty(publish.getReply())) {
@@ -236,17 +231,17 @@ public class PublishController {
 
         Map<String, Object> params = request.getParams();
 
-        String openid = (String) params.get("openid");
+
         String userId = (String) params.get("userId");
 
 
-        log.debug("openid:{} , userId:{}", openid, userId);
+        log.debug(" , userId:{}", userId);
 
-        if (StringUtils.isEmpty(openid) && StringUtils.isEmpty(userId)) {
-            throw new IllegalArgumentException("参数openid与userId必填一项");
+        if (StringUtils.isEmpty(userId)) {
+            throw new IllegalArgumentException("userId必填一项");
         }
 
-        Long userIdA = StringUtils.isEmpty(userId) ? userDao.getUserId(openid) : Long.parseLong(userId);
+        Long userIdA = Long.parseLong(userId);
 
         params.put("userId", userIdA);
 

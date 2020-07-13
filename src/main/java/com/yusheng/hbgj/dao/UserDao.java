@@ -3,6 +3,7 @@ package com.yusheng.hbgj.dao;
 import java.util.List;
 import java.util.Map;
 
+import io.swagger.models.auth.In;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -19,6 +20,9 @@ public interface UserDao {
 
     @Update("update sys_user t set  t.openid = #{openid} , t.headImgUrl= #{headImgUrl}   where t.id = #{id} ")
     Integer saveOpenid(@Param("id") Long id, @Param("openid") String openid, String headImgUrl);
+
+    @Update("update sys_user t set  t.openid = #{openid}    where t.id = #{id} ")
+    Integer saveOpenidHb(@Param("id") Long id, @Param("openid") String openid);
 
 
     @Options(useGeneratedKeys = true, keyProperty = "id")
@@ -67,11 +71,11 @@ public interface UserDao {
     @Select("select  count(*)  from sys_user t where t.openid= #{openid}")
     int wxCountByOpenid(String openid);
 
-    @Select("select  t.id  from sys_user t where t.openid= #{openid}")
-    Long getUserId(String openid);
+    @Select("select  t.id  from sys_user t where t.openid= #{openid} ")
+    Long getUserIdAA(String openid);
 
-    @Select("select t.* from sys_user t where t.openid = #{openid}")
-    User getInfoByOpenId(String openid);
+    @Select("select t.* from sys_user t where t.openid = #{openid} and t.compFlag=#{compFlag}")
+    User getInfoByOpenId(String openid, Integer compFlag);
 
     @Update("update sys_user t set  t.agreeLicence= now()  where t.id = #{id} and t.compFlag=1 and t.agreeLicence is  null ")
     int agreeLicence(String userId);

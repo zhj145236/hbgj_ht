@@ -40,11 +40,11 @@ public interface UserService {
 
 
     /***
-     * 通过openid 得到主键id
+     * 通过openid得到主键id
      * @param openid
      * @return
      */
-    Long getUserId(String openid);
+    //Long getUserId(String openid);
 
 
     /**
@@ -57,7 +57,7 @@ public interface UserService {
     Map<String, Object> login(User user, HttpServletRequest request, HttpSession session);
 
 
-    User getInfoByOpenId(String openid);
+    User getInfoByOpenId(String openid,Integer compFlag);
 
 
     /**

@@ -12,12 +12,8 @@ public interface UserConstants {
     /**
      * openid与token关联
      */
-    String  OPENID_TOKEN ="string:openid_map_token:";
+    String OPENID_MAP_TOKEN ="string:openid_map_token:";
 
-    /**
-     * 保存已注册的openid
-     */
-    String  OPENID_SETS="set:openid";
 
 
 

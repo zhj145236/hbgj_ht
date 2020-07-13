@@ -45,6 +45,9 @@ public class UserServiceImpl implements UserService {
     @Value("${token.expire.day}")
     private Integer expireDay;
 
+    @Value("${constants.hlgjId}")
+    private Long hlgjId;
+
 
     @Override
     public Integer saveOpenid(Long id, String openid) {
@@ -52,25 +55,21 @@ public class UserServiceImpl implements UserService {
 
         // 查找 此微信号有之前无被游客注册
 
-
-        // select  id, headImgUrl from sys_user where openid='oJpnF5CTwQ6H4oSC_6YPZWrF8xX4' and remark= ;
-        User visitor = userDao.getVisitor(openid, "系统自动为微信游客注册此账号");
+        log.info("绑定openid{},并绑定厂商({})，设置默认头像{}", openid, id, "/2020/06/08/logo.jpg");
 
 
-        if (visitor != null && visitor.getId() != null) {
+        if (hlgjId.equals(id)) {
 
-            //delete  from sys_user where  id='35' ;
-            userDao.delete(visitor.getId());
+            //绑定openid,不必修改头像
+            return userDao.saveOpenidHb(id, openid);
 
-            log.info("删除游客:{},并绑定厂商({})的头像和openid", openid, id);
+        } else {
 
-            // update sys_user t set  t.openid = 'oJpnF5CTwQ6H4oSC_6YPZWrF8xX4' , t.headImgUrl= 'https://wx.qlogo.cn/mmopen/vi_32/bMT3KwNdUfeBwxbXcR43CsA0JVwzqt44iaSicWX9VjoAMWt4vKXadP8tVlRM7gSKFP0mCgL4XsxMb1LAoUEwyDSQ/132'  where t.id = 49;
-            return userDao.saveOpenid(id, openid, visitor.getHeadImgUrl());
+            //绑定openid,设置默认头像
+            return userDao.saveOpenid(id, openid, "/2020/06/08/logo.jpg");
+
 
         }
-
-
-        return 0;
 
 
     }
@@ -178,12 +177,6 @@ public class UserServiceImpl implements UserService {
         return userDao.wxCountByOpenid(openid);
     }
 
-    @Override
-    public Long getUserId(String openid) {
-
-        return userDao.getUserId(openid);
-
-    }
 
 
     @Override
@@ -279,9 +272,9 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User getInfoByOpenId(String openid) {
+    public User getInfoByOpenId(String openid, Integer compFlag) {
 
-        return userDao.getInfoByOpenId(openid);
+        return userDao.getInfoByOpenId(openid, compFlag);
 
     }
 
