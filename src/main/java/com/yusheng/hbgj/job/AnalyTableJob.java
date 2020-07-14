@@ -30,13 +30,14 @@ public class AnalyTableJob {
     private TableAnalyDao tableAnalyDao;
 
     /**
-     * 每天3:10执行
+     * 每周一的03:10执行
      */
-    @Scheduled(cron = "0 10 3 * * ? ")
+    @Scheduled(cron = "0 10 3  ? * MON")
+    //@Scheduled(cron = "0 */1 * * * ?")
     private void tableAnaly() {
 
         dateFormat = new SimpleDateFormat("HH:mm:ss");
-        
+
         List<TableAnaly> currentData = tableAnalyDao.getCurrenData();
 
         if (currentData.size() == 0) {
@@ -45,7 +46,7 @@ public class AnalyTableJob {
         }
 
         tableAnalyDao.insertBatch(currentData);
-        logger.warn("每天3:10执行,采集数据成功,共有{}表，现在时间：{}", currentData.size(), dateFormat.format(new Date()));
+        logger.warn("每天03:10执行,采集数据成功,共有{}表，现在时间：{}", currentData.size(), dateFormat.format(new Date()));
 
     }
 

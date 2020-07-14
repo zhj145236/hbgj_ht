@@ -7,7 +7,7 @@
 
 	<select id="getCurrenData" resultType="com.yusheng.hbgj.entity.TableAnaly">
 
-        SELECT table_name as tName ,table_rows as tRows , table_comment tComments , ( DATE_FORMAT(CURRENT_TIME(), 'y%m%d%H%i')) as period FROM information_schema.TABLES
+        SELECT table_name as tName ,table_rows as tRows , table_comment tComments , ( DATE_FORMAT(CURRENT_TIME(), '%y%m%d%H%i')) as period FROM information_schema.TABLES
         WHERE   TABLE_SCHEMA  = 'hbgj'      and table_name!='sys_table_analy'  ORDER BY table_rows DESC
 
 	</select>
