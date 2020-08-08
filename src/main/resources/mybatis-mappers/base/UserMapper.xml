@@ -136,6 +136,10 @@
             </if>
 
 
+            `contractBeginDate` = #{contractBeginDate},
+
+            `contractEndDate` = #{contractEndDate}
+
 
         </set>
         where t.id = #{id}

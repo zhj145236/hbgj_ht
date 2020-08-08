@@ -1,18 +1,10 @@
 package com.yusheng.hbgj.dao;
 
+import com.yusheng.hbgj.entity.User;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
 import java.util.Map;
-
-import io.swagger.models.auth.In;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-
-import com.yusheng.hbgj.entity.User;
 
 @Mapper
 public interface UserDao {
@@ -27,9 +19,9 @@ public interface UserDao {
 
     @Options(useGeneratedKeys = true, keyProperty = "id")
     @Insert("insert into sys_user(username, password, salt, nickname, headImgUrl, phone, " +
-            "telephone, email, birthday, sex, status, createTime, updateTime,originalPassword,remark,address,openid,compFlag,agreeLicence) values " +
+            "telephone, email, birthday, sex, status, createTime, updateTime,originalPassword,remark,address,openid,compFlag,agreeLicence , contractBeginDate,contractEndDate ) values " +
             "(#{username}, #{password}, #{salt}, #{nickname}, #{headImgUrl}, #{phone}, #{telephone}, " +
-            "#{email}, #{birthday}, #{sex}, #{status}, now(), now(),#{originalPassword},#{remark},#{address},#{openid} ,#{compFlag},#{agreeLicence}  )")
+            "#{email}, #{birthday}, #{sex}, #{status}, now(), now(),#{originalPassword},#{remark},#{address},#{openid} ,#{compFlag},#{agreeLicence}, #{contractBeginDate}, #{contractEndDate}  )")
     int save(User user);
 
 

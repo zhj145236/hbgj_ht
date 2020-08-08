@@ -415,13 +415,13 @@ public class FileController {
 
                 Notice notice = new Notice();
                 notice.setIsPersonal(Notice.Personal.YES);
-                notice.setTitle("合同快到期提醒");
+                notice.setTitle("客户的合同快到期提醒");
                 notice.setReceiveId(hlgjId);
 
                 // 给东莞市环联管家生态环境科技有限公司发通知
-                String sb = "您有一份与" + file.getOrgId() + "签订的合同【" + file.getFileOriginName() + "】" +
+                String sb = "您的客户" + file.getOrgId() + "与其他公司签订的合同【" + file.getFileOriginName() + "】" +
                         "将于" + endDate +
-                        "到期,请及时处理。如已经处理请忽略此条通知";
+                        "到期,请知悉。";
                 notice.setContent(sb);
                 notice.setCreateName("系统程序");
                 //设置合同到期前X天创建
@@ -440,9 +440,9 @@ public class FileController {
                 //厂商ID
                 notice2.setReceiveId(file.getResourceId());
 
-                String sb2 = "您有一份与" + "东莞市环联管家生态环境科技有限公司" + "签订的合同【" + file.getFileOriginName() + "】" +
+                String sb2 = "您有一份合同【" + file.getFileOriginName() + "】" +
                         "将于" + endDate +
-                        "到期,请及时处理。如已经处理请忽略此条通知";
+                        "到期,请知悉。";
                 notice2.setContent(sb2);
                 //草稿
                 notice2.setStatus(Notice.Status.DRAFT);

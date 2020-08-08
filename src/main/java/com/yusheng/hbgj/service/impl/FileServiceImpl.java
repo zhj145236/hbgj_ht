@@ -135,6 +135,12 @@ public class FileServiceImpl implements FileService {
 
     }
 
+    @Override
+    public int fileRefCount(String resourceId) {
+
+        return fileInfoDao.fileRefCount(resourceId);
+    }
+
 
     @Override
     public void delete(String id) {
@@ -165,7 +171,6 @@ public class FileServiceImpl implements FileService {
         return fileInfoDao.getByUrl(url);
 
     }
-
 
 
 }

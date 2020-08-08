@@ -48,6 +48,18 @@ public class User extends BaseEntity<Long> {
 
     private String address;
 
+    /**
+     * '合同开始时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date contractBeginDate;
+
+    /**
+     * 合同结束时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date contractEndDate;
+
 
     public String getUsername() {
         return username;
@@ -182,5 +194,21 @@ public class User extends BaseEntity<Long> {
 
     public void setAgreeLicence(Date agreeLicence) {
         this.agreeLicence = agreeLicence;
+    }
+
+    public Date getContractBeginDate() {
+        return contractBeginDate;
+    }
+
+    public void setContractBeginDate(Date contractBeginDate) {
+        this.contractBeginDate = contractBeginDate;
+    }
+
+    public Date getContractEndDate() {
+        return contractEndDate;
+    }
+
+    public void setContractEndDate(Date contractEndDate) {
+        this.contractEndDate = contractEndDate;
     }
 }

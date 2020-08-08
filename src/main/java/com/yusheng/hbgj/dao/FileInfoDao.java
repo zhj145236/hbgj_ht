@@ -44,6 +44,12 @@ public interface FileInfoDao {
     @Select("select count(1) from file_info t where t.md5 = #{md5}  ")
     int fileExtist(@Param("md5") String md5);
 
+
+
+    @Select("select count(1) from file_info t  where t.resourceId = #{resourceId}  and  t.delFlag='1'  ")
+    int fileRefCount(@Param("resourceId") String resourceId);
+
+
     List<FileInfo> list(@Param("params") Map<String, Object> params, @Param("offset") Integer offset,
                         @Param("limit") Integer limit);
 

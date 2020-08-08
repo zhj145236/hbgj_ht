@@ -31,8 +31,11 @@ public interface NoticeDao {
      * @return
      */
     @Delete("delete from t_notice where   refId=#{refId}  and createTime>= now() ")
-    int flushNotice(@Param("refId") String  refId);
+    int flushNotice(@Param("refId") String refId);
 
+
+    @Delete("delete from t_notice where   refId=#{refId}  and  receiveId = #{receiveId}  and title= #{title} and createTime>= now() ")
+    int dropNotice(@Param("refId") String refId, String receiveId, String title);
 
     @Update("update t_notice t set title = #{title}, content = #{content}, status = #{status}, updateTime = #{updateTime} where t.id = #{id}")
     int update(Notice notice);

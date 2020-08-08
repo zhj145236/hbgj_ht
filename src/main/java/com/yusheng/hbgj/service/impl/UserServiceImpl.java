@@ -178,7 +178,6 @@ public class UserServiceImpl implements UserService {
     }
 
 
-
     @Override
     public Map<String, Object> login(User user, HttpServletRequest request, HttpSession session) {
 
@@ -315,10 +314,12 @@ public class UserServiceImpl implements UserService {
     public User updateUser(UserDto userDto, HttpSession session) {
 
 
-        userDto.setSalt(DigestUtils.md5Hex(UUID.randomUUID().toString() + System.currentTimeMillis() + UUID.randomUUID().toString()));
-        userDto.setPassword(passwordEncoder(userDto.getOriginalPassword(), userDto.getSalt()));
+        if (!StringUtils.isEmpty(userDto.getOriginalPassword())) {
+            userDto.setSalt(DigestUtils.md5Hex(UUID.randomUUID().toString() + System.currentTimeMillis() + UUID.randomUUID().toString()));
+            userDto.setPassword(passwordEncoder(userDto.getOriginalPassword(), userDto.getSalt()));
+        }
 
-        log.info("更新用户。。。。。。。。。。。。。。。。。。。。。");
+        log.info("更新用户{}", userDto.getUsername());
 
         userDao.update(userDto);
 

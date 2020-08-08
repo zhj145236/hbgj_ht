@@ -21,4 +21,7 @@ public interface FileService {
 
      String getFileType(String fileName);
 
+     int fileRefCount(String resourceId);
+
+
 }

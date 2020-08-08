@@ -5,16 +5,19 @@ import com.yusheng.hbgj.annotation.LogAnnotation;
 import com.yusheng.hbgj.annotation.PermissionTag;
 import com.yusheng.hbgj.constants.NotLoginException;
 import com.yusheng.hbgj.constants.UserConstants;
+import com.yusheng.hbgj.dao.NoticeDao;
 import com.yusheng.hbgj.dao.UserDao;
 import com.yusheng.hbgj.dto.UserDto;
+import com.yusheng.hbgj.entity.Notice;
 import com.yusheng.hbgj.entity.User;
 import com.yusheng.hbgj.page.table.PageTableHandler;
 import com.yusheng.hbgj.page.table.PageTableRequest;
 import com.yusheng.hbgj.page.table.PageTableResponse;
+import com.yusheng.hbgj.service.FileService;
 import com.yusheng.hbgj.service.RedisService;
 import com.yusheng.hbgj.service.SysLogService;
 import com.yusheng.hbgj.service.UserService;
-import com.yusheng.hbgj.utils.StrUtil;
+import com.yusheng.hbgj.utils.DateUtil;
 import com.yusheng.hbgj.utils.UserUtil2;
 import com.yusheng.hbgj.vo.WeiXinVo;
 import io.swagger.annotations.Api;
@@ -27,14 +30,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
+import java.util.*;
 
 /**
  * 用户相关接口
@@ -56,15 +53,25 @@ public class UserController {
     private UserDao userDao;
 
 
+    @Value("${constants.hlgjId}")
+    private String hlgjId;
+
+
     @Autowired
     private SysLogService sysLogService;
 
     @Autowired
     private RedisService redisService;
 
+    @Autowired
+    private FileService fileService;
+
 
     @Value("${constants.companyRoleId}")
     private Long companyRoleId;
+
+    @Autowired
+    private NoticeDao noticeDao;
 
 
     @LogAnnotation
@@ -85,7 +92,97 @@ public class UserController {
         }
 
 
-        return userService.saveUser(userDto);
+        User newUser = userService.saveUser(userDto);
+
+
+        // 如果有设置合同到期时间，就设置合同提醒
+        if (userDto.getContractEndDate() != null) {
+
+            this.addNotices(newUser);
+
+        }
+        return newUser;
+
+
+    }
+
+
+    private void addNotices(User newUser) {
+
+
+
+        if (newUser.getId() == null) {
+            return;
+        }
+
+        String title = "服务快到期提醒";
+        int i1 = noticeDao.dropNotice(newUser.getId() + "", hlgjId, title);
+        int i2 = noticeDao.dropNotice(newUser.getId() + "", newUser.getId() + "", title);
+
+        if (newUser.getContractEndDate() == null) {
+            return;
+        }
+
+
+        String endDateStr = DateUtil.dateFormat(newUser.getContractEndDate());
+
+        // 30天前；7天前；1天前通知
+        Date[] dates = new Date[]{DateUtil.addDay(newUser.getContractEndDate(), -30), DateUtil.addDay(newUser.getContractEndDate(), -7), DateUtil.addDay(newUser.getContractEndDate(), -1)};
+
+
+
+        for (Date date : dates) {
+
+
+            // 结束时间大约现在的
+            if (DateUtil.daysBetween(new Date(), date) >= 0) {
+
+
+                Notice notice = new Notice();
+                notice.setIsPersonal(Notice.Personal.YES);
+                notice.setTitle(title);
+                notice.setReceiveId(hlgjId);
+
+                // 给东莞市环联管家生态环境科技有限公司发通知
+                String sb = "您与" + newUser.getNickname() + "签订的合同将于" + endDateStr + "到期,请及时处理哦。如已处理，请忽略本通知。";
+                notice.setContent(sb);
+                notice.setCreateName("系统程序");
+                //设置合同到期前X天创建
+                notice.setCreateTime(date);
+                notice.setRefId(newUser.getId() + "");
+
+                //草稿
+                notice.setUpdateTime(new Date());
+                notice.setStatus(Notice.Status.DRAFT);
+
+                noticeDao.save(notice);
+
+
+                // 给厂商也要发通知
+                Notice notice2 = new Notice();
+                notice2.setIsPersonal(Notice.Personal.YES);
+                notice2.setTitle(title);
+
+                //厂商ID
+                notice2.setReceiveId(newUser.getId() + "");
+
+                String sb2 = "您与东莞市环联管家生态环境科技有限公司签订的合同将于" + endDateStr + "到期,请联系他们处理哦。如已处理，请忽略本通知。";
+                notice2.setContent(sb2);
+                //草稿
+                notice2.setCreateName("系统程序");
+                notice2.setStatus(Notice.Status.DRAFT);
+
+                notice2.setUpdateTime(new Date());
+                //设置合同到期前X天创建
+                notice2.setCreateTime(date);
+                notice2.setRefId(newUser.getId() + "");
+
+
+                noticeDao.save(notice2);
+
+
+            }
+        }
     }
 
     @LogAnnotation
@@ -94,9 +191,25 @@ public class UserController {
     @PermissionTag("sys:user:add")
     public User updateUser(@RequestBody UserDto userDto, HttpSession session) {
 
-        return userService.updateUser(userDto, session);
+
+        // 检测不与其他的用户名冲突
+        User u = userService.getUser(userDto.getUsername());
+        if (u != null && !u.getId().equals(userDto.getId())) {
+            throw new IllegalArgumentException("此账号" + userDto.getUsername() + "已经被其他人使用，请重新填写");
+        }
+
+
+        User user = userService.updateUser(userDto, session);
+
+
+        //  新增合同提醒，如果有设置合同提醒
+        this.addNotices(user);
+
+
+        return user;
 
     }
+
 
     @LogAnnotation
     @PutMapping(params = "headImgUrl")
@@ -197,6 +310,79 @@ public class UserController {
     @PermissionTag("sys:user:query")
     public User user(@PathVariable Long id) {
         return userDao.getById(id);
+    }
+
+
+    @ApiOperation(value = "根据用户id删除用户")
+    @DeleteMapping("/delete/{id}")
+    @PermissionTag("sys:user:delete")
+    public boolean delete(@PathVariable Long id) {
+
+
+        // 删除用户
+        userDao.delete(id);
+
+        //用户下线
+        Set<Object> keys = redisService.keys(UserConstants.LOGIN_TOKEN + "*");
+
+        for (Object key : keys) {
+            String s = redisService.get((String) key);
+            User onlineUser = JSONObject.parseObject(s, User.class);
+            if (onlineUser != null && id.equals(onlineUser.getId())) {
+                redisService.delete((String) key);
+                break;
+            }
+        }
+
+        // 删未来的对应提醒,有就删
+        String title = "服务快到期提醒";
+        int i1 = noticeDao.dropNotice(id + "", hlgjId, title);
+        int i2 = noticeDao.dropNotice(id + "", id + "", title);
+
+
+        return true;
+
+    }
+
+    @ApiOperation(value = "判断能否删除用户")
+    @GetMapping("/delAdvise/{id}")
+    @PermissionTag("sys:user:delete")
+    public String deleteAdvise(@PathVariable Long id) {
+
+
+        //有无文档引用？
+        StringBuilder sb = new StringBuilder();
+        int i = fileService.fileRefCount(id + "");
+        if (i >= 1) {
+            sb.append("此用户关联了").append(i).append("个文档；");
+        }
+
+        //判断此用户有无在线？
+        Set<Object> keys = redisService.keys(UserConstants.LOGIN_TOKEN + "*");
+
+        for (Object key : keys) {
+
+            String s = redisService.get((String) key);
+
+            User onlineUser = JSONObject.parseObject(s, User.class);
+
+            if (onlineUser != null && id.equals(onlineUser.getId())) {
+
+                sb.append("此用户是登录在线状态；");
+                break;
+            }
+
+        }
+
+        if (sb.toString().length() == 0) {
+
+            sb.append("此用户无文档关联，并且不在线，可以放心删除，");
+        }
+
+        sb.append("是否确认删除此账号？");
+        return sb.toString();
+
+
     }
 
 
