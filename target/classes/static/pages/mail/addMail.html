@@ -48,16 +48,14 @@
 	<script type="text/javascript" src="../../layui/layui.js"></script>
 	<script type="text/javascript" src="../../js/common.js"></script>
 	<script type="text/javascript">
-		var pro = window.location.protocol;
-		var host = window.location.host;
-		var domain = pro + "//" + host;
+
 		
 		var layedit, index;
 		layui.use(['layedit','upload'], function(){
 		  layedit = layui.layedit;
 		  layedit.set({
               uploadImage: {
-                url: '/files/layui?domain=' + domain,
+                url: '/files/layui',
                 type: 'post'
               }
             });
@@ -67,12 +65,12 @@
 		function add(obj) {
 			var subject = $("#subject").val();
 			var toUsers = $("#toUsers").val();
-		    if(subject.trim() == ""){
-		       layer.msg("标题不能为空")
+		    if(subject.trim() === ""){
+		       layer.msg("标题不能为空");
 			   return;
 		    }
-		    if(toUsers.trim() == ""){
-		       layer.msg("收件人不能为空")
+		    if(toUsers.trim() === ""){
+		       layer.msg("收件人不能为空");
 			   return;
 		    }
 		    $(obj).attr("disabled",true);

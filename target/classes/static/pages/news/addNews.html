@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+
+    <title>添加政策信息</title>
+
+    <style>
+
+        .form-group {
+
+            padding: 20px;
+
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <fieldset>
+
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+
+            </label>
+
+            <div class="col-md-10">
+                说明: 待上传的预览图分辨率应为高260px,宽650px,图片格式建议为png,文件大小应在20KB至500KB之间
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">预览图</label>
+            <div class="col-md-10">
+                <button type="button" class="layui-btn" id="test1">
+                    <i class="layui-icon">&#xe67c;</i>上传（1张）
+                </button>
+                <input type="hidden" name="bannerImg" id="bannerImg">
+                <div id="bannerImgDiv"></div>
+            </div>
+
+
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">标题</label>
+            <div class="col-md-10">
+                <input class="form-control" placeholder="标题必填" type="text" name="title" id="title">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">作者</label>
+            <div class="col-md-10">
+                <input class="form-control" placeholder="作者必填" type="text" name="author" id="author">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">内容</label>
+            <div class="col-md-10">
+
+
+                <textarea class="layui-textarea" id="content" style="display: none">
+					</textarea>
+
+            </div>
+        </div>
+
+
+        <div class="form-actions">
+            <div class="row" align="center">
+                <div class="col-md-12">
+                    <button class="btn btn-primary" onclick="location.href='newsList.html'">返回</button>
+                    <button class="btn btn-primary" type="submit" onclick="add(this)">
+                        <i class="fa fa-save"></i> 保存
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </fieldset>
+</div>
+
+<script type="text/javascript" src="../../js/libs/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/dict.js"></script>
+<script type="text/javascript">
+
+
+    var layedit, index;
+
+    var scratch_news_html = "scratch_news_html";
+    var scratch_news_text = "scratch_news_text";
+    var content_bakHtml;
+
+    var content_bakText;
+
+    layui.use(['layedit', 'upload', 'layer'], function () {
+        layedit = layui.layedit;
+
+
+        layedit.set({
+            uploadImage: {
+                url: '/files/layui',
+                type: 'post'
+            },
+            height: 600
+        });
+
+        index = layedit.build('content');
+
+
+        content_bakText = localStorage.getItem(scratch_news_text);
+
+
+        if (content_bakText !== null && content_bakText.length >= 1) {
+
+            layer.confirm('检测到有未保存的内容，是否还原？', {
+
+                btn: ['确定', '取消']
+
+            }, function () {
+
+
+                layer.close(1);
+
+                content_bakHtml = localStorage.getItem(scratch_news_html);
+
+                layedit.setContent(index, content_bakHtml, false);
+
+
+                autoBackContent();
+
+
+            }, function () {
+
+                localStorage.removeItem(scratch_news_html);
+                localStorage.removeItem(scratch_news_text);
+
+                autoBackContent();
+
+            });
+
+
+        } else {
+
+            autoBackContent();
+
+        }
+
+
+    });
+
+
+    var tempContent_Html;
+    var tempContent_Text;
+    var storage_text_bak;
+
+    function autoBackContent() {
+
+        setInterval(function () {
+
+            tempContent_Text = layedit.getText(index).trim();
+            tempContent_Html = layedit.getContent(index).trim();
+
+            storage_text_bak = localStorage.getItem(scratch_news_text);
+
+
+            if (storage_text_bak !== tempContent_Text) {
+
+                localStorage.setItem(scratch_news_text, tempContent_Text.trim());
+                localStorage.setItem(scratch_news_html, tempContent_Html.trim());
+
+                console.info("自动备份草稿中。。");
+            }
+
+        }, 5000);
+    }
+
+
+    function add(obj) {
+
+        var title = $("#title").val().trim();
+
+        var author = $("#author").val().trim();
+        var bannerImg = $("#bannerImg").val().trim();
+
+
+        if (title === "") {
+            layer.msg("标题不能为空");
+            return;
+        } else if (author === "") {
+            layer.msg("作者不能为空");
+            return;
+        } else if (layedit.getContent(index).trim() === "") {
+            layer.msg("内容不能为空");
+            return;
+        } else if (bannerImg.trim() === "") {
+            layer.msg("请上传一张预览图");
+            return;
+        }
+
+
+        $(obj).attr("disabled", true);
+
+        var formdata = $("#form").serializeObject();
+        formdata.title = title;
+        formdata.bannerImg = bannerImg;
+        formdata.author = author;
+        formdata.content = layedit.getContent(index);
+
+        $.ajax({
+            type: 'post',
+            url: '/newss',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+
+                layer.msg("添加成功", {shift: -1, time: 1000}, function () {
+
+                    localStorage.removeItem(scratch_news_html);
+                    localStorage.removeItem(scratch_news_text);
+
+                    location.href = "newsList.html";
+
+
+                });
+            }
+        });
+    }
+
+
+    layui.use(['upload', 'layer'], function () {
+        var layer = layui.layer;
+        var upload = layui.upload;
+
+        var uploadIns = upload.render({
+            elem: '#test1' //绑定元素
+
+            , accept: 'images' //允许上传的文件类型
+            , url: '/files?tag=政策预览图' //上传接口
+            , auto: false //选择文件后不自动上传
+            , size: 500 //限定大小500KB
+            , exts: 'jpg|png|gif|bmp|jpeg'
+
+            , choose: function (obj) {  //上传前选择回调方法
+
+
+                obj.preview(function (index, file, result) {
+
+
+                    var img = new Image();
+                    img.src = result;
+                    img.onload = function () { //初始化夹在完成后获取上传图片宽高，判断限制上传图片的大小。
+
+                        console.info("图片尺寸","宽:",img.width,"高：",img.height);
+
+                        if ( Math.abs(img.width- 650)<=10  &&  Math.abs(img.height-260)<= 10) {
+
+                            obj.upload(index, file); //满足条件调用上传方法
+
+                        } else {
+
+                            uploadIns.config.elem.next()[0].value = '';
+                            layer.msg('上传失败，您上传的预览图尺寸必须是高260px、宽650px', {icon: 5});
+
+                        }
+                    };
+
+                });
+
+            }
+
+
+            , done: function (res, index, upload) {
+
+                var url = res.url;
+
+                layer.msg("上传成功");
+
+                var src = "/files" + url;
+                var a = "<a target='_blank' href='" + src + "'><img src='" + src + "'/></a>";
+                $("#bannerImgDiv").html(a);
+
+                $("#bannerImg").val(src);
+
+
+            }
+        });
+    });
+
+
+</script>
+</body>
+</html>

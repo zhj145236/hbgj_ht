@@ -1,59 +1,82 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
-<link rel="stylesheet" href="../../layui/css/layui.css" media="all" />
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="../../layui/css/layui.css" media="all"/>
+    <script src="../../js/jq.js"></script>
+
+
 </head>
 <body>
-    <div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div>
+            <header style="height: 100%">
+                <div align="left">
+                    <table style="width: 100%">
+                        <tr>
+
+
+                            <td>
+                                <button type="button" class="layui-btn" id="test1">
+                                    <i class="layui-icon">&#xe67c;</i>上传文件
+                                </button>
+                            </td>
+
+                            <td align="right">
+                                <form class="form-inline" onsubmit="return false">
+                                    <div class="form-group">
+                                        文件名：
+                                        <input id="fileOriginName" type="text" class="form-control" placeholder="可模糊搜索">
+                                        <!--  上传日期：
+                                          <input id="uploadTime" type="date"  name="uploadTime"  class="form-control" >-->
+                                        类型：
+                                        <select class="form-control input-sm" id="type">
+                                            <option value="">全部</option>
+                                            <option value="图片">图片</option>
+                                            <option value="文档">文档</option>
+                                            <option value="视频">视频</option>
+                                            <option value="音频">音频</option>
+
+                                        </select>
+
+                                        <button id="searchBt" class="layui-btn layui-btn-sm"
+                                                permission="sys:file:query"><i class="layui-icon">&#xe615;</i>搜索
+                                        </button>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </header>
+
             <div>
-                <header style="height: 100%">
-					 <div align="left">
-                        <table style="width: 100%">
-                            <tr>
-                                <td>
-                                    <button type="button" class="layui-btn" id="test1">
-									  <i class="layui-icon">&#xe67c;</i>上传文件
-									</button>
-                                </td>
-                                <td align="right">
-                                    <form class="form-inline" onsubmit="return false">
-                                        <div class="form-group">
-                                           <button id="searchBt" class="layui-btn layui-btn-sm" permission="sys:file:query"><i class="layui-icon">&#xe615;</i>搜索</button>
-                                        </div>
-                                    </form>
-                                </td>
-                            </tr> 
-                        </table>
-                    </div>
-                </header>
-                
-                <div>
-                    <div class="widget-body no-padding">
-                        <table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">
-                            <thead>
-                                <tr>
-                                </tr>                       
-                                <tr>
-                                    <th>url</th>
-                                    <th>path</th>
-                                    <th>contentType</th>
-                                    <th>修改时间</th>
-                                    <th>管理</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="widget-body no-padding">
+                    <table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">
+                        <thead>
+                        <tr>
+                        </tr>
+                        <tr>
+                            <th>文件名</th>
+                            <th>文件大小</th>
+                            <th>类型</th>
+                            <th>上传时间</th>
+                            <th>预览</th>
+                            <th>管理</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </body>
 </html>
 
@@ -64,103 +87,143 @@
 <script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="../../js/my/permission.js"></script>
 <script type="text/javascript">
-var pers = checkPermission();
 
-var pro = window.location.protocol;
-var host = window.location.host;
-var domain = pro + "//" + host;
+    var pers = checkPermission();
 
-var example;
-function init(){
-	example = 
-    	$('#dt-table').DataTable({
-        	"searching": false,
-        	"processing": false,
-        	"serverSide" : true,
-        	"language": {
-                "url": "/js/plugin/datatables/Chinese.lang"
-            },
-        	"ajax": {
-        		"url" : "/files",
-        		"type":"get",
-        		"data":function(d){
-    			
-        		},
-    			"error":function(xhr, textStatus, errorThrown){
-    				var msg = xhr.responseText;
-    				console.log(msg)
-    			}
-        	},
-        	"dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",	
-            "columns": [
-                { 
-                	"data": "url", 
-                	"defaultContent": "",
-                	"render": function (data, type, row) {
-                		var url = row['url'];
-                		var type = row['type'];
-                		var u = "";
-                		if(type == 1) {
-                			var src = domain + "/files" + url;
-                			u = "<a target='_blank' href='" + src +"'><img width='30' src='" + src + "'></img></a>";
-                		} else {
-                			u = url;
-                		}
-                    	return u;
-                  	}
+
+
+    var example;
+
+    function init() {
+        example =
+            $('#dt-table').DataTable({
+                "searching": true,
+                "processing": true,
+                "serverSide": true,
+                "language": {
+                    "url": "/js/plugin/datatables/Chinese.lang"
                 },
-                { "data": "path", "defaultContent": ""},
-                { "data": "contentType", "defaultContent": ""},
-                { "data": "updateTime", "defaultContent": ""},
-                { 
-                	"data": "", 
-                	"defaultContent": "",
-                	"orderable":false,
-                	"render": function (data, type, row) {
-                		var id = row['id'];
-                        var del = buttonDel(id, "sys:file:del", pers);
-                        return del;
-                  	}
-                },
-                
-            ],
-           "order": [[ 3, "desc" ]]
-        } );
-}
+                "ajax": {
+                    "url": "/files",
+                    "type": "get",
+                    "data": function (d) {
 
-function del(id){
-	layer.confirm('确定要删除吗？', {
-        btn : [ '确定', '取消' ]
-    }, function() {
-    	$.ajax({
-            type : 'delete',
-            url : '/files/'+id,
-            success : function(data) {
+                        d.fileOriginName = $('#fileOriginName').val();
+                        d.type = $('#type').val();
+
+                    }/*,
+                    "error": function (xhr, textStatus, errorThrown) {
+                        var msg = xhr.responseText;
+                        console.log(msg)
+                    }*/
+                },
+                "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
+                "columns": [
+
+                    {"data": "fileOriginName", "defaultContent": ""},
+
+
+                    {
+                        "data": "size", "defaultContent": "", "render": function (data, type, row) {
+
+                            var sizeInt = parseInt(data);
+                            if (sizeInt < 1024) {
+                                return "小于1KB";
+
+                            } else if (sizeInt < (1024 * 1024)) {
+                                return (sizeInt / 1024).toFixed(1) + "KB";
+
+                            } else if (sizeInt < (1024 * 1024 * 1024)) {
+                                return (sizeInt / 1024 / 1024).toFixed(1) + "MB";
+
+                            } else {
+                                return "超大文件";
+
+                            }
+
+                        }
+                    },
+                    {"data": "type", "defaultContent": ""},
+
+                    {"data": "uploadTime", "defaultContent": ""},
+                    {
+                        "data": "",
+                        "defaultContent": "",
+                        "orderable": false,
+                        "render": function (data, type, row) {
+                            var url = row['url'];
+                            var type = row['type'];
+                            var u = "";
+                            if (type === "图片") {
+
+                                var src =  "/files" + url;
+                                var prev =  "/files/prev" + url;
+                                u = "<a target='_blank' href='" + src + "'><img width='30' src='" + prev + "' title='点击可下载" + row['fileOriginName'] + "'/></a>";
+
+                            } else {
+
+                                var downUrl = "/files" + url;
+
+                                if (parseInt(row['size']) < (1024 * 1024)) {
+                                    u = "<a target='_blank' style='color: #1E9FFF'  title='此文件较大，下载过程中请耐心等待' href='" + downUrl + "'>下载</a>";
+                                } else {
+                                    u = "<a target='_blank' style='color: #1E9FFF'   href='" + downUrl + "'>下载</a>";
+
+                                }
+
+                            }
+                            return u;
+                        }
+                    },
+                    {
+                        "data": "",
+                        "defaultContent": "",
+                        "orderable": false,
+                        "render": function (data, type, row) {
+                            var id = row['id'];
+                            var del = buttonDel(id, "sys:file:del", pers);
+                            return del;
+                        }
+                    }
+
+                ],
+                "order": [[3, "desc"]]
+            });
+    }
+
+    function del(id) {
+        layer.confirm('确定要删除吗？', {
+            btn: ['确定', '取消']
+        }, function () {
+            $.ajax({
+                type: 'delete',
+                url: '/files/' + id,
+                success: function (data) {
+                    example.ajax.reload();
+                    layer.msg("删除成功");
+                }
+            });
+
+            layer.close(1);
+        });
+    }
+
+    $("#searchBt").click(function () {
+        example.ajax.reload();
+    });
+
+    layui.use('upload', function () {
+        var upload = layui.upload;
+        upload.render({
+            elem: '#test1' //绑定元素
+            , accept: 'file' //允许上传的文件类型
+            , url: '/files' //上传接口
+            , done: function (res, index, upload) {
+                layer.msg("上传成功");
                 example.ajax.reload();
-                layer.msg("删除成功");
             }
         });
-        
-        layer.close(1);
     });
-}
 
-$("#searchBt").click(function(){
-	example.ajax.reload();
-});
-
-layui.use('upload', function(){
-	var upload = layui.upload;
-	upload.render({
-	    elem: '#test1' //绑定元素
-	    ,accept: 'file' //允许上传的文件类型
-	    ,url: '/files' //上传接口
-	    ,done: function(res, index, upload){
-	    	layer.msg("上传成功");
-		 	example.ajax.reload();
-	    }
-	  });
-});
-
-init();
+    init();
 </script>

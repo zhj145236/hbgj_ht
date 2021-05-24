@@ -1,13 +1,16 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <configuration>
+
+    <!-- 设定日志级别 -->
     <springProperty name="logFile" source="log.file"/>
     <springProperty name="rootlevel" source="log.level.root"/>
     <springProperty name="mylevel" source="log.level.my"/>
     <springProperty name="maxFileSize" source="log.maxsize"/>
 
+    <!-- 控制台 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d %-5level - %msg %n
+            <pattern>控制台日志:%d{MM-dd HH:mm:ss} %c %t %-5level - %msg %n
             </pattern>
             <charset>UTF-8</charset>
         </encoder>
@@ -17,7 +20,7 @@
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${logFile}</file>
         <encoder>
-            <pattern>%d %-5level - %msg %n
+            <pattern>adminLog的日志:%d{MM-dd HH:mm:ss} %c %t %-5level - %msg %n
             </pattern>
             <charset>UTF-8</charset>
         </encoder>
@@ -31,7 +34,7 @@
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${logFile}.debug</file>
         <encoder>
-            <pattern>%d [%thread] %-5level %logger{36} -[%file:%line]- %msg%n
+            <pattern>错误日志: %c %d [%thread] %-5level %logger{36} -[%file:%line]- %msg%n
             </pattern>
             <charset>UTF-8</charset>
         </encoder>
@@ -50,7 +53,7 @@
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${logFile}.sql</file>
         <encoder>
-            <pattern>%d %-5level - %msg %n
+            <pattern>%d{MM-dd HH:mm:ss} %-5level - %msg %n
             </pattern>
             <charset>UTF-8</charset>
         </encoder>

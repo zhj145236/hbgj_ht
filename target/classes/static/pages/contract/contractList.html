@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>合同管理</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="../../layui/css/layui.css" media="all"/>
+    <script src="../../js/dict.js"></script>
+
+
+</head>
+<body>
+<div>
+
+
+    <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11" style="display: none" id="setContractWindow"
+         target="test123">
+
+        <form class="form-horizontal" id="book" method="post">
+
+
+            <input type="hidden" id="form_id" name="id">
+
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">开始日期</label>
+                <div class="col-md-9">
+                    <input type="text" id="beginTime" name="beginTime" class="layui-input"
+                           placeholder="请选择日期">
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">结束日期</label>
+                <div class="col-md-9">
+                    <input type="text" id="endTime" name="endTime" class="layui-input"
+                           placeholder="应晚于开始日期">
+                </div>
+            </div>
+
+
+            <div class="form-group">
+
+                <label class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+
+                    <button class="btn btn-primary" type="button" onclick="update(this)">
+                        <i class="fa fa-save"></i> 保存
+                    </button>
+
+                </div>
+
+
+            </div>
+
+
+        </form>
+    </div>
+
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div>
+            <header style="height: 100%">
+                <div align="left">
+                    <table style="width: 100%">
+                        <tr>
+
+
+                            <td>
+                                <button type="button" class="layui-btn" id="test1">
+                                    <i class="layui-icon">&#xe67c;</i>上传文件
+                                </button>
+
+
+                            </td>
+
+                            <td align="right">
+
+
+                                <form class="form-inline  layui-form" onsubmit="return false">
+                                    <div class="form-group">
+
+                                        <div class="layui-input-inline">
+                                            <select name="resourceId" id="resourceId"
+                                                    lay-verify="required" lay-search="">
+
+                                            </select>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="form-group">
+
+
+                                        文件名：
+                                        <input id="fileOriginName" type="text" class="form-control" placeholder="可模糊搜索">
+
+
+                                    </div>
+
+
+                                    <button id="searchBt" class="layui-btn layui-btn-sm"
+                                            permission="sys:file:query"><i class="layui-icon">&#xe615;</i>搜索
+                                    </button>
+
+                                </form>
+                            </td>
+                        </tr>
+
+
+                    </table>
+                </div>
+            </header>
+
+            <div>
+                <div class="widget-body no-padding">
+                    <table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">
+                        <thead>
+                        <tr>
+                        </tr>
+                        <tr>
+                            <th>企业名称</th>
+                            <th>合同开始时间</th>
+                            <th>合同结束时间</th>
+                            <th>文件名</th>
+                            <th>文件大小</th>
+                            <th>类型</th>
+                            <th>上传时间</th>
+                            <th>预览</th>
+                            <th>管理</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<script type="text/javascript" src="../../js/libs/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/my/permission.js"></script>
+
+<script type="text/javascript">
+
+    var pers = checkPermission();
+
+
+
+    //获取所有用户
+    getAllUser();
+
+    var example;
+
+
+    layui.use(['layer', 'laydate'], function () {
+        var layer = layui.layer;
+        var laydate = layui.laydate;
+        laydate.render({
+            elem: '#beginTime'
+        });
+        laydate.render({
+            elem: '#endTime'
+        });
+    });
+
+
+    function init() {
+        example =
+            $('#dt-table').DataTable({
+                "searching": true,
+                "processing": true,
+                "serverSide": true,
+                "language": {
+                    "url": "/js/plugin/datatables/Chinese.lang"
+                },
+                "ajax": {
+                    "url": "/files",
+                    "type": "get",
+                    "data": function (d) {
+
+                        d.fileOriginName = $('#fileOriginName').val();
+                        d.type = $('#type').val();
+                        d.resourceId = $('#resourceId').val();
+                        d.tag = "合同管理";
+
+                    }
+
+                },
+                "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
+                "columns": [
+
+                    {"data": "orgId", "orderable": false, "defaultContent": ""},
+
+                    {
+                        "data": "",
+                        "defaultContent": "未设置",
+                        "orderable": false,
+                        "render": function (data, type, row) {
+
+                            if (row['remark'] != null && row['remark'].trim().length > 5) {
+
+                                return row['remark'].split("@")[0];
+
+
+                            }
+
+                        }
+                    },
+
+                    {
+                        "data": "",
+                        "defaultContent": "未设置",
+                        "orderable": false,
+                        "render": function (data, type, row) {
+                            if (row['remark'] != null && row['remark'].trim().length > 5) {
+
+                                var endDate = row['remark'].split("@")[1];
+
+                                var diffDay = parseFloat(((new Date(endDate.replace(/-/g, "/")).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)).toFixed(1));
+
+
+                                if (diffDay <= 7.0 && diffDay > 1.0) {
+
+
+                                    return "<p style='color: #c05e5e;font-size: 17px' title='将于" + diffDay + "天后合同到期' >" + endDate + "</p>";
+
+                                } else if (diffDay <= 1.0 && diffDay > 0.0) {
+
+
+                                    return "<p style='color: #ff0000;font-size: 18px '   title='将于明天到期' >" + endDate + "</p>";
+
+                                } else {
+
+                                    return endDate;
+                                }
+
+
+                            }
+                        }
+                    },
+
+
+                    {"data": "fileOriginName", "orderable": false, "defaultContent": ""},
+
+
+                    {
+                        "data": "size", "defaultContent": "", "orderable": false, "render": function (data, type, row) {
+
+                            var sizeInt = parseInt(data);
+                            if (sizeInt < 1024) {
+                                return "小于1KB";
+
+                            } else if (sizeInt < (1024 * 1024)) {
+                                return (sizeInt / 1024).toFixed(1) + "KB";
+
+                            } else if (sizeInt < (1024 * 1024 * 1024)) {
+                                return (sizeInt / 1024 / 1024).toFixed(1) + "MB";
+
+                            } else {
+                                return "超大文件";
+
+                            }
+
+
+                        }
+                    },
+                    {"data": "type", "orderable": false, "defaultContent": ""},
+
+                    {"data": "uploadTime", "defaultContent": ""},
+                    {
+                        "data": "",
+                        "defaultContent": "",
+                        "orderable": false,
+                        "render": function (data, type, row) {
+                            var url = row['url'];
+                            var type = row['type'];
+                            var u = "";
+                            if (type === "图片") {
+
+                                var src =  "/files" + url;
+                                var prev =  "/files/prev" + url;
+                                u = "<a target='_blank' href='" + src + "'><img width='30' src='" + prev + "' title='点击可下载" + row['fileOriginName'] + "'/></a>";
+
+                            } else {
+
+                                var downUrl =  "/files" + url;
+
+                                if (parseInt(row['size']) < (1024 * 1024)) {
+                                    u = "<a target='_blank' style='color: #1E9FFF'  alt='此文件较大，下载过程中请耐心等待' href='" + downUrl + "'>下载</a>";
+                                } else {
+                                    u = "<a target='_blank' style='color: #1E9FFF'   href='" + downUrl + "'>下载</a>";
+                                }
+
+
+                            }
+                            return u;
+                        }
+                    },
+                    {
+                        "data": "",
+                        "defaultContent": "",
+                        "orderable": false,
+                        "render": function (data, type, row) {
+                            var id = row['id'];
+                            var del = buttonDel(id, "sys:file:del", pers);
+
+                            var start_end = row['remark'];
+
+
+                            var setting = "<button class='layui-btn layui-btn-xs' title='设置合同起止时间' onclick='setContractDate(\"" + id + "\",\"" + start_end + "\")'><i class='layui-icon'>&#xe716;</i></button>";
+
+
+                            return del + setting;
+                        }
+                    }
+
+                ],
+                "order": []
+            });
+    }
+
+
+    // 设置合同时间弹出框
+    function setContractDate(id, start_end) {
+
+
+        $('#form_id').val(id);
+
+
+        if (start_end === null || 'null' === start_end || start_end.trim() === '') {
+            $('#beginTime').val('');
+            $('#endTime').val('');
+
+        } else {
+            $('#beginTime').val(start_end.split("@")[0]);
+            $('#endTime').val(start_end.split("@")[1]);
+
+        }
+        layer.open({
+            type: 1,
+            anim: 1,
+            title: ["设置合同起止时间", 'font-size:18px'],
+            area: ['600px', '250px'],
+            shadeClose: true,
+            content: $("#setContractWindow")
+
+
+        });
+
+    }
+
+
+    /**
+     * 更新 合同时间
+     * @param obj
+     */
+    function update(obj) {
+
+        var id = $("#form_id").val();
+        var beginTime = $("#beginTime").val();
+        var endTime = $("#endTime").val();
+
+        if (beginTime.trim() === "") {
+            layer.msg("开始时间不能为空");
+            return;
+        }
+        if (endTime.trim() === "") {
+            layer.msg("结束时间不能为空");
+            return;
+        }
+
+        if (new Date(endTime.replace(/-/g, "/")).getTime() - new Date(beginTime.replace(/-/g, "/")).getTime() < 86400000) {
+
+            layer.msg("结束时间至少应该比开始时间晚1天");
+            return;
+        }
+        $(obj).attr("disabled", true);
+
+        var formData = {
+            id: id,
+            remark: beginTime + "@" + endTime
+
+        };
+        $.ajax({
+            type: 'put',
+            url: '/files/saveRemark',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formData),
+            success: function (data) {
+                layer.msg("修改成功", {shift: -1, time: 1000}, function () {
+
+                    $('#form_id').val(id);
+                    $('#beginTime').val('');
+                    $('#endTime').val('');
+
+                    example.ajax.reload();
+                    $(obj).attr("disabled", false);
+                    layer.closeAll();
+
+                });
+            }
+        });
+    }
+
+
+    // 删除2张表和文件
+    function del(id) {
+        layer.confirm('确定要删除吗？', {
+            btn: ['确定', '取消']
+        }, function () {
+            $.ajax({
+                type: 'delete',
+                url: '/files/' + id,
+                success: function (data) {
+                    example.ajax.reload();
+                    layer.msg("删除成功");
+                }
+            });
+
+            layer.close(1);
+        });
+    }
+
+    $("#searchBt").click(function () {
+        example.ajax.reload();
+    });
+
+    layui.use('upload', function () {
+        var upload = layui.upload;
+
+
+        var uploadIns =  upload.render({
+            elem: '#test1' //绑定元素
+            , accept: 'file' //允许上传的文件类型
+            , url: '/files' //上传接口
+            , size: 1024 * 30 //限定大小30MB
+            , auto: false //选择文件后不自动上传
+            , data: {
+                resourceId: function () {
+                    return $('#resourceId').val();
+                }, orgId: function () {
+                    return $('#resourceId').find("option:selected").text()
+                },
+                tag: function () {
+                    return "合同管理";
+                }
+            }
+
+           , choose: function (obj) {  //上传前选择回调方法
+
+                if (($('#resourceId').val().trim() === '')) {
+
+                    uploadIns.config.elem.next()[0].value = '';
+                    layer.msg('上传失败，请先为附件选择企业（右上角下拉框）', {icon: 5});
+
+                } else {
+
+                    obj.preview(function (index, file, result) {
+                        obj.upload(index, file);
+                    });
+
+                }
+            }
+            , done: function (res, index, upload) {
+                example.ajax.reload();
+                layer.msg("上传成功");
+            },
+            error: function () {
+                layer.msg('请求异常，请稍后重试', {icon: 5});
+            }
+        });
+    });
+
+    layui.use('form', function () {
+        layui.form.on("select", function (data) {
+            example.ajax.reload();
+        });
+
+    });
+
+    init();
+
+</script>

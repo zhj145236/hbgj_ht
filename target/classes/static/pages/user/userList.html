@@ -42,7 +42,7 @@
                             </form>
                         </td>
                         <td align="right">
-                            <button class="layui-btn layui-btn-sm" onclick="location.href='addUser.html'"
+                            <button class="layui-btn layui-btn-sm" onclick="location.href='addUser.html?version=1'"
                                     permission="sys:user:add">
                                 <i class="layui-icon">&#xe608;</i> 添加
                             </button>
@@ -65,8 +65,11 @@
                         <th>地址</th>
                         <th>手机号</th>
                         <th>邮箱</th>
-                        <th>状态</th>
+                        <th>账号状态</th>
                         <th>备注</th>
+                        <th>合同开始时间</th>
+                        <th>合同结束时间</th>
+                        <th>创建时间</th>
                         <th>操作</th>
                     </tr>
                     </thead>
@@ -119,43 +122,121 @@
                         d.username = $('#username').val();
                         d.nickname = $('#nickname').val();
                         d.status = $('#status').val();
-                    },
-                    "error": function (xhr, textStatus, errorThrown) {
-                        var msg = xhr.responseText;
-                        console.log(msg)
                     }
+                    /* ,
+                     "error": function (xhr, textStatus, errorThrown) {
+                         var msg = xhr.responseText;
+                         console.log(msg);
+
+                     }*/
                 },
                 "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
                 "columns": [
-                    {"data": "username", "defaultContent": ""},
-                    {"data": "originalPassword", "defaultContent": ""},
-                    {"data": "nickname", "defaultContent": ""},
-                    {"data": "address", "defaultContent": ""},
 
-                    {"data": "phone", "defaultContent": ""},
-                    {"data": "email", "defaultContent": ""},
+                    {"data": "username", "orderable": false, "defaultContent": ""},
+                    {"data": "originalPassword", "orderable": false, "defaultContent": ""},
+                    {"data": "nickname", "orderable": false, "defaultContent": ""},
+                    {"data": "address", "orderable": false, "defaultContent": ""},
+
+                    {"data": "phone", "orderable": false, "defaultContent": ""},
+                    {"data": "email", "orderable": false, "defaultContent": ""},
                     {
                         "data": "status",
                         "defaultContent": "",
+                        "orderable": false,
                         "render": function (data, type, row) {
                             return userStatus[data];
                         }
                     },
-                    {"data": "remark", "defaultContent": ""},
+
+                    {"data": "remark", "orderable": false, "defaultContent": ""},
+
+
+                    // 合同开始时间
+                    {
+                        "data": "contractBeginDate",
+                        "defaultContent": "未设置",
+                        "orderable": true,
+                        "render": function (data, type, row) {
+
+                            var ddd = row["contractBeginDate"];
+
+                            if (ddd == null || ddd === "") {
+
+                                return "未设置";
+                            } else {
+                                return ddd;
+                            }
+
+                        }
+                    },
+
+                    //合同结束时间
+                    {
+                        "data": "contractEndDate",
+                        "defaultContent": "未设置",
+                        "orderable": true,
+                        "render": function (data, type, row) {
+
+                            var ddd = row["contractEndDate"];
+
+                            if (ddd == null || ddd === "") {
+                                return "未设置";
+                            } else {
+
+                                var diffDay = parseFloat(((new Date(ddd.replace(/-/g, "/")).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)).toFixed(1));
+
+                                if (diffDay <= 7.0 && diffDay > 1.0) {
+
+
+                                    return "<p style='color: #c05e5e;font-size: 17px' title='将于" + diffDay.toFixed(0) + "天后合同到期' >" + ddd + "</p>";
+
+                                } else if (diffDay <= 1.0 && diffDay > 0.0) {
+
+
+                                    return "<p style='color: #ff0000;font-size: 18px '   title='将于明天到期' >" + ddd + "</p>";
+
+                                } else {
+
+                                    return ddd;
+                                }
+                            }
+                        }
+                    },
+
+
+                    {"data": "createTime", "orderable": true, "defaultContent": ""},
+
                     {
                         "data": "",
                         "defaultContent": "",
                         "orderable": false,
                         "render": function (data, type, row) {
+
+
                             var id = row['id'];
-                            var href = "updateUser.html?id=" + id;
-                            var edit = buttonEdit(href, "sys:user:add", pers);
-                            return edit;
+
+                            var contractBeginDate = row['contractBeginDate'];
+                            var contractEndDate = row['contractEndDate'];
+
+                            var edit = buttonEdit("updateUser.html?id=" + id, "sys:user:add", pers);
+                            var del = "";
+
+
+                            if (hasPermission("sys:user:delete", pers)) {
+
+                                del = $("<button class='layui-btn layui-btn-xs' title='删除此账户' onclick='delAdvise(" + id + ")'><i class='layui-icon'>&#xe640;</i></button>").prop("outerHTML");
+                            }
+
+
+                            return del + edit;
+
+
                         }
                     }
 
                 ],
-                "order": [[0, "desc"], [1, "asc"]]
+                "order": [[10, "DESC"]]  // 创建时间
             });
     }
 
@@ -165,6 +246,56 @@
     });
 
     init();
+
+
+    /**
+     * 删除前给出提示
+     */
+    function delAdvise(id) {
+
+
+        $.ajax({
+            type: 'get',
+            url: '/users/delAdvise/' + id,
+
+            success: function (data) {
+
+                layer.confirm(data, {
+                    btn: ['确定', '取消']
+                }, function () {
+
+                    $.ajax({
+                        type: 'delete',
+                        url: '/users/delete/' + id,
+                        success: function (data) {
+
+                            example.ajax.reload();
+
+                        }
+                    });
+
+                    layer.closeAll();
+
+                }, function () {
+
+                    layer.closeAll();
+                });
+
+
+            }
+        });
+
+    }
+
+
+    function hasPermission(permission, pers) {
+
+        if (permission !== "") {
+            return $.inArray(permission, pers) >= 0;
+        } else {
+            return false;
+        }
+    }
 
 
 </script>

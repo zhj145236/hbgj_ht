@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="/static/css/global.css" media="all"/>
+    <title>详情</title>
+    <style>
+        #content {
+
+            border: 1px solid black;
+            padding: 40px;
+            margin: 0 auto;
+            width: 800px;
+
+
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+
+<div id='content'>
+</div>
+
+<div class="form-actions">
+    <div align="center">
+        <div>
+            <button class="btn btn-primary" onclick="location.href='bannerList.html'">返回</button>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript" src="../../js/libs/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript"
+        src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript">
+
+
+    initData();
+
+    function initData() {
+
+        var id = getUrlParam("id");
+        if (id !== "") {
+            $.ajax({
+                type: 'get',
+                url: '/banners/' + id,
+                async: false,
+                success: function (data) {
+
+                    $('#id').text(data.id);
+
+                    $('#content').html(data.content);
+
+
+                }
+            });
+        }
+
+
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="/static/css/global.css" media="all"/>
+    <title>政策详情</title>
+    <style>
+        #content {
+
+            border: 2px solid blue;
+            padding: 40px;
+            margin: 40px;
+            width: 96%;
+
+
+        }
+
+        #author {
+            font-size: 18px;
+            margin-top: 20px;
+            text-align: center;
+
+        }
+
+        #title {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+
+            text-align: center;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+
+<div>
+
+
+    <div id='title'></div>
+
+
+</div>
+
+<div>
+
+
+    <div id='author'></div>
+
+
+</div>
+
+
+<div>
+
+
+    <div id='content'></div>
+
+</div>
+
+
+<div class="form-actions">
+    <div align="center">
+        <div>
+            <button class="btn btn-primary" onclick="location.href='newsList.html'">返回</button>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript" src="../../js/libs/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript"
+        src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript">
+    layui.use(['layer', 'laydate'], function () {
+        var layer = layui.layer;
+    });
+
+    initData();
+
+    function initData() {
+        var id = getUrlParam("id");
+        if (id !== "") {
+            $.ajax({
+                type: 'get',
+                url: '/newss/' + id,
+                async: false,
+                success: function (data) {
+
+                    $('#id').text(data.id);
+                    $('#title').text(data.title);
+                    $('#content').html(data.content);
+                    $('#author').text(data.author);
+                    $('#createTime').text(data.createTime);
+                    $('#updateTime').text(data.updateTime);
+                    $('#remark').text(data.remark);
+                    $('#delFlag').text(data.delFlag);
+                    $('#sort').text(data.sort);
+
+                }
+            });
+        }
+
+
+    }
+
+</script>
+</body>
+</html>

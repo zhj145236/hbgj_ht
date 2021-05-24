@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yusheng.hbgj.dao.PublishDao">
+
+    <sql id="where">
+        <where>
+            <if test="params.id != null ">
+                and id = #{params.id}
+            </if>
+            <if test="params.openid != null  ">
+                and openid = #{params.openid}
+            </if>
+            <if test="params.sex != null ">
+                and sex = #{params.sex}
+            </if>
+            <if test="params.tel != null  ">
+                and tel like concat('%', #{params.tel}, '%')
+            </if>
+            <if test="params.nickName != null ">
+                and nickName = #{params.nickName}
+            </if>
+            <if test="params.headPic != null  ">
+                and headPic = #{params.headPic}
+            </if>
+            <if test="params.publishContent != null ">
+                and publishContent = #{params.publishContent}
+            </if>
+
+            <if test="params.reply != null ">
+                and reply = #{params.reply}
+            </if>
+
+            <if test="params.createTime != null ">
+                and createTime = #{params.createTime}
+            </if>
+            <if test="params.updateTime != null ">
+                and updateTime = #{params.updateTime}
+            </if>
+            <if test="params.createName != null ">
+                and createName = #{params.createName}
+            </if>
+            <if test="params.updateName != null ">
+                and updateName = #{params.updateName}
+            </if>
+            <if test="params.remark != null ">
+                and remark = #{params.remark}
+            </if>
+            <if test="params.orgId != null ">
+                and orgId = #{params.orgId}
+            </if>
+            <if test="params.delFlag != null ">
+                and delFlag = #{params.delFlag}
+            </if>
+            <if test="params.sort != null ">
+                and sort = #{params.sort}
+            </if>
+            <if test="params.delTime != null ">
+                and delTime = #{params.delTime}
+            </if>
+
+            <if test="params.userId != null ">
+                and userId = #{params.userId}
+            </if>
+
+            <if test="params.userReadTime != null ">
+                and userReadTime = #{params.userReadTime}
+            </if>
+
+
+            <if test="params.realName != null ">
+                and realName = #{params.realName}
+            </if>
+
+
+
+
+
+        </where>
+    </sql>
+
+    <select id="count" resultType="int">
+        select count(1) from publish t
+        <include refid="where"/>
+    </select>
+
+    <select id="list" resultType="Publish">
+        select t.* from publish t
+        <include refid="where"/>
+        ${params.orderBy}
+        limit #{offset}, #{limit}
+    </select>
+
+    <select id="wxlist" resultType="com.yusheng.hbgj.dto.PublishDto">
+
+        select t.id,t.openid ,t.publishContent ,t.reply, t.updateTime as replyTime , t.createTime as  createTime , t.userReadTime as userReadTime  from publish t
+        <include refid="where"/>
+        ${params.orderBy}
+        limit #{offset}, #{limit}
+
+    </select>
+
+
+    <!--新增信息，并拿到新增信息的表主键信息。
+        新增数据，得到主键的外层写法没什么特别，跟普通的insert一样。只不过里面加了selectKey-->
+    <insert id="save">
+
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+
+        insert into publish (openid, sex, tel, nickName, headPic, publishContent, createTime, updateTime,
+        createName, updateName, remark, orgId, delFlag, sort, delTime,reply,userId ,userReadTime,realName )
+        values ( #{openid}, #{sex}, #{tel}, #{nickName}, #{headPic}, #{publishContent}, #{createTime}, #{updateTime},
+        #{createName}, #{updateName}, #{remark}, #{orgId}, #{delFlag}, #{sort}, #{delTime},#{reply},#{userId},#{userReadTime},#{realName} )
+
+    </insert>
+
+
+    <update id="update">
+        update publish t
+        <set>
+            <if test="openid != null">
+                openid = #{openid},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="tel != null">
+                tel = #{tel},
+            </if>
+            <if test="nickName != null">
+                nickName = #{nickName},
+            </if>
+
+            <if test="reply != null">
+                reply = #{reply},
+            </if>
+
+
+            <if test="headPic != null">
+                headPic = #{headPic},
+            </if>
+            <if test="publishContent != null">
+                publishContent = #{publishContent},
+            </if>
+            <if test="createTime != null">
+                createTime = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                updateTime = #{updateTime},
+            </if>
+            <if test="createName != null">
+                createName = #{createName},
+            </if>
+            <if test="updateName != null">
+                updateName = #{updateName},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+            <if test="orgId != null">
+                orgId = #{orgId},
+            </if>
+            <if test="delFlag != null">
+                delFlag = #{delFlag},
+            </if>
+            <if test="sort != null">
+                sort = #{sort},
+            </if>
+            <if test="delTime != null">
+                delTime = #{delTime},
+            </if>
+
+            <if test="userId != null">
+                userId = #{userId},
+            </if>
+
+            <if test="userReadTime != null">
+                userReadTime = #{userReadTime},
+            </if>
+
+            <if test="realName != null">
+                realName = #{realName},
+            </if>
+
+
+
+        </set>
+
+        where t.id = #{id}
+    </update>
+
+</mapper>

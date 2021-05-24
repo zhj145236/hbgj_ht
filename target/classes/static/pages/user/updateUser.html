@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+
+
 </head>
 <body>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -13,30 +15,51 @@
             <input type="hidden" id="userId" name="userId">
 
             <div class="form-group">
-                <label class="col-md-2 control-label">账号名</label>
+                <label class="col-md-2 control-label">登录账号</label>
                 <div class="col-md-10">
-                    <input class="form-control" placeholder="用户名" type="text" name="username" id="username"
-                           readonly="readonly">
+                    <input class="form-control" placeholder="登录账号" type="text" name="username" id="username"
+                           data-bv-notempty="true" data-bv-notempty-message="登录账号不能为空"
+                    >
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-md-2 control-label">密码</label>
                 <div class="col-md-10">
-                    <input class="form-control" placeholder="密码" type="text" name="originalPassword" id="originalPassword">
+                    <input class="form-control" placeholder="密码" type="text" name="originalPassword"
+                           data-bv-notempty="true" data-bv-notempty-message="密码不能为空"
+                           id="originalPassword"/>
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">公司名称</label>
+                <label class="col-md-2 control-label">昵称（公司名）</label>
                 <div class="col-md-10">
-                    <input class="form-control" placeholder="昵称" type="text" name="nickname" id="nickname">
+                    <input class="form-control" placeholder="昵称" type="text" name="nickname" id="nickname"
+                           data-bv-notempty="true" data-bv-notempty-message="昵称（公司名）不能为空"/>
                 </div>
             </div>
+
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">合同服务期</label>
+                <div class="col-xs-2">
+                    <input type="text" class="form-control" placeholder="开始时间" id="contractBeginDate"
+                           name='contractBeginDate'/>
+
+                </div>
+
+                <div class="col-xs-2">
+                    <input type="text" class="form-control" placeholder="结束时间" id="contractEndDate"
+                           name='contractEndDate'/>
+                </div>
+            </div>
+
+
             <div class="form-group">
                 <label class="col-md-2 control-label">手机号</label>
                 <div class="col-md-10">
-                    <input class="form-control" placeholder="手机号" type="text" maxlength="11" name="phone" id="phone">
+                    <input class="form-control" placeholder="手机号" type="text" maxlength="11" name="phone" id="phone"/>
                 </div>
             </div>
             <div class="form-group">
@@ -89,7 +112,7 @@
             </div>
 
 
-             <div class="form-group">
+            <div class="form-group" style="display:none " id="roleDiv">
                 <label class="col-md-2 control-label">角色</label>
                 <div class="checkbox" id="roles">
                 </div>
@@ -99,7 +122,7 @@
                 <div class="row" align="center">
                     <div class="col-md-12">
                         <button class="btn btn-primary" onclick="location.href='userList.html'">返回</button>
-                        <button class="btn btn-primary" type="submit" onclick="update()">
+                        <button class="btn btn-primary" id="updateBtn" onclick="update(this)">
                             <i class="fa fa-save"></i> 保存
                         </button>
                     </div>
@@ -123,6 +146,14 @@
         laydate.render({
             elem: '#birthday'
         });
+
+        laydate.render({
+            elem: '#contractBeginDate'
+        });
+        laydate.render({
+            elem: '#contractEndDate'
+        });
+
     });
 
     showDictSelect("sex", "sex");
@@ -131,9 +162,30 @@
 
     initData();
 
+    isAdmin();
+
+    // 只有管理员 才能显示 角色列表
+    function isAdmin() {
+
+        $.ajax({
+            type: 'get',
+            url: '/roles/myole',
+            async: true,
+            success: function (data) {
+
+                if (parseInt(data[0].id) === 1) {
+                    $("#roleDiv").css("display", "block");
+                }
+
+
+            }
+        });
+
+    }
+
     function initData() {
         var id = getUrlParam("id");
-        if (id != "") {
+        if (id !== "") {
             $.ajax({
                 type: 'get',
                 url: '/users/' + id,
@@ -142,6 +194,9 @@
                     $("#id").val(data.id);
                     $("#username").val(data.username);
                     $("#userId").val(data.userId);
+
+                    $("#contractBeginDate").val(data.contractBeginDate);
+                    $("#contractEndDate").val(data.contractEndDate);
 
                     $("#nickname").val(data.nickname);
                     $("#phone").val(data.phone);
@@ -162,14 +217,39 @@
         }
     }
 
+
     $('#form').bootstrapValidator();
 
-    function update() {
+    function update(obj) {
+
+
+        $("#originalPassword").val($.trim($("#originalPassword").val()));
+        $("#username").val($.trim($("#username").val()));
+
+
+
+        var contractBeginDate = $("#contractBeginDate").val();
+        var contractEndDate = $("#contractEndDate").val();
+
+        if (contractEndDate !== "" && contractBeginDate !== "") {
+            if ((new Date(contractEndDate.replace(/-/g, "/")).getTime() - new Date(contractBeginDate.replace(/-/g, "/")).getTime() < 86400000)) {
+
+                layer.msg("无法保存，合同服务期的结束时间应当晚于开始时间");
+                $("#updateBtn").attr("disabled", false);
+                return;
+            }
+        }
+
+
         var bootstrapValidator = $("#form").data('bootstrapValidator');
+
         bootstrapValidator.validate();
+
         if (!bootstrapValidator.isValid()) {
+
             return;
         }
+
 
         var formdata = $("#form").serializeObject();
         formdata.roleIds = getCheckedRoleIds();

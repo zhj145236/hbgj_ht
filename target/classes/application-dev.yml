@@ -2,15 +2,16 @@ server:
   port: 8080
   servlet:
     session:
-      timeout: 30m #30分钟，测试的话时间不能太短，否则不准。m是分钟单位，s是秒的单位，h是小时的单位，不写单位的话默认是毫秒
+      timeout: "PT10M"
 
 
 spring:
+
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/happyroad?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    url: jdbc:mysql://localhost:3306/hbgj?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
     username: root
-    password: json@1109
+    password: DOG(/ST/BTZ+BtLm/kdWVBMXlfL5rPVl5NgYXwJL3PSqZ7AIei4IEEGbkoFzejPW01I9)
     druid:
       initialSize: 5
       minIdle: 5
@@ -36,38 +37,69 @@ spring:
     multipart:
       max-file-size: 100MB
       max-request-size: 100MB
+
+
   mvc:
+    favicon:
+      enabled: false
+
     servlet:
       load-on-startup: 1
   redis:
     host: localhost
     port: 6379
-    password: passredis@1109
+    password: DOG(jCY22UbFTXqTdzl5IZ8QQ8MoX9ozSoJVgOeExPLr/gvvWJ73Donyc+CepZ+7q+VF)
     database: 1
+
+  session:
+    store-type: redis
+
   mail:
     default-encoding: UTF-8
-    host: smtp.163.com
-    username:
-    password:
+    host: smtp.exmail.qq.com
+    username: noreply@ysnewtop.com
+    password: apkqS5iotjnFyLGrfA
     protocol: smtp
     test-connection: false
 #    properties:
 #      mail.smtp.auth: true
 mybatis:
-  type-aliases-package: com.happyroad.wy.entity;com.happyroad.modules.*.entity
+  type-aliases-package: com.yusheng.hbgj.entity;com.hbgj.modules.*.entity
   mapper-locations: classpath:/mybatis-mappers/*/*.xml
   configuration:
     mapUnderscoreToCamelCase: true
 files:
-  path: ${file-path:d:/files}
+  path: ${file-path:D:/hbgjfiles}
+
+constants:
+
+  #用户ID
+  adminId: 1
+  hlgjId: 2
+
+  # 角色ID
+  companyRoleId: 3
+  visitorRoleId: 4
+
+  #本机域名
+  domain: http://192.168.31.174:8080
+
+  mysqlBinDir: D:\tools\mysql-5.6.46-winx64\bin\
+  sqlBackDir: D:\download\
+
+  #小程序秘钥
+  appid: wx44c4721e4704c732
+  appsecret: 5bf6ca316b48eb9a8887115c03be3409
+
 logging:
   config: classpath:logback-admin.xml
 log:
   level:
     root: info
     my: debug
-  file: ../logs/admin-server.log
+  file: ../hbgj_logs/admin-server.log
   maxsize: 30MB
 token:
   expire:
-    seconds: 86400
+    day: 90
+    webExpireDay: 7

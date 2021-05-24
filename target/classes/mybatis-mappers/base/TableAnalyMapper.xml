@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.happyroad.wy.dao.TableAnalyDao">
+<mapper namespace="com.yusheng.hbgj.dao.TableAnalyDao">
 
 
 
-	<select id="getCurrenData" resultType="com.happyroad.wy.entity.TableAnaly">
+	<select id="getCurrenData" resultType="com.yusheng.hbgj.entity.TableAnaly">
 
-        SELECT table_name as tName ,table_rows as tRows , table_comment tComments , ( DATE_FORMAT(CURRENT_TIME(), 'y%m%d%H%i')) as period FROM information_schema.TABLES
-        WHERE   TABLE_SCHEMA  = 'happyroad'      and table_name!='sys_table_analy'  ORDER BY table_rows DESC
+        SELECT table_name as tName ,table_rows as tRows , table_comment tComments , ( DATE_FORMAT(CURRENT_TIME(), '%y%m%d%H%i')) as period FROM information_schema.TABLES
+        WHERE   TABLE_SCHEMA  = 'hbgj'      and table_name!='sys_table_analy'  ORDER BY table_rows DESC
 
 	</select>
 
@@ -41,12 +41,11 @@
         </foreach>
     </insert>
 
-    <insert id="thisTableCurrentRows" parameterType="string">
+    <select id="thisTableCurrentRows" parameterType="string">
 
-        select tRows
-        from sys_table_analy where t_name= #{tName}
+        select  table_rows as  tRows         from sys_table_analy where t_name= #{tName}
 
-    </insert>
+    </select>
 
 
 </mapper>

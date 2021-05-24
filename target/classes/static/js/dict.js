@@ -3,7 +3,7 @@ function showDictSelect(id, type, all) {
     var select = $("#" + id);
     select.empty();
 
-    if (all != undefined || all) {
+    if (all !== undefined || all) {
         select.append("<option value=''>全部</option>");
     }
 
@@ -16,7 +16,7 @@ function showDictSelect(id, type, all) {
 
 function getDict(type) {
     var v = sessionStorage[type];
-    if (v == null || v == "") {
+    if (v == null || v === "") {
         $.ajax({
             type: 'get',
             url: '/dicts?type=' + type,
@@ -58,12 +58,11 @@ function getAllUser() {
                 select.append("<option value='" + id + "'>" + nickname + "</option>");
             }
 
-
             layui.use('form', function () {
                 var form = layui.form;
-                form.render();
-            });
+                form.render("select");
 
+            });
 
 
         }

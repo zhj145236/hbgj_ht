@@ -4,212 +4,9 @@
     <option name="GROUP_BY_SEVERITY" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f3cc32f-ce62-4bb5-abc8-e1e2356ba79d" name="Default Changelist" comment="favicon.ico图标显示">
-      <change beforePath="$PROJECT_DIR$/.idea/hbgj.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/hbgj.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_pool2_2_5_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_crazycake_shiro_redis_3_2_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__redis_clients_jedis_2_9_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/FileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/pages/check_repair/checkpairList.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/pages/check_repair/checkpairList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/pages/contract/contractList.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/pages/contract/contractList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/pages/environment/environmentList.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/pages/environment/environmentList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/pages/standing_book/standingbookList.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/pages/standing_book/standingbookList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/logback-admin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/logback-admin.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/css/login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/img/avatars/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/img/avatars/sunny.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/img/login/bg.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/img/login/bg.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/img/logo/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/js/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/common.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/js/dict.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/dict.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/js/jq.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/jq.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/js/plugin/datatables/Chinese.lang" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/plugin/datatables/Chinese.lang" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/layui/lay/modules/layedit.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/layui/lay/modules/layedit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/pages/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/pages/job/jobList.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/job/jobList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/pages/log/logList.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/log/logList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/pages/mail/addMail.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/mail/addMail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/pages/notice/addNotice.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/notice/addNotice.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/pages/notice/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/notice/detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/pages/notice/noticeList.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/notice/noticeList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/pages/notice/noticePubList.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/notice/noticePubList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/pages/notice/updateNotice.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/notice/updateNotice.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/pages/user/addUser.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/user/addUser.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/pages/user/changePassword.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/user/changePassword.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/pages/user/updateHeadImg.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/user/updateHeadImg.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/pages/user/updateMyself.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/user/updateMyself.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/pages/user/updateUser.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/user/updateUser.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/pages/user/userList.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/user/userList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/happyroad.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/happyroad.jar.original" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.happyroad.wy.ServerApplicationTest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.happyroad.wy.ServerApplicationTest.txt" beforeDir="false" />
-    </list>
+    <list default="true" id="1f3cc32f-ce62-4bb5-abc8-e1e2356ba79d" name="Default Changelist" comment="" />
     <list id="5318a588-f125-472f-a6e3-978d6f53cb72" name="不提交" comment="不提交" />
-    <list id="eea8e12a-9b0c-4f1b-956d-18e3b7348611" name="不提交2" comment="不提交2">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1a779f41-1dde-4a24-8ab1-092e8e3c6a0c.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/1a779f41-1dde-4a24-8ab1-092e8e3c6a0c.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/happyroad.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application-prod.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/ServerApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/advice/ExceptionHandlerAdvice.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/advice/LogAdvice.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/annotation/LogAnnotation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/config/AsycTaskExecutorConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/config/EhCacheConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/config/InitConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/config/JobConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/config/MyShiroRealm.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/config/RedisConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/config/ShiroConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/config/SwaggerConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/config/WebMvcConfig$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/config/WebMvcConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/constants/UserConstants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/DictController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/ExcelController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/FileController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/FileController$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/FileController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/GenerateController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/JobController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/JobController$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/JobController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/LoginController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/MailController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/MailController$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/MailController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/NoticeController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/NoticeController$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/NoticeController$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/NoticeController$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/NoticeController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/OrgController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/PermissionController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/RoleController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/RoleController$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/RoleController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/SysLogsController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/SysLogsController$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/SysLogsController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/UserController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/UserController$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/controller/UserController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/dao/DictDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/dao/FileInfoDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/dao/JobDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/dao/MailDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/dao/NoticeDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/dao/OrgDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/dao/PermissionDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/dao/RoleDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/dao/SysLogsDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/dao/TableAnalyDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/dao/UserDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/dto/BeanField.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/dto/GenerateDetail.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/dto/GenerateInput.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/dto/LayuiFile$LayuiFileData.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/dto/LayuiFile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/dto/NoticeReadVO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/dto/NoticeVO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/dto/ResponseInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/dto/RoleDto.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/dto/Token.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/dto/UserDto.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/entity/BaseEntity.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/entity/Dict.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/entity/FileInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/entity/JobModel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/entity/Mail.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/entity/MailTo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/entity/Notice$Status.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/entity/Notice.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/entity/Org.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/entity/Permission.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/entity/Role.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/entity/SysLogs.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/entity/TableAnaly.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/entity/User$Status.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/entity/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/filter/LogoutFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/filter/RestfulFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/job/AnalyTableJob.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/job/SpringBeanJob.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/page/table/PageTableArgumentResolver.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/page/table/PageTableHandler$CountHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/page/table/PageTableHandler$ListHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/page/table/PageTableHandler$OrderHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/page/table/PageTableHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/page/table/PageTableRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/page/table/PageTableResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/service/FileService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/service/GenerateService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/service/JobService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/service/MailService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/service/OrgService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/service/PermissionService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/service/RoleService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/service/SendMailSevice.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/service/SysLogService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/service/TokenManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/service/UserService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/service/impl/EhCacheTokenManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/service/impl/FileServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/service/impl/GenerateServiceImpl$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/service/impl/GenerateServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/service/impl/JobServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/service/impl/MailServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/service/impl/OrgServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/service/impl/PermissionServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/service/impl/RedisTokenManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/service/impl/RoleServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/service/impl/SendMailSeviceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/service/impl/SysLogServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/service/impl/UserServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/utils/ColumnProUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/utils/DbBakUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/utils/ExcelUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/utils/FileUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/utils/MathBaseUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/utils/RedisUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/utils/SpringUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/utils/StrUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/utils/SysUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/utils/TemplateUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/utils/UserUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/happyroad/wy/utils/ZipUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis-mappers/base/DictMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis-mappers/base/DictMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis-mappers/base/FileMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis-mappers/base/FileMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis-mappers/base/JobMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis-mappers/base/JobMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis-mappers/base/MailMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis-mappers/base/MailMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis-mappers/base/NoticeMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis-mappers/base/NoticeMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis-mappers/base/RoleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis-mappers/base/RoleMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis-mappers/base/SysLogsMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis-mappers/base/SysLogsMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis-mappers/base/TableAnalyMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis-mappers/base/TableAnalyMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis-mappers/base/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis-mappers/base/UserMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/pages/file/fileList.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/pages/file/fileList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/happyroad/wy/ServerApplicationTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/happyroad/wy/any/T1.class" beforeDir="false" />
-    </list>
+    <list id="eea8e12a-9b0c-4f1b-956d-18e3b7348611" name="不提交2" comment="不提交2" />
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="caches/shiro-ehcache/org%002eapache%002eshiro%002erealm%002etext%002e%0050roperties%0052ealm-0-accounts.data" />
     <ignored path="logs/admin-server.log" />
@@ -258,13 +55,23 @@
     <favorites_list name="hbgj" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="171">
+              <caret line="9" column="15" lean-forward="true" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="HTML File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -273,39 +80,38 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>上传失败，请先为附件选择企业（右上角下拉框）</find>
-      <find>UPLOAD_FILES</find>
-      <find>resourceId</find>
-      <find>getA</find>
-      <find>alert</find>
-      <find>260px,宽650px, 图片格式为png,文件大小</find>
-      <find>260</find>
-      <find>test1</find>
-      <find>mainImgDiv</find>
-      <find>confirm</find>
-      <find>add</find>
-      <find>图片格式为png,文件大小应在100KB至500KB之间</find>
-      <find>6379</find>
-      <find>domain</find>
-      <find>备份数据库文件成功</find>
-      <find>dbBackUp</find>
-      <find>sys:file</find>
-      <find>login</find>
-      <find>BusinessException</find>
-      <find>dealLogin</find>
-      <find>IllegalArgumentException</find>
-      <find>Coo</find>
-      <find>Cookie</find>
-      <find>备案</find>
-      <find>30M</find>
-      <find>20</find>
-      <find>账号</find>
-      <find>logout</find>
+      <find>layer.confirm</find>
+      <find>账号名</find>
+      <find>86400000</find>
+      <find>提交</find>
+      <find>form</find>
+      <find>保存</find>
+      <find>bootstrapValidator</find>
       <find>您有</find>
-      <find>supplyUser</find>
+      <find>noticeDao</find>
+      <find>444444444444444444444</find>
+      <find>到期</find>
+      <find>删除数据-</find>
+      <find>保存BB</find>
+      <find>BB</find>
+      <find>delAdvise</find>
+      <find>确定要删除吗？</find>
+      <find>updateBtn</find>
+      <find>update</find>
+      <find>contractBeginDate</find>
+      <find>password</find>
+      <find>originalPassword</find>
+      <find>username</find>
+      <find>开始时间B</find>
+      <find>服务</find>
+      <find>合同服务期A</find>
+      <find>addU</find>
+      <find>autoPublish</find>
+      <find>合同服务期S</find>
+      <find>sys:user:delete</find>
+      <find>请忽略</find>
     </findStrings>
     <replaceStrings>
-      <replace>sys_table_analy</replace>
       <replace>hbgj</replace>
       <replace>updateDate</replace>
       <replace>updateTime</replace>
@@ -333,17 +139,26 @@
       <replace>scratch_banner_html</replace>
       <replace>XLSX</replace>
       <replace>XLS</replace>
+      <replace>qiniu</replace>
+      <replace>30MB</replace>
+      <replace>T1</replace>
     </replaceStrings>
     <dirStrings>
       <dir>D:\jinwei_private\hbgj\src\main\java</dir>
       <dir>D:\jinwei_private\hbgj\src\test</dir>
       <dir>D:\jinwei_private\hbgj\src</dir>
+      <dir>D:\jinwei_private\hbgj\src\main\resources\static\pages\test</dir>
       <dir>D:\jinwei_private\hbgj</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="branchA" />
+      </map>
+    </option>
   </component>
   <component name="HierarchyBrowserManager">
     <option name="SORT_ALPHABETICALLY" value="true" />
@@ -351,57 +166,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/RedisService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/UserUtil2.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/test/qiniu/uploadWithOthers.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/test/qiniu/uploadWithForm.js" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/QiNiuController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/test/qiniu/main.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/test/qiniu/ui.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/test/qiniu/widget.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/test/qiniu/common.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/test/qiniu/uploadWithSDK.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/test/echarsdemo.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/DateUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/logback-admin.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/config/CrypticConfig.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/yusheng/hbgj/ServerApplicationTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/BannerController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/RegexUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/StrUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/main.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/banner/bannerList.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/error/403.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/RoleController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/impl/RoleServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/DbBakUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/WxController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/ServerApplication.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/publish/publishList.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/RedisService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/UserService.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/application.yml" />
         <option value="$PROJECT_DIR$/src/main/resources/application-dev.yml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/DbBakService.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/application-prod.yml" />
+        <option value="$PROJECT_DIR$/src/main/resources/application-test.yml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/LoginController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/NoticeController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/PublishController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/constants/UserConstants.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/UserUtil2.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/yusheng/hbgj/any/T1.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/SysUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/MysqlDbService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/impl/JobServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/dao/JobDao.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/job/jobList.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/js/dict.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/mybatis-mappers/base/TableAnalyMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/job/AnalyTableJob.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/entity/User.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/validator/MatchingBean.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/validator/ValidatorMessage.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/validator/ValidatorUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/entity/News.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/NewsController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/status_code/500.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/status_code/403.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/status_code/404.html" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/ErrorPageController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/error/js/500.js" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/error/css/500.css" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/error/500.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/error/404.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/error/js/demo-1.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/dao/UserDao.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/news/updateNews.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/news/addNews.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/banner/bannerDetail.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/banner/addBanner.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/banner/updateBanner.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/application-test.yml" />
-        <option value="$PROJECT_DIR$/src/main/resources/application-prod.yml" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/file/fileList.html" />
-        <option value="$PROJECT_DIR$/src/test/java/com/yusheng/hbgj/ServerApplicationTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/impl/UserServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/login.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/contract/contractList.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/environment/environmentList.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/standing_book/standingbookList.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/pages/check_repair/checkpairList.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/index.html" />
-        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/LoginController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/FileController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/dao/FileInfoDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/FileService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/impl/FileServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/dao/NoticeDao.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mybatis-mappers/base/UserMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/user/updateUser.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/impl/UserServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/user/userList.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/pages/user/addUser.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/UserController.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -417,6 +232,13 @@
     <servers />
   </component>
   <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="D:\tools\apache-maven-3.5.2\conf\jars" />
+        <option name="mavenHome" value="D:/tools/apache-maven-3.5.2" />
+        <option name="userSettingsFile" value="D:\tools\apache-maven-3.5.2\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
     <option name="importingSettings">
       <MavenImportingSettings>
         <option name="importAutomatically" value="true" />
@@ -435,26 +257,18 @@
           <item name="hbgj" type="9519ce18:MavenProjectsStructure$ProjectNode" />
           <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
         </path>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="hbgj" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-          <item name="Dependencies" type="f4be9f2a:MavenProjectsStructure$DependenciesNode" />
-        </path>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="hbgj" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-          <item name="Dependencies" type="f4be9f2a:MavenProjectsStructure$DependenciesNode" />
-          <item name="org.springframework.boot:spring-boot-starter-data-redis:2.0.4.RELEASE" type="c0821a7e:MavenProjectsStructure$DependencyNode" />
-        </path>
       </expand>
       <select />
     </treeState>
   </component>
+  <component name="MavenRunner">
+    <option name="skipTests" value="true" />
+  </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="892" />
-    <option name="y" value="-8" />
+    <option name="x" value="931" />
+    <option name="y" value="-19" />
     <option name="width" value="944" />
-    <option name="height" value="1096" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -462,85 +276,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="hbgj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hbgj" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hbgj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hbgj" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hbgj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hbgj" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hbgj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hbgj" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hbgj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hbgj" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hbgj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hbgj" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hbgj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hbgj" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="banner" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hbgj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hbgj" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hbgj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hbgj" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hbgj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hbgj" type="462c0819:PsiDirectoryNode" />
-              <item name="文档和sql" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="ProjectPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="CatdeaLogs" />
     </panes>
   </component>
@@ -555,8 +293,8 @@
     <property name="GenerateAntBuildDialog.outputFileNameProperty" value="hbgj" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
-    <property name="RequestMappingsPanelWidth0" value="725" />
-    <property name="RequestMappingsPanelWidth1" value="725" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
@@ -567,7 +305,9 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="database.console.LAST_STATE" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/static/pages/environment/environmentList.html" />
+    <property name="ignore_missing_gitignore" value="true" />
+    <property name="js.buildTools.gulp.gulp_package_dir" value="" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/static/pages/test" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -583,18 +323,18 @@
       <recent name="com.yusheng.hbgj" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\jinwei_private\hbgj\src\main\resources\static\pages\test" />
       <recent name="D:\jinwei_private\hbgj\src\main\resources\static\pages\error\js" />
       <recent name="D:\jinwei_private\hbgj\src\main\resources\static\pages\error\css" />
       <recent name="D:\jinwei_private\hbgj\src\main\resources\static\pages\error" />
       <recent name="D:\jinwei_private\hbgj\src\main\resources\static\pages\status_code" />
-      <recent name="D:\jinwei_private\hbgj\src\main\java\com\yusheng\hbgj\utils" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.yusheng.hbgj.controller" />
       <recent name="com.yusheng.hbgj.advice" />
       <recent name="com.yusheng.hbgj.utils" />
       <recent name="com.yusheng.hbgj.dto" />
       <recent name="com.yusheng.hbgj.job" />
-      <recent name="com.happyroad.wy.job" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\jinwei_private\hbgj\src\main\java\com\yusheng\hbgj" />
@@ -937,10 +677,10 @@
     <treeState>
       <expand>
         <path>
-          <item name="Found 105 services " type="fcff1e1b:RestServiceStructure$RootNode" />
+          <item name="Found 109 services " type="fcff1e1b:RestServiceStructure$RootNode" />
         </path>
         <path>
-          <item name="Found 105 services " type="fcff1e1b:RestServiceStructure$RootNode" />
+          <item name="Found 109 services " type="fcff1e1b:RestServiceStructure$RootNode" />
           <item name="hbgj" type="c588b436:RestServiceStructure$ProjectNode" />
         </path>
       </expand>
@@ -963,20 +703,11 @@
         </RuleState>
       </list>
     </option>
-    <option name="contentProportion" value="0.19967532" />
+    <option name="contentProportion" value="0.15105577" />
   </component>
   <component name="RunManager" selected="Spring Boot.ServerApplication">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SysUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.yusheng.hbgj.utils.SysUtil" />
-      <module name="hbgj" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -1002,7 +733,22 @@
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="PACKAGE_NAME" value="com.yusheng.hbgj" />
       <option name="MAIN_CLASS_NAME" value="com.yusheng.hbgj.ServerApplicationTest" />
+      <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerApplicationTest.test0 (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="hbgj" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="PACKAGE_NAME" value="com.yusheng.hbgj" />
+      <option name="MAIN_CLASS_NAME" value="com.yusheng.hbgj.ServerApplicationTest" />
+      <option name="METHOD_NAME" value="test0" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -1015,6 +761,8 @@
       <option name="MAIN_CLASS_NAME" value="com.yusheng.hbgj.ServerApplicationTest" />
       <option name="METHOD_NAME" value="test0" />
       <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -1028,16 +776,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="远程调试" type="Remote">
+    <configuration name="测试服务器远程调试" type="Remote">
       <module name="hbgj" />
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
       <option name="SHMEM_ADDRESS" />
       <option name="HOST" value="192.168.31.76" />
-      <option name="PORT" value="5555" />
+      <option name="PORT" value="8401" />
       <option name="AUTO_RESTART" value="false" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="5555" />
+        <option name="DEBUG_PORT" value="8401" />
         <option name="LOCAL" value="false" />
       </RunnerSettings>
       <method v="2" />
@@ -1048,13 +796,15 @@
       <option name="SERVER_MODE" value="false" />
       <option name="SHMEM_ADDRESS" />
       <option name="HOST" value="192.168.31.76" />
-      <option name="PORT" value="555" />
+      <option name="PORT" value="8401" />
       <option name="AUTO_RESTART" value="false" />
       <method v="2" />
     </configuration>
     <configuration name="ServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="hbgj" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.yusheng.hbgj.ServerApplication" />
+      <option name="VM_PARAMETERS" value="  -ms512m -mx512m -Xmn256m -Djava.awt.headless=true -XX:MaxPermSize=128m " />
+      <option name="PROGRAM_PARAMETERS" value=" --jasypt.encryptor.password=LoveMe520@Girl" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <RunnerSettings RunnerId="Debug with VisualVM">
         <option name="visualVMId" value="7947741403900" />
@@ -1082,23 +832,35 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="js.build_tools.gulp">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Application.T1" />
-      <item itemvalue="Application.SysUtil" />
       <item itemvalue="JUnit.ServerApplicationTest.test0" />
+      <item itemvalue="JUnit.ServerApplicationTest.test0 (1)" />
       <item itemvalue="JUnit.ServerApplicationTest" />
-      <item itemvalue="Remote.远程调试" />
+      <item itemvalue="Remote.测试服务器远程调试" />
       <item itemvalue="Spring Boot.ServerApplication" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.ServerApplication" />
-        <item itemvalue="Application.SysUtil" />
         <item itemvalue="Application.T1" />
         <item itemvalue="JUnit.ServerApplicationTest" />
+        <item itemvalue="JUnit.ServerApplicationTest.test0 (1)" />
         <item itemvalue="JUnit.ServerApplicationTest.test0" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SshConsoleOptionsProvider">
+    <option name="myEncoding" value="UTF-8" />
   </component>
   <component name="SvnConfiguration">
     <configuration>C:\Users\Administrator\AppData\Roaming\Subversion</configuration>
@@ -1213,7 +975,59 @@
       <workItem from="1587516510381" duration="18271000" />
       <workItem from="1587603054772" duration="8284000" />
       <workItem from="1587689910570" duration="9776000" />
-      <workItem from="1587710630169" duration="8979000" />
+      <workItem from="1587710630169" duration="9070000" />
+      <workItem from="1587777409459" duration="11862000" />
+      <workItem from="1587889286994" duration="409000" />
+      <workItem from="1587889805656" duration="185000" />
+      <workItem from="1587949358575" duration="2184000" />
+      <workItem from="1587956679365" duration="3321000" />
+      <workItem from="1587969382724" duration="2599000" />
+      <workItem from="1587978224893" duration="6180000" />
+      <workItem from="1588035027915" duration="22205000" />
+      <workItem from="1588126802117" duration="2520000" />
+      <workItem from="1588129457558" duration="9748000" />
+      <workItem from="1588208796979" duration="1180000" />
+      <workItem from="1588237448238" duration="78000" />
+      <workItem from="1588239923095" duration="676000" />
+      <workItem from="1588294517553" duration="10982000" />
+      <workItem from="1588333222486" duration="771000" />
+      <workItem from="1588467809642" duration="190000" />
+      <workItem from="1588729491101" duration="610000" />
+      <workItem from="1588754962089" duration="234000" />
+      <workItem from="1588755394995" duration="2789000" />
+      <workItem from="1588758820918" duration="1392000" />
+      <workItem from="1588921180760" duration="60000" />
+      <workItem from="1589245803670" duration="352000" />
+      <workItem from="1589362197057" duration="1310000" />
+      <workItem from="1590647842357" duration="2981000" />
+      <workItem from="1590653439405" duration="71000" />
+      <workItem from="1590738719327" duration="57000" />
+      <workItem from="1593833333286" duration="1365000" />
+      <workItem from="1593911931204" duration="64000" />
+      <workItem from="1593912141793" duration="380000" />
+      <workItem from="1594093549541" duration="1533000" />
+      <workItem from="1594343170608" duration="338000" />
+      <workItem from="1594366120127" duration="10833000" />
+      <workItem from="1594381850652" duration="5339000" />
+      <workItem from="1594426880027" duration="10507000" />
+      <workItem from="1594602523026" duration="26396000" />
+      <workItem from="1594636642840" duration="6977000" />
+      <workItem from="1594688325411" duration="642000" />
+      <workItem from="1594705599777" duration="2922000" />
+      <workItem from="1595208588872" duration="119000" />
+      <workItem from="1595214844854" duration="1828000" />
+      <workItem from="1596071223001" duration="843000" />
+      <workItem from="1596526708561" duration="933000" />
+      <workItem from="1596702476969" duration="4105000" />
+      <workItem from="1596708635647" duration="2839000" />
+      <workItem from="1596761776805" duration="6925000" />
+      <workItem from="1596769800098" duration="21120000" />
+      <workItem from="1596852472285" duration="7726000" />
+      <workItem from="1596888424303" duration="29000" />
+      <workItem from="1596889013776" duration="538000" />
+      <workItem from="1596937138826" duration="93000" />
+      <workItem from="1597977789904" duration="453000" />
+      <workItem from="1621836291447" duration="270000" />
     </task>
     <task id="LOCAL-00001" summary="数据库脚本">
       <created>1578287448438</created>
@@ -1460,43 +1274,120 @@
       <option name="project" value="LOCAL" />
       <updated>1587553458189</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="修改备案号">
+      <created>1587725089329</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1587725089329</updated>
+    </task>
+    <task id="LOCAL-00037" summary="七牛云上传文件测试">
+      <created>1587949926480</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1587949926480</updated>
+    </task>
+    <task id="LOCAL-00038" summary="1.session设置为7天&#10;2.文件下载路径判断">
+      <created>1588066983826</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1588066983826</updated>
+    </task>
+    <task id="LOCAL-00039" summary="配置信息加密">
+      <created>1588146788602</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1588146788603</updated>
+    </task>
+    <task id="LOCAL-00040" summary="获取微信小程序openid">
+      <created>1588330641189</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1588330641189</updated>
+    </task>
+    <task id="LOCAL-00041" summary="修复用户留言中头像不显示的问题">
+      <created>1588333809862</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1588333809862</updated>
+    </task>
+    <task id="LOCAL-00042" summary="修复问题： The temporary upload location [/tmp/tomcat.3247657652633889459.8080/work/Tomcat/localhost/ROOT] is not valid">
+      <created>1590650581276</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1590650581276</updated>
+    </task>
+    <task id="LOCAL-00043" summary="账号30天内免登录">
+      <created>1594453318999</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1594453319000</updated>
+    </task>
+    <task id="LOCAL-00044" summary="账号90天内免登录">
+      <created>1594647582486</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1594647582486</updated>
+    </task>
+    <task id="LOCAL-00045" summary="每周03:10记录表数据量">
+      <created>1594708281238</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1594708281238</updated>
+    </task>
+    <task id="LOCAL-00046" summary="删除客户，设置客户的合同起止时间，可以修改账号名">
+      <created>1596877636293</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1596877636294</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ServerApplicationTest_test0_(1) - 2020.04.17 at 15h 07m 43s.xml">
+    <history-entry file="ServerApplicationTest_test0 - 2020.04.29 at 11h 10m 55s.xml">
+      <configuration name="ServerApplicationTest.test0" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ServerApplicationTest_test0 - 2020.04.29 at 11h 40m 56s.xml">
+      <configuration name="ServerApplicationTest.test0" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ServerApplicationTest_test0 - 2020.04.29 at 11h 48m 16s.xml">
+      <configuration name="ServerApplicationTest.test0" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ServerApplicationTest - 2020.04.29 at 11h 50m 33s.xml">
+      <configuration name="ServerApplicationTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ServerApplicationTest_test0 - 2020.04.29 at 11h 54m 52s.xml">
+      <configuration name="ServerApplicationTest.test0" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ServerApplicationTest_test0 - 2020.04.29 at 12h 02m 41s.xml">
+      <configuration name="ServerApplicationTest.test0" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ServerApplicationTest_test0 - 2020.04.29 at 12h 03m 24s.xml">
+      <configuration name="ServerApplicationTest.test0" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ServerApplicationTest_test0_(1) - 2020.04.29 at 12h 04m 16s.xml">
       <configuration name="ServerApplicationTest.test0 (1)" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ServerApplicationTest_test0_(2) - 2020.04.17 at 15h 13m 26s.xml">
-      <configuration name="ServerApplicationTest.test0 (2)" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ServerApplicationTest_test0_(3) - 2020.04.17 at 15h 14m 20s.xml">
-      <configuration name="ServerApplicationTest.test0 (3)" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ServerApplicationTest - 2020.04.17 at 15h 27m 49s.xml">
+    <history-entry file="ServerApplicationTest - 2020.04.29 at 12h 05m 49s.xml">
       <configuration name="ServerApplicationTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ServerApplicationTest_test0 - 2020.04.17 at 17h 10m 09s.xml">
-      <configuration name="ServerApplicationTest.test0" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ServerApplicationTest - 2020.04.17 at 17h 10m 48s.xml">
-      <configuration name="ServerApplicationTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ServerApplicationTest - 2020.04.17 at 17h 47m 04s.xml">
-      <configuration name="ServerApplicationTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ServerApplicationTest_test0 - 2020.04.20 at 11h 45m 16s.xml">
-      <configuration name="ServerApplicationTest.test0" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ServerApplicationTest_test0 - 2020.04.20 at 11h 46m 35s.xml">
-      <configuration name="ServerApplicationTest.test0" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ServerApplicationTest - 2020.04.20 at 12h 06m 05s.xml">
-      <configuration name="ServerApplicationTest" configurationId="JUnit" />
+    <history-entry file="ServerApplicationTest_test0_(1) - 2020.04.29 at 14h 08m 13s.xml">
+      <configuration name="ServerApplicationTest.test0 (1)" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="636504000" />
+    <option name="totallyTimeSpent" value="836658000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1508,9 +1399,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-4" y="-4" width="1928" height="1048" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.499187" visible="true" weight="0.28624734" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.499187" visible="true" weight="0.2256" />
       <window_info id="Structure" order="1" show_stripe_button="false" sideWeight="0.500813" side_tool="true" weight="0.26332623" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -1519,50 +1410,63 @@
       <window_info id="Web" order="6" show_stripe_button="false" sideWeight="0.500813" side_tool="true" weight="0.26332623" />
       <window_info id="Image Layers" order="7" />
       <window_info id="Capture Tool" order="8" />
+      <window_info id="Alibaba Cloud Explorer" order="9" />
+      <window_info id="Project Explorer" order="10" />
+      <window_info id="Job Explorer" order="11" />
+      <window_info anchor="bottom" id="SonarLint" />
+      <window_info anchor="bottom" id="Jms Browser" />
+      <window_info anchor="bottom" id="Codeup" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32896176" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49840087" weight="0.6142076" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.46666667" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49840087" weight="0.38293216" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.36393443" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946696" weight="0.32896176" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946696" weight="0.32822758" />
       <window_info anchor="bottom" id="FindBugs-IDEA" order="7" show_stripe_button="false" weight="0.58360654" />
-      <window_info anchor="bottom" id="Spring" order="8" weight="0.32896176" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.44918033" />
-      <window_info anchor="bottom" id="Docker" order="10" weight="0.368306" />
+      <window_info anchor="bottom" id="Spring" order="8" weight="0.32822758" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.44857767" />
+      <window_info anchor="bottom" id="Docker" order="10" weight="0.36761487" />
       <window_info anchor="bottom" id="Java Enterprise" order="11" show_stripe_button="false" weight="0.32896176" />
       <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="13" weight="0.6568306" />
+      <window_info anchor="bottom" id="Version Control" order="13" weight="0.5929978" />
       <window_info anchor="bottom" id="JRebel Executor" order="14" />
       <window_info anchor="bottom" id="MyBatis Log" order="15" />
       <window_info anchor="bottom" id="Tail" order="16" />
       <window_info anchor="bottom" id="Problems" order="17" weight="0.32896176" />
-      <window_info anchor="bottom" id="Messages" order="18" sideWeight="0.4989339" weight="0.26885247" />
+      <window_info anchor="bottom" id="Messages" order="18" sideWeight="0.4989339" weight="0.31838074" />
       <window_info anchor="bottom" id="Database Console" order="19" weight="0.32896176" />
-      <window_info anchor="bottom" id="Run Dashboard" order="20" sideWeight="0.78304905" weight="0.39344263" />
+      <window_info anchor="bottom" id="Run Dashboard" order="20" sideWeight="0.78304905" visible="true" weight="0.38402626" />
       <window_info anchor="bottom" id="JIRA" order="21" show_stripe_button="false" weight="0.32896176" />
       <window_info anchor="bottom" id="Inspection Results" order="22" weight="0.47431695" />
-      <window_info anchor="bottom" id="File Transfer" order="23" weight="0.60546446" />
+      <window_info anchor="bottom" id="File Transfer" order="23" weight="0.4874317" />
       <window_info anchor="bottom" id="Sequence" order="24" />
-      <window_info anchor="bottom" id="RestServices" order="25" weight="0.6502732" />
-      <window_info anchor="bottom" id="JRebel Console" order="26" sideWeight="0.30170575" weight="0.40765026" />
+      <window_info anchor="bottom" id="RestServices" order="25" weight="0.6498906" />
+      <window_info anchor="bottom" id="JRebel Console" order="26" sideWeight="0.30170575" weight="0.40874317" />
       <window_info anchor="bottom" id="Event Log" order="27" sideWeight="0.6982942" weight="0.49945354" />
       <window_info active="true" anchor="bottom" id="REST Client" order="28" visible="true" weight="0.6185792" />
       <window_info anchor="bottom" id="Run with VisualVM" order="29" />
-      <window_info anchor="bottom" id="Debug with VisualVM" order="30" />
+      <window_info anchor="bottom" id="Debug with VisualVM" order="30" weight="0.46448088" />
+      <window_info anchor="bottom" id="Alibaba Cloud View" order="31" weight="0.32932165" />
+      <window_info anchor="bottom" id="Console" order="32" />
+      <window_info anchor="bottom" id="Duplicates" order="33" weight="0.32932165" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Maven" order="3" weight="0.34381664" />
+      <window_info anchor="right" id="Maven" order="3" visible="true" weight="0.13333334" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="right" id="Palette&#9;" order="5" />
       <window_info anchor="right" id="Database" order="6" weight="0.17217484" />
       <window_info anchor="right" id="Remote Host" order="7" weight="0.14712153" />
       <window_info anchor="right" id="Capture Analysis" order="8" />
       <window_info anchor="right" id="Theme Preview" order="9" />
+      <window_info anchor="right" id="Alibaba ROS Templates" order="10" />
+      <window_info anchor="right" id="Alibaba Function Compute" order="11" />
+      <window_info anchor="right" id="Alibaba Log Console" order="12" />
+      <window_info anchor="right" id="Jms Messenger" order="13" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.499187" weight="0.28624734" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.499187" visible="true" weight="0.21504803" />
       <window_info id="Structure" order="1" show_stripe_button="false" sideWeight="0.500813" side_tool="true" weight="0.26332623" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -1571,47 +1475,56 @@
       <window_info id="Web" order="6" show_stripe_button="false" sideWeight="0.500813" side_tool="true" weight="0.26332623" />
       <window_info id="Image Layers" order="7" />
       <window_info id="Capture Tool" order="8" />
+      <window_info id="Alibaba Cloud Explorer" order="9" />
+      <window_info id="Project Explorer" order="10" />
+      <window_info id="Job Explorer" order="11" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32896176" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49840087" weight="0.6142076" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.46666667" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49840087" weight="0.38293216" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.36393443" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946696" weight="0.32896176" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946696" weight="0.32822758" />
       <window_info anchor="bottom" id="FindBugs-IDEA" order="7" show_stripe_button="false" weight="0.58360654" />
-      <window_info anchor="bottom" id="Spring" order="8" weight="0.32896176" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.44918033" />
-      <window_info anchor="bottom" id="Docker" order="10" weight="0.368306" />
+      <window_info anchor="bottom" id="Spring" order="8" weight="0.32822758" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.44857767" />
+      <window_info anchor="bottom" id="Docker" order="10" weight="0.36761487" />
       <window_info anchor="bottom" id="Java Enterprise" order="11" show_stripe_button="false" weight="0.32896176" />
       <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="13" weight="0.6568306" />
+      <window_info anchor="bottom" id="Version Control" order="13" weight="0.5929978" />
       <window_info anchor="bottom" id="JRebel Executor" order="14" />
       <window_info anchor="bottom" id="MyBatis Log" order="15" />
       <window_info anchor="bottom" id="Tail" order="16" />
       <window_info anchor="bottom" id="Problems" order="17" weight="0.32896176" />
-      <window_info anchor="bottom" id="Messages" order="18" sideWeight="0.4989339" weight="0.26885247" />
+      <window_info anchor="bottom" id="Messages" order="18" sideWeight="0.4989339" weight="0.31838074" />
       <window_info anchor="bottom" id="Database Console" order="19" weight="0.32896176" />
-      <window_info active="true" anchor="bottom" id="Run Dashboard" order="20" sideWeight="0.78304905" visible="true" weight="0.39344263" />
+      <window_info active="true" anchor="bottom" id="Run Dashboard" order="20" sideWeight="0.78304905" visible="true" weight="0.4420131" />
       <window_info anchor="bottom" id="JIRA" order="21" show_stripe_button="false" weight="0.32896176" />
       <window_info anchor="bottom" id="Inspection Results" order="22" weight="0.47431695" />
-      <window_info anchor="bottom" id="File Transfer" order="23" weight="0.60546446" />
+      <window_info anchor="bottom" id="File Transfer" order="23" weight="0.4874317" />
       <window_info anchor="bottom" id="Sequence" order="24" />
-      <window_info anchor="bottom" id="RestServices" order="25" weight="0.6502732" />
-      <window_info anchor="bottom" id="JRebel Console" order="26" sideWeight="0.30170575" weight="0.40765026" />
+      <window_info anchor="bottom" id="RestServices" order="25" weight="0.6498906" />
+      <window_info anchor="bottom" id="JRebel Console" order="26" sideWeight="0.30170575" weight="0.40874317" />
       <window_info anchor="bottom" id="Event Log" order="27" sideWeight="0.6982942" weight="0.49945354" />
       <window_info active="true" anchor="bottom" id="REST Client" order="28" visible="true" weight="0.6185792" />
       <window_info anchor="bottom" id="Run with VisualVM" order="29" />
-      <window_info anchor="bottom" id="Debug with VisualVM" order="30" />
+      <window_info anchor="bottom" id="Debug with VisualVM" order="30" weight="0.46448088" />
+      <window_info anchor="bottom" id="Alibaba Cloud View" order="31" weight="0.32932165" />
+      <window_info anchor="bottom" id="Console" order="32" />
+      <window_info anchor="bottom" id="Duplicates" order="33" weight="0.32932165" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Maven" order="3" weight="0.34381664" />
+      <window_info anchor="right" id="Maven" order="3" weight="0.13340448" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="right" id="Palette&#9;" order="5" />
       <window_info anchor="right" id="Database" order="6" weight="0.17217484" />
       <window_info anchor="right" id="Remote Host" order="7" weight="0.14712153" />
       <window_info anchor="right" id="Capture Analysis" order="8" />
       <window_info anchor="right" id="Theme Preview" order="9" />
+      <window_info anchor="right" id="Alibaba ROS Templates" order="10" />
+      <window_info anchor="right" id="Alibaba Function Compute" order="11" />
+      <window_info anchor="right" id="Alibaba Log Console" order="12" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1670,17 +1583,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="文件上传下载优化" />
-    <MESSAGE value="文件上传完善好了" />
-    <MESSAGE value="厂商账号管理 和 用户发布需求列表" />
-    <MESSAGE value="企业检修；企业台账；企业环保文件" />
-    <MESSAGE value="修改通知逻辑代码&#10;合同设置开始和结束时间&#10;DateUtil工具类" />
-    <MESSAGE value="合同到期设置设置自动通知" />
-    <MESSAGE value="1.邮件发送功能&#10;2.设置linux和windows上传文件位置" />
-    <MESSAGE value="1.通知优化&#10;2.图片使用预览图" />
-    <MESSAGE value="图片预览设置缓存" />
-    <MESSAGE value="1、shiro、session超时设置为7天&#10;2、新角色 openid游客 身份&#10;3、图片缺失用默认图片显示" />
-    <MESSAGE value="登录页面配色" />
     <MESSAGE value="favicon.ico图标显示" />
     <MESSAGE value="代码优化" />
     <MESSAGE value="微信新用户注册，系统为其自动登录" />
@@ -1695,34 +1597,45 @@
     <MESSAGE value="修复几处BUG" />
     <MESSAGE value="1、文件上传的BUG总是完美修复了。&#10;2、404/500 页面&#10;3、修改配置文件： redis连接端口，mysql连接端口" />
     <MESSAGE value="test类取消运行" />
-    <option name="LAST_COMMIT_MESSAGE" value="test类取消运行" />
+    <MESSAGE value="修改备案号" />
+    <MESSAGE value="七牛云上传文件测试" />
+    <MESSAGE value="1.session设置为7天&#10;2.文件下载路径判断" />
+    <MESSAGE value="配置信息加密" />
+    <MESSAGE value="获取微信小程序openid" />
+    <MESSAGE value="修复用户留言中头像不显示的问题" />
+    <MESSAGE value="修复问题： The temporary upload location [/tmp/tomcat.3247657652633889459.8080/work/Tomcat/localhost/ROOT] is not valid" />
+    <MESSAGE value="账号30天内免登录" />
+    <MESSAGE value="账号90天内免登录" />
+    <MESSAGE value="每周03:10记录表数据量" />
+    <MESSAGE value="删除客户，设置客户的合同起止时间，可以修改账号名" />
+    <option name="LAST_COMMIT_MESSAGE" value="删除客户，设置客户的合同起止时间，可以修改账号名" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/UserController.java</url>
-          <line>328</line>
+          <url>file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/PublishController.java</url>
+          <line>115</line>
           <properties />
-          <option name="timeStamp" value="3" />
+          <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/UserController.java</url>
-          <line>354</line>
+          <url>file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/PublishController.java</url>
+          <line>125</line>
           <properties />
-          <option name="timeStamp" value="4" />
+          <option name="timeStamp" value="54" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/UserController.java</url>
-          <line>330</line>
+          <url>file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/PublishController.java</url>
+          <line>118</line>
           <properties />
-          <option name="timeStamp" value="5" />
+          <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/UserController.java</url>
-          <line>352</line>
+          <url>file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/PublishController.java</url>
+          <line>119</line>
           <properties />
-          <option name="timeStamp" value="8" />
+          <option name="timeStamp" value="56" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -1734,373 +1647,391 @@
       </breakpoints-dialog>
     </breakpoint-manager>
   </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateCodeFragment">
+      <expression>
+        <expression-string>1 == uu.getCompFlag()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>String aa= userService.passwordEncoder( password, user.getSalt() );</expression-string>
+        <language-id>JAVA</language-id>
+        <custom-info>java.util.Collections</custom-info>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>String aa= userService.passwordEncoder( password, user.getSalt() );
+ System.out.println(aa);</expression-string>
+        <language-id>JAVA</language-id>
+        <custom-info>java.util.Collections</custom-info>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>userService.passwordEncoder(password, user.getSalt()))</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/8.5.32/tomcat-embed-core-8.5.32.jar!/org/apache/catalina/core/ApplicationFilterChain.class">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/advice/LogAdvice.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="134" selection-start-line="134" selection-end-line="134" />
+        <state relative-caret-position="344">
+          <caret line="68" selection-start-line="68" selection-end-line="68" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/javax/validation/validation-api/2.0.1.Final/validation-api-2.0.1.Final.jar!/javax/validation/constraints/Email.class">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/annotation/LogAnnotation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="565">
-          <caret line="31" column="17" selection-start-line="31" selection-start-column="11" selection-end-line="31" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/NewsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
-          <folding>
-            <element signature="e#2566#2567#0" expanded="true" />
-            <element signature="e#2639#2640#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/entity/News.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" column="27" lean-forward="true" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/validator/ValidatorUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="59">
-          <caret line="18" column="12" lean-forward="true" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/validator/ValidatorMessage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" column="28" lean-forward="true" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
-          <folding>
-            <element signature="e#296#297#0" expanded="true" />
-            <element signature="e#326#327#0" expanded="true" />
-            <element signature="e#369#370#0" expanded="true" />
-            <element signature="e#400#401#0" expanded="true" />
-            <element signature="e#434#435#0" expanded="true" />
-            <element signature="e#464#465#0" expanded="true" />
-            <element signature="e#510#511#0" expanded="true" />
-            <element signature="e#548#549#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/status_code/403.html" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/status_code/500.html" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/status_code/404.html" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/error/css/normalize.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/error/css/500.css" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/error/js/500.js" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/error/js/demo-1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="502">
-          <caret line="42" column="37" lean-forward="true" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/error/500.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="73" column="53" lean-forward="true" selection-start-line="73" selection-start-column="53" selection-end-line="73" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/UserUtil2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="143" lean-forward="true" selection-start-line="143" selection-end-line="143" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/constants/UserConstants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="25" column="39" lean-forward="true" selection-start-line="25" selection-start-column="39" selection-end-line="25" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/advice/CheckPermissionAop.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="436">
-          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/error/404.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="28" lean-forward="true" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/ErrorPageController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="26" column="43" lean-forward="true" selection-start-line="26" selection-start-column="43" selection-end-line="26" selection-end-column="43" />
-          <folding>
-            <element signature="e#883#884#0" expanded="true" />
-            <element signature="e#908#909#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/img/login/bg.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/dao/UserDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="45" column="51" lean-forward="true" selection-start-line="45" selection-start-column="51" selection-end-line="45" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/news/updateNews.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="32" column="61" lean-forward="true" selection-start-line="32" selection-start-column="51" selection-end-line="32" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/news/addNews.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="206" column="19" lean-forward="true" selection-start-line="206" selection-start-column="19" selection-end-line="206" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/banner/updateBanner.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="271" column="16" lean-forward="true" selection-start-line="271" selection-start-column="16" selection-end-line="271" selection-end-column="16" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#1;n#fieldset#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#fieldset#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#p#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application-dev.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="45" column="24" lean-forward="true" selection-start-line="45" selection-start-column="24" selection-end-line="45" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/banner/bannerDetail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="25" lean-forward="true" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/banner/addBanner.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="68" column="19" lean-forward="true" selection-start-line="68" selection-start-column="19" selection-end-line="68" selection-end-column="19" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#1;n#fieldset#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#fieldset#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#textarea#0;n#div#0;n#div#2;n#fieldset#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#p#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application-test.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="41" column="20" lean-forward="true" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/file/fileList.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="156" column="48" selection-start-line="156" selection-start-column="48" selection-end-line="156" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/MysqlDbService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/yusheng/hbgj/ServerApplicationTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/UserService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/lang/Integer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="612" column="7" lean-forward="true" selection-start-line="612" selection-start-column="7" selection-end-line="612" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/RedisService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="173" lean-forward="true" selection-start-line="173" selection-end-line="173" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="63" lean-forward="true" selection-start-line="63" selection-end-line="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/environment/environmentList.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-595">
-          <caret line="217" column="42" selection-start-line="217" selection-start-column="42" selection-end-line="217" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/standing_book/standingbookList.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="225" selection-start-line="225" selection-end-line="225" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/check_repair/checkpairList.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="502">
-          <caret line="277" column="7" lean-forward="true" selection-start-line="277" selection-start-column="7" selection-end-line="277" selection-end-column="7" />
-          <folding>
-            <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application-prod.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="502">
-          <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/dashboard.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="38" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
-          <folding>
-            <element signature="n#style#0;n#blockquote#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#blockquote#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#blockquote#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/contract/contractList.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="458" column="50" lean-forward="true" selection-start-line="458" selection-start-column="50" selection-end-line="458" selection-end-column="50" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="108" column="17" lean-forward="true" selection-start-line="108" selection-start-column="17" selection-end-line="108" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/test/echarsdemo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="69" column="27" lean-forward="true" selection-start-line="69" selection-start-column="27" selection-end-line="69" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/LoginController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="203" column="54" lean-forward="true" selection-start-line="203" selection-start-column="54" selection-end-line="203" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/FileController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="370" column="43" lean-forward="true" selection-start-line="370" selection-start-column="43" selection-end-line="370" selection-end-column="43" />
+        <state relative-caret-position="304">
+          <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/NoticeController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="190" column="5" lean-forward="true" selection-start-line="190" selection-start-column="5" selection-end-line="190" selection-end-column="5" />
+        <state relative-caret-position="285">
+          <caret line="167" selection-start-line="167" selection-end-line="167" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/impl/UserServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/yusheng/hbgj/any/T1.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="208" lean-forward="true" selection-start-line="208" selection-end-line="208" />
+        <state relative-caret-position="140">
+          <caret line="33" column="89" lean-forward="true" selection-start-line="33" selection-start-column="89" selection-end-line="33" selection-end-column="89" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/advice/LogAdvice.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/8.5.32/tomcat-embed-core-8.5.32.jar!/org/apache/catalina/core/ApplicationFilterChain.class" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application-test.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="76" column="18" lean-forward="true" selection-start-line="76" selection-start-column="18" selection-end-line="76" selection-end-column="18" />
+        <state relative-caret-position="330">
+          <caret line="80" column="35" lean-forward="true" selection-start-line="80" selection-start-column="35" selection-end-line="80" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application-prod.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="22" column="31" lean-forward="true" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/entity/BaseEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="18" column="30" lean-forward="true" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
+          <folding>
+            <element signature="e#593#594#0" expanded="true" />
+            <element signature="e#609#610#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/UserUtil2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5510">
+          <caret line="290" selection-start-line="290" selection-end-line="290" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/PublishController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3154">
+          <caret line="168" column="31" selection-start-line="168" selection-start-column="31" selection-end-line="168" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/job/AnalyTableJob.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/advice/ExceptionHandlerAdvice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="31" column="36" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/config/AsycTaskExecutorConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/LoginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6213">
+          <caret line="327" selection-start-line="327" selection-end-line="327" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/vo/WeiXinVo.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/WxController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="28" column="36" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/my/permission.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="34" lean-forward="true" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/jq.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="496">
+          <caret line="56" selection-start-line="56" selection-end-line="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/dict.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="19" column="16" lean-forward="true" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/entity/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis-mappers/base/TableAnalyMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis-mappers/base/NoticeMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/plugin/jquery-validate/jquery.validate.min.js">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
-          <caret line="8" column="3" lean-forward="true" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
+          <caret line="8" column="110" selection-start-line="8" selection-start-column="110" selection-end-line="8" selection-end-column="110" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/page/table/PageTableRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/role/roleList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="602">
+          <caret line="127" column="16" selection-start-line="127" selection-start-column="16" selection-end-line="127" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/constants/UserConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="520">
+          <caret line="37" column="11" selection-start-line="37" selection-start-column="11" selection-end-line="37" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/FileService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="38" lean-forward="true" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/impl/FileServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="653">
+          <caret line="140" column="14" selection-start-line="140" selection-start-column="14" selection-end-line="140" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/dao/FileInfoDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="523">
+          <caret line="49" column="59" selection-start-line="49" selection-start-column="49" selection-end-line="49" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/entity/Notice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="653">
+          <caret line="76" column="22" selection-start-line="76" selection-start-column="13" selection-end-line="76" selection-end-column="22" />
+          <folding>
+            <element signature="e#1325#1326#0" expanded="true" />
+            <element signature="e#1367#1368#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/FileController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-568">
+          <caret line="62" lean-forward="true" selection-start-line="62" selection-end-line="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/dao/UserDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="15" column="81" lean-forward="true" selection-start-line="15" selection-start-column="81" selection-end-line="15" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/dao/NoticeDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="37" column="8" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/util/Date.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="1074" column="41" selection-start-line="1074" selection-start-column="41" selection-end-line="1074" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/dto/UserDto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/layui/lay/modules/upload.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" column="14" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/job/AutoSendNoticeJob.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/user/userList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="855">
+          <caret line="45" column="62" selection-start-line="45" selection-start-column="62" selection-end-line="45" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/user/addUser.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1235">
+          <caret line="65" column="18" selection-start-line="65" selection-start-column="18" selection-end-line="65" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/controller/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="213" column="61" lean-forward="true" selection-start-line="213" selection-start-column="61" selection-end-line="213" selection-end-column="61" />
+        <state relative-caret-position="3952">
+          <caret line="208" column="20" selection-start-line="208" selection-start-column="20" selection-end-line="208" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="18" column="58" selection-start-line="18" selection-start-column="58" selection-end-line="18" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/service/impl/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6042">
+          <caret line="324" selection-start-line="324" selection-end-line="324" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis-mappers/base/UserMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="722">
+          <caret line="38" column="25" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/contract/contractList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7733">
+          <caret line="407" column="37" selection-start-line="407" selection-start-column="19" selection-end-line="407" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/utils/DateUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1254">
+          <caret line="66" selection-start-line="66" selection-end-line="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/pages/user/updateUser.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="155" lean-forward="true" selection-start-line="155" selection-end-line="155" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application-dev.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="25" column="34" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="912">
+          <caret line="48" column="60" lean-forward="true" selection-start-line="48" selection-start-column="60" selection-end-line="48" selection-end-column="60" />
+        </state>
+      </provider>
+      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yusheng/hbgj/ServerApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="15" lean-forward="true" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
         </state>
       </provider>
     </entry>

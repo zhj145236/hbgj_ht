@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>轮播图管理</title>
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="../../layui/css/layui.css" media="all"/>
+
+
+</head>
+<body>
+<div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div>
+            <header style="height: 100%">
+                <div align="left">
+                    <table style="width: 100%">
+                        <tr>
+                            <td>
+                                <form class="form-inline" onsubmit="return false">
+
+                                </form>
+                            </td>
+                            <td align="right">
+                                <button class="layui-btn layui-btn-sm" onclick="location.href='addBanner.html'" permission="sys:banner:save" >
+                                    <i class="layui-icon">&#xe608;</i> 添加
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </header>
+
+
+            <div>
+
+                <p style="color: blueviolet">说明: 小程序的轮播图默认取前面3张</p>
+                <div class="widget-body no-padding">
+                    <table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">
+                        <thead>
+                        <tr>
+                        </tr>
+                        <tr>
+                            <!--<th>id</th>-->
+                            <th>主图</th>
+                            <!--  <th>content</th>
+                              <th>author</th>-->
+                            <th>上传时间</th>
+                            <!--  <th>updateTime</th>
+                              <th>remark</th>
+                              <th>delFlag</th>
+                              <th>sort</th>-->
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+<script type="text/javascript" src="../../js/libs/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/my/permission.js"></script>
+
+<script type="text/javascript">
+
+    var pers = checkPermission();
+
+    var example;
+
+    function init() {
+        example =
+            $('#dt-table').DataTable({
+                "searching": false,
+                "processing": false,
+                "serverSide": true,
+                "language": {
+                    "url": "/js/plugin/datatables/Chinese.lang"
+                },
+                "ajax": {
+                    "url": "/banners",
+                    "type": "get",
+                    "data": function (d) {
+                        d.id = $("#id").val();
+                    }
+                },
+                "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
+                "columns": [
+                    /*  {"data": "id", "defaultContent": ""},*/
+                    {
+                        "data": "mainImg", orderable: false, "defaultContent": "",
+                        "width": "620px",
+                        "render": function (data, type, row) {
+
+
+                            var imageHtml = "<img  src='" + data + "' style='width: 100%;height: 150px; border-radius: 5px ' alt='主图' />";
+
+                            return "<div style='width: 382px;height: 150px;border: 2px solid black'> <p>" + imageHtml + "</p>   </div> ";
+
+                        }
+                    },
+                    /* {"data": "content", "defaultContent": ""},*/
+                    /*  {"data": "author", "defaultContent": ""},*/
+                    {"data": "createTime", "defaultContent": ""},
+                    /* {"data": "updateTime", "defaultContent": ""},*/
+                    /* {"data": "remark", "defaultContent": ""},
+                     {"data": "delFlag", "defaultContent": ""},
+                     {"data": "sort", "defaultContent": ""},*/
+                    {
+                        "data": "",
+                        "defaultContent": "",
+                        "orderable": false,
+                        "render": function (data, type, row) {
+
+
+                            var id = row['id'];
+
+                            var href = "updateBanner.html?id=" + id;
+                            var edit = buttonEdit(href, "sys:banner:save", pers);
+                            var del = buttonDel(id, "sys:banner:delete", pers);
+
+
+                            var hrefDetail = "bannerDetail.html?id=" + id;
+
+                            var bannerDetails = buttonDetails(hrefDetail);
+
+                            var toTopButton = toTop(id,"sys:banner:top",pers);
+
+                            return bannerDetails + edit + del + toTopButton;
+                        }
+                    }
+
+                ],
+                "order": []
+            });
+    }
+
+
+    function buttonDetails(hrefDetail) {
+
+
+
+        return "<button  class='layui-btn layui-btn-xs' title='查看详情' onclick='window.location=\"" + hrefDetail + "\"'><i class='layui-icon'>&#xe705;</i></button>";
+
+    }
+
+    layui.use('layer', function () {
+        var layer = layui.layer;
+    });
+
+
+    /**
+     * 置顶展示
+     */
+    function topAction(id) {
+
+        var objForm = {
+            id: id
+        };
+
+        $.ajax({
+            type: 'put',
+            url: '/banners/toTop',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(objForm),
+            success: function (data) {
+
+                example.ajax.reload();
+                layer.msg("置顶成功", {shift: -1, time: 1000});
+
+            }
+        });
+
+    }
+
+    function toTop(id,permission, pers) {
+
+        if (permission !== "") {
+            if ($.inArray(permission, pers) < 0) {
+                return "";
+            }
+        }
+
+
+        return "<button  class='layui-btn layui-btn-xs' title='置顶展示' onclick='topAction(\"" + id + "\")'><i class='layui-icon'>&#xe604;</i></button>";
+    }
+
+
+    function del(id) {
+        layer.confirm('确定要删除吗？', {
+            btn: ['确定', '取消']
+        }, function () {
+            $.ajax({
+                type: 'delete',
+                url: '/banners/' + id,
+                success: function (data) {
+                    example.ajax.reload();
+                    layer.msg("删除成功");
+                }
+            });
+
+            layer.close(1);
+        });
+    }
+
+    $("#searchBt").click(function () {
+        example.ajax.reload();
+    });
+
+    init();
+</script>

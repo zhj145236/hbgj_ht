@@ -1,23 +1,87 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.happyroad.wy.dao.FileInfoDao">
+<mapper namespace="com.yusheng.hbgj.dao.FileInfoDao">
 
-	<sql id="where">
-		<where>
-		</where>
-	</sql>
+    <sql id="where">
+        <where>
 
-	<select id="count" resultType="int">
-		select count(1) from file_info t
-		<include refid="where" />
-	</select>
 
-	<select id="list" resultType="FileInfo">
-		select * from file_info t
-		<include refid="where" />
-		${params.orderBy}
-		limit #{offset}, #{limit}
-	</select>
+            <if test="params.fileOriginName != null and params.fileOriginName != ''">
+                AND t.fileOriginName like concat('%', #{params.fileOriginName}, '%')
+
+            </if>
+
+            <if test="params.type != null and params.type != ''">
+                AND t.type = #{params.type}
+            </if>
+
+            <if test="params.orgId != null and params.orgId != ''">
+                AND t.orgId = #{params.orgId}
+            </if>
+
+            <if test="params.resourceId != null and params.resourceId != ''">
+                AND t.resourceId = #{params.resourceId}
+            </if>
+
+            <if test="params.tag != null and params.tag != ''">
+                AND t.tag = #{params.tag}
+            </if>
+
+            <if test="params.remark != null and params.remark != ''">
+                AND t.remark = #{params.remark}
+            </if>
+            <if test="params.md5 != null and params.md5 != ''">
+                AND t.md5 = #{params.md5}
+            </if>
+
+
+        </where>
+    </sql>
+
+    <select id="count" resultType="int">
+        select count(1) from file_info t
+        <include refid="where"/>
+    </select>
+
+    <select id="list" resultType="FileInfo">
+        select * from file_info t
+        <include refid="where"/>
+        ${params.orderBy}
+        limit #{offset}, #{limit}
+    </select>
+
+    <select id="wxlistFiles" resultType="com.yusheng.hbgj.dto.FileDto">
+
+
+        SELECT f.id, f.fileOriginName, f.url, f.type, f.uploadTime, f.orgId,f.tag
+        from file_info f
+
+        where f.resourceId = #{params.resourceId}
+
+        <if test="params.tag != null and params.tag != ''">
+            and f.tag = #{params.tag}
+        </if>
+
+        and f.delFlag = '1' order by f.uploadTime DESC
+
+        limit #{offset}, #{limit}
+
+
+    </select>
+
+    <select id="wxCount" resultType="java.lang.Integer">
+
+        select count(1) from file_info f
+        where f.resourceId = #{params.resourceId}
+
+        <if test="params.tag != null and params.tag != ''">
+            and f.tag = #{params.tag}
+        </if>
+
+        and f.delFlag = '1'
+
+
+    </select>
 
 </mapper>

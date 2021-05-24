@@ -1,0 +1,103 @@
+server:
+  port: 8080
+  servlet:
+    session:
+      timeout: "PT10M"
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:7090/hbgj?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    username: root
+    password: DOG(z+fqVxcBjzQoee/VS2OtQ5ovF1oyICJTriFUDQPzx2tiivjRaPSvKxDNmmZZoTid)
+    druid:
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1
+      testWhileIdle: true
+      testOnBorrow: true
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      filters: stat,wall
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      stat-view-servlet:
+        allow: 127.0.0.1
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    joda-date-time-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  mvc:
+    servlet:
+      load-on-startup: 1
+    favicon:
+      enabled: false
+
+  redis:
+    host: localhost
+    port: 7190
+    password: DOG(jCY22UbFTXqTdzl5IZ8QQ8MoX9ozSoJVgOeExPLr/gvvWJ73Donyc+CepZ+7q+VF)
+    database: 1
+
+  session:
+    store-type: redis
+
+  mail:
+    default-encoding: UTF-8
+    host: smtp.exmail.qq.com
+    username: noreply@ysnewtop.com
+    password: apkqS5iotjnFyLGrfA
+    protocol: smtp
+    test-connection: false
+#    properties:
+#      mail.smtp.auth: true
+mybatis:
+  type-aliases-package: com.yusheng.hbgj.entity;com.hbgj.modules.*.entity
+  mapper-locations: classpath:/mybatis-mappers/*/*.xml
+  configuration:
+    mapUnderscoreToCamelCase: true
+files:
+  path: ${file-path:/home/king/kingdata/hbgjfiles}
+
+constants:
+
+  #用户ID
+  adminId: 1
+  hlgjId: 2
+
+  # 角色ID
+  companyRoleId: 3
+  visitorRoleId: 4
+
+  #本机域名
+  domain: http://192.168.31.76:8080
+
+  mysqlBinDir:
+  sqlBackDir: /home/king/kingdata/dbback/
+
+  #小程序秘钥
+  appid: wx44c4721e4704c732
+  appsecret: 5bf6ca316b48eb9a8887115c03be3409
+
+logging:
+  config: classpath:logback-admin.xml
+log:
+  level:
+    root: info
+    my: debug
+  file: ../hbgj_logs/admin-server.log
+  maxsize: 30MB
+
+# 移动端与Web终端Session的有效期 都为30天
+token:
+  expire:
+    day: 90
+    webExpireDay: 7

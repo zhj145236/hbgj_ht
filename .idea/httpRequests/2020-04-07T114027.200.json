@@ -1,0 +1,87 @@
+{
+  "recordsTotal": 14,
+  "recordsFiltered": 14,
+  "data": [
+    {
+      "id": "ce5a854dfdcc429ab6f5ccb3d0210884",
+      "url": "/2020/04/01/45a80f75336c980d240987badc3dcf60.gz",
+      "fileOriginName": "nginx-1.16.1.tar.gz",
+      "uploadTime": "2020-04-01 14:50:05",
+      "type": "未知类型",
+      "tag": "企业检修"
+    },
+    {
+      "id": "9014c2fe4d154e6998a03b4e0637001f",
+      "url": "/2020/04/01/076d04be7000c1a2f6868432fc261cf8.png",
+      "fileOriginName": "0RTUH7-3.png",
+      "uploadTime": "2020-04-01 14:49:35",
+      "type": "图片",
+      "tag": "企业检修"
+    },
+    {
+      "id": "1a7747d4e5304ed295bf14c921a28c60",
+      "url": "/2020/04/01/4e364c3a733e7666b1e21481a6deca8f.jpeg",
+      "fileOriginName": "1504523299377.jpeg",
+      "uploadTime": "2020-04-01 14:49:03",
+      "type": "图片",
+      "tag": "企业检修"
+    },
+    {
+      "id": "ef34aeff23b84ababf557f2f564e64b8",
+      "url": "/2020/04/01/bcc9f39322188bb7ed32550305325e06.jpg",
+      "fileOriginName": "微信图片_20191203202052.jpg",
+      "uploadTime": "2020-04-01 14:48:34",
+      "type": "图片",
+      "tag": "企业检修"
+    },
+    {
+      "id": "b697dd8a513440ce892c1d5224fe6f2d",
+      "url": "/2020/03/25/f63ec7383d73d5271f9eaa32db4beb7d.jpg",
+      "fileOriginName": "800026806.jpg",
+      "uploadTime": "2020-03-25 11:29:11",
+      "type": "图片",
+      "tag": "企业检修"
+    },
+    {
+      "id": "cab9aeb601664248b3585c9e3e94a2d0",
+      "url": "/2020/03/24/f63ec7383d73d5271f9eaa32db4beb7d.jpg",
+      "fileOriginName": "800026806.jpg",
+      "uploadTime": "2020-03-24 17:50:33",
+      "type": "图片",
+      "tag": "合同管理"
+    },
+    {
+      "id": "da83a5c65e7ee9d6e2b71213338d6ceb",
+      "url": "/2020/03/21/da83a5c65e7ee9d6e2b71213338d6ceb.png",
+      "fileOriginName": "clipboard.png",
+      "uploadTime": "2020-03-21 16:52:45",
+      "type": "图片",
+      "tag": "企业台账"
+    },
+    {
+      "id": "c447879677fb86dfc6d7aa38c0906b3d",
+      "url": "/2020/03/21/c447879677fb86dfc6d7aa38c0906b3d.jpg",
+      "fileOriginName": "v2-7b5ad93d0b2d8eb303cbccbe1362f351_hd.jpg",
+      "uploadTime": "2020-03-21 16:46:31",
+      "type": "图片",
+      "tag": "企业台账"
+    },
+    {
+      "id": "6197038c5780ff9473d81b8f84a58344",
+      "url": "/2020/03/21/6197038c5780ff9473d81b8f84a58344.mp3",
+      "fileOriginName": "茉莉花.mp3",
+      "uploadTime": "2020-03-21 16:02:08",
+      "type": "音频",
+      "tag": "企业检修"
+    },
+    {
+      "id": "6de7d7b5eb4ccf2114e22ca9c00462d3",
+      "url": "/2020/03/21/6de7d7b5eb4ccf2114e22ca9c00462d3.mp3",
+      "fileOriginName": "匈牙利舞曲.mp3",
+      "uploadTime": "2020-03-21 16:02:01",
+      "type": "音频",
+      "tag": "企业检修"
+    }
+  ],
+  "respTime": "2020-04-07 11:40:27"
+}
